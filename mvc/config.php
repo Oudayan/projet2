@@ -1,9 +1,9 @@
 <?php
 /**
  * @file     config.php
- * @author   Oudayan Dutta
+ * @author   Oudayan Dutta 
  * @version  1.0
- * @date     31 janvier 2018
+ * @date     31 janvier 2018 // 8 février 2018
  * @brief    Définit les constantes et paths 
  * @details  Auto-load des paths des répertoires et des paramètres de connexion à la base de données
  */
