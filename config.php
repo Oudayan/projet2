@@ -1,34 +1,32 @@
 <?php
 /**
  * @file     config.php
- * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
+ * @author   Oudayan Dutta 
  * @version  1.0
- * @date     8 février 2018
+ * @date     31 janvier 2018 // 8 février 2018
  * @brief    Définit les constantes et paths 
  * @details  Auto-load des paths des répertoires et des paramètres de connexion à la base de données
  */
 
-	function __autoload($nomClasse) {
+	function __autoload($className) {
 		
-        $repertoires = array(
-            RACINE . "controleurs/", 
-            RACINE . "modeles/",
-            RACINE . "vues/"
+        $directories = array(
+            ROOT . "controllers/", 
+            ROOT . "models/",
+            ROOT . "views/"
         );
 
-		foreach($repertoires as $rep)
-		{
-			$nomFichier = $rep . $nomClasse . ".php";
-			if(file_exists($nomFichier))
-			{
-				require_once($nomFichier);
+		foreach ($directories as $dir) {
+			$fileName = $dir . $className . ".php";
+			if (file_exists($fileName)) {
+				require_once($fileName);
 				return;
 			}
 		}
 	}
 
 	// déclaration de la racine du projet
-	define("RACINE", $_SERVER["DOCUMENT_ROOT"] . "/alouer/");
+	define("ROOT", $_SERVER["DOCUMENT_ROOT"] . "/alouer/");
 	// déclaration des infos de connexion
 	define("DBNAME", "e1795138");
 	define("USERNAME", "e1795138");

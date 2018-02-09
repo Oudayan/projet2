@@ -19,11 +19,12 @@ CREATE TABLE al_type_contact(
 #------------------------------------------------------------
 
 CREATE TABLE al_disponibilite(
-        id_disponibilite Int NOT NULL ,
-        id_logement      Int NOT NULL ,
-        date_debut       Date NOT NULL ,
-        date_fin         Date NOT NULL ,
-        expire           TinyINT NOT NULL ,
+        id_disponibilite         Int NOT NULL ,
+        id_logement              Int NOT NULL ,
+        date_debut               Date NOT NULL ,
+        date_fin                 Date NOT NULL ,
+        expire                   TinyINT NOT NULL ,
+        id_logement_al_logements Int ,
         PRIMARY KEY (id_disponibilite ) ,
         INDEX (id_logement )
 )ENGINE=InnoDB;
@@ -49,22 +50,22 @@ CREATE TABLE al_logements(
         lat                   Varchar (25) ,
         lon                   Varchar (25) ,
         description           Text NOT NULL ,
-        is_parking            Bool ,
-        is_wifi               Int ,
-        is_cuisine            Bool ,
-        is_tv                 Bool ,
-        is_fer_a_repasser     Bool ,
-        is_cintres            Bool ,
-        is_seche_chevaux      Bool ,
-        is_clima              Bool ,
-        is_laveuse            Bool ,
-        is_secheuse           Bool ,
-        is_chauffage          Bool ,
+        est_staionnement      Bool ,
+        est_wifi              Int ,
+        est_cuisine           Bool ,
+        est_tv                Bool ,
+        est_fer_a_repasser    Bool ,
+        est_cintres           Bool ,
+        est_seche_chevaux     Bool ,
+        est_clima             Bool ,
+        est_laveuse           Bool ,
+        est_secheuse          Bool ,
+        est_chauffage         Bool ,
         premiere__photo       Varchar (75) ,
         notation_actuel       Int NOT NULL ,
-        l_banned              TinyINT ,
-        l_baned_date          Date ,
-        l_banned_commentaire  Text ,
+        l_banni               TinyINT ,
+        l_date_banni          Date ,
+        l_commentaire_banni   Text ,
         courriel              Varchar (25) NOT NULL ,
         id_type_logement      Int NOT NULL ,
         PRIMARY KEY (id_logement )
@@ -129,17 +130,17 @@ CREATE TABLE al_type_logement(
 #------------------------------------------------------------
 
 CREATE TABLE al_usager(
-        courriel             Varchar (25) NOT NULL ,
-        nom                  Char (25) NOT NULL ,
-        prenom               Varchar (25) NOT NULL ,
-        cellulaire           Varchar (25) ,
-        mot_de_passe         Char (25) NOT NULL ,
-        u_banned             TinyINT ,
-        u_commentaire_banned Text ,
-        u_date_banned        Date ,
-        id_contact           Int NOT NULL ,
-        id_type_usager       Int NOT NULL ,
-        id_paiement          Int NOT NULL ,
+        courriel            Varchar (25) NOT NULL ,
+        nom                 Char (25) NOT NULL ,
+        prenom              Varchar (25) NOT NULL ,
+        cellulaire          Varchar (25) ,
+        mot_de_passe        Char (25) NOT NULL ,
+        u_banni             TinyINT ,
+        u_commentaire_banni Text ,
+        u_date_banned       Date ,
+        id_contact          Int NOT NULL ,
+        id_type_usager      Int NOT NULL ,
+        id_paiement         Int NOT NULL ,
         PRIMARY KEY (courriel )
 )ENGINE=InnoDB;
 
@@ -149,15 +150,15 @@ CREATE TABLE al_usager(
 #------------------------------------------------------------
 
 CREATE TABLE al_evaluations(
-        id_evaluation        int (11) Auto_increment  NOT NULL ,
-        commentaire          Text ,
-        date_notation        Date NOT NULL ,
-        ponctuation          Int NOT NULL ,
-        e_banned             TinyINT ,
-        e_date_banned        Date ,
-        e_commentaire_banned Text ,
-        courriel             Varchar (25) NOT NULL ,
-        id_logement          Int ,
+        id_evaluation       int (11) Auto_increment  NOT NULL ,
+        commentaire         Text ,
+        date_notation       Date NOT NULL ,
+        ponctuation         Int NOT NULL ,
+        e_banni             TinyINT ,
+        e_date_banni        Date ,
+        e_commentaire_banni Text ,
+        courriel            Varchar (25) NOT NULL ,
+        id_logement         Int ,
         PRIMARY KEY (id_evaluation )
 )ENGINE=InnoDB;
 
@@ -192,17 +193,6 @@ CREATE TABLE al_messagerie(
 
 
 #------------------------------------------------------------
-# Table: agender
-#------------------------------------------------------------
-
-CREATE TABLE agender(
-        id_logement      Int NOT NULL ,
-        id_disponibilite Int NOT NULL ,
-        PRIMARY KEY (id_logement ,id_disponibilite )
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: assigner  destinataire
 #------------------------------------------------------------
 
@@ -212,6 +202,7 @@ CREATE TABLE assigner__destinataire(
         PRIMARY KEY (courriel ,id_message )
 )ENGINE=InnoDB;
 
+ALTER TABLE al_disponibilite ADD CONSTRAINT FK_al_disponibilite_id_logement_al_logements FOREIGN KEY (id_logement_al_logements) REFERENCES al_logements(id_logement);
 ALTER TABLE al_logements ADD CONSTRAINT FK_al_logements_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
 ALTER TABLE al_logements ADD CONSTRAINT FK_al_logements_id_type_logement FOREIGN KEY (id_type_logement) REFERENCES al_type_logement(id_type_logement);
 ALTER TABLE al_location ADD CONSTRAINT FK_al_location_id_logement_al_logements FOREIGN KEY (id_logement_al_logements) REFERENCES al_logements(id_logement);
@@ -223,14 +214,10 @@ ALTER TABLE al_evaluations ADD CONSTRAINT FK_al_evaluations_courriel FOREIGN KEY
 ALTER TABLE al_evaluations ADD CONSTRAINT FK_al_evaluations_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
 ALTER TABLE al_photos_logement ADD CONSTRAINT FK_al_photos_logement_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
 ALTER TABLE al_messagerie ADD CONSTRAINT FK_al_messagerie_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
-ALTER TABLE agender ADD CONSTRAINT FK_agender_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
-ALTER TABLE agender ADD CONSTRAINT FK_agender_id_disponibilite FOREIGN KEY (id_disponibilite) REFERENCES al_disponibilite(id_disponibilite);
 ALTER TABLE assigner__destinataire ADD CONSTRAINT FK_assigner__destinataire_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
 ALTER TABLE assigner__destinataire ADD CONSTRAINT FK_assigner__destinataire_id_message FOREIGN KEY (id_message) REFERENCES al_messagerie(id_message);
 
---
--- Déchargement des données de la table `type_contact`
---
+
 
 
 
