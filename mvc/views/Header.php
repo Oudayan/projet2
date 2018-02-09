@@ -17,6 +17,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#BarreNav">
                    <div class="fa fa-bars"></div>
                 </button>
+                 <!--- div class="col-9 col-md-6"  --->
                 <div class="col-9 col-md-6">
                     <a class="navbar-brand active" href="index.php"><!-- <img src="images/Logo-A-Louer.png"> --></a>  
                 </div>
