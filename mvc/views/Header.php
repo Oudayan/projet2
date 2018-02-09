@@ -46,6 +46,7 @@
                 </div>
             </nav>
         </header>
+        <!--- div class="col-9 col-md-6"  --->
         <div class="my-4 text-center">
             <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "") ?>
         </div>
