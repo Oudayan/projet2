@@ -12,6 +12,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     <body>
+      <!--commentaire -->
         <header class="bg-inverse text-white">
             <nav class="navbar navbar-toggleable-sm">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#BarreNav">
