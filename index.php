@@ -1,7 +1,7 @@
 <?php
 /**
  * @file     index.php
- * @author   Oudayan Dutta
+ * @author   Oudayan Dutta, Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
  * @version  1.0
  * @date     31 janvier 2018
  * @brief    Page défaut du site 
