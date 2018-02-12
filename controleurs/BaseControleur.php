@@ -1,74 +1,85 @@
 <?php
 /**
-* @file BaseControleur.php
-* @author Jorge Subirats 
-* @version 1.0
-* @date 21 janvier 2018
-* @brief Définit la classe de base pour les controleurs
-*
-* @details Cette classe définit comment accéder aux différents éléments.
-* 
-*/
-	abstract class BaseControleur
-	{		
-		
+ * @file    BaseControleur.php
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version 1.0
+ * @date    31 janvier 2018
+ * @brief   Controlleur parent 
+ * @details Méthodes :  - index() (abstracte) pour les "cases" dans les controlleurs
+                        - afficheVues() pour afficher les vues (partielles)
+                        - lireDAO() pour la connection à la base de donnée & création d'objets modèles
+ */
+
+	abstract class BaseControleur {
+
 		/**
-		* @brief Permet d'afficher une vue
-		* @details Utilise le répertoire vues.
-		* @param point1 array $params
-		* @param point2 nomVue
-		* @param point3 data
-		* @param point4 cheminVue
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  La méthode afficherVues()
+         */
+		public abstract function index(array $params);
+
+ 		/**
+		* @brief  Permet d'afficher une ou plusieurs vues partielles
+		* @detail Affiche une vue is $nomVue est une chaine de charactère ou affiche plusieurs vues si $nomVue est un tableau contentant le nom des vues.
+                  Affiche toujours la/les vue(s) entre les vues partielles entete.php et piedPage.php
+		* @param  [string/array]  $nomVue     Nom de la vue ou tableau contentant les noms des vues à afficher   
+		* @param  [array]         $donnees    Données passée à la/aux vues
 		* @return message d'erreur ou une vue
 		*/
-		public abstract function traite(array $params);
+        protected function afficherVues($nomVue, $donnees = null) {
+            // Inclure le header pour chaque vue
+            include(RACINE . "vues/entete.php");
 
-		protected function afficheVue($nomVue, $data = null)
-		{
-			$cheminVue = RACINE . "vues/" . $nomVue . ".php";
-
-			if(file_exists($cheminVue))
-			{
-				/* include "vues/header.php" ; */
-				include($cheminVue);
-			}
-			else
-			{
-				trigger_error("Erreur 404! La vue $cheminVue n'existe pas.");
-			}
-		}
+            // Si le nom de vue est une chaîne de charactère (seulement une vue partielle)
+            if (is_string($nomVue)) {
+                $cheminVue = RACINE . "vues/" . $nomVue . ".php";
+                    if (file_exists($cheminVue)){
+                    include($cheminVue);
+                }
+            }
+            // Si le nom de vue est contenu dans une tableau (plusieurs vues partielles)
+            else if (is_array($nomVue)) {
+                foreach ($nomVue as $vue) {
+                    $cheminVue = RACINE . "vues/" . $vue . ".php";
+                    if (file_exists($cheminVue)){
+                        include($cheminVue);
+                    }
+                    else {
+                        trigger_error("Erreur 404! La vue $cheminVue n'existe pas.");
+                    }
+                }
+            }
+            // Inclure le footer pour chaque vue
+            include(RACINE . "vues/piedPage.php");
+        }        
+        
 		/**
-		* @brief Permet d'aller chercher le modele
-		* @details Utilise les trois modeles: Reponse,Sujets et Usagers.
-		* @param point1 nomModele
-		* @param point2 classe
-		* @param point3 laDB
-		* @param point4 objetModele
-		* @return string objetModele
-		*/	
-		protected function getDAO($nomModele)
-		{
-			
-			$classe = "Modele_" . $nomModele;
-			if(class_exists($classe))
-			{
+         * @brief       Méthode pour créer les modèles de chaque classe et connexion à la base de données
+         * @details     Vérifie si le modèle existe et fait la connexion à la base de données via la méthode chercherBD() de la classe ManufactureBD.php
+                        Créé l'object modèle de la classe passée en paramètre, contenant toutes le opérations "CRUD" pour cette classe.
+         * @param       [string]    $nomModele      Le nom du modèle à créer
+         * @return      [object]    $objetModele    L'object modèle de la classe passée en paramètre
+         */
+		protected function lireDAO($nomModele) {
+			$classe = "Modele" . $nomModele;
 
-				//on fait une connexion à la base de données
-				$laDB = DBFactory::getDB(DBTYPE, DBNAME, HOST, USERNAME, PWD);
+			if (class_exists($classe)) {
+				// Connexion à la base de données
+				$BD = ManufactureBD::chercherBD(TYPEBD, NOMBD, HEBERGEUR, NOMUSAGER, MOTDEPASSE);
 
-				//on crée une instance de la classe Modele_$classe
-				
-				$objetModele = new $classe($laDB);
-				if($objetModele instanceof BaseDAO)
-				{
+				// Création d'une instance de la classe Modele $classe
+				$objetModele = new $classe($BD);
+				if ($objetModele instanceof BaseDAO) {
 					return $objetModele;
 				}
-				else
-				{
+				else {
 					trigger_error("Le modèle n'est pas conforme.");
 				}
 			}
 		}
 
 	}
+
 ?>
