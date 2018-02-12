@@ -3,97 +3,104 @@
  * @file     BaseDao.php
  * @author   Oudayan Dutta
  * @version  1.0
- * @date     31 janvier 2018
+ * @date     9 février 2018
  * @brief    Modèle parent 
  * @details  Fonctions CRUD commumnes à toutes les classes et modèles
  */
+
 	abstract class BaseDao {
-		protected $db;
-		public function __construct(PDO $dbPDO) {			
-			$this->db = $dbPDO;
+		protected $bd;
+		public function __construct(PDO $bdPDO) {			
+			$this->bd = $bdPDO;
 		}
-			
+
 		/**
-		 * @brief      Deletes a row from a table
-		 * @param      <string>  $primaryKey     ID of the primary key
-		 * @return     <object>
+		 * @brief      Effacer une rangée de la table
+		 * @param      [string]  $clePrimaire     ID de la clé primaire
+		 * @return     [object]
 		 */
-		protected function delete($primaryKey) {
-			$sql = "DELETE FROM " . $this->getTableName() . " WHERE " . $this->getPrimaryKey() ."=?";
-			$data = array($primaryKey);
-			return $this->query($sql, $data);
+		protected function effacer($clePrimaire) {
+			$sql = "DELETE FROM " . $this->checherNomTable() . " WHERE " . $this->lireClePrimaire() ."=?";
+			$donnees = array($clePrimaire);
+			return $this->requete($sql, $donnees);
 		}
-		/**
-		 * @brief      Reads the content from a table
-		 * @param      <string>   $searchValue  Value of the primary key OR specified column
-		 * @param      <string>   $primaryKey   Name of the primary key OR specified column
-		 * @return     <object>                 All fields of the table
+
+        /**
+		 * @brief      Lire le contenu d'une rangée de la table
+		 * @param      [string]   $valeur       Valeur de la clé primaire OU de la colonne spécifée
+		 * @param      [string]   $clePrimaire  Nom de la clé primaire OU de la colonne spécifée
+		 * @return     [object]                 Tous les champs d'une entrée de la table
 		 */
-		protected function load($searchValue, $primaryKey = NULL) {
-			if (!isset($primaryKey)) {
-				$sql = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getPrimaryKey() ."=?";
+		protected function lire($valeur, $clePrimaire = NULL) {
+			if (!isset($clePrimaire)) {
+				$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $this->lireClePrimaire() ."=?";
 			}
 			else {
-				$sql = "SELECT * FROM " . $this->getTableName() . " WHERE " . $primaryKey ."=?";
+				$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $clePrimaire ."=?";
 			}
-			$data = array($searchValue);
-			return $this->query($sql, $data);
+			$donnees = array($valeur);
+			return $this->requete($sql, $donnees);
 		}
-		/**
-		 * @brief      Reads all the rows from a table
-		 * @return     <object>  All fields from all tables
+
+        /**
+		 * @brief      Lire le contenu de toutes les rangées de la table
+		 * @return     [object]  Tous les champs de toutes les entrées la table
 		 */
-		protected function loadAll() {
-			$sql = "SELECT * FROM " . $this->getTableName();
-			return $this->query($sql);
+		protected function lireTous() {
+			$sql = "SELECT * FROM " . $this->checherNomTable();
+			return $this->requete($sql);
 		}
-		/**
-		 * @brief      Updates the value of a field in a table
-		 * @param      <string> $id     Value of the primary key OR specified column
-		 * @param      <string> $field  Name of the column to update
-     * @param      <string> $value  Value of the column to update
-     * @return     <object>  
+
+        /**
+		 * @brief      Modifie la valeur d'un champ dans une table
+		 * @param      [string] $id     Valeur de la clé primaire OU de la colonne spécifée
+		 * @param      [string] $champ  Nom de la colonne à modifier
+         * @param      [string] $valeur Valeur de la colonne à modifier
+         * @return     [object] L'exécution de la requête
 		 */
-		protected function updateField($id, $field, $value) {
-            $sql = "UPDATE " . $this->getTableName() . " SET " . $field . "=? WHERE " . $this->getPrimaryKey() . "=?";
-            $data = array($value, $id);
-            return $this->query($sql, $data);
+		protected function modifierChamp($id, $champ, $valeur) {
+            $sql = "UPDATE " . $this->checherNomTable() . " SET " . $champ . "=? WHERE " . $this->lireClePrimaire() . "=?";
+            $donnees = array($valeur, $id);
+            return $this->requete($sql, $donnees);
         }
-       
+
 		/**
-		 * @brief      Makes a query to a table with the parameters you'll send
-		 * @param      <string>   $sql    The query
-		 * @param      <array>    $data   The values to insert into the query
-		 * @return     <type>
+		 * @brief      Exécute une requête avec les paramètres voulus
+		 * @details    Prépare les données en les protégeant des injections SQL et exécute la requête via l'object PDOStatement
+		 * @param      [string]   $sql        La requete SQL
+		 * @param      [array]    $donnees    La valeur des données à insérer dans la requête
+		 * @return     [object]   $stmt       L'exécution de la requête 
 		 */
-		final protected function query($sql, $data = array()) {
+		final protected function requete($sql, $donnees = array()) {
 			try {
-				$stmt = $this->db->prepare($sql);
-				$stmt->execute($data);
+				$stmt = $this->bd->prepare($sql);
+				$stmt->execute($donnees);
 			}
 			catch (PDOException $e) {
 				trigger_error("<p>La requête suivante a donné une erreur : $sql</p><p>Exception : " . $e->getMessage() . "</p>");
 			}
 			return $stmt;
 		}
-		
+
 		/**
-		 * @brief      Gets the name of the primary key of a table
-		 * @return     <string>  Name of the primary key
+		 * @brief      Va chercher le nom de la clé primaire d'une table
+		 * @return     [string]  Nom de la clé primaire
 		 */
-		final protected function getPrimaryKey() {
-			//copyright salim
-			$sql = "SHOW columns FROM " . $this->getTableName();
-			$results = $this->query($sql);
-			foreach ($results as $row) {
-				if ($row["Key"]=="PRI") {
-					return $row["Field"];
+		final protected function lireClePrimaire() {
+			// Copyright Salim Bourihane
+			$sql = "SHOW columns FROM " . $this->checherNomTable();
+			$colonnes = $this->requete($sql);
+			foreach ($colonnes as $champ) {
+				if ($champ["Key"]=="PRI") {
+					return $champ["Field"];
 				}
 			}
 		}
+
 		/**
-		 * Gets the table name.
+		 * @brief     Méthode abstraite pour déclarer le nom de la table dans le modèle enfant.
 		 */
-		abstract function getTableName();
+		abstract function checherNomTable();
+
 	}
 ?>
