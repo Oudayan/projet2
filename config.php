@@ -1,7 +1,7 @@
 <?php
 /**
  * @file    config.php
- * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats autre example
  * @version 1.0
  * @date    9 février 2018
  * @brief   Définit les constantes et chemins 

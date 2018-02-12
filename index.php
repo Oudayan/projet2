@@ -1,7 +1,7 @@
 <?php
 /**
  * @file    index.php
- * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats je modifié une ligne
  * @version 1.0
  * @date    9 février 2018
  * @brief   Page défaut du site 
