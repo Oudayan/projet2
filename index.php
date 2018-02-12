@@ -1,11 +1,11 @@
 <?php
 /**
- * @file     index.php
- * @author   Oudayan Dutta, Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
- * @version  1.0
- * @date     31 janvier 2018
- * @brief    Page défaut du site 
- * @details  Inclus tous les fichiers du MVC via config.php, part une session, définit le fuseau horaire & date/heure et appelle le routeur pour rediriger au bon controlleur
+ * @file    index.php
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version 1.0
+ * @date    9 février 2018
+ * @brief   Page défaut du site 
+ * @details Inclus tous les fichiers du MVC via config.php, part une session, définit le fuseau horaire & date/heure et appelle le routeur pour rediriger au bon controlleur
  */
     
     // Inclusion des fichiers selon le répertoire et déclaration des paramètres de connexion
@@ -19,6 +19,6 @@
     $now = date("Y-m-d H:i");
 
     // Redirection au bon controleur
-	Router::route();
+	Routeur::route();
 
 ?>
