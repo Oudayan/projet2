@@ -53,7 +53,7 @@ CREATE TABLE al_logements(
         nb_demi_salle_de_bain TinyINT ,
         description           Text NOT NULL ,
         est_staionnement      Bool ,
-        est_wifi              Int ,
+        est_wifi              Bool ,
         est_cuisine           Bool ,
         est_tv                Bool ,
         est_fer_a_repasser    Bool ,
