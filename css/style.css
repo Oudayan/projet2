@@ -1,0 +1,114 @@
+/**
+ * @file     style.css
+ * @author   Oudayan Dutta
+ * @version  1.0
+ * @date     31 janvier 2018
+ * @brief    Styles CSS custom
+ * @details  Feuille de style CSS pour rajouter/modifier des style de Bootstrap
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Titillium+Web|Ubuntu');
+/*
+    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Exo 2', sans-serif;
+*/
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+}
+
+header {
+    color: rgba(0, 0, 0, 0.9);
+    height: 20vh;
+}
+
+header h1 {
+    font-size: 5em;
+}
+
+header h2 {
+    font-size: 2.5em;
+}
+
+main {
+    min-height: 70vh;
+}
+
+#carte {
+    min-height: 70vh;
+}
+
+button.btn {
+    height: 64px;
+}
+
+.btn-bleu {
+  color: #f5f5f5;
+  background-color: #1d91bc;
+  border-color: #1d91bc;
+}
+
+.btn-bleu:hover {
+  color: #f5f5f5;
+  background-color: #5d73c6;
+  border-color: #5d73c6;
+}
+
+.btn-bleu:focus, .btn-bleu.focus {
+  -webkit-box-shadow: 0 0 0 3px rgba(93, 115, 198, 0.5) !important;
+          box-shadow: 0 0 0 3px rgba(93, 115, 198, 0.5) !important;
+}
+
+.btn-bleu.disabled, .btn-bleu:disabled {
+  background-color: #78aeee;
+  border-color: #78aeee;
+}
+
+.btn-bleu:active, .btn-bleu.active,
+.show > .btn-bleu.dropdown-toggle {
+  color: #f5f5f5;
+  background-color: #566cbc !important;
+  background-image: none;
+  border-color: #5d73c6 !important;
+}
+
+.btn-orange {
+  color: #f5f5f5;
+  background-color: #e98d34;
+  border-color: #e98d34;
+}
+
+.btn-orange:hover {
+  color: #f5f5f5;
+  background-color: rgb(205, 120, 45);
+  border-color: rgb(205, 120, 45);
+}
+
+.btn-orange:focus, .btn-orange.focus {
+  -webkit-box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+          box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+}
+
+.btn-orange.disabled, .btn-orange:disabled {
+  background-color: #78aeee;
+  border-color: #78aeee;
+}
+
+.btn-orange:active, .btn-orange.active,
+.show > .btn-orange.dropdown-toggle {
+  color: #f5f5f5;
+  background-color: #e98d34 !important;
+  background-image: none;
+  border-color: #e98d34 !important;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    color: rgba(0, 0, 0, 0.9);
+    height: 10vh;
+}
