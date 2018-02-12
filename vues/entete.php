@@ -12,41 +12,57 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     <body>
-        <header class="bg-inverse text-white">
-            <nav class="navbar navbar-toggleable-sm">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#BarreNav">
-                   <div class="fa fa-bars"></div>
-                </button>
-                <div class="col-9 col-md-6">
-                    <a class="navbar-brand active" href="index.php"><!-- <img src="images/Logo-A-Louer.png"> --></a>  
-                </div>
-                <div class="collapse navbar-collapse" id="BarreNav">
-                    <div class="d-flex justify-content-end ml-auto">
-                        <?php 
-                            if (!isset($_SESSION["UserName"])) {
-                        ?>
-                        <form method='POST' action='index.php?Users' class='d-flex flex-row'>
-                            <input type='hidden' name='action' value='login'>
-                            <table>
-                                <tr><td><label>Nom d'usager : </label></td><td><input type='text' name='UserName' value='OD'></td></tr>
-                                <tr><td><label>Mot de passe : </label></td><td><input type='password' name='Password' value='12345'></td></tr>
-                            </table>
-                            <div>
-                                <button type='submit' class='btn btn-success login'>Se&nbsp;connecter</button>
-                            </div>
+        <header>
+          <nav class="navbar navbar-toggleable-sm bg-inverse mb-5 text-white">
+            <div class="container px-5 px-sm-0" >
+              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>              
+              <div class="ml-auto d-flex flex-nowrap">                
+                <a href="#" id="myBtn" class="nav-item nav-link fa fa-sign-in fa-fw fa-lg bg-login"> Login</a>                 
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog" id="myModal2">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" tabindex="-1">
+                      <div class="modal-header" style="padding:20px 40px;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span class="fas fa-lock"></span> Login</h4>
+                      </div>
+                      <div class="modal-body" style="padding:30px 40px;">
+                        <form role="form">
+                          <div class="form-group">
+                            <label for="usrname"><span class="fas fa-user"></span> Username</label>
+                            <input type="text" class="form-control" id="usrname" placeholder="Courriel">
+                          </div>
+                          <div class="form-group">
+                            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                            <input type="text" class="form-control" id="psw" placeholder="Mot de passe">
+                          </div>
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="" checked>Remember me</label>
+                          </div>
+                            <button type="submit" class="btn btn-bleu btn-block"><span class="glyphicon glyphicon-off"></span>Se connecter</button>
                         </form>
-                        <?php }
-                            else { ?>
-                            <div>
-                                <a href='index.php?Users&action=logout'><button class='btn btn-secondary login'>Se&nbsp;déconnecter</button></a>
-                            </div>
-                        <?php }  ?>
-                    </div>
-                </div>
-            </nav>
+                      </div>
+                      <div class="modal-footer">                       
+                        <p class="textModal">Pour créer un compte <a href="#"> Cliquez ici</a></p>                        
+                      </div>
+                    </div><!-- modal-content -->
+                  </div><!-- modal-dialog -->
+                </div><!-- modal fade -->
+              </div><!-- ml-auto -->  
+            </div><!-- container px-5 -->   
+          </nav>
         </header>
         <div class="my-4 text-center">
-            <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "") ?>
+            <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "")?>
         </div>
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+    });
+});
+</script>   
 
         <main>
