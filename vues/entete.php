@@ -16,7 +16,9 @@
         <header> 
           <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse mb-5 text-white">
             <div class="container px-5 px-sm-0" >
-              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>              
+              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>    <?php 
+                 if (!isset($_SESSION["courriel"])) {
+              ?>              
               <div class="ml-auto d-flex flex-nowrap">                
                 <a href="#" id="myBtn" class="nav-item nav-link fa fa-sign-in fa-lg bg-login"> Login</a>                 
                 <!-- Modal -->
@@ -30,12 +32,11 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>                        
                       </div>
                       <div class="modal-body" style="padding:15px 15px;">                        
-                        <form>
+                        <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
 <?php 
                         if (!isset($_SESSION["UserName"])) {
 ?>
-                         
-                          <div class="form-group">
+                         <div class="form-group">
                             <label for="psw"><span class="fa fa-envelope" aria-hidden="true"></span></label>
                             <input type="email" class="form-control" id="psw" placeholder="Courriel">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -54,11 +55,11 @@
                         }
                         else { 
 ?>
-                            <div>
-                              <a href="index.php?Users&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>                                
+                            <div><span><?= $_SESSION["courriel"];?></span>
+                              <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>                                
                             </div>
 <?php
-                            } 
+                        } 
 ?>
                       </div><!-- modal-body -->
                       <div class="modal-footer">                       
@@ -67,13 +68,15 @@
                     </div><!-- modal-content -->
                   </div><!-- modal-dialog -->
                 </div><!-- modal fade -->
-              </div><!-- ml-auto -->  
+              </div><!-- ml-auto --> 
             </div><!-- container px-5 -->   
           </nav>
         </header>
+      
         <div class="my-4 text-center">
             <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "")?>
         </div>
+      
 <script>
 $(document).ready(function(){
     $("#myBtn").click(function(){

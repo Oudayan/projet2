@@ -10,9 +10,9 @@
 * 
 */
 
-	class Controleur_Logement extends BaseControleur
+	class ControleurLogement extends BaseControleur
 	{		
-		public function traite(array $params)
+		public function index(array $params)
 		{
 			
 			//si le paramètre action existe
@@ -96,7 +96,7 @@
 			else
 			{
 																								
-				$this->affichevue("ajoutlogement");														//action par défaut - afficher la liste des sujets
+				$this->affichevue("ajoutLogement");														//action par défaut - afficher la liste des sujets
 			}
 		}
 		/**
