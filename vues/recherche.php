@@ -24,12 +24,135 @@
             <div class="col-sm-10">
                 <section id="carte">
                 </section>
-                <section id="fiches" class="hidden">
+                <section id="fiches">
+                <?php foreach ($donnees["logements"] as $logement) { ?>
+                    <article id="fiche_<?= $logement->lireIdLogement(); ?>" class="row border rounded text-center my-2 p-2">
+                        <div class="col-lg-4">
+                            <div class="jcarousel-wrapper">
+                                <div class="jcarousel" data-jcarousel="true">
+                                    <ul id="liste_image_<?= $logement->lireIdLogement(); ?>">
+                                        <li><img src="<?= $logement->lirePremierePhoto(); ?>"></li>
+                                        <li><img src="images/Logements/1/image_1.jpg"></li>
+                                        <li><img src="images/Logements/1/image_2.jpg"></li>
+                                        <li><img src="images/Logements/1/image_3.jpg"></li>
+                                    </ul>
+                                </div>
+                                <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true" onclick="afficherImagesCarousel(<?= $logement->lireIdLogement() . ', \'' . $logement->lirePremierePhoto() ?>')">‹</a>
+                                <a href="#" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a>
+                                <p id="pagination_photo_<?= $logement->lireIdLogement(); ?>"  class="jcarousel-pagination" data-jcarouselpagination="true">
+                                    <a href="#1" class="active">1</a>
+                                    <a href="#2">2</a>
+                                    <a href="#3">3</a>
+                                </p>
+                            </div>
+                            <div id="description_image_<?= $logement->lireIdLogement(); ?>">
+                                <p>Description de la photo</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <h4 class="col-12"><?= $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince(); ?></h4>
+                                <div class="col-sm-4">
+                                    <?= $logement->lireDescription(); ?><br>
+                                </div>
+                                <div class="col-sm-4">
+                                    <?= $logement->lirePrix(); ?>
+                                </div>
+                                <div class="col-sm-4">
+                                    <?= $logement->lireEvaluation(); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                <?php } ?>
                 </section>
             </div>
         </div>
     </div>
 </main>
+
+<script type="text/javascript">
+    // Création des images du caroussel
+    function afficherImagesCarousel(idLogement, premierePhoto) {
+        $.ajax({
+            url: 'index.php?Recherche&action=afficherImagesCarousel', 
+            type: 'POST',
+            data:  { idLogement: idLogement }, 
+            dataType: 'json',
+            success: function(donnees) {
+                console.log(donnees);
+                /*
+                $('#liste_image_' + idLogement).empty();
+                $('<img src="' + LirePremierePhoto() + '">').appendTo('#liste_image_' + idLogement);
+                $(result).appendTo('#liste_image_' + idLogement);
+                */
+                //$('.jcarousel').jcarousel('reload');
+            }
+        });
+    };
+
+</script>
+
+<script type="text/javascript">
+    // Source : https://sorgalla.com/jcarousel/
+    $(function() {
+        var jcarousel = $('.jcarousel');
+
+        jcarousel
+            .on('jcarousel:reload jcarousel:create', function () {
+                jcarousel.jcarousel('items').width(jcarousel.innerWidth());
+            })
+            .jcarousel({
+                wrap: 'circular',
+                transitions: Modernizr.csstransitions ? {
+                    transforms:   Modernizr.csstransforms,
+                    transforms3d: Modernizr.csstransforms3d,
+                    easing:       'ease'
+                } : false
+            });
+
+        $('.jcarousel-control-prev')
+            .on('jcarouselcontrol:active', function() {
+                $(this).removeClass('inactive');
+            })
+            .on('jcarouselcontrol:inactive', function() {
+                $(this).addClass('inactive');
+            })
+            .jcarouselControl({
+                target: '-=1'
+            });
+
+        $('.jcarousel-control-next')
+            .on('jcarouselcontrol:active', function() {
+                $(this).removeClass('inactive');
+            })
+            .on('jcarouselcontrol:inactive', function() {
+                $(this).addClass('inactive');
+            })
+            .on('click', function(e) {
+                e.preventDefault();
+            })
+            .jcarouselControl({
+                target: '+=1'
+            });
+
+        $('.jcarousel-pagination')
+            .on('jcarouselpagination:active', 'a', function() {
+                $(this).addClass('active');
+            })
+            .on('jcarouselpagination:inactive', 'a', function() {
+                $(this).removeClass('active');
+            })
+            .on('click', function(e) {
+                e.preventDefault();
+            })
+            .jcarouselPagination({
+                item: function(page) {
+                    return '<a href="#' + page + '">' + page + '</a>';
+                }
+            });
+    });
+</script>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA22Ascl7tbt6eLIQVW8E_2h2rCIoFA4Aw"></script>
 <script type="text/javascript">
@@ -47,7 +170,7 @@
         ["442 Sainte-Hélène St, Montreal, QC H2Y 2K7", 45.5012713, -73.55829399999999],
         ["3048 Rue Delisle, Montreal, QC H4C 1M9", 45.4820269, -73.57898369999998], 
         <?php foreach ($donnees["logements"] as $logement) {
-            echo "['<a href=\"index.php?Logement&action=getbyid\"><img src=\"" . $logement->lirePremierePhoto() . "\"></a>" . $logement->lirePrix() . "$', " . $logement->lireLatitude() . ", " . $logement->lireLongitude() . "], ";
+            echo '[\'<a href="index.php?Logement&action=getbyid"><h5>' . $logement->lireNoCivique() . ' ' . $logement->lireRue() . ' ' . $logement->lireApt() . ', ' . $logement->lireVille() . ', ' . $logement->lireProvince() . ' - <span class="text-warning">' . $logement->lirePrix() . '$</span></h5><img src="' . $logement->lirePremierePhoto() . '"></a>\', ' . $logement->lireLatitude() . ', ' . $logement->lireLongitude() . '], ';
         } ?>
     ];
 
@@ -81,7 +204,7 @@
 
 
         var infowindow = new google.maps.InfoWindow({
-            maxWidth: 200
+            maxWidth: 300
         });
 
         var iconCounter = 0;
@@ -92,7 +215,7 @@
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map,
                 icon: icons[iconCounter],
-                title: 'Click to zoom'
+                title: 'Cliquer pour agrandir'
             });
 
             markers.push(marker);
