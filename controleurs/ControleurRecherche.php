@@ -14,6 +14,7 @@
 
             $modeleLogement = $this->lireDAO("Logement");
             $modeleTypeLogement = $this->lireDAO("TypeLogement");
+            $modelePhotosLogement = $this->lireDAO("PhotoLogement");
 
 			// Si le paramètre action existe
 			if (isset($params["action"])) {
@@ -25,14 +26,21 @@
 					case "recherche" :
                         $donnees["typesLogements"] = $modeleTypeLogement->lireTousTypeLogements();
                         $donnees["logements"] = $modeleLogement->lireTousLogements();
-                        /*echo "<pre>";
-                        var_dump($donnees["logements"]);
-                        echo "</pre>";*/
                         $this->afficherVues("recherche", $donnees);
-                       /*if (isset($params["CategoryId"]) && $params["CategoryId"] != "") {
-                            $category = $categoriesModel->getCategoryById($params["CategoryId"]);
-                            echo $category->Description;
-                        }*/
+                        break;
+
+                    // Affichage de la page de recherche par carte
+					case "afficherImagesCarousel" :
+                        if (isset($params["idLogement"]) && $params["idLogement"] != "") {
+                            $imagesCarousel = $modelePhotosLogement->lireToutesPhotosParLogement($params["idLogement"]);
+                            $infosCarousel = array();
+                            for ($i = 0; $i<count($imagesCarousel);  $i++) {
+                                $infosCarousel[$i] = array();
+                                $infosCarousel[$i][0] = $imagesCarousel[$i]->lireCheminPhoto();
+                                $infosCarousel[$i][1] = $imagesCarousel[$i]->lireDescriptionPhoto();
+                            }
+                            echo json_encode($infosCarousel);
+                        }
                         break;
 
 					default :
