@@ -17,11 +17,10 @@
             <div class="container px-5 px-sm-0" >
               <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>              
               <div class="ml-auto d-flex flex-nowrap">                
-                <a href="#" id="myBtn" class="nav-item nav-link fa fa-sign-in fa-fw fa-lg bg-login"> Login</a>                 
+                <a href="#" id="myBtn" class="nav-item nav-link fa fa-sign-in fa-lg bg-login"> Login</a>                 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" role="dialog">
                   <div class="modal-dialog" id="myModal2">
-
                     <!-- Modal content-->
                     <div class="modal-content" tabindex="-1">
                       <div class="modal-header" style="padding:20px 40px;">
@@ -30,8 +29,11 @@
                       </div>
                       <div class="modal-body" style="padding:30px 40px;">
                         <form role="form">
+<?php 
+                        if (!isset($_SESSION["UserName"])) {
+?>
                           <div class="form-group">
-                            <label for="usrname"><span class="fas fa-user"></span> Username</label>
+                            <li class="fa-user-circle"></li>
                             <input type="text" class="form-control" id="usrname" placeholder="Courriel">
                           </div>
                           <div class="form-group">
@@ -41,8 +43,18 @@
                           <div class="checkbox">
                             <label><input type="checkbox" value="" checked>Remember me</label>
                           </div>
-                            <button type="submit" class="btn btn-bleu btn-block"><span class="glyphicon glyphicon-off"></span>Se connecter</button>
+                            <button type="submit" class="btn btn-bleu btn-block"><span></span>Se connecter</button>
                         </form>
+<?php
+                        }
+                        else { 
+?>
+                            <div>
+                              <a href="index.php?Users&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>                                
+                            </div>
+<?php
+                            } 
+?>
                       </div>
                       <div class="modal-footer">                       
                         <p class="textModal">Pour créer un compte <a href="#"> Cliquez ici</a></p>                        
