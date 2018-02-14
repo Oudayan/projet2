@@ -11,7 +11,7 @@
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery.jcarousel.min.js"></script>
-        <script src="js/modernizr.js"></script>
+        <script src="js/modernizr.js"></script>        
     </head>
     <script>
 $(document).ready(function(){
@@ -45,29 +45,27 @@ $(document).ready(function(){
                         <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
                          <div class="form-group">
                             <label for="psw"><span class="fa fa-envelope" aria-hidden="true"></span></label>
-                            <input type="email" class="form-control" id="psw" placeholder="Courriel">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="email" class="form-control" id="courriel" placeholder="Courriel">                            
                           </div>                          
                           <div class="form-group">
                             <label for="psw"><span class="fa fa-key" aria-hidden="true"></span></label>
-                            <input type="password" class="form-control" id="psw" placeholder="Mot de passe">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="password" class="form-control" id="psw" placeholder="Mot de passe">                           
                           </div>
                           <div class="checkbox">
                             <label><input type="checkbox" value="" checked class="textModal"> Se souvenir de moi</label>
                           </div>
                             <button type="submit" id="btnModal" class="btn-block">Se connecter</button>
                         </form>
-<?php
+                        <?php
                         }
                         else { 
-?>
+                        ?>
                             <div><span><?= $_SESSION["courriel"];?></span>
                               <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>                                
                             </div>
-<?php
+                        <?php
                         } 
-?>
+                        ?>
                       </div><!-- modal-body -->
                       <div class="modal-footer">                       
                         <p class="textModal">Vous n’avez pas de compte ?<a href="#"> Inscription</a></p>                        
