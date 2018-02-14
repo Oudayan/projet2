@@ -13,13 +13,19 @@
         <script src="js/jquery.jcarousel.min.js"></script>
         <script src="js/modernizr.js"></script>
     </head>
+    <script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+    });
+});
+</script>
     <body>
         <header> 
           <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse mb-5 text-white">
             <div class="container px-5 px-sm-0" >
-              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>    <?php 
-                 if (!isset($_SESSION["courriel"])) {
-              ?>              
+              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>   
+             
               <div class="ml-auto d-flex flex-nowrap">                
                 <a href="#" id="myBtn" class="nav-item nav-link fa fa-sign-in fa-lg bg-login"> Login</a>                 
                 <!-- Modal -->
@@ -32,11 +38,11 @@
                         <h6> Connectez-vous avec votre adresse e-mail</h6>                         
                         <button type="button" class="close" data-dismiss="modal">&times;</button>                        
                       </div>
-                      <div class="modal-body" style="padding:15px 15px;">                        
-                        <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
-<?php 
+                      <div class="modal-body" style="padding:15px 15px;">
+                        <?php 
                         if (!isset($_SESSION["UserName"])) {
-?>
+                        ?>
+                        <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
                          <div class="form-group">
                             <label for="psw"><span class="fa fa-envelope" aria-hidden="true"></span></label>
                             <input type="email" class="form-control" id="psw" placeholder="Courriel">
@@ -77,13 +83,3 @@
         <div class="my-4 text-center">
             <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "")?>
         </div>
-      
-<script>
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
-</script>   
-
-        <main>
