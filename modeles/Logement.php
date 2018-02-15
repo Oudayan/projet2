@@ -22,7 +22,6 @@
 		private $longitude;
 		private $courriel;
 		private $id_type_logement;
-		private $nb_interieur;
 		private $premiere_photo;
 		private $prix;
 		private $evaluation;
@@ -43,12 +42,13 @@
 		private $est_laveuse;
 		private $est_secheuse;
 		private $est_chauffage;
+		private $l_actif;
 		private $l_banni;
 		private $l_date_banni;
 		private $l_commentaire_banni;
 
         // Constructeur
-		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $nb_interieur = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
+		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_actif = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
             $this->ecrireIdLogement($id_logement);
             $this->ecrireNoCivique($no_civique);
             $this->ecrireApt($apt);		
@@ -61,7 +61,6 @@
             $this->ecrireLongitude($longitude);
             $this->ecrireCourriel($courriel);
             $this->ecrireIdTypeLogement($id_type_logement);		
-            $this->ecrireNbInterieur($nb_interieur);
             $this->ecrirePremierePhoto($premiere_photo);
             $this->ecrirePrix($prix);
             $this->ecrireEvaluation($evaluation);
@@ -82,6 +81,7 @@
             $this->ecrireEstLaveuse($est_laveuse);
             $this->ecrireEstSecheuse($est_secheuse);
             $this->ecrireEstChauffage($est_chauffage);
+            $this->ecrireLActif($l_actif);
             $this->ecrireLBanni($l_banni);
             $this->ecrireLDateBanni($l_date_banni);
             $this->ecrireLCommentaireBanni($l_commentaire_banni);
@@ -158,12 +158,6 @@
         public function ecrireIdTypeLogement($id_type_logement) {
             if (is_numeric($id_type_logement) && trim($id_type_logement) != "") {
                 $this->id_type_logement = $id_type_logement;
-            }
-        }
-        // Écrire nb_interieur
-        public function ecrireNbInterieur($nb_interieur) {
-            if (is_string($nb_interieur) && trim($nb_interieur) != "") {
-                $this->nb_interieur = $nb_interieur;
             }
         }
         // Écrire premiere_photo
@@ -286,6 +280,12 @@
                 $this->est_chauffage = $est_chauffage;
             }
         }
+        // Écrire l_actif
+        public function ecrireLActif($l_actif) {
+            if (is_bool($l_actif) && trim($l_actif) != "") {
+                $this->l_actif = $l_actif;
+            }
+        }
         // Écrire l_banni
         public function ecrireLBanni($l_banni) {
             if (is_bool($l_banni) && trim($l_banni) != "") {
@@ -353,10 +353,6 @@
         // Lire id_type_logement
         public function lireIdTypeLogement() {
             return $this->id_type_logement;
-        }
-        // Lire nb_interieur
-        public function lireNbInterieur() {
-            return $this->nb_interieur;
         }
         // Lire premiere_photo
         public function lirePremierePhoto() {
@@ -437,6 +433,10 @@
         // Lire est_chauffage
         public function lireEstChauffage() {
             return $this->est_chauffage;
+        }
+        // Lire l_actif
+        public function lireLActif() {
+            return $this->l_actif;
         }
         // Lire l_banni
         public function lireLBanni() {

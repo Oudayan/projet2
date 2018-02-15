@@ -1,3 +1,346 @@
+<<<<<<< HEAD
+/**
+ * @file     style.css
+ * @author   Oudayan Dutta
+ * @version  1.0
+ * @date     31 janvier 2018
+ * @brief    Styles CSS custom
+ * @details  Feuille de style CSS pour rajouter/modifier des style de Bootstrap
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Pragati+Narrow|Roboto');
+/*
+    font-family: 'Pragati Narrow', sans-serif;
+    font-family: 'Roboto', sans-serif;
+*/
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Pragati Narrow', sans-serif;
+}
+
+header {
+    color: rgba(0, 0, 0, 0.75);
+    height: 10vh;
+}
+
+header h1 {
+    font-size: 5em;
+}
+
+header h2 {
+    font-size: 2.5em;
+}
+
+.accueil {
+    
+}
+
+main {
+    height: 70vh;
+}
+
+main.background {
+    background: url(../images/MONTREAL%20.jpg) no-repeat fixed; 
+    background-size: contain;
+    height: 80vh;
+    margin-top: -15vh;
+}
+
+.depart {
+    bottom: -50vh;
+    color: #f5f5f5;
+}
+
+.depart button {
+    width: 150px;
+}
+
+select[multiple]{
+    height: 133px;
+}
+
+#carte {
+    min-height: 70vh;
+}
+
+#catalogue {
+    height: 70vh;
+    overflow: scroll;
+}
+
+a:hover {
+  text-decoration: none;  
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.btn-bleu {
+  color: #f5f5f5;
+  background-color: #1d91bc;
+  border-color: #1d91bc;
+}
+
+.btn-bleu:hover {
+  color: #f5f5f5;
+  background-color: #5d73c6;
+  border-color: #5d73c6;
+}
+
+.btn-bleu:focus, .btn-bleu.focus {
+  -webkit-box-shadow: 0 0 0 3px rgba(93, 115, 198, 0.5) !important;
+          box-shadow: 0 0 0 3px rgba(93, 115, 198, 0.5) !important;
+}
+
+.btn-bleu.disabled, .btn-bleu:disabled {
+  background-color: #78aeee;
+  border-color: #78aeee;
+}
+
+.btn-bleu:active, .btn-bleu.active,
+.show > .btn-bleu.dropdown-toggle {
+  color: #f5f5f5;
+  background-color: #566cbc !important;
+  background-image: none;
+  border-color: #5d73c6 !important;
+}
+
+.btn-orange {
+  color: #f5f5f5;
+  background-color: #e98d34;
+  border-color: #e98d34;
+}
+
+.btn-orange:hover {
+  color: #f5f5f5;
+  background-color: rgb(205, 120, 45);
+  border-color: rgb(205, 120, 45);
+}
+
+.btn-orange:focus, .btn-orange.focus {
+  -webkit-box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+}
+
+.btn-orange.disabled, .btn-orange:disabled {
+  background-color: #78aeee;
+  border-color: #78aeee;
+}
+
+.btn-orange:active, .btn-orange.active,
+.show > .btn-orange.dropdown-toggle {
+  color: #f5f5f5;
+  background-color: #e98d34 !important;
+  background-image: none;
+  border-color: #e98d34 !important;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Zoraida */
+.bg-login{
+    color: white;
+}
+    
+.bg-login:hover {
+      color: #f6c783;
+}  
+    
+.modal-header, h4, .close {
+   background-color: #177598;
+    background: linear-gradient(to right,  rgb(23, 117, 152) , rgba(23, 117, 152, 0.63));
+    color:white !important;
+    text-align: center;
+    font-size: 20px;
+    }
+    
+.modal-header{    
+    height: 60px;
+}
+    
+button.close{
+    background: #559ab3;
+} 
+    
+#btnModal{    
+    height: 30px;
+    color: #f5f5f5;
+    background-color: #1d91bc;
+    border-color: #1d91bc; 
+    border: none;
+    border-radius: 4px;
+}
+
+.modal-footer {
+    background-color: #F6F7EA;
+    height: 60px;
+}
+
+.textModal{
+    color: black;
+}
+
+#dialog{ 
+    width: 300px;
+    height: 100px;
+}
+
+.navbar{
+    background: rgba(51, 51, 51, 0.97);
+}
+
+label {
+  color: black;
+}    
+
+/* Original */
+footer {
+    color: rgba(0, 0, 0, 0.9);
+    height: 10vh;
+}
+
+
+/** Carousel **/
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    float: left;
+}
+
+.jcarousel img {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+}
+
+/** Carousel Controls **/
+
+.jcarousel-control-prev,
+.jcarousel-control-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -10%;
+    width: 5%;
+    text-align: center;
+    color: #fefefe;
+    text-decoration: none;
+    text-shadow: 0 0 1px #000;
+    font: 24px/27px Arial, sans-serif;
+}
+
+.jcarousel-control-prev {
+    left: 15px;
+}
+
+.jcarousel-control-next {
+    right: 15px;
+}
+
+.jcarousel-control-prev:hover span,
+.jcarousel-control-next:hover span {
+    display: block;
+}
+
+a.jcarousel-control-prev:hover,
+a.jcarousel-control-next:hover {
+    color: #e98d34;
+}
+
+.jcarousel-control-prev.inactive,
+.jcarousel-control-next.inactive {
+    opacity: .25;
+    cursor: default;
+}
+
+/** Carousel Pagination **/
+
+.jcarousel-pagination {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    margin: 0;
+    margin-left: -22px;
+}
+
+.jcarousel-pagination a {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+    height: 10px;
+    width: 10px;
+    line-height: 10px;
+    background: #fff;
+    color: #e98d34;
+    border-radius: 10px;
+    text-indent: -9999px;
+    margin-right: 7px;
+    -webkit-box-shadow: 0 0 2px #e98d34;
+    -moz-box-shadow: 0 0 2px #e98d34;
+    box-shadow: 0 0 2px #e98d34;
+}
+
+.jcarousel-pagination a.active {
+    background: #e98d34;
+    color: #fff;
+    opacity: 1;
+    -webkit-box-shadow: 0 0 2px #F0EFE7;
+    -moz-box-shadow: 0 0 2px #F0EFE7;
+    box-shadow: 0 0 2px #F0EFE7;
+}
+
+/* Évaluations 
+Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rating-define-by-width
+*/
+
+.score {
+    display: inline-block;
+    font-family: Wingdings;
+    font-size: 25px;
+    color: #ccc;
+    position: relative;
+}
+
+.score::before,
+.score span::before{
+    content: "\2605\2605\2605\2605\2605";
+    display: block;
+}
+
+.score span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #e98d34;
+    text-shadow: 1px 1px 3px #666;
+}
+
+.prix {
+    font-size: 25px;
+    color: #e98d34;
+    text-shadow: 1px 1px 3px #666;
+}
+=======
 /**
  * @file     style.css
  * @author   Oudayan Dutta
@@ -334,3 +677,4 @@ a.jcarousel-control-next:hover {
     -moz-box-shadow: 0 0 2px #F0EFE7;
     box-shadow: 0 0 2px #F0EFE7;
 }
+>>>>>>> c0eba126f9f446e229a6baceff901c230142d211
