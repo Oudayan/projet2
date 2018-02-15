@@ -11,7 +11,7 @@
 <main class="container">
     <div class="container-fluid">
         <div class="row">
-            <aside class="col-lg-3 border rounded my-2">
+            <aside class="col-lg-3 border rounded">
                 <form class="py-3">
                     <div class="form-group">
                         <label for="region">Région&nbsp;:</label>
@@ -139,63 +139,73 @@
                 </form>
                 <button id="drop" class="btn btn-block btn-orange mb-4">Rechercher</button>
             </aside>
+            
+            
             <div class="col-lg-9">
-                <section id="carte" class="hidden">
-                </section>
-                <section id="catalogue" class="">
-                    <?php foreach ($donnees["logements"] as $logement) { ?>
-                        <article id="fiche_<?= $logement->lireIdLogement(); ?>" class="row border rounded text-center m-2 p-2">
-                            <div class="col-lg-4">
-                                <div class="jcarousel-wrapper">
-                                    <div class="jcarousel" data-jcarousel="true">
-                                        <ul id="liste_image_<?= $logement->lireIdLogement(); ?>">
-                                            <li>
-                                                <img src="<?= $logement->lirePremierePhoto(); ?>">
-                                                <h5 class="py-2">Façade</h5>
-                                            </li>
-                                            <li>
-                                                <img src="images/Logements/1/image_2.jpg">
-                                                <h5 class="py-2">Escalier</h5>
-                                            </li>
-                                            <li>
-                                                <img src="images/Logements/1/image_3.jpg">
-                                                <h5 class="py-2">Salon</h5>
-                                            </li>
-                                            <li>
-                                                <img src="images/Logements/1/image_5.jpg">
-                                                <h5 class="py-2">Bureau</h5>
-                                            </li>
-                                            <li>
-                                                <img src="images/Logements/1/image_6.jpg">
-                                                <h5 class="py-2">Cuisine</h5>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true" onclick="afficherImagesCarousel(<?= $logement->lireIdLogement() . ', \'' . $logement->lirePremierePhoto() ?>')">‹</a>
-                                    <a href="#" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a>
-                                    <p id="pagination_photo_<?= $logement->lireIdLogement(); ?>"  class="jcarousel-pagination" data-jcarouselpagination="true">
-                                        <a href="#1" class="active">1</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="row">
-                                    <h4 class="col-12 p-2"><?= $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince(); ?></h4>
-                                    <div class="col-sm-12 text-left my-3">
-                                        <?= $logement->lireDescription(); ?><br>
-                                    </div>
-                                    <div class="col-sm-6 text-left my-3">
-                                        Prix&nbsp;:&nbsp;<br><span class="prix mt-3"><strong><?= $logement->lirePrix(); ?>&nbsp;$</strong></span>
-                                    </div>
-                                    <div class="col-sm-6 text-right my-3">
-                                        Évaluation&nbsp;:&nbsp;<?= round($logement->lireEvaluation(), 2); ?>&nbsp;/&nbsp;5
-                                        <br><span class="score"><span style="width: <?= ($logement->lireEvaluation() / 5) * 100 ?>%"></span></span>
+                <nav>
+                    <div id="nav-tab" class="nav nav-tabs row mx-0" role="tablist">
+                        <a class="nav-item nav-link col-6 active" id="nav-catalogue-tab" data-toggle="tab" href="#catalogue" role="tab" aria-controls="nav-catalogue" aria-selected="true"><h3>Catalogue</h3></a>
+                        <a class="nav-item nav-link col-6" id="nav-carte-tab" data-toggle="tab" href="#carte" role="tab" aria-controls="nav-carte" aria-selected="false"><h3>Carte</h3></a>
+                    </div>
+                </nav>
+                <div id="nav-tabContent" class="tab-content border-left border-right border-bottom">
+                    <section id="carte" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-carte-tab">
+                    </section>
+                    <section id="catalogue" class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-catalogue-tab">
+                        <?php foreach ($donnees["logements"] as $logement) { ?>
+                            <article id="fiche_<?= $logement->lireIdLogement(); ?>" class="row border rounded text-center m-2 p-2">
+                                <div class="col-lg-4">
+                                    <div class="jcarousel-wrapper">
+                                        <div class="jcarousel" data-jcarousel="true">
+                                            <ul id="liste_image_<?= $logement->lireIdLogement(); ?>">
+                                                <li>
+                                                    <img src="<?= $logement->lirePremierePhoto(); ?>">
+                                                    <h5 class="py-2">Façade</h5>
+                                                </li>
+                                                <li>
+                                                    <img src="images/Logements/1/image_2.jpg">
+                                                    <h5 class="py-2">Escalier</h5>
+                                                </li>
+                                                <li>
+                                                    <img src="images/Logements/1/image_3.jpg">
+                                                    <h5 class="py-2">Salon</h5>
+                                                </li>
+                                                <li>
+                                                    <img src="images/Logements/1/image_5.jpg">
+                                                    <h5 class="py-2">Bureau</h5>
+                                                </li>
+                                                <li>
+                                                    <img src="images/Logements/1/image_6.jpg">
+                                                    <h5 class="py-2">Cuisine</h5>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true" onclick="afficherImagesCarousel(<?= $logement->lireIdLogement() . ', \'' . $logement->lirePremierePhoto() ?>')">‹</a>
+                                        <a href="#" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a>
+                                        <p id="pagination_photo_<?= $logement->lireIdLogement(); ?>"  class="jcarousel-pagination" data-jcarouselpagination="true">
+                                            <a href="#1" class="active">1</a>
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
-                    <?php } ?>
-                </section>
+                                <div class="col-lg-8">
+                                    <div class="row">
+                                        <h4 class="col-12 p-2"><?= $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince(); ?></h4>
+                                        <div class="col-sm-12 text-left my-3">
+                                            <?= $logement->lireDescription(); ?><br>
+                                        </div>
+                                        <div class="col-sm-6 text-left my-3">
+                                            Prix&nbsp;:&nbsp;<br><span class="prix mt-3"><strong><?= $logement->lirePrix(); ?>&nbsp;$</strong></span>
+                                        </div>
+                                        <div class="col-sm-6 text-right my-3">
+                                            Évaluation&nbsp;:&nbsp;<?= round($logement->lireEvaluation(), 2); ?>&nbsp;/&nbsp;5
+                                            <br><span class="score"><span style="width: <?= ($logement->lireEvaluation() / 5) * 100 ?>%"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php } ?>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
@@ -228,18 +238,19 @@
         var url = window.location.search.substring(1);
         var catalogue = new RegExp(/catalogue=true/, "gi");
         if (catalogue.test(url)) {
-            $("#catalogue").removeClass("hidden");
-        }
-        else {
-            $("#catalogue").addClass("hidden");
+            $("#nav-tab a:first-child").tab('show');
+            $("#catalogue").addClass('active');
         }
         var carte = new RegExp(/carte=true/, "gi");
         if (carte.test(url)) {
-            $("#carte").removeClass("hidden");
+            $("#nav-tab a:last-child").tab('show');
+            $("#carte").addClass('active');
         }
-        else {
-            $("#carte").addClass("hidden");
-        }
+    
+        $("#nav-carte-tab").on("click", function() {
+            initialize();
+        });
+
     });
 </script>
 
