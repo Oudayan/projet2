@@ -3,7 +3,7 @@
  * @file    config.php
  * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats
  * @version 1.0
- * @date    9 février 2018
+ * @date    9 février 2018 dernière révision 
  * @brief   Définit les constantes et chemins 
  * @details Auto-chargement des classes et des paramètres de connexion à la base de données
  */
