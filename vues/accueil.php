@@ -8,10 +8,41 @@
  * @details     Liens pour recherche de logements par carte ou par liste
  */ 
 ?>
-<main class="container text-center">
-    <h3>Ceci est la page d'accueil</h3>
-    <div class="d-flex justify-content-between">
-        <a href='index.php?Recherche&action=recherche'><button class='btn btn-bleu'>Recherche par carte</button></a>
-        <a href='index.php?Recherche&action=RechercheFiches'><button class='btn btn-orange'>Recherche par fiches</button></a>
-    </div>
-</main>
+        <main class="container-fluid background text-center">
+            <div class="row">
+                <div class="depart col-sm-4 offset-sm-4">
+                    <div class="row">
+                        <h2 class="col-12">Recherche par</h2>
+                        <a href='index.php?Recherche&action=recherche&catalogue=true' class="col-sm-6"><button class='btn m-1'>Catalogue</button></a>
+                        <a href='index.php?Recherche&action=recherche&carte=true' class="col-sm-6"><button class='btn m-1'>Carte</button></a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            /* Source : http://callmenick.com/post/advanced-parallax-scrolling-effect 
+            (function(){
+                var parallax = document.querySelectorAll(".background"), speed = 0.5;
+                window.onscroll = function(){
+                    [].slice.call(parallax).forEach(function(el,i) {
+                        var windowYOffset = window.pageYOffset, elBackgrounPos = "0 " + (windowYOffset * speed) + "px";
+                        el.style.backgroundPosition = elBackgrounPos;
+                    });
+                };
+            })();*/
+        </script>
+
+        <script type="text/javascript">
+            /*$(window).on("load resize", function() {
+                var url = window.location.search.substring(1);
+                var home1 = new RegExp(/&action=accueil/, "gi");
+                var home2 = new RegExp(/&action=/, "gi");
+                if ((home1.test(url) ^ home2.test(url)) || $(window).width() < 768) {
+                    $("header").removeClass("accueil");
+                }
+                else {
+                    $("header").addClass("accueil");
+                }
+            });*/
+        </script>

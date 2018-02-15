@@ -6,47 +6,80 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">        
         <title>A Louer</title>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/jquery.jcarousel.min.js"></script>
+        <script src="js/modernizr.js"></script>        
+        <script>
+            /*$(document).ready(function(){
+                $("#myBtn").click(function(){
+                    $("#myModal").modal();
+                });
+            });*/
+        </script>
     </head>
     <body>
-        <header class="bg-inverse text-white">
-            <nav class="navbar navbar-toggleable-sm">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#BarreNav">
-                   <div class="fa fa-bars"></div>
-                </button>
-                <div class="col-9 col-md-6">
-                    <a class="navbar-brand active" href="index.php"><!-- <img src="images/Logo-A-Louer.png"> --></a>  
-                </div>
-                <div class="collapse navbar-collapse" id="BarreNav">
-                    <div class="d-flex justify-content-end ml-auto">
-                        <?php 
-                            if (!isset($_SESSION["UserName"])) {
-                        ?>
-                        <form method='POST' action='index.php?Users' class='d-flex flex-row'>
-                            <input type='hidden' name='action' value='login'>
-                            <table>
-                                <tr><td><label>Nom d'usager : </label></td><td><input type='text' name='UserName' value='OD'></td></tr>
-                                <tr><td><label>Mot de passe : </label></td><td><input type='password' name='Password' value='12345'></td></tr>
-                            </table>
-                            <div>
-                                <button type='submit' class='btn btn-success login'>Se&nbsp;connecter</button>
+        <header class="container-fluid"> 
+            <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse text-white row">
+                <div class="container px-5 px-sm-0">
+                    <a href="index.php?Recherche&action=accueil" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:60%"></a>
+                    <div class="ml-auto d-flex flex-nowrap">
+                        <a href="#" class="nav-item nav-link fa fa-sign-in fa-lg bg-login" data-toggle="modal" data-target="#loginModal">Login</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="loginModal" role="dialog">
+                            <div class="modal-dialog" id="dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="padding:15px 30px;">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <h6 class="text-white"> Connectez-vous avec votre adresse e-mail</h6>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body" style="padding:15px 15px;">
+                                        <?php if (!isset($_SESSION["UserName"])) { ?>
+                                        <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
+                                            <div class="form-group">
+                                                <div class="offset-">
+                                                    <label for="psw"><span class="fa fa-envelope" aria-hidden="true"></span></label>
+                                                </div>
+                                                <input type="email" class="form-control" id="courriel" placeholder="Courriel">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="psw"><span class="fa fa-key" aria-hidden="true"></span></label>
+                                                <input type="password" class="form-control" id="psw" placeholder="Mot de passe">
+                                            </div>
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" value="" checked class="textModal"> Se souvenir de moi</label>
+                                            </div>
+                                            <button type="submit" id="btnModal" class="btn-block">Se connecter</button>
+                                        </form>
+                                        <?php }
+                                        else { ?>
+                                        <div><span><?= $_SESSION["courriel"];?></span>
+                                            <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
+                                    <!-- modal-body -->
+                                    <div class="modal-footer">
+                                        <p class="textModal">Vous n’avez pas de compte ?<a href="#"> Inscription</a><br></p>
+                                    </div>
+                                </div>
+                                <!-- modal-content -->
                             </div>
-                        </form>
-                        <?php }
-                            else { ?>
-                            <div>
-                                <a href='index.php?Users&action=logout'><button class='btn btn-secondary login'>Se&nbsp;déconnecter</button></a>
-                            </div>
-                        <?php }  ?>
+                            <!-- modal-dialog -->
+                        </div>
+                        <!-- modal fade -->
                     </div>
+                    <!-- ml-auto -->
                 </div>
+                <!-- container px-5 -->
             </nav>
+            <div class="my-4 text-center">
+                <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "")?>
+            </div>
         </header>
-        <div class="my-4 text-center">
-            <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "") ?>
-        </div>
+      
 
-        <main>

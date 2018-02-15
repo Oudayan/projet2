@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * @file     style.css
  * @author   Oudayan Dutta
@@ -7,21 +8,21 @@
  * @details  Feuille de style CSS pour rajouter/modifier des style de Bootstrap
  */
 
-@import url('https://fonts.googleapis.com/css?family=Exo+2|Titillium+Web|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Pragati+Narrow|Roboto');
 /*
-    font-family: 'Titillium Web', sans-serif;
-    font-family: 'Ubuntu', sans-serif;
-    font-family: 'Exo 2', sans-serif;
+    font-family: 'Pragati Narrow', sans-serif;
+    font-family: 'Roboto', sans-serif;
 */
-
 body {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Pragati Narrow', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
     font-size: 1em;
 }
 
 header {
     color: rgba(0, 0, 0, 0.9);
     height: 20vh;
+    widows: 100%;
 }
 
 header h1 {
@@ -32,16 +33,56 @@ header h2 {
     font-size: 2.5em;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Pragati Narrow', sans-serif;
+}
+
+h6 {
+  color: #1d91bc;
+}
+
+a:hover {
+  text-decoration: none;  
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
 main {
-    min-height: 70vh;
+    height: 70vh;
+    background-color: rgba(254, 254, 254, 0);
+}
+
+main.background {
+    background: url(../images/MONTREAL%20.jpg) no-repeat fixed; 
+    background-size: contain;
+    height: 70vh;
+    margin-top: -15vh;
+}
+
+.depart {
+    bottom: -45vh;
+    color: #f5f5f5;
+    background-color: rgba(254, 254, 254, 0);
+}
+
+.depart button {
+    width: 150px;
+}
+
+select[multiple]{
+    height: 133px;
 }
 
 #carte {
     min-height: 70vh;
 }
 
-button.btn {
-    height: 64px;
+#catalogue {
+    height: 70vh;
+    overflow: scroll;
 }
 
 .btn-bleu {
@@ -88,7 +129,7 @@ button.btn {
 
 .btn-orange:focus, .btn-orange.focus {
   -webkit-box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
-          box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
 }
 
 .btn-orange.disabled, .btn-orange:disabled {
@@ -108,7 +149,261 @@ button.btn {
     display: none;
 }
 
-footer {
-    color: rgba(0, 0, 0, 0.9);
-    height: 10vh;
+/** Carousel **/
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    float: left;
+}
+
+.jcarousel img {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+}
+
+/** Carousel Controls **/
+
+.jcarousel-control-prev,
+.jcarousel-control-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -10%;
+    width: 5%;
+    text-align: center;
+    color: #fefefe;
+    text-decoration: none;
+    text-shadow: 0 0 1px #000;
+    font: 24px/27px Arial, sans-serif;
+}
+
+.jcarousel-control-prev {
+    left: 15px;
+}
+
+.jcarousel-control-next {
+    right: 15px;
+}
+
+.jcarousel-control-prev:hover span,
+.jcarousel-control-next:hover span {
+    display: block;
+}
+
+a.jcarousel-control-prev:hover,
+a.jcarousel-control-next:hover {
+    color: #e98d34;
+}
+
+.jcarousel-control-prev.inactive,
+.jcarousel-control-next.inactive {
+    opacity: .25;
+    cursor: default;
+}
+
+/** Carousel Pagination **/
+
+.jcarousel-pagination {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    margin: 0;
+    margin-left: -22px;
+}
+
+.jcarousel-pagination a {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+    height: 10px;
+    width: 10px;
+    line-height: 10px;
+    background: #fff;
+    color: #e98d34;
+    border-radius: 10px;
+    text-indent: -9999px;
+    margin-right: 7px;
+    -webkit-box-shadow: 0 0 2px #e98d34;
+    -moz-box-shadow: 0 0 2px #e98d34;
+    box-shadow: 0 0 2px #e98d34;
+}
+
+.jcarousel-pagination a.active {
+    background: #e98d34;
+    color: #fff;
+    opacity: 1;
+    -webkit-box-shadow: 0 0 2px #F0EFE7;
+    -moz-box-shadow: 0 0 2px #F0EFE7;
+    box-shadow: 0 0 2px #F0EFE7;
+}
+
+/* Évaluations 
+Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rating-define-by-width
+*/
+
+.score {
+    display: inline-block;
+    font-family: Wingdings;
+    font-size: 25px;
+    color: #ccc;
+    position: relative;
+}
+
+.score::before,
+.score span::before{
+    content: "\2605\2605\2605\2605\2605";
+    display: block;
+}
+
+.score span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #e98d34;
+    text-shadow: 1px 1px 3px #666;
+}
+
+.prix {
+    font-size: 25px;
+    color: #e98d34;
+    text-shadow: 1px 1px 3px #666;
+}
+
+#carte {
+    min-height: 70vh;
+}
+
+/* Zoraida */
+.bg-login {
+    color: white;
+}
+    
+.bg-login:hover {
+      color: #f6c784;
+}  
+    
+.modal-header, h4 {
+    background-color: rgba(23, 117, 152, 0);
+    background: linear-gradient(to right, rgba(23, 117, 152, 0.63), rgb(23, 117, 152));
+    color: #fefefe !important;
+    text-align: center;
+    font-size: 20px;
+}
+    
+.modal-header {    
+    height: 60px;
+}
+
+.modal-header .close {
+    padding: 0.5rem;
+    margin: -.5rem -1rem -1rem auto;
+    color: #fefefe !important;
+    background-color: rgba(23, 117, 152, 0);
+}
+    
+#btnModal {    
+    height: 30px;
+    color: #f5f5f5;
+    background-color: #1d91bc;
+    border-color: #1d91bc; 
+    border: none;
+    border-radius: 4px;
+}
+
+.modal-footer {
+    background-color: #F6F7EA;
+}
+
+.textModalc {
+    color: black;
+}
+
+#dialog { 
+    width: 300px;
+    height: 100px;
+}
+
+.navbar {
+    background: rgba(51, 51, 51, 0.97);
+}
+
+label {
+    color: black;
+}    
+
+#services {
+    margin-top: 20px;
+    background: #333;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    }
+
+.footerText {
+    color: #9d9d96;
+    font-size: 0.9em;
+}
+
+.iconFooter {
+    color: #e98d34;
+}
+
+/* style social icon*/
+.fa {
+    padding: 10px;
+    font-size: 40px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10%;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-google-plus{
+    background: #b33b2c;
+    color: white;
+}
+
+.fa-twitter{
+    background: white;
+    color: #1b95e0;;
+}
+
+#info{
+    background-color: #f6f7eA;   
+    padding: 15px;
+}
+
+.circle{
+    width: 250px;
+    height: 250px;   
+    background: #fefefe; 
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+    margin: 20px;
+    padding: 10px 15px 40px 15px;
+    font-family: 'Pragati Narrow', sans-serif;
 }
