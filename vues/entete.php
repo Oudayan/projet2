@@ -22,10 +22,9 @@ $(document).ready(function(){
 </script>
     <body>
         <header> 
-          <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse mb-5 text-white">
-            <div class="container px-5 px-sm-0" >
-              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:100px;"></a>   
-             
+          <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse text-white row">
+            <div class="container px-5 px-sm-0">
+              <a href="#" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:60%"></a>
               <div class="ml-auto d-flex flex-nowrap">                
                 <a href="#" id="myBtn" class="nav-item nav-link fa fa-sign-in fa-lg bg-login"> Login</a>                 
                 <!-- Modal -->
@@ -35,7 +34,7 @@ $(document).ready(function(){
                     <div class="modal-content">                      
                       <div class="modal-header" style="padding:15px 30px;">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                        <h6> Connectez-vous avec votre adresse e-mail</h6>                         
+                        <h6 class="text-white"> Connectez-vous avec votre adresse e-mail</h6>                         
                         <button type="button" class="close" data-dismiss="modal">&times;</button>                        
                       </div>
                       <div class="modal-body" style="padding:15px 15px;">
@@ -44,7 +43,9 @@ $(document).ready(function(){
                         ?>
                         <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
                          <div class="form-group">
+                           <div class="offset-">
                             <label for="psw"><span class="fa fa-envelope" aria-hidden="true"></span></label>
+                            </div>
                             <input type="email" class="form-control" id="courriel" placeholder="Courriel">                            
                           </div>                          
                           <div class="form-group">
@@ -68,7 +69,7 @@ $(document).ready(function(){
                         ?>
                       </div><!-- modal-body -->
                       <div class="modal-footer">                       
-                        <p class="textModal">Vous n’avez pas de compte ?<a href="#"> Inscription</a></p>                        
+                        <p class="textModal">Vous n’avez pas de compte ?<a href="#"> Inscription</a><br></p>                        
                       </div>
                     </div><!-- modal-content -->
                   </div><!-- modal-dialog -->
