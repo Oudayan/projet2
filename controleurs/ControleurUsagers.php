@@ -35,9 +35,9 @@
 								//$nouveauUsager = new Usagers();
 								//$nouveauUsager->ecrireCourriel($params["courriel"]);
 								//$my=$nouveauUsager->lireCourriel();
-								var_dump("my",$modeleUsagers);
+								// var_dump("my",$modeleUsagers);
 								$data = $modeleUsagers->obtenir_par_courriel($params["courriel"]);  
-								var_dump($data);
+								//var_dump($data);
 								if($data && $data->lireCourriel() == $params["courriel"] && $data->lireMotDePasse() == $params["MotDePasse"])	//verifie si $data est "vraie" et si les donnees de la bd sont pareil comme les entrées.
 								{																								//$data sera faux si le courriel ne se trouve pas dans la bd
 																		
@@ -85,7 +85,15 @@
 							var_dump("Erreur en parametres");
 						
 					break;
-														
+					
+					case "ajouterUsager" : 
+						$modeleTypeContact = $this->lireDAO("TypeContact");
+						$modeleTypePaiement = $this->lireDAO("TypePaiement");
+					  	$donnees["listeContacts"] = $modeleTypeContact->lireTousTypeContact();
+					  	$donnees["listePaiements"] = $modeleTypePaiement->lireTousTypePaiement();
+					  	$this->afficherVues("ajoutUsager", $donnees);
+					break;
+
 					//====================================================partie administrative===========================
 					
 				
@@ -110,8 +118,9 @@
 						break;
 					
 					
-					case "sauvegardeUsager" :														//va chercher un usager pour permettre la modification
-						 
+					case "enregistrerUsager" :														//va chercher un usager pour permettre la modification
+						var_dump($params);
+						//die();
 						if(!isset($params["courriel"]) || !isset($params["nom"]) || !isset($params["prenom"]))
 						{	
 					       echo "Erreur .... !";
@@ -119,24 +128,10 @@
 						}
 						else
 						{
-							if ($params["courriel"])
-							{ 
-								if(isset($params["isAdmin"])) 
-									$params["isAdmin"]="1"; 
-								else 
-									$params["isAdmin"]="0";
-								
-								if(isset($params["isBanned"]))
-									$params["isBanned"]="1";
-								else 
-									$params["isBanned"]="0";
-								
-								$params["MotDePasse"]="";
 								$modeleUsagers = $this->lireDAO("Usagers");                                  
-								$modification["Usager"] = new Usager($params["courriel"],$params["nom"],$params["prenom"], $params["MotDePasse"], $params["isAdmin"],$params["isBanned"]);
+								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],2,$params["id_paiement"]);
 								$succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
 								$this->afficheListeUsagers();
-							}
 						}
 						break;
 					case "Logout":																	//va chercher un usager pour permettre la modification
@@ -164,40 +159,14 @@
 		* @param point1 data
 		* @return à une vue.
 		*/
+
 		private function afficheListeUsagers()
 		{
 			$modeleUsagers = $this->lireDAO("Usagers");
 			$data["usagers"] = $modeleUsagers->obtenir_tous();
 			$this->afficherVues("AfficheListeUsagers", $data);
 		}
-		/**
-		* @brief Valide le courriel et le MotDePasse
-		* @details Fait les validations nécessaires pour la sécurité du site
-		* @param point1 erreurs
-		* @param point2 courriel
-		* @param point3 MotDePasse
-		* @return erreurs.
-		*/
-		
-		private function valide($courriel, $MotDePasse)
-		{
-			$erreurs = "";
-			$courriel = trim($courriel);
-			$MotDePasse = trim($MotDePasse);
-			
-			if($courriel == "")
-				$erreurs .= "Le courriel ne peut etre vide.<br>";
-			if(strlen($courriel) > 30)
-				$erreurs .= "Le courriel ne dépasse pas 30 caracteres.";
-			
-			if($MotDePasse == "")
-				$erreurs .= "Le MotDePasse ne peut etre vide.<br>";
-			if(strlen($MotDePasse) > 30)
-				$erreurs .= "Le MotDePasse ne dépasse pas 30 caracteres.";
-			
-			echo "$erreurs";   																	
-			return $erreurs;
-		}
+
 		
 		/**
 		* @brief Permet la déconnection de la session
@@ -223,8 +192,6 @@
 		}
 		
 	}
-	
-
 	
 		
 ?>
