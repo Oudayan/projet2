@@ -23,6 +23,12 @@
 				switch($params["action"]) {
 					
                     // Affichage de la page de recherche par carte
+					case "accueil" :
+                        $this->afficherVues("accueil");
+                        break;
+
+					
+                    // Affichage de la page de recherche par carte
 					case "recherche" :
                         $donnees["typesLogements"] = $modeleTypeLogement->lireTousTypeLogements();
                         $donnees["logements"] = $modeleLogement->lireTousLogements();
