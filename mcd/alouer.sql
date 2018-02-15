@@ -200,7 +200,7 @@ CREATE TABLE al_messagerie(
 # Table: assigner  destinataire
 #------------------------------------------------------------
 
-CREATE TABLE assigner_destinataire(
+CREATE TABLE al_assigner_destinataire(
     courriel   Varchar (25) NOT NULL, 
     id_message Int NOT NULL, 
     PRIMARY KEY (courriel, id_message)
@@ -218,8 +218,8 @@ ALTER TABLE al_evaluations ADD CONSTRAINT FK_al_evaluations_courriel FOREIGN KEY
 ALTER TABLE al_evaluations ADD CONSTRAINT FK_al_evaluations_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
 ALTER TABLE al_photos_logement ADD CONSTRAINT FK_al_photos_logement_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
 ALTER TABLE al_messagerie ADD CONSTRAINT FK_al_messagerie_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
-ALTER TABLE assigner_destinataire ADD CONSTRAINT FK_assigner_destinataire_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
-ALTER TABLE assigner_destinataire ADD CONSTRAINT FK_assigner_destinataire_id_message FOREIGN KEY (id_message) REFERENCES al_messagerie(id_message);
+ALTER TABLE al_assigner_destinataire ADD CONSTRAINT FK_assigner_destinataire_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
+ALTER TABLE al_assigner_destinataire ADD CONSTRAINT FK_assigner_destinataire_id_message FOREIGN KEY (id_message) REFERENCES al_messagerie(id_message);
 
 
 
