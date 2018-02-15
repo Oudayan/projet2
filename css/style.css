@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * @file     style.css
  * @author   Oudayan Dutta
@@ -76,8 +75,12 @@ select[multiple]{
     height: 133px;
 }
 
+a.nav-item.nav-link {
+    color: #e98d34;
+}
+
 #carte {
-    min-height: 70vh;
+    height: 70vh;
 }
 
 #catalogue {
@@ -279,10 +282,6 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     font-size: 25px;
     color: #e98d34;
     text-shadow: 1px 1px 3px #666;
-}
-
-#carte {
-    min-height: 70vh;
 }
 
 /* Zoraida */
