@@ -60,15 +60,21 @@
               </div>
           </section>
         </div><!-- row -->
-      </div>
+      </div><!-- container -->
     </section> 
     </footer>
+            <div class="row">
+                <div class="col-sm-9 offset-sm-2 text-danger">
+                    <?php if (isset($data["errors"])) {
+                        if ($data["errors"] != "") {
+                            echo "<p>" . $data["errors"] . "</p>";
+                        }
+                    } ?>
+                </div>
+            </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/tether.min.js"></script>
 
-
-        <script src="js/jquery.slim.min.js"></script>
-        <script src="js/tether.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/scripts.js"></script>
-
-  </body>
-</html>
+    </body>  <!-- D'entete.php -->
+</html>  <!-- D'entete.php -->

@@ -31,10 +31,11 @@
 
 	// Déclaration de la racine du projet
 	define("RACINE", $_SERVER["DOCUMENT_ROOT"] . "/alouer/");
+	//define("RACINE", $_SERVER["DOCUMENT_ROOT"] . "/alouer/projet2/");
 	// Déclaration des infos de connexion
-	define("NOMBD", "alouer");
-	define("NOMUSAGER", "root");
-    define("MOTDEPASSE", "");
+	define("NOMBD", "e1795138");
+	define("NOMUSAGER", "e1795138");
+    define("MOTDEPASSE", "710626");
 	//define("NOMBD", "alouer");
 	//define("NOMUSAGER", "root");
     //define("MOTDEPASSE", "root");
