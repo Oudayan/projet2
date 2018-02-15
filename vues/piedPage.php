@@ -7,7 +7,7 @@
                     } ?>
                 </div>
             </div>
-        </main> <!-- From Header.php -->
+        </main> <!-- D'entete.php -->
 
         <footer class="container-fluid text-center bg-inverse text-white">
             <div class="social">
@@ -21,13 +21,11 @@
             <?php
             
             ?>
-        </footer>
+        </footer> 
 
-        <script src="js/jquery.slim.min.js"></script>
-        <script src="js/tether.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/scripts.js"></script>
-
-</body>
+        <script src="js/tether.min.js"></script>
+        
+    </body>  <!-- D'entete.php -->
     
-</html>
+</html>  <!-- D'entete.php -->

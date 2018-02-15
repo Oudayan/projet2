@@ -12,14 +12,14 @@
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery.jcarousel.min.js"></script>
         <script src="js/modernizr.js"></script>        
+        <script>
+            $(document).ready(function(){
+                $("#myBtn").click(function(){
+                    $("#myModal").modal();
+                });
+            });
+        </script>
     </head>
-    <script>
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
-</script>
     <body>
         <header> 
           <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse mb-5 text-white">
@@ -39,9 +39,7 @@ $(document).ready(function(){
                         <button type="button" class="close" data-dismiss="modal">&times;</button>                        
                       </div>
                       <div class="modal-body" style="padding:15px 15px;">
-                        <?php 
-                        if (!isset($_SESSION["UserName"])) {
-                        ?>
+                        <?php if (!isset($_SESSION["UserName"])) { ?>
                         <form role="form" action="index.php?Usagers&action=verificationLogin" method="post">
                          <div class="form-group">
                             <label for="psw"><span class="fa fa-envelope" aria-hidden="true"></span></label>
@@ -56,16 +54,12 @@ $(document).ready(function(){
                           </div>
                             <button type="submit" id="btnModal" class="btn-block">Se connecter</button>
                         </form>
-                        <?php
-                        }
-                        else { 
-                        ?>
+                        <?php }
+                        else { ?>
                             <div><span><?= $_SESSION["courriel"];?></span>
                               <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>                                
                             </div>
-                        <?php
-                        } 
-                        ?>
+                        <?php } ?>
                       </div><!-- modal-body -->
                       <div class="modal-footer">                       
                         <p class="textModal">Vous n’avez pas de compte ?<a href="#"> Inscription</a></p>                        
@@ -81,3 +75,4 @@ $(document).ready(function(){
         <div class="my-4 text-center">
             <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "")?>
         </div>
+
