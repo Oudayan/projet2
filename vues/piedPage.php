@@ -1,4 +1,4 @@
-    <footer>
+    <footer class="mt-5">
     <div class="row" id="info">
         <div class="circle mx-auto">
           <div class="row justify-content-center text-center">
@@ -24,7 +24,7 @@
               <i class="fa fa-handshake-o fa-lg iconFooter" aria-hidden="true"></i>
             </div>            
             <h6><b>Logez votre logement</b></h6>
-             <p>Faites le contrat de location avec le locataire via notre application <strong>À louer</strong> en toute sécurité</ </p>
+             <p>Faites le contrat de location<br>avec le locataire via notre application <strong>À louer</strong><br>en toute sécurité</ </p>
           </div>
         </div><!-- circle --> 
         <div class="circle mx-auto">
@@ -33,7 +33,7 @@
               <i class="fa fa-money fa-lg iconFooter" aria-hidden="true"></i>
             </div>            
             <h6><b>Recevez vos gains</b></h6>
-              <p>Vous êtes payé par paypal après la fin de la location.</p>
+              <p>Vous êtes payé par paypal<br>après la fin de la location.</p>
           </div>
         </div><!-- circle -->
     </div><!-- class="row" -->        
@@ -63,17 +63,8 @@
       </div><!-- container -->
     </section> 
     </footer>
-            <div class="row">
-                <div class="col-sm-9 offset-sm-2 text-danger">
-                    <?php if (isset($data["errors"])) {
-                        if ($data["errors"] != "") {
-                            echo "<p>" . $data["errors"] . "</p>";
-                        }
-                    } ?>
-                </div>
-            </div>
+
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
     <script src="js/tether.min.js"></script>
 
     </body>  <!-- D'entete.php -->
