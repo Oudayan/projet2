@@ -53,7 +53,7 @@
                                             <div class="checkbox">
                                                 <label><input type="checkbox" value="" checked class="textModal"> Se souvenir de moi</label>
                                             </div>
-                                            <button type="submit" id="btnModal" class="btn-block">Se connecter</button>
+                                            <button type="submit" id="btnModal" class="btn-block btn-bleu">Se connecter</button>
                                         </form>
                                         <?php }
                                         else { ?>
