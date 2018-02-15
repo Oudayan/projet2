@@ -75,10 +75,10 @@
 		* @param point7 courriel
 		* @return aucun.
 		*/
-		public function sauvegarde(Usager $unUsager)
+		public function sauvegarde(Usagers $unUsager)
 		{
 
-			if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
+		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
 			{
 				$query = "UPDATE " . $this->getTableName() . " SET nom=?, prenom=?, isAdmin=?, isBanned=? WHERE courriel = ?";
 				$donnees = array($unUsager->nom,$unUsager->prenom,$unUsager->isAdmin,$unUsager->isBanned,$unUsager->courriel) ;
@@ -87,14 +87,19 @@
 			}
 			
 			
-			/*
+			
 			else
-			{
+			{ */
 				//insert
-				$query = "INSERT INTO " . $this->getTableName() . "(courriel,prenom, nom, bio) VALUES (?, ?, ?)";
-				$donnees = array($leRealisateur->prenom, $leRealisateur->nom,$leRealisateur->bio);
+				var_dump($unUsager);
+				$query = "INSERT INTO " . $this->checherNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
+				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
+				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
+				);
+
 				return $this->requete($query, $donnees);
-			}*/
+			/*}*/
 		}
 		
 	}
