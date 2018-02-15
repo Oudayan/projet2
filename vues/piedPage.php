@@ -60,7 +60,7 @@
               </div>
           </section>
         </div><!-- row -->
-      </div>
+      </div><!-- container -->
     </section> 
     </footer>
 
