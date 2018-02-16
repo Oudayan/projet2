@@ -10,11 +10,11 @@
 ?>
         <main class="container-fluid background text-center">
             <div class="row">
-                <div class="depart col-sm-4 offset-sm-4">
+                <div class="depart col-md-4 offset-md-4">
                     <div class="row">
                         <h2 class="col-12">Recherche par</h2>
-                        <a href='index.php?Recherche&action=recherche&catalogue=true' class="col-sm-6"><button class='btn m-1'>Catalogue</button></a>
-                        <a href='index.php?Recherche&action=recherche&carte=true' class="col-sm-6"><button class='btn m-1'>Carte</button></a>
+                        <a href='index.php?Recherche&action=recherche&fiches=true' class="col-md-6"><button class='btn m-1'>Fiches</button></a>
+                        <a href='index.php?Recherche&action=recherche&carte=true' class="col-md-6"><button class='btn m-1'>Carte</button></a>
                     </div>
                 </div>
             </div>
