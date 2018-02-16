@@ -58,8 +58,7 @@
 		  	}
 		  	else {
 				$this->accueil();
-                break;
-		  	
+ 		  	
 		  	}
 
 	  	} // end of switch
@@ -121,7 +120,7 @@
 				$donnees["logements"] = $modeleLogement->lireTousLogements();
 				$this->afficherVues("recherche", $donnees);
 			}
-
+		return;
 		}
 
     }
