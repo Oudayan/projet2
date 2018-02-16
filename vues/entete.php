@@ -19,6 +19,13 @@
                 });
             });*/
         </script>
+		<style>
+			@import "compass/css3";
+
+			body{
+			padding: 50px;
+}
+		</style>
     </head>
     <body>
         <header class="container-fluid"> 
@@ -80,4 +87,10 @@
             </div>
         </header>
       
-
+<script>
+	window.setTimeout(function() {
+		$(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+		});
+	}, 4000);
+</script>
