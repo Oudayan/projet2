@@ -1,5 +1,5 @@
     <footer class="mt-5">
-    <div class="row" id="info">
+    <div id="info" class="row">
         <div class="circle mx-auto">
           <div class="row justify-content-center text-center">
             <div class="col-8 col-sm-6">
