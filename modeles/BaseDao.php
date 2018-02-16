@@ -5,10 +5,10 @@
  * @version  1.0
  * @date     9 février 2018
  * @brief    Modèle parent 
- * @details  Fonctions CRUD commumnes à toutes les classes et modèles
+ * @details  Fonctions "CRUD" commumnes à toutes les classes et modèles
  */
 
-	abstract class BaseDao {
+	abstract class BaseDAO {
 		protected $bd;
 		public function __construct(PDO $bdPDO) {			
 			$this->bd = $bdPDO;
