@@ -27,10 +27,9 @@
 																									
 						if(isset($params["courriel"]) && isset($params["MotDePasse"]) )
 						{
-							$erreurs = $this->valide($params["courriel"], $params["MotDePasse"]); 	
+								
 																									
-							if($erreurs == "" )
-							{
+		
 								$modeleUsagers = $this->lireDao("Usagers");
 								//$nouveauUsager = new Usagers();
 								//$nouveauUsager->ecrireCourriel($params["courriel"]);
@@ -49,7 +48,7 @@
 									}	
 									else															
 									{	
-									     var_dump("vous-etes authentifié");																							
+									     $message = "vous-etes authentifié";																							
 										// $controleur = "Sujets"; 									// chercher la classe avec le nom du controleur Sujets pour pouvoir afficher la liste des sujets
 										// $classe = "Controleur_" . $controleur;
 										//if(class_exists($classe))
@@ -67,22 +66,19 @@
 									}
 									$_SESSION["courriel"] = $params["courriel"];	
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
-									header("Location: http://e1795138.webdev.cmaisonneuve.qc.ca/alouer"); 
+									$this->afficherVues("accueil");
+									// header("Location: http://e1795138.webdev.cmaisonneuve.qc.ca/alouer"); 
 								}
 								else
 								{
 									echo "Le courriel ou le MotDePasse est inexact";             
 								
 								}
-							}
-							
-							else
-							{
-								$this->afficherVues("FormLogin");	
-							}
+
 						}
 						else 
-							var_dump("Erreur en parametres");
+							$message = "Erreur en parametres";
+							Return  $message; 
 						
 					break;
 					
@@ -136,7 +132,8 @@
 						break;
 					case "Logout":																	//va chercher un usager pour permettre la modification
 					   $this->deconnection();
-					   header("Location: http://e1795138.webdev.cmaisonneuve.qc.ca/alouer");
+					   $this->afficherVues("accueil");
+					  // header("Location: http://e1795138.webdev.cmaisonneuve.qc.ca/alouer");
 
 					break;
 					/*default:		
