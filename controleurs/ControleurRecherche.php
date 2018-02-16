@@ -24,7 +24,7 @@
 					
                     // Affichage de la page de recherche par carte
 					case "accueil" :
-                        $this->afficherVues("accueil");
+						$this->accueil();
                         break;
 
 					
@@ -50,14 +50,16 @@
                         break;
 
 					default :
-						$this->afficherVues("accueil");
+					    $this->accueil();
                         break;
 
 			 	}
 					
 		  	}
 		  	else {
-		  		$this->afficherVues("accueil");
+				$this->accueil();
+                break;
+		  	
 		  	}
 
 	  	} // end of switch
@@ -85,6 +87,7 @@
             }
         }
 
+		
         // km = (40000 / 2^zoomlevel) * 2
         
 		private function showCategories() {
@@ -105,6 +108,20 @@
 				$errors .= "Une erreur s'est glissée lors de la modification, veuillez recommencer.<br>";
 				return $errors;
 			}
+		}
+		
+		public function accueil() {
+			if (!isset($_SESSION["courriel"])) {
+				$this->afficherVues("accueil");
+			}
+			else {
+				$modeleLogement = $this->lireDAO("Logement");
+				$modeleTypeLogement = $this->lireDAO("TypeLogement");
+				$donnees["typesLogements"] = $modeleTypeLogement->lireTousTypeLogements();
+				$donnees["logements"] = $modeleLogement->lireTousLogements();
+				$this->afficherVues("recherche", $donnees);
+			}
+
 		}
 
     }
