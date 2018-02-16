@@ -21,8 +21,8 @@
 			return $logement;
 		}
 		
-        public function lireTousLogements($filter = "id_logement > 0", $order = "evaluation DESC") {
-			$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $filter . " ORDER BY " . $order;
+        public function lireTousLogements($filtre = "id_logement > 0", $ordre = "evaluation DESC") {
+			$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $filtre . " ORDER BY " . $ordre;
 			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
     	}
