@@ -66,8 +66,8 @@
 									}
 									$_SESSION["courriel"] = $params["courriel"];	
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
-									$this->afficherVues("accueil");
-									// header("Location: http://e1795138.webdev.cmaisonneuve.qc.ca/alouer"); 
+
+								 header("Location: index.php"); 
 								}
 								else
 								{
@@ -132,8 +132,7 @@
 						break;
 					case "Logout":																	//va chercher un usager pour permettre la modification
 					   $this->deconnection();
-					   $this->afficherVues("accueil");
-					  // header("Location: http://e1795138.webdev.cmaisonneuve.qc.ca/alouer");
+					   header("Location: index.php");
 
 					break;
 					/*default:		
