@@ -13,10 +13,10 @@
 	{
 		public function index(array $params)
 		{
-																									
+
 			if(isset($params["action"]))
 			{
-				// var_dump("Si",$params);
+				//var_dump("Si",$params);
 				// var_dump($_POST);
 				switch($params["action"])
 				
@@ -48,7 +48,8 @@
 									}	
 									else															
 									{	
-									     $message = "vous-etes authentifié";																							
+			
+										 
 										// $controleur = "Sujets"; 									// chercher la classe avec le nom du controleur Sujets pour pouvoir afficher la liste des sujets
 										// $classe = "Controleur_" . $controleur;
 										//if(class_exists($classe))
@@ -66,19 +67,23 @@
 									}
 									$_SESSION["courriel"] = $params["courriel"];	
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
-
-								 header("Location: index.php"); 
+									
+								
+									header("Location: index.php");
+							
 								}
 								else
 								{
-									echo "Le courriel ou le MotDePasse est inexact";             
+									var_dump("Le courriel ou le MotDePasse est inexact");   
+									die();
 								
 								}
 
 						}
-						else 
-							$message = "Erreur en parametres";
-							Return  $message; 
+						else {
+							var_dump("Erreur en parametres");
+						    die();
+						}
 						
 					break;
 					
