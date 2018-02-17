@@ -69,7 +69,7 @@
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
 									
 								
-									$this->afficheListeUsagers();
+									header("Location: index.php");
 							
 								}
 								else
