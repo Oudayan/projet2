@@ -67,15 +67,15 @@
 									}
 									$_SESSION["courriel"] = $params["courriel"];	
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
-									
-								
+								    $_SESSION["alert"]= "Reussi";
 									header("Location: index.php");
 							
 								}
 								else
 								{
 									var_dump("Le courriel ou le MotDePasse est inexact");   
-									die();
+									$_SESSION["warning"]= "Le courriel ou le MotDePasse est inexact";
+									header("Location: index.php");
 								
 								}
 
