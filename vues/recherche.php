@@ -11,11 +11,17 @@
 <main class="container">
     <div class="container-fluid">
         <div class="row">
-            <aside class="col-lg-3 border rounded py-3">
-                <form class="py-2">
+            <aside class="recherche col-lg-3 border rounded py-3 mt-2">
+                <form id="formulaire_recherche" method="post" action="<?= $donnees["action"] ?>" class="py-2">
+                    <input type="hidden" name="action" value="recherche">
+                    <div class="form-group d-flex justify-content-between">
+                        <label>Trier par&nbsp;:</label>
+                        <input type="checkbox" name="tri" <?= $donnees["tri"] ?> data-toggle="toggle" data-on="Prix" data-off="Évaluation" data-onstyle="bleu" data-offstyle="orange">
+                        <input type="checkbox" name="asc" <?= $donnees["asc"] ?> data-toggle="toggle" data-on="Asc." data-off="Desc." data-onstyle="bleu" data-offstyle="orange">
+                    </div>
                     <div class="form-group">
                         <label for="region">Région&nbsp;:</label>
-                        <select class="form-control" id="region">
+                        <select class="form-control" id="region" name="region">
                             <option value="1" disabled>Bas-Saint-Laurent</option>
                             <option value="2" disabled>Saguenay–Lac-Saint-Jean</option>
                             <option value="3" disabled>Capitale-Nationale</option>
@@ -37,8 +43,8 @@
                     </div>
                     <div class="form-group">
                         <label for="rayon">Rayon&nbsp;:</label>
-                        <select class="form-control" id="rayon">
-                            <option value="1">0.5 KM</option>
+                        <select class="form-control" id="rayon" name="rayon">
+                            <option value="0.5">0.5 KM</option>
                             <option value="1">1 KM</option>
                             <option value="2">2 KM</option>
                             <option value="3">3 KM</option>
@@ -60,75 +66,75 @@
                     </div>
                     <div class="form-group">
                         <label for="prixMin">Entre&nbsp;:</label>
-                        <select class="form-control" id="prixMin">
-                            <option value="0" selected>Aucun prix minimum</option>
-                            <option value="25">25 $</option>
-                            <option value="50">50 $</option>
-                            <option value="75">75 $</option>
-                            <option value="100">100 $</option>
-                            <option value="125">125 $</option>
-                            <option value="150">150 $</option>
-                            <option value="175">175 $</option>
-                            <option value="200">200 $</option>
-                            <option value="225">225 $</option>
-                            <option value="250">250 $</option>
-                            <option value="275">275 $</option>
-                            <option value="300">300 $</option>
-                            <option value="325">325 $</option>
-                            <option value="350">350 $</option>
-                            <option value="375">375 $</option>
-                            <option value="400">400 $</option>
-                            <option value="425">425 $</option>
-                            <option value="450">450 $</option>
-                            <option value="475">475 $</option>
-                            <option value="500">500 $</option>
-                            <option value="550">550 $</option>
-                            <option value="600">600 $</option>
-                            <option value="650">650 $</option>
-                            <option value="700">700 $</option>
-                            <option value="750">750 $</option>
-                            <option value="800">800 $</option>
-                            <option value="850">850 $</option>
-                            <option value="900">900 $</option>
-                            <option value="950">950 $</option>
-                            <option value="1000">1000 $</option>
+                        <select class="form-control" id="prixMin" name="prixMin">
+                            <option value="0" <?= ($donnees['prixMin'] == 0 ? 'selected' : '') ?>>Aucun prix minimum</option>
+                            <option value="25" <?= ($donnees['prixMin'] == 25 ? 'selected' : '') ?>>25 $</option>
+                            <option value="50" <?= ($donnees['prixMin'] == 50 ? 'selected' : '') ?>>50 $</option>
+                            <option value="75" <?= ($donnees['prixMin'] == 75 ? 'selected' : '') ?>>75 $</option>
+                            <option value="100" <?= ($donnees['prixMin'] == 100 ? 'selected' : '') ?>>100 $</option>
+                            <option value="125" <?= ($donnees['prixMin'] == 125 ? 'selected' : '') ?>>125 $</option>
+                            <option value="150" <?= ($donnees['prixMin'] == 150 ? 'selected' : '') ?>>150 $</option>
+                            <option value="175" <?= ($donnees['prixMin'] == 175 ? 'selected' : '') ?>>175 $</option>
+                            <option value="200" <?= ($donnees['prixMin'] == 200 ? 'selected' : '') ?>>200 $</option>
+                            <option value="225" <?= ($donnees['prixMin'] == 225 ? 'selected' : '') ?>>225 $</option>
+                            <option value="250" <?= ($donnees['prixMin'] == 250 ? 'selected' : '') ?>>250 $</option>
+                            <option value="275" <?= ($donnees['prixMin'] == 275 ? 'selected' : '') ?>>275 $</option>
+                            <option value="300" <?= ($donnees['prixMin'] == 300 ? 'selected' : '') ?>>300 $</option>
+                            <option value="325" <?= ($donnees['prixMin'] == 325 ? 'selected' : '') ?>>325 $</option>
+                            <option value="350" <?= ($donnees['prixMin'] == 350 ? 'selected' : '') ?>>350 $</option>
+                            <option value="375" <?= ($donnees['prixMin'] == 375 ? 'selected' : '') ?>>375 $</option>
+                            <option value="400" <?= ($donnees['prixMin'] == 400 ? 'selected' : '') ?>>400 $</option>
+                            <option value="425" <?= ($donnees['prixMin'] == 425 ? 'selected' : '') ?>>425 $</option>
+                            <option value="450" <?= ($donnees['prixMin'] == 450 ? 'selected' : '') ?>>450 $</option>
+                            <option value="475" <?= ($donnees['prixMin'] == 475 ? 'selected' : '') ?>>475 $</option>
+                            <option value="500" <?= ($donnees['prixMin'] == 500 ? 'selected' : '') ?>>500 $</option>
+                            <option value="550" <?= ($donnees['prixMin'] == 550 ? 'selected' : '') ?>>550 $</option>
+                            <option value="600" <?= ($donnees['prixMin'] == 600 ? 'selected' : '') ?>>600 $</option>
+                            <option value="650" <?= ($donnees['prixMin'] == 650 ? 'selected' : '') ?>>650 $</option>
+                            <option value="700" <?= ($donnees['prixMin'] == 700 ? 'selected' : '') ?>>700 $</option>
+                            <option value="750" <?= ($donnees['prixMin'] == 750 ? 'selected' : '') ?>>750 $</option>
+                            <option value="800" <?= ($donnees['prixMin'] == 800 ? 'selected' : '') ?>>800 $</option>
+                            <option value="850" <?= ($donnees['prixMin'] == 850 ? 'selected' : '') ?>>850 $</option>
+                            <option value="900" <?= ($donnees['prixMin'] == 900 ? 'selected' : '') ?>>900 $</option>
+                            <option value="950" <?= ($donnees['prixMin'] == 950 ? 'selected' : '') ?>>950 $</option>
+                            <option value="1000" <?= ($donnees['prixMin'] == 1000 ? 'selected' : '') ?>>1000 $</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="prixMax">Et&nbsp;:</label>
-                        <select class="form-control" id="prixMax">
-                            <option value="0">0 $</option>
-                            <option value="25">25 $</option>
-                            <option value="50">50 $</option>
-                            <option value="75">75 $</option>
-                            <option value="100">100 $</option>
-                            <option value="125">125 $</option>
-                            <option value="150">150 $</option>
-                            <option value="175">175 $</option>
-                            <option value="200">200 $</option>
-                            <option value="225">225 $</option>
-                            <option value="250">250 $</option>
-                            <option value="275">275 $</option>
-                            <option value="300">300 $</option>
-                            <option value="325">325 $</option>
-                            <option value="350">350 $</option>
-                            <option value="375">375 $</option>
-                            <option value="400">400 $</option>
-                            <option value="425">425 $</option>
-                            <option value="450">450 $</option>
-                            <option value="475">475 $</option>
-                            <option value="500">500 $</option>
-                            <option value="550">550 $</option>
-                            <option value="600">600 $</option>
-                            <option value="650">650 $</option>
-                            <option value="700">700 $</option>
-                            <option value="750">750 $</option>
-                            <option value="800">800 $</option>
-                            <option value="850">850 $</option>
-                            <option value="900">900 $</option>
-                            <option value="950">950 $</option>
-                            <option value="1000">1000 $</option>
-                            <option value="1000000" selected>Aucun prix maximum</option>
+                        <select class="form-control" id="prixMax" name="prixMax">
+                            <option value="0" <?= ($donnees['prixMax'] == 0 ? 'selected' : '') ?>>Aucun prix minimum</option>
+                            <option value="25" <?= ($donnees['prixMax'] == 25 ? 'selected' : '') ?>>25 $</option>
+                            <option value="50" <?= ($donnees['prixMax'] == 50 ? 'selected' : '') ?>>50 $</option>
+                            <option value="75" <?= ($donnees['prixMax'] == 75 ? 'selected' : '') ?>>75 $</option>
+                            <option value="100" <?= ($donnees['prixMax'] == 100 ? 'selected' : '') ?>>100 $</option>
+                            <option value="125" <?= ($donnees['prixMax'] == 125 ? 'selected' : '') ?>>125 $</option>
+                            <option value="150" <?= ($donnees['prixMax'] == 150 ? 'selected' : '') ?>>150 $</option>
+                            <option value="175" <?= ($donnees['prixMax'] == 175 ? 'selected' : '') ?>>175 $</option>
+                            <option value="200" <?= ($donnees['prixMax'] == 200 ? 'selected' : '') ?>>200 $</option>
+                            <option value="225" <?= ($donnees['prixMax'] == 225 ? 'selected' : '') ?>>225 $</option>
+                            <option value="250" <?= ($donnees['prixMax'] == 250 ? 'selected' : '') ?>>250 $</option>
+                            <option value="275" <?= ($donnees['prixMax'] == 275 ? 'selected' : '') ?>>275 $</option>
+                            <option value="300" <?= ($donnees['prixMax'] == 300 ? 'selected' : '') ?>>300 $</option>
+                            <option value="325" <?= ($donnees['prixMax'] == 325 ? 'selected' : '') ?>>325 $</option>
+                            <option value="350" <?= ($donnees['prixMax'] == 350 ? 'selected' : '') ?>>350 $</option>
+                            <option value="375" <?= ($donnees['prixMax'] == 375 ? 'selected' : '') ?>>375 $</option>
+                            <option value="400" <?= ($donnees['prixMax'] == 400 ? 'selected' : '') ?>>400 $</option>
+                            <option value="425" <?= ($donnees['prixMax'] == 425 ? 'selected' : '') ?>>425 $</option>
+                            <option value="450" <?= ($donnees['prixMax'] == 450 ? 'selected' : '') ?>>450 $</option>
+                            <option value="475" <?= ($donnees['prixMax'] == 475 ? 'selected' : '') ?>>475 $</option>
+                            <option value="500" <?= ($donnees['prixMax'] == 500 ? 'selected' : '') ?>>500 $</option>
+                            <option value="550" <?= ($donnees['prixMax'] == 550 ? 'selected' : '') ?>>550 $</option>
+                            <option value="600" <?= ($donnees['prixMax'] == 600 ? 'selected' : '') ?>>600 $</option>
+                            <option value="650" <?= ($donnees['prixMax'] == 650 ? 'selected' : '') ?>>650 $</option>
+                            <option value="700" <?= ($donnees['prixMax'] == 700 ? 'selected' : '') ?>>700 $</option>
+                            <option value="750" <?= ($donnees['prixMax'] == 750 ? 'selected' : '') ?>>750 $</option>
+                            <option value="800" <?= ($donnees['prixMax'] == 800 ? 'selected' : '') ?>>800 $</option>
+                            <option value="850" <?= ($donnees['prixMax'] == 850 ? 'selected' : '') ?>>850 $</option>
+                            <option value="900" <?= ($donnees['prixMax'] == 900 ? 'selected' : '') ?>>900 $</option>
+                            <option value="950" <?= ($donnees['prixMax'] == 950 ? 'selected' : '') ?>>950 $</option>
+                            <option value="1000" <?= ($donnees['prixMax'] == 1000 ? 'selected' : '') ?>>1000 $</option>
+                            <option value="1000000" <?= ($donnees['prixMax'] == 1000000 ? 'selected' : '') ?>>Aucun prix maximum</option>
                         </select>
                     </div>
                     <label>Types de logements&nbsp;:</label>
@@ -138,17 +144,28 @@
                             $icones = ["images/red-dot.png", "images/orange-dot.png", "images/yellow-dot.png", "images/purple-dot.png", "images/blue-dot.png", "images/green-dot.png"]
                             ?>
                             <div class="row>">
-                                <input class="form-check-input col-1 offset-1" type="checkbox" value="<?= $typesLogements->lireIdTypeLogement() ?>" id="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" checked>
+                                <input class="form-check-input col-1 offset-1" type="checkbox" value="<?= $typesLogements->lireIdTypeLogement() ?>" id="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" name="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" <?= $donnees["typeLogement" . $typesLogements->lireIdTypeLogement()] ?>>
                                 <label class="form-check-label col-9" for="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>"><?= $typesLogements->lireTypeLogement() ?></label>
                                 <span class="legende col-1"><img src="<?= $icones[($typesLogements->lireIdTypeLogement() - 1)] ?>"></span>
                             </div>
                         <?php } ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="evaluation">Évaluation&nbsp;:</label>
+                        <select class="form-control" id="evaluation" name="evaluation">
+                            <option value="0" <?= ($donnees['evaluation'] == 0 ? 'selected' : '') ?>>Toutes les évaluations</option>
+                            <option value="1" <?= ($donnees['evaluation'] == 1 ? 'selected' : '') ?>>1 étoile ou plus</option>
+                            <option value="2" <?= ($donnees['evaluation'] == 2 ? 'selected' : '') ?>>2 étoiles ou plus</option>
+                            <option value="3" <?= ($donnees['evaluation'] == 3 ? 'selected' : '') ?>>3 étoiles ou plus</option>
+                            <option value="4" <?= ($donnees['evaluation'] == 4 ? 'selected' : '') ?>>4 étoiles ou plus</option>
+                            <option value="5" <?= ($donnees['evaluation'] == 5 ? 'selected' : '') ?>>5 étoiles</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="recherche" class="btn btn-block btn-orange mb-2">Rechercher</button>
                 </form>
-                <button id="drop" class="btn btn-block btn-orange mb-2">Rechercher</button>
             </aside>
-            <div class="col-lg-9">
+            <div class="col-lg-9 mt-2">
                 <nav>
                     <div id="nav-tab" class="nav nav-tabs row mx-0" role="tablist">
                         <a class="nav-item nav-link col-6 active" id="nav-fiches-tab" data-toggle="tab" href="#fiches" role="tab" aria-controls="nav-fiches" aria-selected="true"><h3>Fiches</h3></a>
@@ -165,29 +182,27 @@
                                     <div class="jcarousel-wrapper">
                                         <div class="jcarousel" data-jcarousel="true">
                                             <ul id="liste_image_<?= $logement->lireIdLogement(); ?>">
-                                                <li>
-                                                    <img src="<?= $logement->lirePremierePhoto(); ?>">
-                                                    <h5 class="py-2">Façade</h5>
-                                                </li>
-                                                <li>
-                                                    <img src="images/Logements/1/image_2.jpg">
-                                                    <h5 class="py-2">Escalier</h5>
-                                                </li>
-                                                <li>
-                                                    <img src="images/Logements/1/image_3.jpg">
-                                                    <h5 class="py-2">Salon</h5>
-                                                </li>
-                                                <li>
-                                                    <img src="images/Logements/1/image_5.jpg">
-                                                    <h5 class="py-2">Bureau</h5>
-                                                </li>
-                                                <li>
-                                                    <img src="images/Logements/1/image_6.jpg">
-                                                    <h5 class="py-2">Cuisine</h5>
-                                                </li>
+                                                <script type="text/javascript">
+                                                    // Création des images du caroussel
+                                                    $.ajax({
+                                                        url: 'index.php?Recherche&action=afficherImagesCarousel', 
+                                                        type: 'POST',
+                                                        data:  { idLogement: <?= $logement->lireIdLogement(); ?> }, 
+                                                        dataType: 'json',
+                                                        success: function(donnees) {
+                                                            console.log(donnees);
+                                                            $('#liste_image_' + <?= $logement->lireIdLogement(); ?>).empty();
+                                                            $('#pagination_photo_' + <?= $logement->lireIdLogement(); ?>).empty();
+                                                            for (var i=0; i<donnees.length; i++) {
+                                                                $('<li><img src="' + donnees[i][0] + '"><h5 class="py-2">' + donnees[i][1] + '</h5></li>').appendTo('#liste_image_' + <?= $logement->lireIdLogement(); ?>);
+                                                                $('<li>' + i + '</li>').appendTo('#pagination_photo_' + <?= $logement->lireIdLogement(); ?>);
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
                                             </ul>
                                         </div>
-                                        <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true" onclick="afficherImagesCarousel(<?= $logement->lireIdLogement() . ', \'' . $logement->lirePremierePhoto() ?>')">‹</a>
+                                        <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true">‹</a>
                                         <a href="#" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a>
                                         <p id="pagination_photo_<?= $logement->lireIdLogement(); ?>"  class="jcarousel-pagination" data-jcarouselpagination="true">
                                             <a href="#1" class="active">1</a>
@@ -201,10 +216,10 @@
                                             <div class="col-sm-12 text-left my-3">
                                                 <?= $logement->lireDescription(); ?><br>
                                             </div>
-                                            <div class="col-sm-6 text-left my-3">
+                                            <div class="col-sm-6 text-center text-sm-left my-3">
                                                 Prix&nbsp;:&nbsp;<br><span class="prix mt-3"><strong><?= $logement->lirePrix(); ?>&nbsp;$</strong></span>
                                             </div>
-                                            <div class="col-sm-6 text-right my-3">
+                                            <div class="col-sm-6 text-center text-sm-right my-3">
                                                 Évaluation&nbsp;:&nbsp;<?= round($logement->lireEvaluation(), 2); ?>&nbsp;/&nbsp;5
                                                 <br><span class="score"><span style="width: <?= ($logement->lireEvaluation() / 5) * 100 ?>%"></span></span>
                                             </div>
@@ -221,8 +236,8 @@
 </main>
 
 <script type="text/javascript">
-    // Création des images du caroussel
-    function afficherImagesCarousel(idLogement, premierePhoto) {
+    /* Création des images du caroussel
+    function afficherImagesCarousel(idLogement) {
         $.ajax({
             url: 'index.php?Recherche&action=afficherImagesCarousel', 
             type: 'POST',
@@ -230,16 +245,16 @@
             dataType: 'json',
             success: function(donnees) {
                 console.log(donnees);
-                /*
                 $('#liste_image_' + idLogement).empty();
-                $('<img src="' + LirePremierePhoto() + '">').appendTo('#liste_image_' + idLogement);
-                $(result).appendTo('#liste_image_' + idLogement);
-                */
-                //$('.jcarousel').jcarousel('reload');
+                for (var i=0; i<donnees.length; i++) {
+                    $('<li><img src="' + donnees[i][0] + '"><h5 class="py-2">' + donnees[i][1] + '</h5></li>').appendTo('#liste_image_' + idLogement);
+                    $('<li>' + i + '</li>').appendTo$('#pagination_photo_' + idLogement);
+                }
+                $('.jcarousel').jcarousel('reload');
             }
         });
     };
-
+    */
 </script>
 
 <script type="text/javascript">
@@ -262,15 +277,16 @@
     });
 
     $("#nav-fiches-tab").on("click", function() {
-        $(".legende").addClass('hidden');
+        $(".legende").addClass("hidden");
+        $("#formulaire_recherche").attr("action", "index.php?Recherche&fiches=true")
     });
 
     $("#nav-carte-tab").on("click", function() {
-        $(".legende").removeClass('hidden');
+        $(".legende").removeClass("hidden");
+        $("#formulaire_recherche").attr("action", "index.php?Recherche&carte=true")
     });
 
 </script>
-
 
 
 <script type="text/javascript">
@@ -353,14 +369,13 @@
 
     var icons = [
       iconURLPrefix + 'red-dot.png',
-      iconURLPrefix + 'purple-dot.png',
       iconURLPrefix + 'orange-dot.png',
-      iconURLPrefix + 'blue-dot.png',
       iconURLPrefix + 'yellow-dot.png',
+      iconURLPrefix + 'purple-dot.png',
+      iconURLPrefix + 'blue-dot.png',
       iconURLPrefix + 'green-dot.png',
       iconURLPrefix + 'pink-dot.png'
     ]
-    var iconsLength = icons.length;
 
     function initialize() {
         map = new google.maps.Map(document.getElementById('carte'), {
@@ -395,11 +410,10 @@
 
             google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
                 return function() {
-                    infowindow.setContent('<div class="text-danger">' + locations[i][0] + '</div>');
+                    infowindow.setContent('<div class="fiche-carte">' + locations[i][0] + '</div>');
                     infowindow.open(map, marker);
                     //map.setZoom(9);
                     //map.setCenter(marker.getPosition());
-                    //console.log("Hover!");
                 }
             })(marker, i));
 
@@ -409,15 +423,8 @@
                     infowindow.open(map, marker);
                     map.setZoom(17);
                     map.setCenter(marker.getPosition());
-                    //console.log("Click!");
                 }
             })(marker, i));
-
-            iconCounter++;
-            // We only have a limited number of possible icon colors, so we may have to restart the counter
-            if (iconCounter >= iconsLength) {
-              iconCounter = 0;
-            }
 
         }
         //autoCenter();
