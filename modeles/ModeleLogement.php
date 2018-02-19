@@ -21,11 +21,18 @@
 			return $logement;
 		}
 		
-        public function lireTousLogements($filtre = "id_logement > 0", $ordre = "evaluation DESC") {
-			$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $filtre . " ORDER BY " . $ordre;
+        public function lireTousLogements() {
+			$sql = "SELECT * FROM " . $this->checherNomTable();
 			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
     	}
+
+        // Source : https://stackoverflow.com/questions/8850336/radius-of-40-kilometers-using-latitude-and-longitude
+        public function filterLogements($filtre = "id_logement > 0", $ordre = "evaluation DESC", $distance = "20", $latitude = "45.56", $longitude = "-73.57") {
+            $sql = "SELECT *, (6371 * acos(cos(radians(" . $latitude . ")) * cos(radians(`latitude`)) * cos(radians(`longitude`) - radians(" . $longitude . ")) + sin(radians(" . $latitude . ") ) * sin(radians(`latitude`)))) AS distance FROM " . $this->checherNomTable() . " WHERE " . $filtre . " HAVING distance <= " . $distance . " ORDER BY " . $ordre;
+			$resultat = $this->requete($sql);
+			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
+    	}        
 
 		public function sauvegarderLogement(Logement $logement) {
 			if ($logement->lireId() && $this->lire($logement->lireId())->fetch()) {
