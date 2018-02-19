@@ -22,46 +22,46 @@
                     <div class="form-group">
                         <label for="region">Région&nbsp;:</label>
                         <select class="form-control" id="region" name="region">
-                            <option value="1" disabled>Bas-Saint-Laurent</option>
-                            <option value="2" disabled>Saguenay–Lac-Saint-Jean</option>
-                            <option value="3" disabled>Capitale-Nationale</option>
-                            <option value="4" disabled>Mauricie</option>
-                            <option value="5" disabled>Estrie</option>
-                            <option value="6" selected>Montréal</option>
-                            <option value="7" disabled>Outaouais</option>
-                            <option value="8" disabled>Abitibi-Témiscamingue</option>
-                            <option value="9" disabled>Côte-Nord</option>
-                            <option value="10" disabled>Nord-du-Québec</option>
-                            <option value="11" disabled>Gaspésie–Îles-de-la-Madeleine</option>
-                            <option value="12" disabled>Chaudière-Appalaches</option>
-                            <option value="13" disabled>Laval</option>
-                            <option value="14" disabled>Lanaudière</option>
-                            <option value="15" disabled>Laurentides</option>
-                            <option value="16" disabled>Montérégie</option>
-                            <option value="17" disabled>Centre-du-Québec</option>
+                            <option value="1" <?= ($donnees['region'] == 1 ? 'selected' : 'disabled') ?>>Bas-Saint-Laurent</option>
+                            <option value="2" <?= ($donnees['region'] == 2 ? 'selected' : 'disabled') ?>>Saguenay–Lac-Saint-Jean</option>
+                            <option value="3" <?= ($donnees['region'] == 3 ? 'selected' : 'disabled') ?>>Capitale-Nationale</option>
+                            <option value="4" <?= ($donnees['region'] == 4 ? 'selected' : 'disabled') ?>>Mauricie</option>
+                            <option value="5" <?= ($donnees['region'] == 5 ? 'selected' : 'disabled') ?>>Estrie</option>
+                            <option value="6" <?= ($donnees['region'] == 6 ? 'selected' : 'disabled') ?>>Montréal</option>
+                            <option value="7" <?= ($donnees['region'] == 7 ? 'selected' : 'disabled') ?>>Outaouais</option>
+                            <option value="8" <?= ($donnees['region'] == 8 ? 'selected' : 'disabled') ?>>Abitibi-Témiscamingue</option>
+                            <option value="9" <?= ($donnees['region'] == 9 ? 'selected' : 'disabled') ?>>Côte-Nord</option>
+                            <option value="10" <?= ($donnees['region'] == 10 ? 'selected' : 'disabled') ?>>Nord-du-Québec</option>
+                            <option value="11" <?= ($donnees['region'] == 11 ? 'selected' : 'disabled') ?>>Gaspésie–Îles-de-la-Madeleine</option>
+                            <option value="12" <?= ($donnees['region'] == 12 ? 'selected' : 'disabled') ?>>Chaudière-Appalaches</option>
+                            <option value="13" <?= ($donnees['region'] == 13 ? 'selected' : 'disabled') ?>>Laval</option>
+                            <option value="14" <?= ($donnees['region'] == 14 ? 'selected' : 'disabled') ?>>Lanaudière</option>
+                            <option value="15" <?= ($donnees['region'] == 15 ? 'selected' : 'disabled') ?>>Laurentides</option>
+                            <option value="16" <?= ($donnees['region'] == 16 ? 'selected' : 'disabled') ?>>Montérégie</option>
+                            <option value="17" <?= ($donnees['region'] == 17 ? 'selected' : 'disabled') ?>>Centre-du-Québec</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="rayon">Rayon&nbsp;:</label>
                         <select class="form-control" id="rayon" name="rayon">
-                            <option value="0.5">0.5 KM</option>
-                            <option value="1">1 KM</option>
-                            <option value="2">2 KM</option>
-                            <option value="3">3 KM</option>
-                            <option value="4">4 KM</option>
-                            <option value="5">5 KM</option>
-                            <option value="10">10 KM</option>
-                            <option value="15">15 KM</option>
-                            <option value="20">20 KM</option>
-                            <option value="25" selected>25 KM</option>
-                            <option value="50">50 KM</option>
-                            <option value="75">75 KM</option>
-                            <option value="100">100 KM</option>
-                            <option value="150">150 KM</option>
-                            <option value="200">200 KM</option>
-                            <option value="250">250 KM</option>
-                            <option value="500">500 KM</option>
-                            <option value="500">1000 KM</option>
+                            <option value="0.5" <?= ($donnees['rayon'] == 0.5 ? 'selected' : '') ?>>0.5 KM</option>
+                            <option value="1" <?= ($donnees['rayon'] == 1 ? 'selected' : '') ?>>1 KM</option>
+                            <option value="2" <?= ($donnees['rayon'] == 2 ? 'selected' : '') ?>>2 KM</option>
+                            <option value="3" <?= ($donnees['rayon'] == 3 ? 'selected' : '') ?>>3 KM</option>
+                            <option value="4" <?= ($donnees['rayon'] == 4 ? 'selected' : '') ?>>4 KM</option>
+                            <option value="5" <?= ($donnees['rayon'] == 5 ? 'selected' : '') ?>>5 KM</option>
+                            <option value="10" <?= ($donnees['rayon'] == 10 ? 'selected' : '') ?>>10 KM</option>
+                            <option value="15" <?= ($donnees['rayon'] == 15 ? 'selected' : '') ?>>15 KM</option>
+                            <option value="20" <?= ($donnees['rayon'] == 20 ? 'selected' : '') ?>>20 KM</option>
+                            <option value="25" <?= ($donnees['rayon'] == 25 ? 'selected' : '') ?>>25 KM</option>
+                            <option value="50" <?= ($donnees['rayon'] == 50 ? 'selected' : '') ?>>50 KM</option>
+                            <option value="75" <?= ($donnees['rayon'] == 75 ? 'selected' : '') ?>>75 KM</option>
+                            <option value="100" <?= ($donnees['rayon'] == 100 ? 'selected' : '') ?>>100 KM</option>
+                            <option value="150" <?= ($donnees['rayon'] == 150 ? 'selected' : '') ?>>150 KM</option>
+                            <option value="200" <?= ($donnees['rayon'] == 200 ? 'selected' : '') ?>>200 KM</option>
+                            <option value="250" <?= ($donnees['rayon'] == 250 ? 'selected' : '') ?>>250 KM</option>
+                            <option value="500" <?= ($donnees['rayon'] == 500 ? 'selected' : '') ?>>500 KM</option>
+                            <option value="1000" <?= ($donnees['rayon'] == 1000 ? 'selected' : '') ?>>1000 KM</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label for="prixMax">Et&nbsp;:</label>
                         <select class="form-control" id="prixMax" name="prixMax">
-                            <option value="0" <?= ($donnees['prixMax'] == 0 ? 'selected' : '') ?>>Aucun prix minimum</option>
+                            <option value="1000000" <?= ($donnees['prixMax'] == 1000000 ? 'selected' : '') ?>>Aucun prix maximum</option>
                             <option value="25" <?= ($donnees['prixMax'] == 25 ? 'selected' : '') ?>>25 $</option>
                             <option value="50" <?= ($donnees['prixMax'] == 50 ? 'selected' : '') ?>>50 $</option>
                             <option value="75" <?= ($donnees['prixMax'] == 75 ? 'selected' : '') ?>>75 $</option>
@@ -134,7 +134,6 @@
                             <option value="900" <?= ($donnees['prixMax'] == 900 ? 'selected' : '') ?>>900 $</option>
                             <option value="950" <?= ($donnees['prixMax'] == 950 ? 'selected' : '') ?>>950 $</option>
                             <option value="1000" <?= ($donnees['prixMax'] == 1000 ? 'selected' : '') ?>>1000 $</option>
-                            <option value="1000000" <?= ($donnees['prixMax'] == 1000000 ? 'selected' : '') ?>>Aucun prix maximum</option>
                         </select>
                     </div>
                     <label>Types de logements&nbsp;:</label>
@@ -360,9 +359,12 @@
     var locations = [
         <?php foreach ($donnees["logements"] as $logement) {
             echo '[\'<a href="index.php?Logement&action=getbyid"><h4 class="p-2">' . $logement->lireNoCivique() . ' ' . $logement->lireRue() . ' ' . $logement->lireApt() . ', ' . $logement->lireVille() . ', ' . $logement->lireProvince() . '</h4></span><img src="' . $logement->lirePremierePhoto() . '"><div class="d-flex justify-content-between"><span class="prix pt-2"><strong>' . $logement->lirePrix() . '$</strong></span><span class="score"><span style="width:' . ($logement->lireEvaluation() / 5) * 100 . '%"></span></div></a>\', ' . $logement->lireLatitude() . ', ' . $logement->lireLongitude() . ', ' . ($logement->lireIdTypeLogement() - 1). '], ';
-        } ?>
+        } 
+        //echo ", " . $donnees["zoom"]; 
+        ?>
     ];
-    console.log(locations);
+    
+    //console.log();
     
     // Setup the different icons and shadows
     var iconURLPrefix = 'images/';
@@ -378,8 +380,9 @@
     ]
 
     function initialize() {
+        var zoomlvl = <?= $donnees["zoom"] ?>;
         map = new google.maps.Map(document.getElementById('carte'), {
-            zoom: 11,
+            zoom: zoomlvl,
             center: new google.maps.LatLng(45.56, -73.57),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false,
