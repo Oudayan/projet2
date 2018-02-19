@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * @file     style.css
  * @author   Oudayan Dutta
@@ -8,14 +7,15 @@
  * @details  Feuille de style CSS pour rajouter/modifier des style de Bootstrap
  */
 
-@import url('https://fonts.googleapis.com/css?family=Pragati+Narrow|Roboto');
 /*
+@import url('https://fonts.googleapis.com/css?family=Pragati+Narrow|Roboto');
+
     font-family: 'Pragati Narrow', sans-serif;
     font-family: 'Roboto', sans-serif;
 */
 body {
-    font-family: 'Pragati Narrow', sans-serif;
-    /*font-family: 'Roboto', sans-serif;*/
+    /*font-family: 'Pragati Narrow', sans-serif;
+    font-family: 'Roboto', sans-serif;*/
     font-size: 1em;
 }
 
@@ -51,34 +51,82 @@ img {
 }
 
 main {
-    height: 70vh;
     background-color: rgba(254, 254, 254, 0);
-    margin-bottom: 100px;
+    margin-bottom: 10vh;
 }
 
-main.background {
+/* Page d'accueil */
+.background {
     background: url(../images/MONTREAL.jpg) no-repeat fixed; 
     background-size: contain;
     height: 70vh;
-    margin-top: -15vh;
+    margin-top: -20vh;
 }
 
 .depart {
     bottom: -45vh;
     color: #f5f5f5;
+    text-shadow: 1px 1px 3px #666;
     background-color: rgba(254, 254, 254, 0);
 }
 
 .depart button {
-    width: 150px;
+    width: 125px;
+    -webkit-box-shadow: 1px 1px 3px #666;
+    -moz-box-shadow: 1px 1px 3px #666;
+    box-shadow: 1px 1px 3px #666;    
 }
 
-select[multiple]{
-    height: 133px;
+@media (min-width: 1400px) {
+    .depart {
+        bottom: -45vh;
+    }
+}
+
+@media (max-width: 1400px) {
+    main.background {
+        height: 60vh;
+    }
+    
+    .depart {
+        bottom: -35vh;
+    }
+}
+
+@media (max-width: 1150px) {
+    main.background {
+        height: 50vh;
+    }
+    
+    .depart {
+        bottom: -30vh;
+    }
+}
+
+@media (max-width: 1000px) {
+    main.background {
+    }
+
+    .depart {
+        bottom: -42vh;
+    }
+}
+
+@media (max-width: 767px) {
+    main.background {
+        background-position: 0 11vh;
+    }
+}
+
+/* Page recherche */
+.recherche {
+    -webkit-box-shadow: 1px 1px 1px #999;
+    -moz-box-shadow: 1px 1px 1px #999;
+    box-shadow: 1px 1px 1px #999;    
 }
 
 .nav-item {
-    color: #e98d34;
+    color: rgba(0, 0, 0, 0.75);
     text-shadow: 1px 1px 3px #666;
 }
 
@@ -87,182 +135,51 @@ a:hover.nav-item {
     text-shadow: 1px 1px 3px #666;
 }
 
+.nav-item.nav-link.active {
+    color: #e98d34;
+    text-shadow: 1px 1px 3px #666;
+}
+
 #carte {
-    min-height: 70vh;
+    min-height: 80vh;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;
+    box-shadow: 1px 1px 2px #999;    
 }
 
-#catalogue {
-    height: 70vh;
-    overflow: scroll;
-}
-
-.btn-bleu {
-  color: #f5f5f5;
-  background-color: #1d91bc;
-  border-color: #1d91bc;
-}
-
-.btn-bleu:hover {
-  color: #f5f5f5;
-  background-color: rgb(23, 133, 173);
-  border-color: rgb(23, 133, 173);
-}
-
-.btn-bleu:focus, .btn-bleu.focus {
-  -webkit-box-shadow: 0 0 0 3px rgba(23, 133, 173, 0.5) !important;
-          box-shadow: 0 0 0 3px rgba(23, 133, 173, 0.5) !important;
-}
-
-.btn-bleu.disabled, .btn-bleu:disabled {
-  background-color: #78aeee;
-  border-color: #78aeee;
-}
-
-.btn-bleu:active, .btn-bleu.active,
-.show > .btn-bleu.dropdown-toggle {
-  color: #f5f5f5;
-  background-color: rgb(23, 133, 173) !important;
-  background-image: none;
-  border-color: rgb(23, 133, 173) !important;
-}
-
-.btn-orange {
-  color: #f5f5f5;
-  background-color: #e98d34;
-  border-color: #e98d34;
-}
-
-.btn-orange:hover {
-  color: #f5f5f5;
-  background-color: rgb(205, 120, 45);
-  border-color: rgb(205, 120, 45);
-}
-
-.btn-orange:focus, .btn-orange.focus {
-  -webkit-box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
-  box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
-}
-
-.btn-orange.disabled, .btn-orange:disabled {
-  background-color: #78aeee;
-  border-color: #78aeee;
-}
-
-.btn-orange:active, .btn-orange.active,
-.show > .btn-orange.dropdown-toggle {
-  color: #f5f5f5;
-  background-color: #e98d34 !important;
-  background-image: none;
-  border-color: #e98d34 !important;
+.legende img {
+    width: 20px;
+    height: auto;
 }
 
 .hidden {
     display: none;
 }
 
-/** Carousel **/
-.jcarousel {
-    position: relative;
-    overflow: hidden;
+h4.titre-fiche {
+    background: rgba(0, 0, 0, 0.67);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(0, 0, 0, 0.6));
 }
 
-.jcarousel ul {
-    width: 20000em;
-    position: relative;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.description-fiche a {
+    color: rgba(0, 0, 0, 0.67);
 }
 
-.jcarousel li {
-    float: left;
+.description-fiche a:hover {
+    color: rgba(0, 0, 0, 0.9);
 }
 
-.jcarousel img {
-    display: block;
-    max-width: 100%;
-    height: auto !important;
-}
-
-/** Carousel Controls **/
-
-.jcarousel-control-prev,
-.jcarousel-control-next {
-    position: absolute;
-    top: 50%;
-    margin-top: -10%;
-    width: 5%;
-    text-align: center;
-    color: #fefefe;
-    text-decoration: none;
-    text-shadow: 0 0 1px #000;
-    font: 24px/27px Arial, sans-serif;
-}
-
-.jcarousel-control-prev {
-    left: 15px;
-}
-
-.jcarousel-control-next {
-    right: 15px;
-}
-
-.jcarousel-control-prev:hover span,
-.jcarousel-control-next:hover span {
-    display: block;
-}
-
-a.jcarousel-control-prev:hover,
-a.jcarousel-control-next:hover {
-    color: #e98d34;
-}
-
-.jcarousel-control-prev.inactive,
-.jcarousel-control-next.inactive {
-    opacity: .25;
-    cursor: default;
-}
-
-/** Carousel Pagination **/
-
-.jcarousel-pagination {
-    position: absolute;
-    top: 2%;
-    left: 50%;
-    margin: 0;
-    margin-left: -22px;
-}
-
-.jcarousel-pagination a {
-    text-decoration: none;
-    display: inline-block;
-    font-size: 11px;
-    height: 10px;
-    width: 10px;
-    line-height: 10px;
-    background: #fff;
-    color: #e98d34;
-    border-radius: 10px;
-    text-indent: -9999px;
-    margin-right: 7px;
-    -webkit-box-shadow: 0 0 2px #e98d34;
-    -moz-box-shadow: 0 0 2px #e98d34;
-    box-shadow: 0 0 2px #e98d34;
-}
-
-.jcarousel-pagination a.active {
-    background: #e98d34;
-    color: #fff;
-    opacity: 1;
-    -webkit-box-shadow: 0 0 2px #F0EFE7;
-    -moz-box-shadow: 0 0 2px #F0EFE7;
-    box-shadow: 0 0 2px #F0EFE7;
+#fiches {
+    height: 80vh;
+    overflow: scroll;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;
+    box-shadow: 1px 1px 2px #999;    
 }
 
 /* Évaluations 
 Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rating-define-by-width
 */
-
 .score {
     display: inline-block;
     font-family: Wingdings;
@@ -271,8 +188,7 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     position: relative;
 }
 
-.score::before,
-.score span::before{
+.score::before, .score span::before {
     content: "\2605\2605\2605\2605\2605";
     display: block;
 }
@@ -292,8 +208,80 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     text-shadow: 1px 1px 3px #666;
 }
 
-#carte {
-    min-height: 70vh;
+/* Styles pour les boutons */
+.btn-bleu {
+    color: #f5f5f5;
+    background-color: rgb(29, 145, 188);
+    border-color: #1d91bc;
+}
+
+.btn-bleu:hover {
+    color: #f5f5f5;
+    background-color: rgb(15, 110, 145) !important;
+    border-color: rgb(15, 110, 145) !important;
+}
+
+.btn-bleu:focus, .btn-bleu.focus {
+    -webkit-box-shadow: 0 0 0 3px rgba(23, 133, 173, 0.5) !important;
+    -moz-box-shadow: ;
+    box-shadow: 0 0 0 3px rgba(23, 133, 173, 0.5) !important;
+}
+
+.btn-bleu.disabled, .btn-bleu:disabled {
+    background-color: #78aeee;
+    border-color: #78aeee;
+}
+
+.btn-bleu:active, .btn-bleu.active,
+.show > .btn-bleu.dropdown-toggle {
+    color: #f5f5f5;
+    background-color: rgb(23, 133, 173) !important;
+    background-image: none;
+    border-color: rgb(23, 133, 173) !important;
+}
+
+.btn-orange {
+    color: #f5f5f5;
+    background-color: #e98d34;
+    border-color: #e98d34;
+}
+
+.btn-orange:hover {
+    color: #f5f5f5;
+    background-color: rgb(205, 120, 45) !important;
+    border-color: rgb(205, 120, 45) !important;
+}
+
+.btn-orange:focus, .btn-orange.focus {
+    -webkit-box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+    -moz-box-shadow: ;
+    box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
+}
+
+.btn-orange.disabled, .btn-orange:disabled {
+    background-color: #deb995;
+    border-color: #deb995;
+}
+
+.btn-orange:active, .btn-orange.active,
+.show > .btn-orange.dropdown-toggle {
+    color: #f5f5f5;
+    background-color: #e98d34 !important;
+    background-image: none;
+    border-color: #e98d34 !important;
+}
+
+/** Carousel **/
+.carousel-indicators {
+    margin-bottom: -25px;
+    background: rgba(0, 0, 0, 0.67);
+    color: rgba(0, 0, 0, 0.67);
+}
+
+carousel-caption h5 {
+    display: inline-block;
+    bottom: -50px;
+    color: #999;
 }
 
 /* Zoraida */
@@ -303,7 +291,11 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     
 .bg-login:hover {
       color: #f6c784;
-}  
+}
+
+.iconMessage {
+    color: #e98d34;
+}
     
 .modal-header, h4 {
     background-color: rgba(23, 117, 152, 0);
@@ -385,29 +377,29 @@ label {
     opacity: 0.7;
 }
 
-/* Set a specific color for each brand */
+/* Mettez une couleur spécifique pour chaque icon */
 /* Facebook */
 .fa-facebook {
     background: #3B5998;
     color: white;
 }
 
-.fa-google-plus{
+.fa-google-plus {
     background: #b33b2c;
     color: white;
 }
 
-.fa-twitter{
+.fa-twitter {
     background: white;
     color: #1b95e0;;
 }
 
-#info{
+#info {
     background-color: #f6f7eA;   
     padding: 15px;
 }
 
-.circle{
+.circle {
     width: 250px;
     height: 250px;   
     background: #fefefe; 
@@ -418,3 +410,31 @@ label {
     padding: 10px 15px 40px 15px;
     font-family: 'Pragati Narrow', sans-serif;
 }
+/* ------------
+  Messagerie 
+-------------*/
+  .nav-pills, .tab-messagerie {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  
+  #v-pills-tab {
+      background-color: rgba(23, 117, 152, 0);
+      background: linear-gradient(to right, rgba(23, 117, 152, 0.63), rgb(23, 117, 152));
+      border-radius: 5px;
+      font-size: 0.7rem;
+  }
+  
+ /* a.nav-link {
+    color: #F0EFE7;
+  }
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: rgb(23, 117, 152);
+  }
+   #v-pills-profile {
+    height: 40vh;
+    overflow: scroll;
+  }*/
+
+  
