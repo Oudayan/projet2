@@ -20,7 +20,7 @@
       <a class="nav-link" id="v-pills-messages-tab list-group-item-action" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
     </div><!-- nav flex-column -->
     
-    <div class="tab-content col-9" id="v-pills-tabContent">
+    <div class="tab-messagerie col-9" id="v-pills-tabContent">
       
       <div class="tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-home-tab">
         <form>
@@ -106,7 +106,7 @@
 	
       </div><!-- tab-pane -->
       <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"> gdgd dfd  dfgsd...</div>
-    </div><!-- tab-content -->
+    </div><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
 </div><!-- container -->
  <script>
