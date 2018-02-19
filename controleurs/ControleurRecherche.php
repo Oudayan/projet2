@@ -82,19 +82,19 @@
                                 $donnees["zoom"] = 10;
                             }
                             if ($params["rayon"] == 75) {
-                                $donnees["zoom"] = 9.5;
+                                $donnees["zoom"] = 9.25;
                             }
                             if ($params["rayon"] == 100) {
-                                $donnees["zoom"] = 9;
+                                $donnees["zoom"] = 8.5;
                             }
                             if ($params["rayon"] == 150) {
-                                $donnees["zoom"] = 8.66;
+                                $donnees["zoom"] = 8.25;
                             }
                             if ($params["rayon"] == 200) {
-                                $donnees["zoom"] = 8.33;
+                                $donnees["zoom"] = 8;
                             }
                             if ($params["rayon"] == 250) {
-                                $donnees["zoom"] = 8;
+                                $donnees["zoom"] = 7.5;
                             }
                             if ($params["rayon"] == 500) {
                                 $donnees["zoom"] = 7;
