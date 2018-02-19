@@ -42,13 +42,14 @@
 		private $est_laveuse;
 		private $est_secheuse;
 		private $est_chauffage;
+		private $l_valide;
 		private $l_actif;
 		private $l_banni;
 		private $l_date_banni;
 		private $l_commentaire_banni;
 
         // Constructeur
-		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_actif = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
+		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
             $this->ecrireIdLogement($id_logement);
             $this->ecrireNoCivique($no_civique);
             $this->ecrireApt($apt);		
@@ -81,6 +82,7 @@
             $this->ecrireEstLaveuse($est_laveuse);
             $this->ecrireEstSecheuse($est_secheuse);
             $this->ecrireEstChauffage($est_chauffage);
+            $this->ecrireLvalide($l_valide);
             $this->ecrireLActif($l_actif);
             $this->ecrireLBanni($l_banni);
             $this->ecrireLDateBanni($l_date_banni);
@@ -280,6 +282,12 @@
                 $this->est_chauffage = $est_chauffage;
             }
         }
+        // Écrire l_valide
+        public function ecrireLValide($l_valide) {
+            if (is_bool($l_valide) && trim($l_valide) != "") {
+                $this->l_valide = $l_valide;
+            }
+        }
         // Écrire l_actif
         public function ecrireLActif($l_actif) {
             if (is_bool($l_actif) && trim($l_actif) != "") {
@@ -433,6 +441,10 @@
         // Lire est_chauffage
         public function lireEstChauffage() {
             return $this->est_chauffage;
+        }
+        // Lire l_valide
+        public function lireLValide() {
+            return $this->l_valide;
         }
         // Lire l_actif
         public function lireLActif() {
