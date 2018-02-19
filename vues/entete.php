@@ -7,12 +7,24 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-toggle.css">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>A Louer</title>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery.jcarousel.min.js"></script>
-        <script src="js/modernizr.js"></script>        
+        <script src="js/modernizr.js"></script> 
+        
+        <!-- Messagerie -->
+      
+        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="css/richtext.scss">        
+        <link rel="stylesheet" href="css/richtext.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/jquery.richtext.js"></script>
+        
+        <!--<script src="https://cdn.jsdelivr.net/npm/gijgo@1.8.1/combined/js/gijgo.min.js" type="text/javascript"></script>
+        <link href="https://cdn.jsdelivr.net/npm/gijgo@1.8.1/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />-->
+      
         <script>
             /*$(document).ready(function(){
                 $("#myBtn").click(function(){
@@ -44,7 +56,7 @@
 					
                     <?php if (!isset($_SESSION["courriel"])) { ?>
 					<div class="ml-auto d-flex flex-nowrap">
-                        <a href="#" class="nav-item nav-link fa fa-sign-in fa-lg bg-login" data-toggle="modal" data-target="#loginModal">Login</a>
+                        <a href="#" class="nav-item nav-link" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in fa-lg bg-login"></i>Login</a>
                         <!-- Modal -->
                         <div class="modal fade" id="loginModal" role="dialog">
                             <div class="modal-dialog" id="dialog">
@@ -77,7 +89,7 @@
                                     </div>
                                     <!-- modal-body -->
                                     <div class="modal-footer">
-                                        <p class="textModal">Vous n’avez pas de compte ?<a href="index.php?Usagers&action=ajouterUsager"> Inscription</a><br></p>
+                                        <p class="textModalc">Vous n’avez pas de compte ?<a href="index.php?Usagers&action=ajouterUsager"> Inscription</a><br></p>
                                     </div>
                                 </div><!-- modal-content -->
                             </div><!-- modal-dialog -->
@@ -85,16 +97,17 @@
                     </div><!-- ml-auto -->
 				   <?php }
 					else { ?>
-					<div><span><?= $_SESSION["courriel"];?></span>
-						<a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>
+					<div>
+                      <a href="index.php?Usagers&action=nouvelMessage"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
+                      <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
 					</div>
 					<?php } ?>					
 					
                 </div><!-- container px-5 -->
             </nav>
-            <div class="my-4 text-center">
-                <?= (isset($_SESSION["loginMessage"]) ? $_SESSION["loginMessage"] : "")?>
-            </div>
+           <!-- <div class="my-4 text-center">
+            
+            </div>-->
         </header>
       
 <script>

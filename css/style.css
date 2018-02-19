@@ -9,6 +9,7 @@
 
 /*
 @import url('https://fonts.googleapis.com/css?family=Pragati+Narrow|Roboto');
+
     font-family: 'Pragati Narrow', sans-serif;
     font-family: 'Roboto', sans-serif;
 */
@@ -368,6 +369,7 @@ a.jcarousel-control-next:hover {
     box-shadow: 0 0 2px #F0EFE7;
 }
 
+
 /* Zoraida */
 .bg-login {
     color: white;
@@ -375,7 +377,11 @@ a.jcarousel-control-next:hover {
     
 .bg-login:hover {
       color: #f6c784;
-}  
+}
+
+.iconMessage {
+    color: #e98d34;
+}
     
 .modal-header, h4 {
     background-color: rgba(23, 117, 152, 0);
@@ -457,29 +463,29 @@ label {
     opacity: 0.7;
 }
 
-/* Set a specific color for each brand */
+/* Mettez une couleur spécifique pour chaque icon */
 /* Facebook */
 .fa-facebook {
     background: #3B5998;
     color: white;
 }
 
-.fa-google-plus{
+.fa-google-plus {
     background: #b33b2c;
     color: white;
 }
 
-.fa-twitter{
+.fa-twitter {
     background: white;
     color: #1b95e0;;
 }
 
-#info{
+#info {
     background-color: #f6f7eA;   
     padding: 15px;
 }
 
-.circle{
+.circle {
     width: 250px;
     height: 250px;   
     background: #fefefe; 
@@ -490,3 +496,31 @@ label {
     padding: 10px 15px 40px 15px;
     font-family: 'Pragati Narrow', sans-serif;
 }
+/* ------------
+  Messagerie 
+-------------*/
+  .nav-pills, .tab-content {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  
+  #v-pills-tab {
+      background-color: rgba(23, 117, 152, 0);
+      background: linear-gradient(to right, rgba(23, 117, 152, 0.63), rgb(23, 117, 152));
+      border-radius: 5px;
+      font-size: 0.7rem;
+  }
+  
+ /* a.nav-link {
+    color: #F0EFE7;
+  }
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: rgb(23, 117, 152);
+  }
+   #v-pills-profile {
+    height: 40vh;
+    overflow: scroll;
+  }*/
+
+  

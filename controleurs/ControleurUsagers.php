@@ -140,6 +140,9 @@
 					   header("Location: index.php");
 
 					break;
+                    
+                    case "nouvelMessage":
+                      $this->afficherVues("messagerie");
 					/*default:		
 																								
 						trigger_error("Action invalide");
