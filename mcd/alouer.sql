@@ -335,7 +335,7 @@ INSERT INTO `al_photos_logement` (`id_photo_logement`, `chemin_photo`, `descript
 (17, "images/Logements/2/image_7.jpg", "Chambre des maîtres", 2), 
 (18, "images/Logements/2/image_8.jpg", "Chambre d'invité", 2), 
 (19, "images/Logements/2/image_9.jpg", "Salle de bain", 2), 
-(20, "images/Logements/2/image_10 .jpg", "Corridor", 2),
+(20, "images/Logements/2/image_10.jpg", "Corridor", 2),
 (21, "images/Logements/3/image_1.jpg", "Salle à manger", 3), 
 (22, "images/Logements/3/image_2.jpg", "Salon 1", 3), 
 (23, "images/Logements/3/image_3.jpg", "Salon 2", 3), 
