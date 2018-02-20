@@ -144,7 +144,7 @@
 			else
 			{
 				  var_dump("No");
-				  $this->afficherVuess("accueil"); 													//action par defaut- affiche le login
+				  $this->afficherVues("accueil"); 													//action par defaut- affiche le login
 			}	
 		}
 		
