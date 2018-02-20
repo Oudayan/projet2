@@ -9,20 +9,28 @@
  * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  * 
  */
-?>
+?> 
+<head> 
+    <!-- Messagerie -->
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/richtext.scss">        
+    <link rel="stylesheet" href="css/richtext.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery.richtext.js"></script>
+</head>     
 
 <div class="container">
   <div class="d-flex flex-row">
     <div class="nav flex-column nav-pills col-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link" id="v-pills-home-tab list-group-item-action" data-toggle="pill" href="#v-pills-compMessage" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Composer un message</a>
+      <a class="nav-link" id="v-pills-compMessage-tab list-group-item-action" data-toggle="pill" href="#v-pills-compMessage" role="tab" aria-controls="v-pills-compMessage" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Composer un message</a>
        <div class="dropdown-divider"></div>
-      <a class="nav-link" id="v-pills-profile-tab list-group-item-action" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false">14</span><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
-      <a class="nav-link" id="v-pills-messages-tab list-group-item-action" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
+      <a class="nav-link" id="v-pills-boitRecp-tab list-group-item-action" data-toggle="pill" href="#v-pills-boitRecp" role="tab" aria-controls="v-pills-boitRecp" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false">14</span><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
+      <a class="nav-link" id="v-pills-mEnvoyes-tab list-group-item-action" data-toggle="pill" href="#v-pills-mEnvoyes" role="tab" aria-controls="v-pills-mEnvoyes" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
     </div><!-- nav flex-column -->
     
-    <div class="tab-content col-9" id="v-pills-tabContent">
+    <div class="tab-content tab-messagerie col-9" id="v-pills-tabContent">
       
-      <div class="tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-home-tab">
+      <div class="tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
         <form>
           <div class="form-group row">
             <label for="text-input" class="col-2 col-form-label">À</label>
@@ -51,62 +59,34 @@
              </div>             
             </div>
           </div><!-- form-group row -->          
-        </form>
-      </div><!-- tab-pane -->
-      <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+        </form>        
+      </div><!-- tab-pane compMessage -->
+      
+      <div class="tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <table class="table table-sm responsive-sm table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
-
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr onclick="afficherMessage(this)">
               <td>
-                <div class="form-group row">
-                  
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">
-                      </label>
-                    </div>
-                  </div>
-                </div>
+               <i class="fa fa-envelope" aria-hidden="true"></i>
               </td>
               <td>pepito perez</td>
-              <td>demo messagerie</td>
+              <td><a href="">demo messagerie</a></td>
+              <td><a href=""><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
               <td>17 fev 2017</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                </div>
-              </td>
-              <td>pepito perez</td>
-              <td>demo messagerie</td>
-              <td>17 fev 2017</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                </div>
-              </td>
-              <td>pepito perez</td>
-              <td>demo messagerie</td>
-              <td>17 fev 2017</td>
-            </tr>
+            </tr>            
           </tbody>
         </table>
+      </div><!-- tab-pane boitRecp-->
+      
+      <div class="tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab"> gdgd dfd  dfgsd...</div>
       </div><!-- tab-pane -->
-	
-      </div><!-- tab-pane -->
-      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"> gdgd dfd  dfgsd...</div>
-    </div><!-- tab-content -->
+      
+    </div><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
 </div><!-- container -->
  <script>

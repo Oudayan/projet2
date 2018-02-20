@@ -12,15 +12,7 @@
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery.jcarousel.min.js"></script>
-        <script src="js/modernizr.js"></script> 
-        
-        <!-- Messagerie -->
-      
-        <link rel="stylesheet" href="css/site.css">
-        <link rel="stylesheet" href="css/richtext.scss">        
-        <link rel="stylesheet" href="css/richtext.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="js/jquery.richtext.js"></script>
+        <script src="js/modernizr.js"></script>
         
         <!--<script src="https://cdn.jsdelivr.net/npm/gijgo@1.8.1/combined/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://cdn.jsdelivr.net/npm/gijgo@1.8.1/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />-->
