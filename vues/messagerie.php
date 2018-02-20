@@ -2,12 +2,11 @@
 /**
  * @file     messgerie.php
  * @author   Zoraida Ortiz
- * @version  1.0
- * @date     15 fevrier 2018
+ * @version  2.0
+ * @date     20 fevrier 2018
  * @brief    vue messagerie
  * @details  
  * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
- * 
  */
 ?> 
 <head> 
@@ -93,4 +92,3 @@
             $('.content').richText();
         });
         </script>
-

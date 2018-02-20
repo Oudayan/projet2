@@ -2,8 +2,8 @@
 /** 
  * @file        ControleurRecherche.php
  * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
- * @version     1.0
- * @date        10 février 2018
+ * @version     2.0
+ * @date        20 février 2018
  * @brief       Controleur pour la recherche de logements
  * @details     
  */ 
@@ -24,7 +24,7 @@
 					
                     // Affichage de la page d'accueil
 					case "accueil" :
-						$this->accueil();
+						$this->afficherVues("accueil");
                         break;
 
                     // Affichage de la page de recherche
@@ -197,14 +197,14 @@
                         break;
 
 					default :
-					    $this->accueil();
+					    $this->afficherVues("accueil");
                         break;
 
 			 	}
 					
 		  	}
 		  	else {
-				$this->accueil();
+				$this->afficherVues("accueil");
  		  	
 		  	}
 
