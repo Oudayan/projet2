@@ -204,7 +204,7 @@
 					
 		  	}
 		  	else {
-                $this->afficherVues("accueil");
+            $this->afficherVues("accueil");
 		  	}
 
 	  	} // end of switch
@@ -256,11 +256,7 @@
 				$this->afficherVues("accueil");
 			}
 			else {
-				$modeleLogement = $this->lireDAO("Logement");
-				$modeleTypeLogement = $this->lireDAO("TypeLogement");
-				$donnees["typesLogements"] = $modeleTypeLogement->lireTousTypeLogements();
-				$donnees["logements"] = $modeleLogement->lireTousLogements();
-				$this->afficherVues("recherche", $donnees);
+				header("Location: index.php?Recherche&action=recherche&fiches=true");
 			}
 		  return;
 		}
