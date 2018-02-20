@@ -67,22 +67,23 @@
 									}
 									$_SESSION["courriel"] = $params["courriel"];	
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
-								    $_SESSION["alert"]= "Reussi";
+									$_SESSION["prenom"] = $data->lirepreNom();
+								    $_SESSION["succes"]= "Bienvenue ! " . $_SESSION["prenom"] . " " ;
 									header("Location: index.php");
 							
 								}
 								else
 								{
 									var_dump("Le courriel ou le MotDePasse est inexact");   
-									$_SESSION["warning"]= "Le courriel ou le MotDePasse est inexact";
+									$_SESSION["erreur"]= "Le courriel ou le MotDePasse est inexact ";
 									header("Location: index.php");
 								
 								}
 
 						}
 						else {
-							var_dump("Erreur en parametres");
-						    die();
+							$_SESSION["warning"]="Erreur en parametres";
+						    header("Location: index.php");
 						}
 						
 					break;
@@ -130,7 +131,7 @@
 						else
 						{
 								$modeleUsagers = $this->lireDAO("Usagers");                                  
-								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],2,$params["id_paiement"]);
+								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],3,$params["id_paiement"]);
 								$succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
 								$this->afficheListeUsagers();
 						}
@@ -187,9 +188,12 @@
 			{
 				unset($_SESSION["typeUser"]);
 				setcookie("typeUser", null, -1, '/');
-
 			}	
-
+			if (isset($_SESSION["prenom"]))
+			{
+				unset($_SESSION["prenom"]);
+				setcookie("prenom", null, -1, '/');
+			}
 		}
 		
 	}
