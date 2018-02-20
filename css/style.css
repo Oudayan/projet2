@@ -284,9 +284,13 @@ carousel-caption h5 {
     color: #999;
 }
 
+a.nav-item.nav-link {
+    color: #e98d34;
+}
+
 /* Zoraida */
 .bg-login {
-    color: white;
+    color: #e98d34;
 }
     
 .bg-login:hover {
@@ -419,22 +423,26 @@ label {
   }
   
   #v-pills-tab {
-      background-color: rgba(23, 117, 152, 0);
-      background: linear-gradient(to right, rgba(23, 117, 152, 0.63), rgb(23, 117, 152));
+       background: rgba(0, 0, 0, 0.67);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(0, 0, 0, 0.6));
       border-radius: 5px;
       font-size: 0.7rem;
   }
   
- /* a.nav-link {
+ a.nav-link {
     color: #F0EFE7;
   }
+  
   .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: rgb(23, 117, 152);
+    background-color: rgb(57, 57, 57);
   }
+  
    #v-pills-profile {
     height: 40vh;
     overflow: scroll;
-  }*/
+  }
+  
+  
 
   
