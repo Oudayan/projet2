@@ -25,6 +25,10 @@
 					switch($params["action"])
 					{
 
+                        case "afficherLogement";
+                            $this->afficherVues("logement");
+                            break;
+                            
 						case "getbyid":
 							$json = array();
 							if (isset($params["id"]))

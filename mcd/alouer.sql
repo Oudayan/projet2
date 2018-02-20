@@ -23,8 +23,7 @@ CREATE TABLE al_disponibilite(
     id_logement              Int NOT NULL, 
     date_debut               Date NOT NULL, 
     date_fin                 Date NOT NULL, 
-    expire                   TinyINT NOT NULL, 
-    id_logement_al_logements Int, 
+    expire                   Bool NOT NULL, 
     PRIMARY KEY (id_disponibilite), 
     INDEX (id_logement)
 )ENGINE=InnoDB;
@@ -72,7 +71,8 @@ CREATE TABLE al_logements(
     l_banni               Bool, 
     l_date_banni          Date, 
     l_commentaire_banni   Text, 
-    PRIMARY KEY (id_logement)
+    PRIMARY KEY (id_logement),
+    INDEX (latitude, longitude)
 )ENGINE=InnoDB;
 
 

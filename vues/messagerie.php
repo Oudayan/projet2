@@ -27,7 +27,7 @@
       <a class="nav-link" id="v-pills-boitRecp-tab list-group-item-action" data-toggle="pill" href="#v-pills-boitRecp" role="tab" aria-controls="v-pills-boitRecp" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false">14</span><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
       <a class="nav-link" id="v-pills-mEnvoyes-tab list-group-item-action" data-toggle="pill" href="#v-pills-mEnvoyes" role="tab" aria-controls="v-pills-mEnvoyes" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
     </div><!-- nav flex-column -->
-    
+
     <div class="tab-content tab-messagerie col-9" id="v-pills-tabContent">
       
       <div class="tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
@@ -85,7 +85,6 @@
       
       <div class="tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab"> gdgd dfd  dfgsd...</div>
       </div><!-- tab-pane -->
-      
     </div><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
 </div><!-- container -->
