@@ -178,35 +178,44 @@
                         <?php foreach ($donnees["logements"] as $logement) { ?>
                             <article id="fiche_<?= $logement->lireIdLogement(); ?>" class="row border rounded text-center m-2 p-2">
                                 <div class="col-lg-4">
-                                    <div class="jcarousel-wrapper">
-                                        <div class="jcarousel" data-jcarousel="true">
-                                            <ul id="liste_image_<?= $logement->lireIdLogement(); ?>">
-                                                <script type="text/javascript">
-                                                    // Création des images du caroussel
-                                                    $.ajax({
-                                                        url: 'index.php?Recherche&action=afficherImagesCarousel', 
-                                                        type: 'POST',
-                                                        data:  { idLogement: <?= $logement->lireIdLogement(); ?> }, 
-                                                        dataType: 'json',
-                                                        success: function(donnees) {
-                                                            console.log(donnees);
-                                                            $('#liste_image_' + <?= $logement->lireIdLogement(); ?>).empty();
-                                                            $('#pagination_photo_' + <?= $logement->lireIdLogement(); ?>).empty();
-                                                            for (var i=0; i<donnees.length; i++) {
-                                                                $('<li><img src="' + donnees[i][0] + '"><h5 class="py-2">' + donnees[i][1] + '</h5></li>').appendTo('#liste_image_' + <?= $logement->lireIdLogement(); ?>);
-                                                                $('<li>' + i + '</li>').appendTo('#pagination_photo_' + <?= $logement->lireIdLogement(); ?>);
-                                                            }
-                                                        }
-                                                    });
-                                                </script>
-                                            </ul>
+
+                                    <div id="carousel_<?= $logement->lireIdLogement(); ?>" class="carousel slide" data-ride="carousel">
+                                        <ol id="carousel_pagination_<?= $logement->lireIdLogement(); ?>" class="carousel-indicators">
+                                            <li data-target="#carousel_<?= $logement->lireIdLogement(); ?>" data-slide-to="0"></li>
+                                        </ol>
+                                        <div id="liste_image_<?= $logement->lireIdLogement(); ?>" class="carousel-inner">
+                                            <div class="carousel-item active"><img class="d-block w-100"  src="<?= $logement->lirePremierePhoto(); ?>"><div class="carousel-caption d-none d-md-block"><h5>Façade</h5></div></div>
                                         </div>
-                                        <a href="#" class="jcarousel-control-prev" data-jcarouselcontrol="true">‹</a>
-                                        <a href="#" class="jcarousel-control-next" data-jcarouselcontrol="true">›</a>
-                                        <p id="pagination_photo_<?= $logement->lireIdLogement(); ?>"  class="jcarousel-pagination" data-jcarouselpagination="true">
-                                            <a href="#1" class="active">1</a>
-                                        </p>
-                                    </div>
+                                        <a class="carousel-control-prev" href="#carousel_<?= $logement->lireIdLogement(); ?>" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carousel_<?= $logement->lireIdLogement(); ?>" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                        <script type="text/javascript">
+                                            // Création des images du caroussel
+                                            $.ajax({
+                                                url: 'index.php?Recherche&action=afficherImagesCarousel', 
+                                                type: 'POST',
+                                                data:  { idLogement: <?= $logement->lireIdLogement(); ?> }, 
+                                                dataType: 'json',
+                                                success: function(donnees) {
+                                                    console.log(donnees);
+                                                    $('#liste_image_' + <?= $logement->lireIdLogement(); ?>).empty();
+                                                    $('#carousel_pagination_' + <?= $logement->lireIdLogement(); ?>).empty();
+                                                    for (var i=0; i<donnees.length; i++) {
+                                                        $('<div class="carousel-item"><img class="d-block w-100" src="' + donnees[i][0] + '" alt="' + donnees[i][1] + '"><div class="carousel-caption d-none d-md-block"><h5>' + donnees[i][1] + '</h5></div></div>').appendTo('#liste_image_' + <?= $logement->lireIdLogement(); ?>);
+                                                        $('<li data-target="#carousel_<?= $logement->lireIdLogement(); ?>" data-slide-to="' + i + '"></li>').appendTo('#carousel_pagination_' + <?= $logement->lireIdLogement(); ?>);
+                                                        $(".carousel-item:first-child").addClass("active");
+                                                        $(".carousel_pagination_" + <?= $logement->lireIdLogement(); ?> + ":first-child").addClass("active");
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                    </div>                                    
+
                                 </div>
                                 <div class="col-lg-8 description-fiche">
                                     <a href="index.php?Logement&action=getbyid">
@@ -285,68 +294,6 @@
         $("#formulaire_recherche").attr("action", "index.php?Recherche&carte=true")
     });
 
-</script>
-
-
-<script type="text/javascript">
-    // Source : https://sorgalla.com/jcarousel/
-    $(function() {
-        var jcarousel = $('.jcarousel');
-
-        jcarousel
-            .on('jcarousel:reload jcarousel:create', function () {
-                jcarousel.jcarousel('items').width(jcarousel.innerWidth());
-            })
-            .jcarousel({
-                wrap: 'circular',
-                transitions: Modernizr.csstransitions ? {
-                    transforms:   Modernizr.csstransforms,
-                    transforms3d: Modernizr.csstransforms3d,
-                    easing:       'ease'
-                } : false
-            });
-
-        $('.jcarousel-control-prev')
-            .on('jcarouselcontrol:active', function() {
-                $(this).removeClass('inactive');
-            })
-            .on('jcarouselcontrol:inactive', function() {
-                $(this).addClass('inactive');
-            })
-            .jcarouselControl({
-                target: '-=1'
-            });
-
-        $('.jcarousel-control-next')
-            .on('jcarouselcontrol:active', function() {
-                $(this).removeClass('inactive');
-            })
-            .on('jcarouselcontrol:inactive', function() {
-                $(this).addClass('inactive');
-            })
-            .on('click', function(e) {
-                e.preventDefault();
-            })
-            .jcarouselControl({
-                target: '+=1'
-            });
-
-        $('.jcarousel-pagination')
-            .on('jcarouselpagination:active', 'a', function() {
-                $(this).addClass('active');
-            })
-            .on('jcarouselpagination:inactive', 'a', function() {
-                $(this).removeClass('active');
-            })
-            .on('click', function(e) {
-                e.preventDefault();
-            })
-            .jcarouselPagination({
-                item: function(page) {
-                    return '<a href="#' + page + '">' + page + '</a>';
-                }
-            });
-    });
 </script>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA22Ascl7tbt6eLIQVW8E_2h2rCIoFA4Aw"></script>
