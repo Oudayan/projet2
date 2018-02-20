@@ -14,10 +14,10 @@
 
 
 textarea {
-    background-color:#FAFAFA;
-    border:#EFEFEF solid 1px;
-    color:#333;
-    height:150px;
+    /*background-color:#FAFAFA;*/
+  border:#EFEFEF solid 1px;
+   /* color:#333;*/
+    height: 50px;
     width:100%;
 }
 
