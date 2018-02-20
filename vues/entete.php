@@ -84,7 +84,7 @@
 					
                 </div><!-- container px-5 -->
             </nav>
-        </header>
+        </header >
 <script>
 	window.setTimeout(function() {
 		$(".alert").fadeTo(500, 0).slideUp(500, function(){
