@@ -24,7 +24,7 @@
 					
                     // Affichage de la page d'accueil
 					case "accueil" :
-						$this->accueil();
+						$this->afficherVues("accueil");
                         break;
 
                     // Affichage de la page de recherche
@@ -197,15 +197,14 @@
                         break;
 
 					default :
-					    $this->accueil();
+                        $this->afficherVues("accueil");
                         break;
 
 			 	}
 					
 		  	}
 		  	else {
-				$this->accueil();
- 		  	
+                $this->afficherVues("accueil");
 		  	}
 
 	  	} // end of switch
@@ -263,7 +262,7 @@
 				$donnees["logements"] = $modeleLogement->lireTousLogements();
 				$this->afficherVues("recherche", $donnees);
 			}
-		return;
+		  return;
 		}
 
     }

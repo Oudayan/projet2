@@ -1,6 +1,6 @@
 <?php
 /**
-* @file Controleur_Usagers.php
+* @file ControleurUsagers.php
 * @autheurs 
 * @version 1.0
 * @date 12 février 2018
@@ -68,14 +68,14 @@
 									$_SESSION["courriel"] = $params["courriel"];	
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
 								    $_SESSION["alert"]= "Reussi";
-									header("Location: index.php");
+									header("Location: index.php?Recherche&action=recherche&fiches=true");
 							
 								}
 								else
 								{
 									var_dump("Le courriel ou le MotDePasse est inexact");   
 									$_SESSION["warning"]= "Le courriel ou le MotDePasse est inexact";
-									header("Location: index.php");
+									header("Location: index.php?Recherche&action=recherche&fiches=true");
 								
 								}
 
@@ -129,10 +129,10 @@
 						}
 						else
 						{
-								$modeleUsagers = $this->lireDAO("Usagers");                                  
-								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],2,$params["id_paiement"]);
-								$succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
-								$this->afficheListeUsagers();
+                            $modeleUsagers = $this->lireDAO("Usagers");                                  
+                            $modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],2,$params["id_paiement"]);
+                            $succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
+                            $this->afficheListeUsagers();
 						}
 						break;
 					case "Logout":																	//va chercher un usager pour permettre la modification
@@ -152,7 +152,7 @@
 			else
 			{
 				var_dump("No");
-				$this->afficherVuess("FormLogin"); 													//action par defaut- affiche le login
+				$this->afficherVuess("accueil"); 													//action par defaut- affiche le login
 			}	
 		}
 		

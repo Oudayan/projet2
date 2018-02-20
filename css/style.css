@@ -284,9 +284,13 @@ carousel-caption h5 {
     color: #999;
 }
 
+a.nav-item.nav-link {
+    color: #e98d34;
+}
+
 /* Zoraida */
 .bg-login {
-    color: white;
+    color: #e98d34;
 }
     
 .bg-login:hover {
