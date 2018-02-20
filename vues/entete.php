@@ -75,9 +75,9 @@
                     </div><!-- ml-auto -->
 				   <?php }
 					else { ?>
-					<div><span>Usager: <strong></strong></span>						
+					<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>						
                       <a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
-                      <a href="index.php?Usagers&action=nouvelMessage"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["prenom"];?></a>
+                      <a href="index.php?Usagers&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
                       <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>
 					</div>
 					<?php } ?>					
