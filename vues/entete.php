@@ -98,7 +98,7 @@
 				   <?php }
 					else { ?>
 					<div>
-                      <a href="index.php?Usagers&action=nouvelMessage"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
+                      <a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
                       <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
 					</div>
 					<?php } ?>					
