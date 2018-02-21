@@ -130,9 +130,7 @@
 					    $this->deconnection();
 					    header("Location: index.php");
 					    break;
-            
-					/*default:		
-																								
+					/*default:																	
 						trigger_error("Action invalide");
 					*/	
 				}	
@@ -140,7 +138,7 @@
 			else
 			{
 				  var_dump("No");
-				  $this->afficherVuess("accueil"); 													//action par defaut- affiche le login
+				  $this->afficherVues("accueil"); 													//action par defaut- affiche le login
 			}	
 		}
 		
@@ -187,4 +185,5 @@
 		}
 		
 	}
+
 ?>
