@@ -12,26 +12,26 @@
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery.jcarousel.min.js"></script>
-        <script src="js/modernizr.js"></script>
+        <script src="js/modernizr.js"></script> 
     </head>
     <body>
         <header class="container-fluid"> 
             <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse text-white row">
                 <div class="container px-5 px-sm-0">
                     <a href="index.php?Recherche&action=accueil" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:60%"></a>
-						<?php if (isset($_SESSION["alert"])) {?>
+						<?php if (isset($_SESSION["succes"])) {?>
 						<div class="alert alert-success" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<strong>Reussi!</strong> <?= $_SESSION["alert"] ?>
+							<strong><?= $_SESSION["succes"] ?></strong> 
 						</div> <?php 
-						unset($_SESSION['alert']);
+						unset($_SESSION['succes']);
 						} ?>
-						<?php if (isset($_SESSION["warning"])) {?>
+						<?php if (isset($_SESSION["erreur"])) {?>
 						<div class="alert alert-danger" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<strong>Attention !</strong> <?= $_SESSION["warning"] ?>
+							<strong>Attention !</strong> <?= $_SESSION["erreur"] ?>
 						</div> <?php 
-						unset($_SESSION['warning']);
+						unset($_SESSION['erreur']);
 						} ?>
 					
                     <?php if (!isset($_SESSION["courriel"])) { ?>
@@ -75,10 +75,10 @@
                     </div><!-- ml-auto -->
 				   <?php }
 					else { ?>
-					<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>						
-                      <a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
-                      <a href="index.php?Usagers&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
-                      <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>
+					<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
+						<a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
+                        <a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
+                        <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
 					</div>
 					<?php } ?>					
 					

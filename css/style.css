@@ -423,10 +423,10 @@ label {
   }
   
   #v-pills-tab {
-       background: rgba(0, 0, 0, 0.67);
+    background: rgba(0, 0, 0, 0.67);
     background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgb(0, 0, 0, 0.6));
-      border-radius: 5px;
-      font-size: 0.7rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
   }
   
  a.nav-link {
