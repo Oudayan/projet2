@@ -77,12 +77,12 @@
 		/**
 		* @brief Sauvegarde un message
 		* @details Prend les informations entrées et les sauvegarde dans la base de données.
-		* @param point1 unUsager
-		* @param point2 userName
-		* @param point3 nom
-		* @param point4 prenom
-		* @param point5 isAdmin
-		* @param point6 isBanned
+		* @param point1 unMessage
+		* @param point2 id_message
+		* @param point3 sujet
+		* @param point4 fichier_joint
+		* @param point5 message
+		* @param point6 msg_date
 		* @param point7 courriel
 		* @return aucun.
 		*/
@@ -102,11 +102,11 @@
 			else
 			{ */
 				//insert
-				var_dump($unUsager);
-				$query = "INSERT INTO " . $this->checherNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
-				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
-				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
+				var_dump($unMessage);
+				$query = "INSERT INTO " . $this->checherNomTable() . "(sujet, fichier_joint, message, msg_date, courriel,) VALUES (?, ?, ?, ?, ?)";
+				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
+				$unMessage->lireMsg_date(),$unMessage->lireCourriel(),
+				$unMessage->lireContact(),$unMessage->lireTypeUsager(),	$unMessage->lireTypePaiement()
 				);
 
 				return $this->requete($query, $donnees);
