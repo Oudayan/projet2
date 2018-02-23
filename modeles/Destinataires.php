@@ -2,8 +2,8 @@
 /**
 * @file Destinataires.php
 * @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
-* @version 1.0
-* @date 21 janvier 2018
+* @version 2.0
+* @date 23 janvier 2018
 * @brief Définit la classe Destinataires.
 *
 * @details Cette classe définit les attributs des destinataires 
@@ -11,28 +11,25 @@
 */
 
 	class Destinataires {
-		private $courriel;
+		private $destinataire;
 		private $id_message;
 		private $lu;
-		private $effacer;
-		
-		
+		private $actif;
 		
 
-		public function __construct($courriel = "", $id_message = NULL, $lu = NULL, $effacer = "" )
+		public function __construct($destinataire = "", $id_message = NULL, $lu = NULL, $actif = NULL )
 		{
-			$this->ecrireCourriel($courriel);
+			$this->ecrireDestinataire($destinataire);
 			$this->ecrireId_message($id_message);
 			$this->ecrireLu($lu);
-			$this->ecrireEffacer($effacer);
-			
+			$this->ecrireActif($actif);
 		}
 		
         // "SETTERS"
         
-		public function ecrireCourriel($courriel) {
-            if (is_string($courriel) && trim($courriel) != "") {
-                $this->courriel = $courriel;
+		public function ecrireDestinataire($destinataire) {
+            if (is_string($destinataire) && trim($destinataire) != "") {
+                $this->destinataire = $destinataire;
             }			
 		}
 		
@@ -48,9 +45,9 @@
             }			
 		}
 
-		public function ecrireEffacer($effacer){
-            if (is_bool($effacer) && trim($effacer) != "") {
-                $this->effacer = $effacer;
+		public function ecrireActif($actif){
+            if (is_bool($actif) && trim($actif) != "") {
+                $this->actif = $actif;
             }			
 		}
 
@@ -58,8 +55,8 @@
 		
 		// "GETTERS"				
 		
-		public function lireCourriel(){
-            return $this->courriel;
+		public function lireDestinataire(){
+            return $this->destinataire;
 		}
 		
 		
@@ -71,8 +68,8 @@
             return $this->lu;
 		}
 
-		public function lireEffacer(){
-            return $this->effacer;
+		public function lireActif(){
+            return $this->actif;
 		}
 		
 	} //fin de la classe

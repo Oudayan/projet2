@@ -2,8 +2,8 @@
 /**
 * @file ModeleDestinataires.php
 * @author Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
-* @version 1.0
-* @date 22 janvier 2018
+* @version 2.0
+* @date 23 janvier 2018
 * @brief Définit la classe ModeleDestinataire
 *
 * @details Cette classe définit les attributs nécessaire pour tout ce qui touche les messages aux destinataires.
@@ -17,82 +17,90 @@
 		* @details Permet d'aller chercher le nom d'une table.
 		* @param point1 
 		* @param point2 
-		* @return string messagerie.
+		* @return string destinataire.
 		*/
 		public function checherNomTable()
 		{
-			return "al_assigner_destinataire";
+			return "al_destinataire";
 		}
 		
+         /**
+		* @brief Pour aller chercher tous ls messages d'un usager qui est logger 
+		* @details Permet d'aller chercher les renseignements relatif aux messages pour l'usager qui est logger.
+		* @param point1 destinataire
+		* @return array resultat.
+		*/
+		public function obtenir_par_destinataire($destinataire)
+		{
+			$resultat = $this->lire($destinataire, "destinataire");
+			 return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Destinataires");
+		}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         /**
-		* @brief Pour aller chercher un destinataire
-		* @details Permet d'aller chercher les renseignements sur un destinataire en utilisant le id_message.
+		* @brief Pour aller chercher ls infos pour un id_message
+		* @details Permet d'aller chercher ds infos en utilisant le id_message.
 		* @param point1 id_message
 		* @param point2 resultat
-		* @return array unMessage.
+		* @return array unInformation.
 		*/
 		public function obtenir_par_id_message($id_message)
 		{
-			$resultat = $this->lire($id_message);//reference BaseDAO
+			$resultat = $this->lire($id_message, "id_message");//reference BaseDAO
 			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Destinataires'); 
-			$unMessage = $resultat->fetch();
-			return $unMessage;
+			$unInformation = $resultat->fetch();
+			return $unInformation;
 		}
-		
+	
         
         
         
         /**
-		* @brief Obtenir tous les messages pour un usager 
-		* @details Permet d'obtenir les informations de tous les messages d'un ussager.
+		* @brief Obtenir tous les destinataires 
+		* @details Permet d'obtenir les destinataires.
 		* @param point1 resultat
-		* @return array desMessages.
+		* @return array desDestinataires.
 		*/																	
 		public function obtenir_tous()
 		{
 			$resultat = $this->lireTous();  //reference BaseDAO
-			$desMessages = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Messages");
-			return $desMessages;
+			$desDestinataires = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Destinataires");
+			return $desDestinataires;
 		}
-		
+	
         
         
-        /**
-		* @brief Pour aller chercher un usager 
-		* @details Permet d'aller chercher les renseignements sur un usager utilisant le nom.
-		* @param point1 nom
-		* @return array unUsager.
-		*/
-		public function obtenir_par_nom($nom)
-		{
-			$resultat = $this->lire($nom);
-			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Messages'); 
-			$unUsager = $resultat->fetch();
-			return $unUsager;
-		}
+       
 		
         
 		/**
-		* @brief Sauvegarde un message
+		* @brief Sauvegarde un destinataire
 		* @details Prend les informations entrées et les sauvegarde dans la base de données.
-		* @param point1 unMessage
+		* @param point1 unDestinataire
 		* @param point2 id_message
-		* @param point3 sujet
-		* @param point4 fichier_joint
-		* @param point5 message
-		* @param point6 msg_date
-		* @param point7 courriel
+		* @param point3 lu
+		* @param point4 actif
 		* @return aucun.
 		*/
-		public function sauvegarde(Usagers $unUsager)
+		public function sauvegarde(Destinataires $unDestinataire)
 		{
 
-		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
+		/*	if($unDestinataire->destinataire && $this->lire($unDestinataire->destinataire)->fetch())
 			{
-				$query = "UPDATE " . $this->getTableName() . " SET nom=?, prenom=?, isAdmin=?, isBanned=? WHERE courriel = ?";
-				$donnees = array($unUsager->nom,$unUsager->prenom,$unUsager->isAdmin,$unUsager->isBanned,$unUsager->courriel) ;
+				$query = "UPDATE " . $this->getTableName() . " SET destinataire=?, id_message=?, lu=?, actif=? WHERE destinataire = ?";
+				$donnees = array($unDestinataire->destinataire,$unDestinataire->id_message,$unDestinataire->lu,$unDestinataire->actif) ;
 				$resultat = $this->requete($query, $donnees);
 			
 			}
@@ -102,12 +110,10 @@
 			else
 			{ */
 				//insert
-				var_dump($unMessage);
-				$query = "INSERT INTO " . $this->checherNomTable() . "(sujet, fichier_joint, message, msg_date, courriel,) VALUES (?, ?, ?, ?, ?)";
-				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
-				$unMessage->lireMsg_date(),$unMessage->lireCourriel(),
-				$unMessage->lireContact(),$unMessage->lireTypeUsager(),	$unMessage->lireTypePaiement()
-				);
+				var_dump($unDestinataire);
+				$query = "INSERT INTO " . $this->checherNomTable() . "(destinataire, id_message, lu, actif) VALUES (?, ?, ?, ?)";
+				$donnees = array($unDestinataire->lireDestinataire(), $unDestinataire->lireId_message(),$unDestinataire->lireLu(),
+				$unDestinataire->lireActif());
 
 				return $this->requete($query, $donnees);
 			/*}*/
