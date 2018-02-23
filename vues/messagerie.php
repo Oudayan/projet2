@@ -31,40 +31,15 @@
     </div><!-- nav flex-column -->
 
     <div class="tab-content tab-messagerie col-9" id="v-pills-tabContent">
-      
-      <div class="tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
-        <form>
-          <div class="form-group row">
-            <label for="text-input" class="col-2 col-form-label">À</label>
-            <div class="col-10">
-                <input class="form-control" type="text" value="" id="text-input">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="text-input" class="col-2 col-form-label">Sujet</label>
-            <div class="col-10">
-                <input class="form-control" type="text" value="" id="text-input">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="file_id" class="col-2 col-form-label">Fichier joint</label>
-            <div class="col-10">
-              <input name="mon_image" type="file" id="file_id">
-            </div>
-          </div>  
-          <div class="form-group row">
-            <label for="text-input" class="col-2 col-form-label">Message</label>           
-            <div class="col-10">           
-              <div class="page-wrapper box-content">
-               <textarea class="content" name="example"></textarea> 
-                <button class="btn btn-orange">Envoyer</button>
-             </div>             
-            </div>
-          </div><!-- form-group row -->          
-        </form>        
+       
+    <div class="tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
+        <?php include "vues/formulaireMessagerie.php";?>     
       </div><!-- tab-pane compMessage -->
       
       <div class="tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+       <div class="btnsMessagerie">
+        <button type="button" class="btn-bleu btn-sm">Répondre</button><br><br>
+      </div> 
         <table class="table table-sm responsive-sm table-hover display" id="messages">
           <thead>
             <tr>
@@ -81,6 +56,7 @@
       </div><!-- tab-pane boitRecp-->
       
       <div class="tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
+        <button type="button" class="btn-bleu btn-sm disabled">Répondre</button><br><br>
         <table class="table table-sm responsive-sm table-hover display">
           <thead>
             <tr>
@@ -94,15 +70,29 @@
           <tbody id="msgEnvoyes">
           </tbody>
         </table>
+        <div id="messageRecu">
+         <!-- <form>  
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">De</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">email@example.com</p>
+                </div>
+              </div>
+             <?php //include "vues/formulaireMessagerie.php";?>
+          </form>-->
+        </div>
+        
       </div>        
     </div><!-- tab-pane -->
     </div><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
 </div><!-- container -->
 <script type="text/javascript">
-  $(document).ready(function() {
+$(document).ready(function() {
         $('.content').richText(); 
         afficherBoiteReception();
+       /* $(document).on('click','.mess', function(){          
+          alert('salut')});*/
     });
         
 </script>
@@ -113,8 +103,9 @@
         type: 'POST',
         dataType: 'json',
        success: function(json) {
-        $.each(json, function(i, item) {
-           $("#boiteReception").append("<tr><td>" + item.lu + "</td><td>" + item.nom + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td></tr>");
+          $("#boiteReception").html("");
+          $.each(json, function(i, item) {
+          $("#boiteReception").append("<tr><td>" + item.lu + "</td><td>" + item.nom + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td></tr>");
 
           });
             },
@@ -132,8 +123,10 @@
             type: 'POST',
             dataType: 'json',
            success: function(json) {
+            $("#msgEnvoyes").html("");
             $.each(json, function(i, item) {
-               $("#msgEnvoyes").append("<tr><td>" + item.lu + "</td><td>" + item.nom + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td></tr>");
+              /*console.log("<tr><td onclick=\"alert('salut')\">");*/
+               $("#msgEnvoyes").append("<tr><td><a href='#' onclick='lireMessage(" + item.id_message + ")'>" + item.lu + "</a></td><td>" + item.nom + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td><td class='hidden'>" + item.id_message + "</td></tr>");
          
               });
 				},
@@ -143,5 +136,28 @@
         });
     }; 
  </script>
+<script type="text/javascript">
+function lireMessage(id){
+       $.ajax({
+          url: 'index.php?Messagerie&action=afficherMessage', 
+          type: 'POST',
+          data: {id_message: id },
+          dataType: 'json',
+          success: function(json) {
+            /*$('#PresentationId').val(json.courriel);*/
+          $("#messageRecu").empty();
+          $.each(json, function(i, item) {
+            $("<texarea class= 'content'>" + item.message + "</texarea><hr>").appendTo("#messageRecu");
+
+            });
+              },
+              error: function(xhr, ajaxOptions, thrownError) {
+                  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+              }
+     }); 
+  };
+ 
+  </script>
+  
         
  
