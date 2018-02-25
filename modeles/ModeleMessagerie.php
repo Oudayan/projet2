@@ -2,8 +2,8 @@
 /**
 * @file ModeleMessagerie.php
 * @author Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
-* @version 1.0
-* @date 20 janvier 2018
+* @version 2.0
+* @date 23 janvier 2018
 * @brief Définit la classe ModeleMessagerie
 *
 * @details Cette classe définit les attributs nécessaire pour tout ce qui touche les messages entre membres.
@@ -25,17 +25,33 @@
 		}
 		
         
+        /**
+		* @brief Pour aller chercher un message
+		* @details Permet d'aller chercher les renseignements sur un message reçu en utilisant le id du message.
+		* @param point1 id_message
+		* @param point2 resultat
+		* @return array unMessage.
+		*/
+		public function obtenir_par_id_message($id_message)
+		{
+			$resultat = $this->lire($id_message);//reference BaseDAO
+			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Messages'); 
+			$unMessage = $resultat->fetch();
+			return $unMessage;
+		}
+        
+        
         
         /**
 		* @brief Pour aller chercher un message
 		* @details Permet d'aller chercher les renseignements sur un message reçu en utilisant le courriel de l'utilisateur.
-		* @param point1 courriel
+		* @param point1 expediteur
 		* @param point2 resultat
 		* @return array unMessage.
 		*/
-		public function obtenir_par_courriel($courriel)
+		public function obtenir_par_expediteur($expediteur)
 		{
-			$resultat = $this->lire($courriel);//reference BaseDAO
+			$resultat = $this->lire($expediteur, "expediteur");//reference BaseDAO
 			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Messages'); 
 			$unMessage = $resultat->fetch();
 			return $unMessage;
@@ -45,8 +61,8 @@
         
         
         /**
-		* @brief Obtenir tous les messages pour un usager 
-		* @details Permet d'obtenir les informations de tous les messages d'un ussager.
+		* @brief Obtenir tous les messages pour un expediteur 
+		* @details Permet d'obtenir les informations de tous les messages d'un expediteur.
 		* @param point1 resultat
 		* @return array desMessages.
 		*/																	

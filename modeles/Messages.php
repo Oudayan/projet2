@@ -2,9 +2,9 @@
 /**
 * @file Messages.php
 * @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
-* @version 1.0
-* @date 21 janvier 2018
-* @brief Définit la classe Messages.
+* @version 2.0
+* @date 23 janvier 2018
+* @brief Définit la classe Messages pour la messagerie.
 *
 * @details Cette classe définit les attributs d'un message
 * 
@@ -17,17 +17,17 @@
 		private $fichier_joint;
 		private $message;
 		private $msg_date;
-		private $courriel;
+		private $expediteur;
 		
 
-		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $courriel = "" )
+		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $expediteur = "" )
 		{
 			$this->ecrireId_message($id_message);
 			$this->ecrireId_reference($id_reference);
 			$this->ecrireSujet($sujet);
 			$this->ecrireFichier_joint($fichier_joint);
 			$this->ecrireMessage($message);
-			$this->ecrireCourriel($courriel);
+			$this->ecrireExpediteur($expediteur);
 			
 		}
 		
@@ -62,9 +62,9 @@
             }			
 		}
 
-		public function ecrireCourriel($courriel) {
-            if (is_string($courriel) && trim($courriel) != "") {
-                $this->courriel = $courriel;
+		public function ecrireExpediteur($expediteur) {
+            if (is_string($expediteur) && trim($expediteur) != "") {
+                $this->expediteur = $expediteur;
             }			
 		}
 
@@ -91,8 +91,8 @@
             return $this->message;
 		}
 
-		public function lireCourriel(){
-            return $this->courriel;
+		public function lireExpediteur(){
+            return $this->expediteur;
 		}
 
 			
