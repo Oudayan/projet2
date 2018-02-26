@@ -32,11 +32,18 @@
 		*/
 		public function obtenir_par_destinataire($destinataire)
 		{
+			$sql = "SELECT * FROM " . $this->chercherNomTable();
+			$resultat = $this->requete($sql);
+			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
 			$resultat = $this->lire($destinataire, "destinataire");
 			 return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Destinataires");
 		}
         
-        
+         public function lireTousLogements() {
+			$sql = "SELECT * FROM " . $this->checherNomTable();
+			$resultat = $this->requete($sql);
+			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
+    	}
         
         
         
