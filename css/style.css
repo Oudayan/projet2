@@ -15,14 +15,14 @@
 */
 body {
     /*font-family: 'Pragati Narrow', sans-serif;
-    font-family: 'Roboto', sans-serif;*/
-    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;*/
 }
 
 header {
     color: rgba(0, 0, 0, 0.9);
     height: 20vh;
-    widows: 100%;
+    width: 100%;
 }
 
 header h1 {
@@ -125,7 +125,21 @@ main {
     box-shadow: 1px 1px 1px #999;    
 }
 
-.nav-item {
+.date-form {
+    position: relative;
+}
+
+.date-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+a.btn.btn-orange, a:hover.btn.btn-orange {
+    color: #f5f5f5;
+}
+
+a.nav-item.nav-link {
     color: rgba(0, 0, 0, 0.75);
     text-shadow: 1px 1px 3px #666;
 }
@@ -170,7 +184,7 @@ h4.titre-fiche {
 }
 
 #fiches {
-    height: 80vh;
+    height: 90vh;
     overflow: scroll;
     -webkit-box-shadow: 1px 1px 2px #999;
     -moz-box-shadow: 1px 1px 2px #999;
@@ -284,9 +298,9 @@ carousel-caption h5 {
     color: #999;
 }
 
-a.nav-item.nav-link {
+/*a.nav-item.nav-link {
     color: #e98d34;
-}
+}*/
 
 /* Zoraida */
 .bg-login {

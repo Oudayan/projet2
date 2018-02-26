@@ -21,8 +21,8 @@ CREATE TABLE al_type_contact (
 CREATE TABLE al_disponibilite (
     id_disponibilite         Int (11) NOT NULL, 
     id_logement              Int (11) NOT NULL, 
-    date_debut               Datetime NOT NULL, 
-    date_fin                 Datetime NOT NULL, 
+    date_debut               Date NOT NULL, 
+    date_fin                 Date NOT NULL, 
     PRIMARY KEY (id_disponibilite), 
     INDEX (id_logement)
 )ENGINE=InnoDB;
@@ -186,7 +186,7 @@ CREATE TABLE al_photos_logement (
 
 CREATE TABLE al_pieces (
     id_piece            Int (11) Auto_increment NOT NULL, 
-    description_photo   Varchar (255) NOT NULL, 
+    description_piece   Varchar (255) NOT NULL, 
     PRIMARY KEY (id_piece)
 )ENGINE=InnoDB;
 
@@ -234,7 +234,7 @@ ALTER TABLE al_usager ADD CONSTRAINT FK_al_usager_id_paiement FOREIGN KEY (id_pa
 ALTER TABLE al_evaluations ADD CONSTRAINT FK_al_evaluations_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
 ALTER TABLE al_evaluations ADD CONSTRAINT FK_al_evaluations_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
 ALTER TABLE al_photos_logement ADD CONSTRAINT FK_al_photos_logement_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
-ALTER TABLE al_photos_logement ADD CONSTRAINT FK_al_pieces_id_piece FOREIGN KEY (id_piece) REFERENCES al_pieces(id_piece);
+ALTER TABLE al_photos_logement ADD CONSTRAINT FK_al_photos_logement_id_piece FOREIGN KEY (id_piece) REFERENCES al_pieces(id_piece);
 ALTER TABLE al_messagerie ADD CONSTRAINT FK_al_messagerie_expediteur FOREIGN KEY (expediteur) REFERENCES al_usager(courriel);
 ALTER TABLE al_destinataire ADD CONSTRAINT FK_destinataire_destinataire FOREIGN KEY (destinataire) REFERENCES al_usager(courriel);
 ALTER TABLE al_destinataire ADD CONSTRAINT FK_destinataire_id_message FOREIGN KEY (id_message) REFERENCES al_messagerie(id_message);
@@ -336,7 +336,7 @@ INSERT INTO `al_logements`
 -- Insertion des données de la table `al_pieces`
 -- 
 
-INSERT INTO `al_pieces` (`id_piece`, `description_photo`) VALUES 
+INSERT INTO `al_pieces` (`id_piece`, `description_piece`) VALUES 
 (1, "Atelier"), 
 (2, "Bureau"), 
 (3, "Balcon"),
@@ -520,30 +520,38 @@ INSERT INTO `al_photos_logement` (`id_photo_logement`, `chemin_photo`, `id_piece
 -- 
 
 INSERT INTO `al_disponibilite` (`id_disponibilite`, `id_logement`, `date_debut`, `date_fin`) VALUES
-(1, 1, "2018-02-01 13:00", "2018-03-01 13:00"),
-(2, 1, "2018-03-15 13:00", "2018-03-31 13:00"),
-(3, 2, "2018-02-15 13:00", "2018-02-21 13:00"),
-(4, 2, "2018-03-01 13:00", "2018-03-08 13:00"),
-(5, 3, "2018-02-07 13:00", "2018-02-21 13:00"),
-(6, 3, "2018-02-28 13:00", "2018-03-07 13:00"),
-(7, 4, "2018-02-21 13:00", "2018-03-21 13:00"),
-(8, 4, "2018-03-28 13:00", "2018-04-15 13:00"),
-(9, 5, "2018-02-03 13:00", "2018-02-10 13:00"),
-(10, 5, "2018-02-24 13:00", "2018-03-24 13:00"),
-(11, 6, "2018-02-11 13:00", "2018-02-12 13:00"),
-(12, 6, "2018-02-18 13:00", "2018-02-25 13:00"),
-(13, 7, "2018-02-03 13:00", "2018-03-03 13:00"),
-(14, 7, "2018-03-08 13:00", "2018-03-22 13:00"),
-(15, 8, "2018-02-06 13:00", "2018-02-20 13:00"),
-(16, 8, "2018-03-01 13:00", "2018-03-04 13:00"),
-(17, 9, "2018-02-15 13:00", "2018-02-28 13:00"),
-(18, 9, "2018-03-10 13:00", "2018-03-17 13:00"),
-(19, 10, "2018-02-20 13:00", "2018-03-01 13:00"),
-(20, 10, "2018-03-11 13:00", "2018-03-25 13:00"),
-(21, 11, "2018-02-02 13:00", "2018-02-03 13:00"),
-(22, 11, "2018-03-01 13:00", "2018-03-08 13:00"),
-(23, 12, "2018-02-04 13:00", "2018-02-22 13:00"),
-(24, 12, "2018-03-03 13:00", "2018-03-10 13:00");
+(1, 1, "2018-02-20", "2018-03-04"),
+(2, 1, "2018-03-15", "2018-03-31"),
+(3, 1, "2018-04-07", "2018-04-21"),
+(4, 2, "2018-02-25", "2018-02-27"),
+(5, 2, "2018-03-01", "2018-03-29"),
+(6, 2, "2018-04-04", "2018-04-25"),
+(7, 3, "2018-02-21", "2018-03-02"),
+(8, 3, "2018-03-12", "2018-03-13"),
+(9, 3, "2018-04-01", "2018-04-12"),
+(10, 4, "2018-02-21", "2018-03-21"),
+(11, 4, "2018-03-28", "2018-04-15"),
+(12, 4, "2018-04-20", "2018-04-30"),
+(13, 5, "2018-02-20", "2018-03-10"),
+(14, 5, "2018-03-24", "2018-04-24"),
+(15, 6, "2018-02-19", "2018-02-27"),
+(16, 6, "2018-03-10", "2018-03-25"),
+(17, 6, "2018-04-07", "2018-04-11"),
+(18, 7, "2018-02-26", "2018-03-03"),
+(19, 7, "2018-03-08", "2018-03-22"),
+(20, 7, "2018-04-02", "2018-02-18"),
+(21, 8, "2018-02-22", "2018-03-20"),
+(22, 8, "2018-04-01", "2018-04-14"),
+(23, 9, "2018-02-21", "2018-03-03"),
+(24, 9, "2018-03-10", "2018-03-17"),
+(25, 10, "2018-02-20", "2018-03-01"),
+(26, 10, "2018-03-11", "2018-03-25"),
+(27, 10, "2018-04-03", "2018-04-10"),
+(28, 11, "2018-02-22", "2018-03-03"),
+(29, 11, "2018-03-11", "2018-03-18"),
+(30, 11, "2018-04-01", "2018-04-15"),
+(31, 12, "2018-02-24", "2018-03-22"),
+(32, 12, "2018-04-03", "2018-04-21");
 
 -- --------------------------------------------------------
 

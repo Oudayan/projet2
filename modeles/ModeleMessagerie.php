@@ -19,7 +19,7 @@
 		* @param point2 
 		* @return string messagerie.
 		*/
-		public function checherNomTable()
+		public function lireNomTable()
 		{
 			return "al_messagerie";
 		}
@@ -103,7 +103,7 @@
 			{ */
 				//insert
 				var_dump($unUsager);
-				$query = "INSERT INTO " . $this->checherNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				$query = "INSERT INTO " . $this->lireNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
 				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
 				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
