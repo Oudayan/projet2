@@ -446,10 +446,8 @@ label {
      background-color: rgba(58, 90, 101, 0);
   } 
   .input-group-text {
-    color: rgb(140, 143, 144) !important;
+    color: rgb(93, 94, 95) !important;
     background: #f6f7ea !important;
-    //background: linear-gradient(to right, rgb(29, 145, 188), rgb(22, 90, 115)) !important;
-    //border: 1px solid #f6f7ea !important;
   }  
   
   #btnEnvoyer{
