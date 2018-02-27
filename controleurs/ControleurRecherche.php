@@ -207,6 +207,13 @@
             else if (!isset($_SESSION["recherche"]["region"])) {
                 $_SESSION["recherche"]["region"] = 6;
             }
+            // Adresse
+            if (isset($params["adresseDepart"])) {
+                $_SESSION["recherche"]["adresseDepart"] = $params["adresseDepart"];
+            }
+            else if (!isset($_SESSION["recherche"]["adresseDepart"])) {
+                $_SESSION["recherche"]["adresseDepart"] = "";
+            }
             // Latitude
             if (isset($params["latitude"])) {
                 $_SESSION["recherche"]["latitude"] = $params["latitude"];
@@ -225,7 +232,7 @@
             if (isset($params["rayon"])) {
                 $_SESSION["recherche"]["rayon"] = $params["rayon"];
                 // Tableau associatif des rayons de recherche et du niveau de zoom de la carte
-                $zoom = ["0.5"=>18, 1=>17, 2=>16, 3=>15, 4=>14, 5=>13, 10=>12, 15=>11.5, 20=>11, 25=>10.5, 50=>10, 75=>9.25, 100=>8.75, 150=>8.25, 200=>8, 250=>7.5, 500=>7, 1000=>6];
+                $zoom = ["0.5"=>16, 1=>15, 2=>14, 3=>13.66, 4=>13.33, 5=>13, 10=>12, 15=>11.5, 20=>11, 25=>10.5, 50=>10, 75=>9.25, 100=>8.75, 150=>8.25, 200=>8, 250=>7.5, 500=>7, 1000=>6];
                 foreach ($zoom as $rayon=>$valeur) {
                     if ($rayon == $params["rayon"]) {
                         $_SESSION["recherche"]["zoom"] = $valeur;

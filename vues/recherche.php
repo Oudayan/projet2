@@ -9,7 +9,7 @@
  */ 
 ?>
 <main class="container-fluid mx-3">
-    <div class="d-flex justify-content-around mb-2">
+    <div class="d-flex justify-content-around mt-3">
         <h1>Recherche de logements À Louer</h1>
     </div>
     <div class="row">
@@ -34,12 +34,12 @@
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <label for="region">Point de départ&nbsp;:</label>
-                        <a class="btn btn-sm btn-orange mb-1" onclick="">Ma position</a>
+                        <a class="btn btn-sm btn-orange mb-2" onclick="geoLocalisation()"><i class="fa fa-globe"></i> Ma position</a>
                     </div>
-                    <input type="text" class="form-control" placeholder="Entrer une adresse">
+                    <input type="text" id="adresseDepart" name="adresseDepart" class="form-control" placeholder="Entrer une adresse" value="<?= $_SESSION["recherche"]["adresseDepart"] ?>">
                 </div>
-                <input type="hidden" id="latitude" name="latitude" value="45.57">
-                <input type="hidden" id="longitude" name="longitude" value="-73.57">
+                <input type="hidden" id="latitude" name="latitude" value="<?= $_SESSION["recherche"]["latitude"] ?>">
+                <input type="hidden" id="longitude" name="longitude" value="<?= $_SESSION["recherche"]["longitude"] ?>">
                 <div class="form-group hidden">
                     <label for="region">Région&nbsp;:</label>
                     <select class="form-control" id="region" name="region">
@@ -296,6 +296,60 @@
 
     }); // Fin du onload
 
+
+    function geoLocalisation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(chercherPosition);
+        }
+        else { 
+            $("#adresseDepart").val("Geolocalisation non supportée sur ce fureteur.");
+        }
+    };
+
+    function chercherPosition(position) {
+        var lat = position.coords.latitude; 
+        var lng = position.coords.longitude;
+        $("#latitude").val(lat); 
+        $("#longitude").val(lng);
+        var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+        console.log(latlng);
+        var geocoder = new google.maps.Geocoder;
+        geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === 'OK') {
+                if (results[0]) {
+                    $("#adresseDepart").val(results[0].formatted_address);
+                    window.setTimeout(function() {
+                        $("#formulaire_recherche").submit();
+                    }, 500);
+
+                }
+                else {
+                    window.alert("Aucun résultat trouvé.");
+                }
+            }
+            else {
+                window.alert("La géolocalisation n'a pu être effectuée.");
+            }
+        });
+    };
+
+    function LngLat() {
+        var adresse = $("#adresseDepart").val();
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': adresse}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var lat = results[0].geometry.location.lat();
+                var lng = results[0].geometry.location.lng();
+                $("#latitude").val(lat); 
+                $("#longitude").val(lng);
+                //$("#formulaire_recherche").submit();
+            }
+            else {
+                $("#adresseDepart").val("");
+            }
+        });
+    };
+    
     // Mise à jour des éléments du formulaire recherche quand l'onglet Fiches est sélectionné
     $("#nav-fiches-tab").on("click", function() {
         $(".legende").addClass("hidden");
@@ -397,6 +451,7 @@
 
     // Mise à jour de la vue quand un item du formulaire de recherche est changé
     $("#formulaire_recherche").on("change", function() {
+        LngLat();
         if ($("#nav-fiches-tab").hasClass("active")) {
             rechercheFiches();
         }
@@ -405,6 +460,18 @@
         }
     });
 
+    $("#adresseDepart").on("blur", function() {
+        //if ($("#nav-carte-tab").hasClass("active")) {
+            $("#formulaire_recherche").submit();
+        //}
+    });
+    
+    $("#rayon").on("change", function() {
+        //if ($("#nav-carte-tab").hasClass("active")) {
+            $("#formulaire_recherche").submit();
+        //}
+    });
+    
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA22Ascl7tbt6eLIQVW8E_2h2rCIoFA4Aw&callback=initialize"></script>
 <script type="text/javascript">
