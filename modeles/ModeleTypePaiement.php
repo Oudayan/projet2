@@ -10,7 +10,7 @@
 
 	class ModeleTypePaiement extends BaseDAO {
 
-		public function checherNomTable() {
+		public function lireNomTable() {
 			return "al_type_paiement";
 		}
         
@@ -32,12 +32,12 @@
 		public function sauvegarderTypeLogement(TypeLogement $typeLogement) {
 			if ($typeLogement->lireId() && $this->lire($typeLogement->lireId())->fetch()) {
 				// update
-				$sql = "UPDATE " . $this->checherNomTable() . " SET type_logement=? WHERE " . $this->lireClePrimaire() . "=?";
+				$sql = "UPDATE " . $this->lireNomTable() . " SET type_logement=? WHERE " . $this->lireClePrimaire() . "=?";
                 $donnees = array($typeLogement->lireTypeLogement(), $typeLogement->lireIdTypeLogement());
 			} 
 			else {
 				// insert
-                $sql = "INSERT INTO " . $this->checherNomTable() . "(type_logement) VALUES (?)"; 
+                $sql = "INSERT INTO " . $this->lireNomTable() . "(type_logement) VALUES (?)"; 
 				$donnees = array($typeLogement->lireTypeLogement());
 			}
            	return $this->requete($sql, $donnees);

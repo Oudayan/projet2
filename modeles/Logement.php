@@ -5,7 +5,7 @@
  * @version 1.1
  * @date    11 février 2018
  * @brief   Définit la classe Logement.
- * @details Cette classe définit les attributs d'un Logement 
+ * @details Cette classe définit les attributs privés d'un logement avec toutes les méthodes publiques "getters" et "setters" pour écrire et lire les attributs 
  */
 	class Logement {
         

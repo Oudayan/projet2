@@ -11,7 +11,7 @@
 	class ModelePhotoLogement extends BaseDAO {
 
         // Déclaration du nom de la table (fonction abstraite)
-		public function checherNomTable() {
+		public function lireNomTable() {
 			return "al_photos_logement";
 		}
         
@@ -24,7 +24,7 @@
 		
         // Lire toutes les photos d'un logement
         public function lireToutesPhotosParLogement($idLogement) {
-            $sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE id_logement=?";
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement=?";
             $donnees = array($idLogement);
             $resultat =  $this->requete($sql, $donnees);
             return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "PhotoLogement");
@@ -33,13 +33,13 @@
 		public function sauvegarderPhotoLogement(PhotoLogement $photoLogement) {
 			if ($photoLogement->lireIdPhotoLogement() && $this->lire($photoLogement->lireIdPhotoLogement())->fetch()) {
 				// update
-				$sql = "UPDATE " . $this->checherNomTable() . " SET chemin_photo=?, description_photo=?, id_logement=? WHERE " . $this->lireClePrimaire() . "=?";
-                $donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireDescriptionPhoto(), $photoLogement->lireIdLogement(), $photoLogement->lireIdPhotoLogement());
+				$sql = "UPDATE " . $this->lireNomTable() . " SET chemin_photo=?, description_photo=?, id_logement=? WHERE " . $this->lireClePrimaire() . "=?";
+                $donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireIdPiece(), $photoLogement->lireIdLogement(), $photoLogement->lireIdPhotoLogement());
 			} 
 			else {
 				// insert
-                $sql = "INSERT INTO " . $this->checherNomTable() . "(chemin_photo, description_photo, id_logement) VALUES (?, ?, ?)"; 
-				$donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireDescriptionPhoto(), $photoLogement->lireIdLogement());
+                $sql = "INSERT INTO " . $this->lireNomTable() . "(chemin_photo, description_photo, id_logement) VALUES (?, ?, ?)"; 
+				$donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireIdPiece(), $photoLogement->lireIdLogement());
 			}
            	return $this->requete($sql, $donnees);
 		}
