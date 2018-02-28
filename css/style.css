@@ -417,12 +417,12 @@ label {
 /* ------------
   Messagerie 
 -------------*/
-  .nav-pills, .tab-messagerie {
+.nav-pills, .tab-messagerie {
     margin-top: 25px;
     margin-bottom: 25px;
   }
   
-  #v-pills-tab {
+#v-pills-tab {
     background: rgb(29, 145, 188);
     background: linear-gradient(to right, rgb(29, 145, 188), rgb(22, 90, 115));
     border-radius: 5px;
@@ -433,32 +433,49 @@ label {
     color: #F0EFE7;
   }
   
-  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
     background-color: rgb(22, 90, 115);
   }
   
-  #v-pills-profile {
+#v-pills-profile {
    height: 40vh;
    overflow: scroll;
   }
-  .btnsMessagerie {
+  
+.btnsMessagerie {
      background-color: rgba(58, 90, 101, 0);
   } 
-  .input-group-text {
+  
+.input-group-text {
     color: rgb(93, 94, 95) !important;
     background: #f6f7ea !important;
   }  
   
-  #btnEnvoyer{
+#btnEnvoyer{
   float:right;
   }
-  #boiteLecture1{
+  
+.boiteLecture{
     background: rgb(250, 251, 246);
-    padding: 20px;
-    height: auto;
+    padding: 20px 20px 140px 20px;
+    border-style: solid;
+    border-color: #dee2e6;
   }
-  .heigthFormBLecture {
+  
+.heigthFormBLecture {
     height: 15px;
+  }
+  
+  .display {
+    border-style: solid;
+    border-color: #dee2e6;
+    border-radius: 4px;
+  }  
+
+  .textMessage {
+    border-style: solid;
+    border-color: rgb(246, 247, 234);
+    border-radius: 4px;
   }
   
