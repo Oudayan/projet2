@@ -20,7 +20,7 @@
 		 * @return     [object]
 		 */
 		protected function effacer($clePrimaire) {
-			$sql = "DELETE FROM " . $this->checherNomTable() . " WHERE " . $this->lireClePrimaire() ."=?";
+			$sql = "DELETE FROM " . $this->lireNomTable() . " WHERE " . $this->lireClePrimaire() ."=?";
 			$donnees = array($clePrimaire);
 			return $this->requete($sql, $donnees);
 		}
@@ -33,10 +33,10 @@
 		 */
 		protected function lire($valeur, $clePrimaire = NULL) {
 			if (!isset($clePrimaire)) {
-				$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $this->lireClePrimaire() ."=?";
+				$sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE " . $this->lireClePrimaire() ."=?";
 			}
 			else {
-				$sql = "SELECT * FROM " . $this->checherNomTable() . " WHERE " . $clePrimaire ."=?";
+				$sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE " . $clePrimaire ."=?";
 			}
 			$donnees = array($valeur);
 			return $this->requete($sql, $donnees);
@@ -47,7 +47,7 @@
 		 * @return     [object]  Tous les champs de toutes les entrées la table
 		 */
 		protected function lireTous() {
-			$sql = "SELECT * FROM " . $this->checherNomTable();
+			$sql = "SELECT * FROM " . $this->lireNomTable();
 			return $this->requete($sql);
 		}
 
@@ -59,7 +59,7 @@
          * @return     [object] L'exécution de la requête
 		 */
 		protected function modifierChamp($id, $champ, $valeur) {
-            $sql = "UPDATE " . $this->checherNomTable() . " SET " . $champ . "=? WHERE " . $this->lireClePrimaire() . "=?";
+            $sql = "UPDATE " . $this->lireNomTable() . " SET " . $champ . "=? WHERE " . $this->lireClePrimaire() . "=?";
             $donnees = array($valeur, $id);
             return $this->requete($sql, $donnees);
         }
@@ -88,7 +88,7 @@
 		 */
 		final protected function lireClePrimaire() {
 			// Copyright Salim Bourihane
-			$sql = "SHOW columns FROM " . $this->checherNomTable();
+			$sql = "SHOW columns FROM " . $this->lireNomTable();
 			$colonnes = $this->requete($sql);
 			foreach ($colonnes as $champ) {
 				if ($champ["Key"]=="PRI") {
@@ -100,7 +100,7 @@
 		/**
 		 * @brief     Méthode abstraite pour déclarer le nom de la table dans le modèle enfant.
 		 */
-		abstract function checherNomTable();
+		abstract function lireNomTable();
 
 	}
 ?>
