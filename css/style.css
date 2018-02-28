@@ -442,8 +442,8 @@ label {
   }
   
 #v-pills-tab {
-    background: rgb(29, 145, 188);
-    background: linear-gradient(to right, rgb(29, 145, 188), rgb(22, 90, 115));
+    /*background: rgb(29, 145, 188);*/
+    background: linear-gradient(to right, rgb(23, 99, 128), rgba(11, 42, 52, 0.99));
     border-radius: 5px;
     font-size: 0.7rem;
   }
@@ -479,6 +479,7 @@ label {
     background: rgb(250, 251, 246);
     padding: 20px 20px 140px 20px;
     border-style: solid;
+    border-width: 1px;
     border-color: #dee2e6;
   }
   
@@ -488,6 +489,7 @@ label {
   
   .display {
     border-style: solid;
+    border-width: 1px;  
     border-color: #dee2e6;
     border-radius: 4px;
   }  

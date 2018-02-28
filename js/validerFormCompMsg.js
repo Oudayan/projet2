@@ -14,15 +14,15 @@ function validaterFormMsg(){
         
         //selection destinataire
 		if(destinataire == null || destinataire == 0){
-			erreur += 'ERROR: Vous devez entrer au moins un destinataire.<br>';
+			erreur += 'ERROR: Vous devez entrer au moins un destinataire.';
 		}
  
 		//champ obligatoire
 		if(sujet == null || sujet.length == 0 || /^\s+$/.test(sujet)){
-			erreur += 'ERROR: Vous devez saisir un sujet.<br>';
+			erreur += 'ERROR: Vous devez saisir un sujet.';
 		}
         if (textMessage == null || textMessage.length == 0 || /^\s+$/.test(textMessage)){
-          erreur += "Voudriez vous envoyer le courriel sans messsage?<br>";
+          erreur += "Voudriez vous envoyer le courriel sans messsage?";
         }
         
         if (erreur == ""){
@@ -30,9 +30,9 @@ function validaterFormMsg(){
         }
         else{
            alert(erreur); 
-        }
-       
-}    
+        }  
+}  
+
 function validerExtension() { 
     var fichierJoint = $("#fichierJoint").val();
     
