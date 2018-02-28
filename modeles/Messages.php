@@ -17,16 +17,19 @@
 		private $fichier_joint;
 		private $message;
 		private $msg_date;
+        private $m_actif;
 		private $expediteur;
 		
 
-		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $expediteur = "" )
+		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "",m_actif= "", $expediteur = "" )
 		{
 			$this->ecrireId_message($id_message);
 			$this->ecrireId_reference($id_reference);
 			$this->ecrireSujet($sujet);
 			$this->ecrireFichier_joint($fichier_joint);
 			$this->ecrireMessage($message);
+            $this->ecrire$msg_date($msg_date);
+            $this->ecrire$m_actif(m_actif);
 			$this->ecrireExpediteur($expediteur);
 			
 		}
@@ -61,7 +64,17 @@
                 $this->message = $message;
             }			
 		}
-
+        public function ecrireMsg_date($msg_date) {
+            if (is_string($msg_date) && trim($msg_date) != "") {
+                $this->msg_date = $msg_date;
+            }			
+		}
+        public function ecrireM_actif($m_actif) {
+            if (is_string($m_actif) && trim($m_actif) != "") {
+                $this->m_actif = $m_actif;
+            }			
+		}
+        
 		public function ecrireExpediteur($expediteur) {
             if (is_string($expediteur) && trim($expediteur) != "") {
                 $this->expediteur = $expediteur;
@@ -90,7 +103,13 @@
 		public function lireMessage(){
             return $this->message;
 		}
-
+        public function lireMsg_date(){
+            return $this->msg_date;
+		}
+        public function lireM_actif(){
+            return $this->m_actif;
+		}
+        
 		public function lireExpediteur(){
             return $this->expediteur;
 		}

@@ -12,13 +12,13 @@
 	class MessagesDestinataires extends Messages{
 		private $destinataire;
 		private $lu;
-		private $actif;
+		private $d_actif;
 
-		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $expediteur = "" $destinataire = "",  $lu = NULL, $actif = NULL )
+		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $m_actif= "", $expediteur = "", $destinataire = "",  $lu = NULL, $d_actif = NULL )
 		{
 			$this->ecrireDestinataire($destinataire);
 			$this->ecrireLu($lu);
-			$this->ecrireActif($actif);
+			$this->ecrireD_actif($d_actif);
 		}
 		
         // "SETTERS"
@@ -35,9 +35,9 @@
             }			
 		}
 
-		public function ecrireActif($actif){
-            if (is_bool($actif) && trim($actif) != "") {
-                $this->actif = $actif;
+		public function ecrireD_actif($d_actif){
+            if (is_bool($d_actif) && trim($d_actif) != "") {
+                $this->d_actif = $d_actif;
             }			
 		}
 	
@@ -53,8 +53,8 @@
             return $this->lu;
 		}
 
-		public function lireActif(){
-            return $this->actif;
+		public function lireD_actif(){
+            return $this->d_actif;
 		}
 		
 	} //fin de la class

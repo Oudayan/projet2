@@ -35,21 +35,30 @@
 						// aller chercher les messages recues
                       
                     
-                    case "messagesRecus":  
-                        $modeleMessagesDestinataires = $this->getDao("MessagesDestinataires");
-                        $recus = $modeleMessagesDestinataires->obtenir_par_expediteur($_SESSION["courriel"])
-                               
+                    case "messagesRecus":
+                        
+                        $modeleMessagesDestinataires = $this->lireDao("MessagesDestinataires");
+                        $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
+                        //var_dump($recus);
+                                //die();
 							$donnees = array();
-                            for ($i=0; $i< count($recus);$i++){
+                            for ($i=0; $i< count($recus); $i++){
                                 $donnees[$i]=array();
-                                $donnees[$i][0]=this->lireDestinataire();
-                                $donnees[$i][1]=this->lireId_message();
-                                $donnees[$i][2]=this->lireId_reference();
-                                $donnees[$i][3]=this->lireSujet();
-                                $donnees[$i][4]=this->lireFichier_joint();
-                                $donnees[$i][4]=this->lireLu();   
-                                $donnees[$i][5]=this->lireExpediteur();
+                                $donnees[$i][0]= $this->lireDestinataire();
+                                $donnees[$i][1]=lireId_message();
+                                $donnees[$i][2]=lireLu(); 
+                                $donnees[$i][3]=lireD_actif();
+                                $donnees[$i][4]=lireId_message();
+                                $donnees[$i][5]=lireId_reference();
+                                $donnees[$i][6]=lireSujet();
+                                $donnees[$i][7]=lireFichier_joint();
+                                $donnees[$i][8]=lireMessage();
+                                $donnees[$i][9]=lireMsg_date();
+                                $donnees[$i][10]=lireExpediteur();
+                                $donnees[$i][11]=lireM_actif();
                         	}  
+                              //var_dump($donnees);
+                               // die();
 							echo json_encode($donnees);
 							return;					                                                 //contient la liste des messages recus
 							break;  
@@ -64,11 +73,14 @@
 					*/	
 				}                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
-			else
+			/*
+            else
 			{
 				//var_dump("No");
 				$this->afficherVues("messagerie"); 													//action par defaut- affiche la page d'accueil de la messagerie
-			}                                                                                       // fin du else du param action	
+			}
+            */
+            // fin du else du param action	
 		}                                                                                           //fin de la fonction index
 		
 		

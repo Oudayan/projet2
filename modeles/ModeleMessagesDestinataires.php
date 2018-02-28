@@ -21,19 +21,19 @@
 		*/
 		public function lireNomTable()
 		{
-			return "al_destinataires";
+			return "al_destinataire";
 		}
 		
         
-        SELECT al_destinataire.destinataire, al_destinataire.lu, al_destinataire.id_message, al_messagerie.id_reference, al_messagerie.sujet, al_messagerie.fichier_joint, al_messagerie.message, al_messagerie.msg_date, al_messagerie.expediteur
+        /**
         
          SELECT *   
         FROM al_destinataire
         JOIN al_messagerie 
         ON al_destinataire.id_message = al_messagerie.id_message
-        WHERE destinataire = "missde0404@gmail.com" AND actif = true
+        WHERE destinataire = "missde0404@gmail.com" AND d_actif = true
         ORDER BY  al_messagerie.msg_date DESC;
-        
+        **/
         
         /**
 		* @brief Pour aller chercher les messages pour un utilisateur qui est logger
@@ -43,20 +43,22 @@
 		* @return array donnees.
 		*/
         
-        public function messageRecu($destinataire)
+        public function messagesRecus($destinataire)
+        {
         $sql = "SELECT *
         
         FROM " . $this->lireNomTable() .
         " JOIN al_messagerie  
-        ON " . $this->checherNomTable() .".id_message = al_messagerie.id_message 
-        WHERE destinataire =? 
-        AND m_actif =true 
+        ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
+        WHERE destinataire = ? 
+        AND d_actif = true 
         ORDER BY al_messagerie.msg_date DESC";
         
-        $resultat = $this->requete($sql);
-		return $this->requete($sql, $donnees);
+        return $resultat = $this->requete($sql);
+		 
+            //$this->requete($sql, $donnees);
           
-        
+        }
         
         
         
@@ -72,6 +74,7 @@
 		* @param point2 resultat
 		* @return array unMessage.
 		*/
+        /**
 		public function obtenir_par_destinataires($expediteur)
 		{
 			$resultat = $this->lire($expediteur, "expediteur");//reference BaseDAO
@@ -88,7 +91,8 @@
 		* @details Permet d'obtenir les informations de tous les messages d'un expediteur.
 		* @param point1 resultat
 		* @return array desMessages.
-		*/																	
+		*/
+        /**
 		public function obtenir_tous()
 		{
 			$resultat = $this->lireTous();  //reference BaseDAO
@@ -104,7 +108,8 @@
 		* @param point1 nom
 		* @return array unUsager.
 		*/
-		public function obtenir_par_nom($nom)
+		/**
+        public function obtenir_par_nom($nom)
 		{
 			$resultat = $this->lire($nom);
 			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Messages'); 
@@ -125,7 +130,8 @@
 		* @param point7 courriel
 		* @return aucun.
 		*/
-		public function sauvegarde(Usagers $unUsager)
+		/**
+        public function sauvegarde(Usagers $unUsager)
 		{
 
 		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
@@ -141,6 +147,7 @@
 			else
 			{ */
 				//insert
+        /**
 				var_dump($unMessage);
 				$sql = "INSERT INTO " . $this->checherNomTable() . "(sujet, fichier_joint, message, msg_date, courriel,) VALUES (?, ?, ?, ?, ?)";
 				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
@@ -150,7 +157,7 @@
 
 				return $this->requete($sql, $donnees);
 			/*}*/
-		}
+	} //fin de la class ModeleMessagesDestinataires 
 		
-	}
+	
 ?>

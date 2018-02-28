@@ -102,7 +102,8 @@
 		* @param point7 courriel
 		* @return aucun.
 		*/
-		public function sauvegarde(Usagers $unUsager)
+		/**
+        public function sauvegarde(Usagers $unUsager)
 		{
 
 		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
@@ -118,24 +119,23 @@
 			else
 			{ */
 				//insert
-<<<<<<< HEAD
-				var_dump($unMessage);
+/**
+				//var_dump($unMessage);
 				$query = "INSERT INTO " . $this->checherNomTable() . "(sujet, fichier_joint, message, msg_date, courriel,) VALUES (?, ?, ?, ?, ?)";
 				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
 				$unMessage->lireMsg_date(),$unMessage->lireCourriel(),
 				$unMessage->lireContact(),$unMessage->lireTypeUsager(),	$unMessage->lireTypePaiement()
-=======
-				var_dump($unUsager);
+
+				//var_dump($unUsager);
 				$query = "INSERT INTO " . $this->lireNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
 				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
 				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
->>>>>>> b697d25cc216ed083648ab2a7207bd4fb6355a9b
+
 				);
 
 				return $this->requete($query, $donnees);
 			/*}*/
-		}
+		} //fin de la classe
 		
-	}
 ?>

@@ -24,13 +24,15 @@
 			return "al_destinataire";
 		}
 		
+        
+        /*
          /**
 		* @brief Pour aller chercher tous ls messages d'un usager qui est logger 
 		* @details Permet d'aller chercher les renseignements relatif aux messages pour l'usager qui est logger.
 		* @param point1 destinataire
 		* @return array resultat.
 		*/
-		public function obtenir_par_destinataire($destinataire)
+		/**public function obtenir_par_destinataire($destinataire)
 		{
 			$sql = "SELECT * FROM " . $this->chercherNomTable();
 			$resultat = $this->requete($sql);
@@ -45,7 +47,7 @@
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
     	}
         
-        
+        */
         
         
         
