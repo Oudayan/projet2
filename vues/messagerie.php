@@ -57,7 +57,7 @@
              <span class="input-group-text small">Fichier joint</span>
            </div>
            <div class="custom-file">
-             <input type="file" class="custom-file-input" id="fichierJoint" >
+             <input type="file" class="custom-file-input" id="fichierJoint" name="fichierJoint">
              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
            </div>
           </div>
