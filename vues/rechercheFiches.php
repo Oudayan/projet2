@@ -60,7 +60,7 @@
                                         } ?>
                                         </div>
                                         <div class="col-sm-6 text-center text-sm-left my-3">
-                                            Prix&nbsp;:&nbsp;<br><span class="prix mt-3"><strong><?= $logement->lirePrix(); ?>&nbsp;$</strong></span>
+                                            Prix&nbsp;:&nbsp;<br><span class="prix mt-3"><strong><?= $logement->lirePrix(); ?>&nbsp;$</strong></span><small> par&nbsp;nuit</small>
                                         </div>
                                         <div class="col-sm-6 text-center text-sm-right my-3">
                                             Évaluation&nbsp;:&nbsp;<?= round($logement->lireEvaluation(), 2); ?>&nbsp;/&nbsp;5
