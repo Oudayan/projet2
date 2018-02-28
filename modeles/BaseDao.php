@@ -100,7 +100,7 @@
 		/**
 		 * @brief     Méthode abstraite pour déclarer le nom de la table dans le modèle enfant.
 		 */
-		abstract function checherNomTable();
+		abstract function lireNomTable();
 
 	}
 ?>
