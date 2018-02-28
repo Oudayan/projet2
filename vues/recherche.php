@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
-                        <label for="region">Point de départ&nbsp;:</label>
+                        <label for="adresseDepart">Point de départ&nbsp;:</label>
                         <a class="btn btn-sm btn-orange mb-2" onclick="geoLocalisation()"><i class="fa fa-globe"></i> Ma position</a>
                     </div>
                     <input type="text" id="adresseDepart" name="adresseDepart" class="form-control" placeholder="Entrer une adresse" value="<?= $_SESSION["recherche"]["adresseDepart"] ?>">
