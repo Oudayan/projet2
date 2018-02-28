@@ -22,8 +22,11 @@
 		private $id_contact;
 		private $id_type_usager;
 		private $id_paiement;
+		private $u_valide;
+		private $u_actif;
 
-		public function __construct($courriel = "", $nom = "", $prenom = "", $cellulaire = "", $mot_de_passe = "", $u_banni = 0, $u_commentaire_banni = "", $u_date_banni = "", $id_contact = 0, $id_type_usager = 2, $id_paiement=0 )
+
+		public function __construct($courriel = "", $nom = "", $prenom = "", $cellulaire = "", $mot_de_passe = "", $u_banni = 0, $u_commentaire_banni = "", $u_date_banni = "", $id_contact = 0, $id_type_usager = 2, $id_paiement=0, $u_valide=false, $u_actif=true )
 		{
 			$this->ecrireCourriel($courriel);
 			$this->ecrireNom($nom);
@@ -36,6 +39,8 @@
 			$this->ecrireContact($id_contact);
 			$this->ecrireTypeUsager($id_type_usager);
 			$this->ecrireTypePaiement($id_paiement);
+			$this->ecrireUValide($u_valide);
+			$this->ecrireUActif($u_actif);
 		}
 		
         // "SETTERS"
@@ -102,7 +107,20 @@
             if (is_numeric($id_paiement) && trim($id_paiement) != "") {
                 $this->id_paiement = $id_paiement;
             }			
-		}	
+		}
+
+		public function ecrireUValide($u_valide){
+			if (is_bool($u_valide)){
+				$this->u_valide = $u_valide;
+			}
+		}
+
+		public function ecrireUActif($u_actif){
+			if (is_bool($u_actif)){
+				$this->u_actif = $u_actif;
+			}
+
+		}
 		
 		// "GETTERS"				
 		public function lireCourriel() {
@@ -147,8 +165,16 @@
 
 		public function lireTypePaiement(){
                 return $this->id_paiement;
-		}	
+		}
+
+		public function lireUValide(){
+				return $this->u_valide;
+		}
 		
+		public function lireUActif(){
+			return $this->u_actif;
+		}
+
 		//public function 
 	}
 

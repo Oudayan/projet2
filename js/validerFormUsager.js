@@ -1,7 +1,8 @@
 /*
-* Fichier: formulairejstr.js
+* Fichier: valideFormUsager.js
 * fonction validateForm
-* Auteurs: Denise Ratté - Jorge Subirats 
+* Autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
+* Date 21 février 2018
 */
 
 /*
@@ -14,41 +15,23 @@
 var typepaiement = null;
 // console.log(typepaiement);
 
-function validateForm() {       // Validation quand on fait le submit
+function validateForm() {    
 	cleanErreurs();
-	err = 0 ; 					// Variable pour compter le nombre d'erreurs 
-	err = estPrenom();			// Validation pour le prénom
-	err = estNom();				// Validation pour le nom 
-	err = estPseudo();			// Validation pour le pseudo 
-	err = estMotDePasse();		// Validation pour le mot de passe 
-	err = estConfMotPasse();	// Validation pour la confirmation du mot de passe 
-	err = estAdresse();			// Validation pour l'adresse 
-	err = estVille();			// Validation pour la la ville
-	err = estTelephone(); 		//Numero de telephone
-	err = estCodePostal();		// Validation pour le code postal 
-	err = estCourriel();		// Validation pour l'adresse courriel
-	err = estDateNaissance();	// Validation pour la date de naissance
-	err = estNas();				// Validation pour le numéro d'assurance sociale 
-	if (typepaiement) {
-		if (typepaiement == "Cheque"){
-			err = estBanque(); 		// Paiement par cheque: Banque
-			err = estNumCheque(); 	// Paiement par cheque: numero de cheque
-		}
-		else {
-			err = estCarte();
-			err = estCarteCredit(); 	//carte de credit: numero de carte
-			err = estDateExpiration();  //carte de credit: date d'expiration
-		}
-	}
-	else
-		err = 1;
-	console.log(typepaiement);
-	if (err != 0) {  // Si la variable est differente de 0, il y aura erreur
-		return false
+	err = 0 ; 					
+	err = estCourriel();			
+	err = estMotdePasse();				
+	err = estConfirmaMotdePasse();			
+	err = estNom();		
+	err = estPreNom();	
+	err = estCellulaire();	
+	if (err != 0) { 
+        console.log(err);
+		alert ("Le formulaire est invalide");
+		return false;
 	}
 	else {
 		cleanErreurs();
-		alert ("Le formulaire est valide") 
+		return true;
 	}
 }
 
@@ -61,8 +44,8 @@ function validateForm() {       // Validation quand on fait le submit
 
 function cleanErreurs()  {  
 	document.getElementById("errCourriel").style.visibility="hidden";
-	document.getElementById("errMotDePasse").style.visibility="hidden";
-	document.getElementById("errConfMotPasse").style.visibility="hidden";
+	document.getElementById("errMot_de_passe").style.visibility="hidden";
+	document.getElementById("errConfirmaMotdePasse").style.visibility="hidden";
 	document.getElementById("errNom").style.visibility="hidden";
 	document.getElementById("errPrenom").style.visibility="hidden";
 	document.getElementById("errCellulaire").style.visibility="hidden";
