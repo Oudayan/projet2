@@ -21,11 +21,8 @@
         <link rel="stylesheet" href="css/richtext.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/jquery.richtext.js"></script>
-        
-        <!--<script src="https://cdn.jsdelivr.net/npm/gijgo@1.8.1/combined/js/gijgo.min.js" type="text/javascript"></script>
-        <link href="https://cdn.jsdelivr.net/npm/gijgo@1.8.1/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />-->
-      
-        <script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	        <script>
             /*$(document).ready(function(){
                 $("#myBtn").click(function(){
                     $("#myModal").modal();
@@ -98,15 +95,12 @@
                     </div><!-- ml-auto -->
 				   <?php }
 					else { ?>
-<<<<<<< HEAD
-					<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
-						<a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>
+
+
 						<a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
-=======
 					<div>
-                      <a href="index.php?Usagers&action=nouvelMessage"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
-                      <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
->>>>>>> 8734ae64959fd0c7512bf41c7c0b76bba62bda62
+                      <a href="index.php?Usagers&action=nouvelMessage"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["prenom"];?></a>
+                      <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>
 					</div>
 					<?php } ?>					
 					

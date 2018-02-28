@@ -14,7 +14,7 @@
 	{		
 		public function index(array $params)
 		{
-			
+			//var_dump ($params);
 			//si le paramètre action existe
 			if(isset($params["action"]) )
 			{	
@@ -76,6 +76,16 @@
 						case "Modifier" :
 						    var_dump("Modify");
 							break;
+						case "formAjoutLogement" :
+					if (isset($_SESSION["courriel"])) {
+								$modeleTypeLogement = $this->lireDAO("TypeLogement");
+								$donnees["TypeLogements"]=$modeleTypeLogement->lireTousTypeLogements();
+								$this->affichervues("ajoutLogement", $donnees);				//action par défaut - afficher la liste des sujets
+								}
+							else {
+								$_SESSION["warning"]= "Vous devez vous authentifier pour accès à enregistrer un logement";
+								header("Location: index.php"); }
+							break;
 						case "ajoutpresenta" :
 						
 								$json = array();
@@ -88,6 +98,7 @@
 								echo json_encode($json);
 								return;
 							break;
+							
 						default:
 							// $this->afficheListeSujets();
 							trigger_error($params["action"] . " Action invalide.");		
@@ -95,8 +106,8 @@
 			} // if 
 			else
 			{
-																								
-				$this->affichevue("ajoutLogement");														//action par défaut - afficher la liste des sujets
+				
+				header("Location: index.php");
 			}
 		}
 		/**

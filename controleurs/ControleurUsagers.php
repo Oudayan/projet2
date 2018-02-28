@@ -121,7 +121,7 @@
 					
 					
 					case "enregistrerUsager" :														//va chercher un usager pour permettre la modification
-						var_dump($params);
+						//var_dump($params);
 						//die();
 						if(!isset($params["courriel"]) || !isset($params["nom"]) || !isset($params["prenom"]))
 						{	
@@ -131,9 +131,10 @@
 						else
 						{
 								$modeleUsagers = $this->lireDAO("Usagers");                                  
-								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],3,$params["id_paiement"]);
+								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],3,$params["id_paiement"],false,true);
 								$succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
-								$this->afficheListeUsagers();
+								$_SESSION["succes"]= "Votre compte a été crée, merci de attendre un confirmation dans votre courriel avate de s'authentifier ! ";
+								header("Location: index.php");
 						}
 						break;
 					case "Logout":																	//va chercher un usager pour permettre la modification

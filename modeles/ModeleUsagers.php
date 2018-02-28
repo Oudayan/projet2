@@ -91,11 +91,12 @@
 			else
 			{ */
 				//insert
-				var_dump($unUsager);
-				$query = "INSERT INTO " . $this->checherNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				//var_dump($unUsager);
+				$query = "INSERT INTO " . $this->checherNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement, u_valide, u_actif) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
 				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
-				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
+				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement(), 
+				$unUsager->lireUValide(), $unUsager->lireUActif()
 				);
 
 				return $this->requete($query, $donnees);
