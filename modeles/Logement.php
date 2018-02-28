@@ -31,6 +31,7 @@
 		private $nb_lits;
 		private $nb_salle_de_bain;
 		private $nb_demi_salle_de_bain;
+		private $frais_nettoyage;
 		private $est_staionnement;
 		private $est_wifi;
 		private $est_cuisine;
@@ -49,7 +50,7 @@
 		private $l_commentaire_banni;
 
         // Constructeur
-		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
+		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $frais_nettoyage = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
             $this->ecrireIdLogement($id_logement);
             $this->ecrireNoCivique($no_civique);
             $this->ecrireApt($apt);		
@@ -71,6 +72,7 @@
             $this->ecrireNbLits($nb_lits);
             $this->ecrireNbSalleDeBain($nb_salle_de_bain);
             $this->ecrireNbDemiSalleDeBain($nb_demi_salle_de_bain);
+            $this->ecrireFraisNettoyage($frais_nettoyage);
             $this->ecrireEstStaionnement($est_staionnement);
             $this->ecrireEstWifi($est_wifi);
             $this->ecrireEstCuisine($est_cuisine);
@@ -214,6 +216,12 @@
         public function ecrireNbDemiSalleDeBain($nb_demi_salle_de_bain) {
             if (is_numeric($nb_demi_salle_de_bain) && trim($nb_demi_salle_de_bain) != "") {
                 $this->nb_demi_salle_de_bain = $nb_demi_salle_de_bain;
+            }
+        }
+        // Écrire frais_nettoyage
+        public function ecrireFraisNettoyage($frais_nettoyage) {
+            if (is_numeric($frais_nettoyage) && trim($frais_nettoyage) != "") {
+                $this->frais_nettoyage = $frais_nettoyage;
             }
         }
         // Écrire est_staionnement
@@ -397,6 +405,10 @@
         // Lire nb_demi_salle_de_bain
         public function lireNbDemiSalleDeBain() {
             return $this->nb_demi_salle_de_bain;
+        }
+        // Lire frais_nettoyage
+        public function lireFraisNettoyage() {
+            return $this->frais_nettoyage;
         }
         // Lire est_staionnement
         public function lireEstStaionnement() {
