@@ -20,7 +20,6 @@
 		<?php $courriel = $_SESSION["courriel"];
 		   $evaluation = null ?>
 		<div class="container">
-		<input id='courriel' type="hidden" name="country" value=<?= $courriel?>>
 		<form id="form_ajoute" onsubmit="return validateForm()" action="index.php?Presenta&action=ajoutlogement" method="post">
 		<h3>Ajouter un logement</h3>
         <div class="form-group row">
@@ -224,18 +223,18 @@
 						<div id="filediv">
 							<label class="btn btn-primary">
 								<i class="fa fa-upload"></i> Des photos ... 
-								<input id="multiplesPhotos" name="files[]" type="file" multiple="" accept="image/*" onchange="prePhotos(this)" style="display:none;"/>
+								<input id="multiplesPhotos" name="files[]" type="file" multiple="" onchange="prePhotos(this)" style="display:none;"/>
 							</label>
 						</div>
 					</div>
 				</div>
 			</div>
 			<hr>
-			<!-- <legend>Photos Section 1</legend> -->
+			<legend>Photos Section 1</legend>
 			<div class="row justify-content-md-center">
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 1 
+						<i class="fa fa-file-image-o"></i> Photo 
 						<input type="file" name="image0" accept="image/*" onchange="readURL(this);" id="0" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash0" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -245,7 +244,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 2
+						<i class="fa fa-file-image-o"></i> Photo 
 						<input type="file" name="image1" accept="image/*" onchange="readURL(this);" id="1" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash1" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -255,7 +254,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 3
+						<i class="fa fa-file-image-o"></i> Photo 
 						<input type="file" name="image2" accept="image/*" onchange="readURL(this);" id="2" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash2" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -265,7 +264,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 4
+						<i class="fa fa-file-image-o"></i> Photo 
 						<input type="file" name="image3" accept="image/*" onchange="readURL(this);" id="3" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash3" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -275,11 +274,11 @@
 				</div>
 			</div>
 			<hr>
-			<!-- <legend>Photos Section 2</legend> -->
+			<legend>Photos Section 2</legend>
 			<div class="row justify-content-md-center">			
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 5
+						<i class="fa fa-file-image-o"></i> Photo 
 						<input type="file" name="image4" accept="image/*" onchange="readURL(this);" id="4" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash4" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -289,7 +288,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 6				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image5" accept="image/*" onchange="readURL(this);" id="5" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash5" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -299,7 +298,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 7				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image6" accept="image/*" onchange="readURL(this);" id="6" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash6" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -309,7 +308,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 8				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image7" accept="image/*" onchange="readURL(this);" id="7" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash7" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -319,11 +318,11 @@
 				</div>
 			</div>
 			<hr>
-			<!-- <legend>Photos Section 3</legend> -->
+			<legend>Photos Section 3</legend>
 			<div class="row justify-content-md-center">				
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 9				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image8" accept="image/*" onchange="readURL(this);" id="8" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash8" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -333,7 +332,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 10			
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image9" accept="image/*" onchange="readURL(this);" id="9" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash9" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -343,7 +342,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 11				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image10" accept="image/*" onchange="readURL(this);" id="10" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash10" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -353,7 +352,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 12				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image11" accept="image/*" onchange="readURL(this);" id="11" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash11" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -363,11 +362,11 @@
 				</div>
 			</div>
 			<hr>
-			<!-- <legend>Photos Section 4</legend> -->
+			<legend>Photos Section 4</legend>
 			<div class="row justify-content-md-center">
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 13
+						<i class="fa fa-file-image-o"></i> Photo 
 						<input type="file" name="image12" accept="image/*" onchange="readURL(this);" id="12" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash12" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -377,7 +376,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 14				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image13" accept="image/*" onchange="readURL(this);" id="13" id="fileToUpload" style="display:none;"/>
 					</label>
 					<button id="trash13" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -387,7 +386,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 15				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image14" accept="image/*" onchange="readURL(this);" id="14" id="fileToUpload" style="display:none;"/>
 					</label>
 					<button id="trash14" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -397,7 +396,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 16				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image15" accept="image/*" onchange="readURL(this);" id="15" id="fileToUpload" style="display:none;"/>
 					</label>
 					<button id="trash15" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -407,11 +406,11 @@
 				</div>
 			</div>
 			<hr>
-			<!-- <legend>Photos Section 5</legend> -->
+			<legend>Photos Section 5</legend>
 			<div class="row justify-content-md-center">
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 17				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image16" accept="image/*" onchange="readURL(this);" id="16" id="fileToUpload" style="display:none;"/>
 					</label>
 					<button id="trash16" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -421,7 +420,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 18				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image17" accept="image/*" onchange="readURL(this);" id="17" id="fileToUpload" style="display:none;"/>
 					</label>
 					<button id="trash17" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -431,7 +430,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 19				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image18" accept="image/*" onchange="readURL(this);" id="18" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash18" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -441,7 +440,7 @@
 				</div>
 				<div class="col-lg-3 col-md-auto">
 					<label class="btn btn-success">
-						<i class="fa fa-file-image-o"></i> Photo 20				
+						<i class="fa fa-file-image-o"></i> Photo 				
 						<input type="file" name="image19" accept="image/*" onchange="readURL(this);" id="19" id="fileToUpload" style="display:none;" />
 					</label>
 					<button id="trash19" type="button" class="btn" style="display:none" onclick="removePhoto(id)">
@@ -460,7 +459,8 @@
 </main>
 
 <script>
-
+	$
+	$
 	function readURL(input) {
 		console.log(input.id);
 		// for(i=0;i<20;i++){
@@ -497,37 +497,29 @@
 		if (input.files.length >= 20) {
 			alert ("Votre choix a dépassé la limite, jusqu'a 20 Photos" )
 		}
-		formData = new FormData();
-		
-		 for (i=0;i<input.files.length;i++){
-			formData.append('files[]',input.files[i]);
-		}
 		files = input.files;
 		console.log(files);
 		if (input.files.length > 0){
 				$('#monConteneur').hide();
 			}
-			$.ajax({
+			console.log(input.files[0]);
+			mesDonnees = JSON.stringify(input.files[0].name);
+			console.log(mesDonnees);
+	/*		$.ajax({
 				url: "vues/upload.php",
 				type: "POST",
-				data: formData,
-				processData: false,
-				contentType: false,
+				data: {input:files},
 				success: function (res) {
-					// document.getElementById("response").innerHTML = res;
+					//document.getElementById("response").innerHTML = res;
 					alert(res);
 				},
 				error: function(){
 					alert('Erreur');
 				}
-			});
-		courriel = document.getElementById('courriel').value;
-		console.log(courriel);
+			});*/
 		for(i=0;i<input.files.length;i++){
-			file = 'images/'+courriel+'/' + input.files[i].name;
-			console.log(file);
 			 $("#photo"+i).show()
-				.attr('src','images/'+courriel+'/' + input.files[i].name); 
+				.attr('src','images/Logements/9/' + input.files[i].name); 
 			$("#trash"+i).show();
 		}
 	}
