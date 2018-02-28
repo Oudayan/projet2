@@ -1,3 +1,7 @@
 /nbproject/private/
 .DS_Store
+.nbproject/project.properties
 config.php
+
+// Clearer la cache après un changement de goit ignore.
+git rm -r --cached .
