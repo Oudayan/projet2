@@ -221,6 +221,19 @@ CREATE TABLE al_destinataire(
 )ENGINE=InnoDB;
 
 
+#------------------------------------------------------------
+# Table: al_options
+#------------------------------------------------------------
+
+CREATE TABLE al_options(
+    id_option       Int (11) Auto_increment NOT NULL, 
+    nom_option      Varchar (255) NOT NULL, 
+    valeurs_option  Varchar (5000) NOT NULL, 
+    PRIMARY KEY (id_option)
+)ENGINE=InnoDB;
+
+
+-- --------------------------------------------------------
 
 ALTER TABLE al_disponibilite ADD CONSTRAINT FK_al_disponibilite_id_logement FOREIGN KEY (id_logement) REFERENCES al_logements(id_logement);
 ALTER TABLE al_logements ADD CONSTRAINT FK_al_logements_courriel FOREIGN KEY (courriel) REFERENCES al_usager(courriel);
@@ -239,7 +252,7 @@ ALTER TABLE al_messagerie ADD CONSTRAINT FK_al_messagerie_expediteur FOREIGN KEY
 ALTER TABLE al_destinataire ADD CONSTRAINT FK_destinataire_destinataire FOREIGN KEY (destinataire) REFERENCES al_usager(courriel);
 ALTER TABLE al_destinataire ADD CONSTRAINT FK_destinataire_id_message FOREIGN KEY (id_message) REFERENCES al_messagerie(id_message);
 
-
+-- --------------------------------------------------------
 
 
 -- 
@@ -364,6 +377,8 @@ INSERT INTO `al_pieces` (`id_piece`, `description_piece`) VALUES
 (25, "Vestibule"), 
 (26, "Vue extérieure"),
 (0, "Autre");
+
+-- --------------------------------------------------------
 
 
 -- 
@@ -594,7 +609,6 @@ INSERT INTO `al_messagerie` (`id_message`, `id_reference`, `sujet`, `fichier_joi
 -- 
 
 INSERT INTO `al_destinataire` (`destinataire`, `id_message`, `lu`, `actif`) VALUES
-
 ('jonathanmartel@gmail.com', 1, false, true), 
 ('faycalabouzaid@gmail.com', 2, false, true), 
 ('gabrielzoraidag@gmail.com', 3, false, true), 
@@ -623,5 +637,15 @@ INSERT INTO `al_destinataire` (`destinataire`, `id_message`, `lu`, `actif`) VALU
 ('oudayan@gmail.com', 24, false, true), 
 ('chucknorris@gmail.com', 23, false, true);
 
+-- --------------------------------------------------------
+
+
+-- 
+-- Insertion des données de la table `al_destinataire`
+-- 
+
+INSERT INTO `al_options` (`id_option`, `nom_option`, `valeurs_option`) VALUES
+(1, 'forumlaire_recherche', '{"affichage":"carte","tri":"evaluation","asc":"DESC","region":"6","latitude":"45.57"},"longitude":"-73.57","rayon":"20","zoom":"11","prixMin":"0","prixMax":"1000000", "evaluation":"0"}')
 
 -- --------------------------------------------------------
+

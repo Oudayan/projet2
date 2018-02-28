@@ -18,7 +18,7 @@
     <body>
         <header class="container-fluid"> 
             <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse text-white row">
-                <div class="container px-5 px-sm-0">
+                <div class="container px-5 px-sm-0 d-flex no-wrap justify-content-around">
                     <a href="index.php?Recherche&action=accueil" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:60%"></a>
 						<?php if (isset($_SESSION["succes"])) {?>
 						<div class="alert alert-success" role="alert">

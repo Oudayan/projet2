@@ -164,7 +164,7 @@
                         $icones = ["images/red-dot.png", "images/orange-dot.png", "images/yellow-dot.png", "images/purple-dot.png", "images/blue-dot.png", "images/green-dot.png"]
                         ?>
                         <div class="row>">
-                            <input class="form-check-input col-1 offset-1" type="checkbox" value="<?= $typesLogements->lireIdTypeLogement() ?>" id="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" name="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" <?= $_SESSION["recherche"]["typeLogement" . $typesLogements->lireIdTypeLogement()] ?>>
+                            <input class="form-check-input col-1 offset-1" type="checkbox" value="<?= $typesLogements->lireIdTypeLogement() ?>" id="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" name="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>" <?= $_SESSION["recherche"]["typeLogement" . $typesLogements->lireIdTypeLogement()]; ?>>
                             <label class="form-check-label col-9" for="typeLogement<?= $typesLogements->lireIdTypeLogement() ?>"><?= $typesLogements->lireTypeLogement() ?></label>
                             <span class="legende col-1"><img src="<?= $icones[($typesLogements->lireIdTypeLogement() - 1)] ?>"></span>
                         </div>
@@ -282,7 +282,8 @@
                 ],
                 "firstDay": 1
             },
-            "minDate": new Date(), 
+            <?= (isset($_SESSION['disponibilite']['dateDebut']) ? '"minDate": "' . $_SESSION['disponibilite']['dateDebut'] . '", ' : '"minDate": new Date(), ') ?>
+            <?= (isset($_SESSION['disponibilite']['dateFin']) ? '"minDate": "' . $_SESSION['disponibilite']['dateFin'] . '", ' : '') ?>
             <?= (isset($_SESSION['recherche']['debutLocation']) ? '"startDate": "' . $_SESSION['recherche']['debutLocation'] . '", ' : '') ?>
             <?= (isset($_SESSION['recherche']['finLocation']) ? '"endDate": "' . $_SESSION['recherche']['finLocation'] . '", ' : '') ?>
             "applyClass": "btn-orange"
