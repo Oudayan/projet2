@@ -54,6 +54,7 @@ CREATE TABLE al_logements (
     nb_lits               TinyInt, 
     nb_salle_de_bain      TinyINT, 
     nb_demi_salle_de_bain TinyINT, 
+    frais_nettoyage       Decimal (15,2),
     est_stationnement     Bool, 
     est_wifi              Bool, 
     est_cuisine           Bool, 
@@ -203,6 +204,7 @@ CREATE TABLE al_messagerie (
     message       Text NOT NULL, 
     msg_date      Datetime NOT NULL, 
     expediteur    Varchar (25) NOT NULL, 
+    m_actif       Bool, 
     PRIMARY KEY (id_message), 
     INDEX (id_reference, msg_date)
 )ENGINE=InnoDB;
@@ -216,7 +218,7 @@ CREATE TABLE al_destinataire(
     destinataire    Varchar (25) NOT NULL, 
     id_message      Int (11) NOT NULL, 
     lu              Bool, 
-    actif           Bool, 
+    d_actif         Bool, 
     PRIMARY KEY (destinataire, id_message)
 )ENGINE=InnoDB;
 
@@ -328,19 +330,19 @@ INSERT INTO `al_usager` (`courriel`, `nom`, `prenom`, `cellulaire`, `mot_de_pass
 -- 
 
 INSERT INTO `al_logements` 
-(`id_logement`, `no_civique`, `apt`, `rue`, `ville`, `province`, `pays`, `code_postal`, `latitude`, `longitude`, `courriel`, `id_type_logement`, `premiere_photo`, `prix`, `evaluation`, `description`, `nb_personnes`, `nb_chambres`, `nb_lits`, `nb_salle_de_bain`, `nb_demi_salle_de_bain`, `est_stationnement`, `est_wifi`, `est_cuisine`, `est_tv`, `est_fer_a_repasser`, `est_cintres`, `est_seche_cheveux`, `est_climatise`, `est_laveuse`, `est_secheuse`, `est_chauffage`, `l_valide`,  `l_actif`, `l_banni`, `l_date_banni`, `l_commentaire_banni`) VALUES 
-(1, '2030', 'Suite 400', 'Pie-IX Blvd', 'Montreal', 'QC', 'CAN', 'H1V 2C8', '45.5502794', '-73.54264409999996', 'jonathanmartel@gmail.com', 6, 'images/Logements/1/image_1.jpg', 100.00, 4.02345, 'Description', '4', '2', '3', '1', '1', true, true, false, true, true, false, true, true, true, true, true, true, true, NULL, NULL, NULL), 
-(2, '688', 'Suite 520', 'Rue Notre-Dame O', 'Montreal', 'QC', 'CAN', 'H3C 0S5', '45.5001746', '-73.55989160000001', 'gabrielzoraidag@gmail.com', 4, 'images/Logements/2/image_1.jpg', 135.00, 4.52345, 'Appartement à 1 min de marche du métro Square-Victoria et ave McGill. Profitez de l\'énergie et de l\'architecture du Vieux_Montréal.', '4', '2', '2', '1', '', false, true, true, true, false, false, true, false, true, true, true, true, true, NULL, NULL, NULL), 
-(3, '4386', 'Suite 120', 'Rue Berri', 'Montreal', 'QC', 'CAN', 'H2J 2R1', '45.5240338', '-73.58021389999999', 'oudayan@gmail.com', 3, 'images/Logements/3/image_1.jpg', 130.00, 4.22345, 'À la porte du métro Mont-Royale et de sa rue commerçante, magnifique condo. Une chambre fermée et une deuxième avec des portes française.', '4', '2', '2', '1', '', false, false, false, true, true, false, true, true, true, true, false, true, true, NULL, NULL, NULL), 
-(4, '15120 A', '', 'Rue Camille-Laurin', 'Montreal', 'QC', 'CAN', 'H1A 5T4', '45.6846104', '-73.50309270000002', 'faycalabouzaid@gmail.com', 1, 'images/Logements/4/image_1.jpg', 180.00, 4.32345, 'À proximité de tout.', '4', '2', '2', '1', '1', true, false, true, true, false, false, false, true, true, true, true, true, true, NULL, NULL, NULL), 
-(5, '4719', '', 'Ave Papineau', 'Montreal', 'QC', 'CAN', 'H2H 1V4', '45.53425559999999', '-73.57709349999999', 'jsubirats@yahoo.com', 2, 'images/Logements/5/image_1.jpg', 145.00, 4.42345, 'Idéal pour faire du tourisme à votre ryhtme', '4', '2', '2', '2', '', false, true, false, false, true, true, true, true, false, false, false, true, true, NULL, NULL, NULL), 
-(6, '7385', '', 'Ave Jean-Desprez', 'Montreal', 'QC', 'CAN', 'H1K 5B9', '45.6167817', '-73.54753340000002', 'gabrielzoraidag@gmail.com', 1, 'images/Logements/6/image_1.jpg', 170.00, 4.52345, 'Résidence chaleureuse.', '2', '1', '1', '1', '1', true, true, true, false, false, true, true, false, true, true, true, true, true, NULL, NULL, NULL), 
-(7, '1021', '', 'Rue Allard', 'Montreal', 'QC', 'CAN', 'H4H 2C7', '45.4466471', '-73.57856370000002', 'jsubirats@yahoo.com', 1, 'images/Logements/7/image_1.jpg', 165.00, 4.62345, 'Peut combler tout vos besoins.', '6', '3', '4', '2', '', true, false, true, false, true, true, true, true, false, false, true, true, true, NULL, NULL, NULL), 
-(8, '3907', '', 'Rue de Bullion', 'Montreal', 'QC', 'CAN', 'H2W 2E2', '45.517627', '-73.57632690000003', 'missde0404@gmail.com', 3, 'images/Logements/8/image_1.jpg', 200.00, 4.72345, 'Parmi les rues pleines d\'histoires, notre résidence vous offre un style de vie combinant le luxe et le divertissement.', '5', '3', '3', '2', '', false, true, true, true, false, true, true, false, true, true, true, true, true, NULL, NULL, NULL),
-(9, '3696', '', 'Ave du Parc-LaFontaine', 'Montreal', 'QC', 'CAN', 'H2L 3M4', '45.5222205', '-73.56778930000002', 'oudayan@gmail.com', 2, 'images/Logements/9/image_1.jpg', 150.00, 4.55345, 'Appartement idéal pour venir relaxer.', '4', '2', '2', '1', '', false, true, true, false, false, true, true, false, true, true, false, true, true, NULL, NULL, NULL), 
-(10, '4780', '302', 'Rue Fullum', 'Montreal', 'QC', 'CAN', 'H7H 2R9', '45.53893', '-73.5734913', 'jonathanmartel@gmail.com', 2, 'images/Logements/10/image_1.jpg', 175.00, 3.76345, 'Super bien localiser.', '4', '2', '2', '2', '', true, true, false, true, false, true, true, true, false, false, true, true, true, NULL, NULL, NULL), 
-(11, '1401', '', 'Argyle Avenue', 'Montreal', 'QC', 'CAN', 'H2C 0S5', '45.4945481', '-73.57175489999997', 'missde0404@gmail.com', 2, 'images/Logements/11/image_1.jpg', 100.00, 4.88345, 'Installée dans des résidences du début du 20ème siècle et situé près du Centre Bell, la Petite Auberge bénéficie d\'un super emplacement idéal pour explorer les attractions à proximité.', '5', '1', '1', '1', '', false, true, false, true, false, true, false, false, true, true, true, true, true, NULL, NULL, NULL), 
-(12, '137 A', '', 'Boul des Prairies', 'Laval', 'QC', 'CAN', 'H3C 4S5', '45.552302', '-73.68894799999998', 'faycalabouzaid@gmail.com', 5, 'images/Logements/12/image_1.jpg', 140.00, 4.55555, 'Chalet pour venir vous relaxer en toute saison. ', '6', '3', '3', '1', '1', true, true, true, true, true, true, true, true, true, true, true, true, true, NULL, NULL, NULL);
+(`id_logement`, `no_civique`, `apt`, `rue`, `ville`, `province`, `pays`, `code_postal`, `latitude`, `longitude`, `courriel`, `id_type_logement`, `premiere_photo`, `prix`, `evaluation`, `description`, `nb_personnes`, `nb_chambres`, `nb_lits`, `nb_salle_de_bain`, `nb_demi_salle_de_bain`, `frais_nettoyage`, `est_stationnement`, `est_wifi`, `est_cuisine`, `est_tv`, `est_fer_a_repasser`, `est_cintres`, `est_seche_cheveux`, `est_climatise`, `est_laveuse`, `est_secheuse`, `est_chauffage`, `l_valide`,  `l_actif`, `l_banni`, `l_date_banni`, `l_commentaire_banni`) VALUES 
+(1, '2030', 'Suite 400', 'Pie-IX Blvd', 'Montreal', 'QC', 'CAN', 'H1V 2C8', '45.5502794', '-73.54264409999996', 'jonathanmartel@gmail.com', 6, 'images/Logements/1/image_1.jpg', 100.00, 4.02345, 'Description', '4', '2', '3', '1', '1', '50.00', true, true, false, true, true, false, true, true, true, true, true, true, true, NULL, NULL, NULL), 
+(2, '688', 'Suite 520', 'Rue Notre-Dame O', 'Montreal', 'QC', 'CAN', 'H3C 0S5', '45.5001746', '-73.55989160000001', 'gabrielzoraidag@gmail.com', 4, 'images/Logements/2/image_1.jpg', 135.00, 4.52345, 'Appartement à 1 min de marche du métro Square-Victoria et ave McGill. Profitez de l\'énergie et de l\'architecture du Vieux_Montréal.', '4', '2', '2', '1', '', '', false, true, true, true, false, false, true, false, true, true, true, true, true, NULL, NULL, NULL), 
+(3, '4386', 'Suite 120', 'Rue Berri', 'Montreal', 'QC', 'CAN', 'H2J 2R1', '45.5240338', '-73.58021389999999', 'oudayan@gmail.com', 3, 'images/Logements/3/image_1.jpg', 130.00, 4.22345, 'À la porte du métro Mont-Royale et de sa rue commerçante, magnifique condo. Une chambre fermée et une deuxième avec des portes française.', '4', '2', '2', '1', '', '', false, false, false, true, true, false, true, true, true, true, false, true, true, NULL, NULL, NULL), 
+(4, '15120 A', '', 'Rue Camille-Laurin', 'Montreal', 'QC', 'CAN', 'H1A 5T4', '45.6846104', '-73.50309270000002', 'faycalabouzaid@gmail.com', 1, 'images/Logements/4/image_1.jpg', 180.00, 4.32345, 'À proximité de tout.', '4', '2', '2', '1', '1', '0.00', true, false, true, true, false, false, false, true, true, true, true, true, true, NULL, NULL, NULL), 
+(5, '4719', '', 'Ave Papineau', 'Montreal', 'QC', 'CAN', 'H2H 1V4', '45.53425559999999', '-73.57709349999999', 'jsubirats@yahoo.com', 2, 'images/Logements/5/image_1.jpg', 145.00, 4.42345, 'Idéal pour faire du tourisme à votre ryhtme', '4', '2', '2', '2', '', '40.00', false, true, false, false, true, true, true, true, false, false, false, true, true, NULL, NULL, NULL), 
+(6, '7385', '', 'Ave Jean-Desprez', 'Montreal', 'QC', 'CAN', 'H1K 5B9', '45.6167817', '-73.54753340000002', 'gabrielzoraidag@gmail.com', 1, 'images/Logements/6/image_1.jpg', 170.00, 4.52345, 'Résidence chaleureuse.', '2', '1', '1', '1', '1', '', true, true, true, false, false, true, true, false, true, true, true, true, true, NULL, NULL, NULL), 
+(7, '1021', '', 'Rue Allard', 'Montreal', 'QC', 'CAN', 'H4H 2C7', '45.4466471', '-73.57856370000002', 'jsubirats@yahoo.com', 1, 'images/Logements/7/image_1.jpg', 165.00, 4.62345, 'Peut combler tout vos besoins.', '6', '3', '4', '2', '', '80.00', true, false, true, false, true, true, true, true, false, false, true, true, true, NULL, NULL, NULL), 
+(8, '3907', '', 'Rue de Bullion', 'Montreal', 'QC', 'CAN', 'H2W 2E2', '45.517627', '-73.57632690000003', 'missde0404@gmail.com', 3, 'images/Logements/8/image_1.jpg', 200.00, 4.72345, 'Parmi les rues pleines d\'histoires, notre résidence vous offre un style de vie combinant le luxe et le divertissement.', '5', '3', '3', '2', '', '60.00', false, true, true, true, false, true, true, false, true, true, true, true, true, NULL, NULL, NULL),
+(9, '3696', '', 'Ave du Parc-LaFontaine', 'Montreal', 'QC', 'CAN', 'H2L 3M4', '45.5222205', '-73.56778930000002', 'oudayan@gmail.com', 2, 'images/Logements/9/image_1.jpg', 150.00, 4.55345, 'Appartement idéal pour venir relaxer.', '4', '2', '2', '1', '', '33.33', false, true, true, false, false, true, true, false, true, true, false, true, true, NULL, NULL, NULL), 
+(10, '4780', '302', 'Rue Fullum', 'Montreal', 'QC', 'CAN', 'H7H 2R9', '45.53893', '-73.5734913', 'jonathanmartel@gmail.com', 2, 'images/Logements/10/image_1.jpg', 175.00, 3.76345, 'Super bien localiser.', '4', '2', '2', '2', '', '0.00', true, true, false, true, false, true, true, true, false, false, true, true, true, NULL, NULL, NULL), 
+(11, '1401', '', 'Argyle Avenue', 'Montreal', 'QC', 'CAN', 'H2C 0S5', '45.4945481', '-73.57175489999997', 'missde0404@gmail.com', 2, 'images/Logements/11/image_1.jpg', 100.00, 4.88345, 'Installée dans des résidences du début du 20ème siècle et situé près du Centre Bell, la Petite Auberge bénéficie d\'un super emplacement idéal pour explorer les attractions à proximité.', '5', '1', '1', '1', '', '50.00', false, true, false, true, false, true, false, false, true, true, true, true, true, NULL, NULL, NULL), 
+(12, '137 A', '', 'Boul des Prairies', 'Laval', 'QC', 'CAN', 'H3C 4S5', '45.552302', '-73.68894799999998', 'faycalabouzaid@gmail.com', 5, 'images/Logements/12/image_1.jpg', 140.00, 4.55555, 'Chalet pour venir vous relaxer en toute saison. ', '6', '3', '3', '1', '1', '75.00', true, true, true, true, true, true, true, true, true, true, true, true, true, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -575,31 +577,31 @@ INSERT INTO `al_disponibilite` (`id_disponibilite`, `id_logement`, `date_debut`,
 -- Insertion des données de la table `al_messagerie`
 -- 
 
-INSERT INTO `al_messagerie` (`id_message`, `id_reference`, `sujet`, `fichier_joint`, `message`, `msg_date`, `expediteur`) VALUES
-(1, NULL, "Question 1", "pieces_jointes/test 1.docx", "message 1", "2018-02-21 8:00", "chucknorris@gmail.com"), 
-(2, NULL, "Question 2", "pieces_jointes/test 2.docx", "message 2", "2018-02-21 8:30", "jonathanmartel@gmail.com"), 
-(3, NULL, "Question 3", "pieces_jointes/test 3.docx", "message 3", "2018-02-21 8:45", "faycalabouzaid@gmail.com"), 
-(4, NULL, "Question 4", NULL, "message 4", "2018-02-21 9:00", "gabrielzoraidag@gmail.com"), 
-(5, 4, "Question 4", NULL, "message 5", "2018-02-21 9:45", "jsubirats@yahoo.com"), 
-(6, 4, "Question 4", NULL, "message 6", "2018-02-21 9:50", "missde0404@gmail.com"), 
-(7, NULL, "Question 5", "pieces_jointes/test 4.docx", "message 7", "2018-02-21 9:00", "oudayan@gmail.com"), 
-(8, NULL, "Question 6", NULL, "message 8", "2018-02-21 9:50", "missde0404@gmail.com"), 
-(9, NULL, "Question 7", "pieces_jointes/test 5.docx", "message 9", "2018-02-22 9:00", "chucknorris@gmail.com"), 
-(10, NULL, "Question 8", "pieces_jointes/test 6.docx", "message 10", "2018-02-22 9:30", "jonathanmartel@gmail.com"), 
-(11, NULL, "Question 9", "pieces_jointes/test 7.docx", "message 11", "2018-02-22 9:45", "faycalabouzaid@gmail.com"), 
-(12, NULL, "Question 10", NULL, "message 12", "2018-02-22 10:00", "gabrielzoraidag@gmail.com"), 
-(13, 12, "Question 10", NULL, "message 13", "2018-02-22 11:45", "jsubirats@yahoo.com"), 
-(14, 12, "Question 10", NULL, "message 14", "2018-02-23 9:50", "missde0404@gmail.com"), 
-(15, NULL, "Question 11", "pieces_jointes/test 8.docx", "message 15", "2018-02-22 13:00", "oudayan@gmail.com"), 
-(16, NULL, "Question 12", NULL, "message 16", "2018-02-22 13:50", "missde0404@gmail.com"), 
-(17, NULL, "Question 13", "pieces_jointes/test 9.docx", "message 17", "2018-02-22 17:00", "chucknorris@gmail.com"), 
-(18, NULL, "Question 14", "pieces_jointes/test 10.docx", "message 18", "2018-02-22 17:30", "jonathanmartel@gmail.com"), 
-(19, NULL, "Question 15", "pieces_jointes/test 11.docx", "message 19", "2018-02-22 18:45", "faycalabouzaid@gmail.com"), 
-(20, NULL, "Question 16", NULL, "message 20", "2018-02-22 19:00", "gabrielzoraidag@gmail.com"), 
-(21, 20, "Question 16", NULL, "message 21", "2018-02-22 19:45", "jsubirats@yahoo.com"), 
-(22, 20, "Question 16", NULL, "message 22", "2018-02-22 19:50", "missde0404@gmail.com"), 
-(23, NULL, "Question 17", "pieces_jointes/test 12.docx", "message 23", "2018-02-22 20:00", "oudayan@gmail.com"), 
-(24, NULL, "Question 18", NULL, "message 24", "2018-02-22 20:50", "missde0404@gmail.com");
+INSERT INTO `al_messagerie` (`id_message`, `id_reference`, `sujet`, `fichier_joint`, `message`, `msg_date`, `expediteur`, `m_actif`) VALUES
+(1, NULL, "Question 1", "pieces_jointes/test 1.docx", "message 1", "2018-02-21 8:00", "chucknorris@gmail.com", true), 
+(2, NULL, "Question 2", "pieces_jointes/test 2.docx", "message 2", "2018-02-21 8:30", "jonathanmartel@gmail.com", true), 
+(3, NULL, "Question 3", "pieces_jointes/test 3.docx", "message 3", "2018-02-21 8:45", "faycalabouzaid@gmail.com", true), 
+(4, NULL, "Question 4", NULL, "message 4", "2018-02-21 9:00", "gabrielzoraidag@gmail.com", true), 
+(5, 4, "Question 4", NULL, "message 5", "2018-02-21 9:45", "jsubirats@yahoo.com", true), 
+(6, 4, "Question 4", NULL, "message 6", "2018-02-21 9:50", "missde0404@gmail.com", true), 
+(7, NULL, "Question 5", "pieces_jointes/test 4.docx", "message 7", "2018-02-21 9:00", "oudayan@gmail.com", true), 
+(8, NULL, "Question 6", NULL, "message 8", "2018-02-21 9:50", "missde0404@gmail.com", true), 
+(9, NULL, "Question 7", "pieces_jointes/test 5.docx", "message 9", "2018-02-22 9:00", "chucknorris@gmail.com", true), 
+(10, NULL, "Question 8", "pieces_jointes/test 6.docx", "message 10", "2018-02-22 9:30", "jonathanmartel@gmail.com", true), 
+(11, NULL, "Question 9", "pieces_jointes/test 7.docx", "message 11", "2018-02-22 9:45", "faycalabouzaid@gmail.com", true), 
+(12, NULL, "Question 10", NULL, "message 12", "2018-02-22 10:00", "gabrielzoraidag@gmail.com", true), 
+(13, 12, "Question 10", NULL, "message 13", "2018-02-22 11:45", "jsubirats@yahoo.com", true), 
+(14, 12, "Question 10", NULL, "message 14", "2018-02-23 9:50", "missde0404@gmail.com", true), 
+(15, NULL, "Question 11", "pieces_jointes/test 8.docx", "message 15", "2018-02-22 13:00", "oudayan@gmail.com", true), 
+(16, NULL, "Question 12", NULL, "message 16", "2018-02-22 13:50", "missde0404@gmail.com", true), 
+(17, NULL, "Question 13", "pieces_jointes/test 9.docx", "message 17", "2018-02-22 17:00", "chucknorris@gmail.com", true), 
+(18, NULL, "Question 14", "pieces_jointes/test 10.docx", "message 18", "2018-02-22 17:30", "jonathanmartel@gmail.com", true), 
+(19, NULL, "Question 15", "pieces_jointes/test 11.docx", "message 19", "2018-02-22 18:45", "faycalabouzaid@gmail.com", true), 
+(20, NULL, "Question 16", NULL, "message 20", "2018-02-22 19:00", "gabrielzoraidag@gmail.com", true), 
+(21, 20, "Question 16", NULL, "message 21", "2018-02-22 19:45", "jsubirats@yahoo.com", true), 
+(22, 20, "Question 16", NULL, "message 22", "2018-02-22 19:50", "missde0404@gmail.com", true), 
+(23, NULL, "Question 17", "pieces_jointes/test 12.docx", "message 23", "2018-02-22 20:00", "oudayan@gmail.com", true), 
+(24, NULL, "Question 18", NULL, "message 24", "2018-02-22 20:50", "missde0404@gmail.com", true);
 
 -- --------------------------------------------------------
 
@@ -608,7 +610,7 @@ INSERT INTO `al_messagerie` (`id_message`, `id_reference`, `sujet`, `fichier_joi
 -- Insertion des données de la table `al_destinataire`
 -- 
 
-INSERT INTO `al_destinataire` (`destinataire`, `id_message`, `lu`, `actif`) VALUES
+INSERT INTO `al_destinataire` (`destinataire`, `id_message`, `lu`, `d_actif`) VALUES
 ('jonathanmartel@gmail.com', 1, false, true), 
 ('faycalabouzaid@gmail.com', 2, false, true), 
 ('gabrielzoraidag@gmail.com', 3, false, true), 
@@ -645,7 +647,11 @@ INSERT INTO `al_destinataire` (`destinataire`, `id_message`, `lu`, `actif`) VALU
 -- 
 
 INSERT INTO `al_options` (`id_option`, `nom_option`, `valeurs_option`) VALUES
-(1, 'forumlaire_recherche', '{"affichage":"carte","tri":"evaluation","asc":"DESC","region":"6","latitude":"45.57"},"longitude":"-73.57","rayon":"20","zoom":"11","prixMin":"0","prixMax":"1000000", "evaluation":"0"}')
+(1, 'forumlaire_recherche', '{"affichage":"carte","tri":"evaluation","asc":"DESC","region":"6","latitude":"45.57"},"longitude":"-73.57","rayon":"20","zoom":"11","prixMin":"0","prixMax":"1000000", "evaluation":"0"}'), 
+(2, 'taxes_canada', '{"CA", "TPS":"0.05","TVQ":"0,09975"}'),
+(3, 'frais_service', '5.00'),
+(4, 'frais_nettoyage', '50.00')
+
 
 -- --------------------------------------------------------
 
