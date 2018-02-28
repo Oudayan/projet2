@@ -10,7 +10,7 @@
 
 	class ModeleLogement extends BaseDAO {
 
-		public function checherNomTable() {
+		public function lireNomTable() {
 			return "al_logements";
 		}
         
