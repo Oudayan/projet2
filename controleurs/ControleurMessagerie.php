@@ -114,7 +114,7 @@
                         $msg = "";
                         if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))
                         { 
-                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"] $_SESSION["courriel"] );
+                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
                             $taille_max = 1024; //Taille en kilobytes
                             $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);
                         }
