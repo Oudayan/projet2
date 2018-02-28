@@ -17,6 +17,8 @@
             $modelePhotosLogement = $this->lireDAO("PhotoLogement");
             $modelePieces = $this->lireDAO("Piece");
 
+            $_SESSION["recherche"]["rafraichir"] = 0;
+
             // Si le paramètre action existe
 			if (isset($params["action"])) {
 
@@ -190,14 +192,17 @@
             // Construction du filtre de la requête
             $filtre = "l_actif = true";
             // Date de location
+            $dates[0] = date("Y-m-d");
+            $dates[1] = date("Y-m-d");
+            if (!isset($_SESSION["recherche"]["datesLocation"])) {
+                $_SESSION["recherche"]["datesLocation"] = $dates[0] . "  au  " . $dates[1];
+            }
             if (isset($params["datesLocation"])) {
                 $dates = explode("  au  ", $params["datesLocation"]);
+                //var_dump($dates);
                 $filtre .= ($filtre == "" ? "" : " AND ") . "date_debut <= '" . $dates[0] . "' AND date_fin >= '" . $dates[1] . "'";
                 $_SESSION["recherche"]["debutLocation"] = $dates[0];
                 $_SESSION["recherche"]["finLocation"] = $dates[1];
-            }
-            else if (!isset($_SESSION["recherche"]["datesLocation"])) {
-                $_SESSION["recherche"]["datesLocation"] = date("m-d-Y");
             }
             // Région
             if (isset($params["region"])) {
@@ -264,6 +269,7 @@
             $cnt = 0;
             for ($i = 1; $i <= count($_SESSION["recherche"]["typesLogements"]); $i++) {
                 if (isset($params["typeLogement" . $i])) {
+                    $_SESSION["recherche"]["rafraichir"]++;
                     $cnt++;
                     if ($cnt == 1) {
                         $filtre .= ($filtre == "" ? "(" : " AND (") . "id_type_logement = " . $i;
@@ -276,6 +282,7 @@
                 else {
                     $_SESSION["recherche"]["typeLogement" . $i] = "";
                 }
+                
             }
             if ($cnt == 0) {
                 for ($i = 1; $i <= count($_SESSION["recherche"]["typesLogements"]); $i++) { 

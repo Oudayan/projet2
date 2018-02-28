@@ -1,9 +1,9 @@
 ﻿<?php
 /** 
 	* @ file	ajoututilisateur.php
-	* @ author	Jorge Subirats
-	* @ version 1.0
-	* @ date         12 juillet 2017
+	* @ author	Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
+	* @ version 2.1
+	* @ date     16 février 2018
 	* @ brief 	 formulaire d'ajout de un nouvel utilisateur 
 	*
 	* @ details 
@@ -46,14 +46,14 @@
 	<!-- form method="POST" action="index.php" id="contenu" -->
         <!-- <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="contenu">    -->
 		<div class="container">
-			<form name="ajoutUsager" action="index.php?Usagers&action=enregistrerUsager" method="POST" id="contenu">    
+			<form name="ajoutUsager" onsubmit="return validateForm()" action="index.php?Usagers&action=enregistrerUsager" method="POST" id="contenu">    
                 <h3>Merci de remplir votres infos</h3>
 				<p>Votre courriel sera l'identifiant de votre compte</p><br/>
 				<div class="form-group row">
 					<div class="col-lg-4">				
 						<label>Courriel</label>
 						<input class="form-control" type="text" name="courriel"  value="<?= $courriel; ?>" onblur="estCourriel()" required>
-						<span id="errCourriel" style="color:red; visibility:hidden">* Invalide ou requise</span>
+						<span id="errCourriel" style="color:red; visibility:hidden">* Invalide ou requis</span>
 					</div>
 					<div class="col-lg-4">
 						<label>Mot de Passe</label>
