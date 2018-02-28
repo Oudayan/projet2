@@ -1,42 +1,44 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @file     formulaire.php
+ * @author   Zoraida Ortiz
+ * @version  1.0
+ * @date     26 fevrier 2018
+ * @brief    formulaire pour afficher un message 
+ * 
  */
 ?>
-<div class="container" id="messageRecu">
-  <form>
-    <button type="button" class="btn-bleu btn-sm">Répondre</button><br><br> 
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">De :</label>
+
+  <form class="boiteLecture hidden">
+    <button type="button" class="btn-bleu btn-sm">Répondre</button><hr> 
+    <div class="form-group row heigthFormBLecture">
+      <label class="col-sm-2 col-form-label-sm">De :</label>
       <div class="col-sm-10">
-        <input class="form-control-plaintext" id="expediteur" type="email" disabled placeholder="">
+        <input class="form-control-plaintext form-control-sm expediteur" type="email"disabled>
       </div>
     </div>
-   <div class="form-group row">
-      <label class="col-sm-2 col-form-label">sujet :</label>
+    <div class="form-group row heigthFormBLecture">
+      <label class="col-sm-2 col-form-label-sm">Date :</label>
       <div class="col-sm-10">
-        <input class="form-control-plaintext" id="sujet" type="text" disabled placeholder="">
+        <input class="form-control-plaintext form-control-sm dateCourriel" type="text" disabled>
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Date :</label>
+    <div class="form-group row heigthFormBLecture">
+      <label class="col-sm-2 col-form-label-sm">sujet :</label>
       <div class="col-sm-10">
-        <input class="form-control-plaintext" id="dateCourriel" type="text" disabled placeholder="">
+        <input class="form-control-plaintext form-control-sm sujet" type="text" disabled>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="file_id" class="col-2 col-form-label">Fichier joint</label>
-      <div class="col-10">
-        <input name="mon_image" type="file" id="file_id">
+    <div class="form-group row heigthFormBLecture">
+      <label for="file_id" class="col-sm-3 col-form-label-sm">Fichier joint</label>
+      <div class="col-9">
+        <a href="#" download="">download
+        </a>
       </div>
-    </div>  
-    <div class="form-group row">
-    <label for="exampleTextarea">Example textarea</label>
-    <textarea class="form-control" id="textMessage" rows="3"></textarea>
-  </div>
-    </div><!-- form-group row -->
-  </form>  
-</div>
+    </div>
+    <div class="form-group row heigthFormBLecture">
+      <div class="col-12">
+        <textarea class="form-control textMessage" rows="6"></textarea>
+      </div>
+    </div>
+  </form>
