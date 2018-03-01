@@ -130,7 +130,6 @@
                             $this->afficherVues("messagerie");
                         }
                         break;  
-                        
                     default:
 							// $this->afficheListeSujets();
 							trigger_error($params["action"] . " Action invalide.");	    
