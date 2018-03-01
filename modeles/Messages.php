@@ -11,25 +11,24 @@
 */
 
 	class Messages {
-		private $id_message;
-		private $id_reference;
-		private $sujet;
-		private $fichier_joint;
-		private $message;
-		private $msg_date;
-        private $m_actif;
-		private $expediteur;
+		protected $id_message;
+		protected $id_reference;
+		protected $sujet;
+		protected $fichier_joint;
+		protected $message;
+		protected $msg_date;
+        protected $m_actif;
+		protected $expediteur;
 		
-
-		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "",m_actif= "", $expediteur = "" )
+		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $m_actif= "", $expediteur = "" )
 		{
 			$this->ecrireId_message($id_message);
 			$this->ecrireId_reference($id_reference);
 			$this->ecrireSujet($sujet);
 			$this->ecrireFichier_joint($fichier_joint);
 			$this->ecrireMessage($message);
-            $this->ecrire$msg_date($msg_date);
-            $this->ecrire$m_actif(m_actif);
+            $this->ecrireMsg_date($msg_date);
+            $this->ecrireM_actif($m_actif);
 			$this->ecrireExpediteur($expediteur);
 			
 		}
