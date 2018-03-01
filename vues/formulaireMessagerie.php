@@ -10,7 +10,8 @@
 ?>
 
   <form class="boiteLecture hidden">
-    <button type="button" class="btn-bleu btn-sm">Répondre</button><hr> 
+    <button type="button" class="btn-bleu btn-sm">Répondre</button>
+    <button type="button" class="btn-bleu btn-sm">Transférer</button><hr>
     <div class="form-group row heigthFormBLecture">
       <label class="col-sm-2 col-form-label-sm">De :</label>
       <div class="col-sm-10">

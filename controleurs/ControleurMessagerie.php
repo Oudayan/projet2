@@ -110,13 +110,14 @@
                         
                      case "composerMessage" :
                         $nom_fichier=$_FILES["fichierJoint"]["name"];
-                        $destination = "fichiersMessagerie/";
+                        var_dump($nom_fichier);
+                        $destination = "upload/";
                         $msg = "";
-                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))
+                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
                             $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
                             $taille_max = 1024; //Taille en kilobytes
-                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);
+                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);                           
                         }
                         if (trim($msg) != '')
                         {
@@ -125,7 +126,7 @@
                         }
                         else
                         {
-                            $msg_validation='En attendant de validation';
+                            $msg_validation='Message envoyé';
                             $this->afficherVues("messagerie");
                         }
                         break;  
@@ -147,7 +148,7 @@
  */
 function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
 {
-    $fichier = "";
+    $message = "";
     if($_FILES[$nom_fichier]['error'] > 0){
                 $message = 'An error ocurred when uploading.';
             }

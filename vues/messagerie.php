@@ -32,9 +32,9 @@
       <a class="nav-link" id="v-pills-mEnvoyes-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-mEnvoyes" role="tab" aria-controls="v-pills-mEnvoyes" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
     </nav><!-- nav flex-column -->
 
-    <main class="tab-messagerie tab-content col-9" id="v-pills-tabContent">
+    <aside class="tab-messagerie tab-content col-9" id="v-pills-tabContent">
       <section class="composerMessage tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
-        <form  action="" id="formMessagerie">
+        <form enctype="multipart/form-data" action="index.php?Messagerie&action=composerMessage" method="POST" ><!--id="formMessagerie"-->
           <div class="input-group input-group-sm mb-3 col-6">
             <div class="input-group-prepend">
               <label class="input-group-text col-form-label-sm" for="destinataire">À</label>
@@ -53,13 +53,16 @@
             <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="sujet">
           </div>
           <div class="input-group group-sm mb-3 col-6">
-           <div class="input-group-prepend">
+              <label for="file_id"><p class="text-primary">Taille max 1 Mo :</p></label>
+                <input name="fichierJoint" type="file" id="file_id">
+              
+           <!--<div class="input-group-prepend">
              <span class="input-group-text small">Fichier joint</span>
            </div>
            <div class="custom-file">
              <input type="file" class="custom-file-input" id="fichierJoint" name="fichierJoint">
              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-           </div>
+           </div>-->
           </div>
           <div class="input-group group-sm mb-3 ">
             <div class="input-group-prepend">
@@ -68,9 +71,9 @@
             <textarea class="form-control" aria-label="With textarea" rows="6" id="textMessage"></textarea>
           </div>
             <input id="date" type="hidden" value="<?php echo date('Y-m-d H:i:sP');?>"><br>
-            <input type="submit" class="btn-bleu btn-sm" id="EnvoyerForm" value="Envoyer" disabled> 
+            <input type="submit" class="btn-bleu btn-sm"  value="Envoyer"> 
         </form>    
-      </section><!-- composerMessage -->
+      </section><!-- composerMessage id="EnvoyerForm" id input envoyer-->
       
       <section class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <table class="table table-sm responsive-sm table-hover display">
@@ -104,7 +107,7 @@
         </table>
            <?php include 'formulaireMessagerie.php';?>
       </section><!-- messagesEnvoyes -->
-    </main><!-- tab-messagerie -->
+    </aside><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
 </div><!-- container -->
 <script type="text/javascript">
@@ -176,8 +179,27 @@
   function cacherBoitesLecture() {
     $('.boiteLecture').addClass('hidden');
   }
+
+ function transfereMessage(id){
+    $.ajax({
+        url: 'index.php?Messagerie&action=destinatairesAjoutes', 
+        type: 'POST',
+        data: {id_message: id },
+        dataType: 'json',
+        success: function(donnes) {
+          if (donnes) {
+             
+                }     
+          }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    }); 
+  };
   
-  $("#EnvoyerForm").on("click", function() {
+  
+ /* $("#EnvoyerForm").on("click", function() {
     $.ajax({
         url: 'index.php?Presentations&action=sauvegarderMessage',
         type: 'POST',
@@ -193,7 +215,7 @@
     });
 });
 
-  $("#formMessagerie").on("change", function(){
+ /* $("#formMessagerie").on("change", function(){
      var resultat = validaterFormMsg();
      if(resultat){
        console.log(resultat);
@@ -206,7 +228,7 @@
   
   $("#fichierJoint").on("blur",function(){
       validerExtension();
-  });
+  });*/
   </script>
   
         

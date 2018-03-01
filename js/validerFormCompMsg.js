@@ -6,7 +6,7 @@
  * @brief    validation du formulaire pour composer un message
  * 
  */
-function validaterFormMsg(){
+/*function validaterFormMsg(){
 	var destinataire = $("#destinataire").val();
 	var sujet = $("#sujet").val();
 	var textMessage = $("#textMessage").val();
