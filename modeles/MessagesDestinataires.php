@@ -14,7 +14,7 @@
 		private $lu;
 		private $d_actif;
 
-		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $m_actif= "", $expediteur = "", $destinataire = "",  $lu = NULL, $d_actif = NULL )
+		public function __construct($id_message = 0, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $m_actif= "", $expediteur = "", $destinataire = NULL,  $lu = NULL, $d_actif = NULL )
 		{
 			$this->ecrireDestinataire($destinataire);
 			$this->ecrireLu($lu);
