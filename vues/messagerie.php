@@ -120,13 +120,13 @@
   
   function afficherBoiteReception() {
     $.ajax({
-        url: 'index.php?Messagerie&action=boiteReception', 
+        url: 'index.php?Messagerie&action=messagesRecus', 
         type: 'POST',
         dataType: 'json',
         success: function(json) {
           $("#boiteReception").html("");
           $.each(json, function(i, item) {
-          $("#boiteReception").append("<tr><td><a href='#' onclick='lireMessage(" + item.id_message + ")'>" + item.lu + "</a></td><td>" + item.nom + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td><td class='hidden'>" + item.id_message + "</td></tr>");
+          $("#boiteReception").append("<tr><td><a href='#' onclick='lireMessage(" + item.id_message + ")'>" + item.lu + "</a></td><td>" + item.destinataire + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td><td class='hidden'>" + item.id_message + "</td></tr>");
           });
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -154,7 +154,7 @@
         
   function lireMessage(id){
     $.ajax({
-        url: 'index.php?Messagerie&action=afficherMessage', 
+        url: 'index.php?Messagerie&action=messagesRecus', 
         type: 'POST',
         data: {id_message: id },
         dataType: 'json',
