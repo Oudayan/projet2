@@ -50,13 +50,13 @@
         FROM " . $this->lireNomTable() .
         " JOIN al_messagerie  
         ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
-        WHERE destinataire = ? 
-        AND d_actif = true 
+        WHERE destinataire = '" . $destinataire . "'
+        AND d_actif = 1 
         ORDER BY al_messagerie.msg_date DESC";
         
-        return $resultat = $this->requete($sql);
-		 
-            //$this->requete($sql, $donnees);
+        $resultat = $this->requete($sql);
+            $resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "MessagesDestinataires"); 
+            return $resultat->fetchAll();
           
         }
         
