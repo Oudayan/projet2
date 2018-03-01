@@ -136,6 +136,7 @@
 
 				return $this->requete($query, $donnees);
 			/*}*/
+
 		} //fin de la classe
-		
+
 ?>

@@ -23,6 +23,7 @@
 					//====================================================Accéder à la messagerie==================================================================
 					
 					case "afficherMessagerie":
+
                         if($_SESSION["courriel"])
                         {
                             $this->afficherVues("messagerie");
@@ -67,10 +68,29 @@
 							return;					                                                 //contient la liste des messages recus
 							break;  
                         
-                        	
-
-					
-					
+                        case "composerMessage" :
+                        $nom_fichier=$_FILES["fichierJoint"]["name"];
+                        var_dump($nom_fichier);
+                        $destination = "upload/";
+                        $msg = "";
+                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
+                        { 
+                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+                            $taille_max = 1024; //Taille en kilobytes
+                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);                           
+                        }
+                        if (trim($msg) != '')
+                        {
+                            $msg_validation= "La taille de l'image n'est pas valide";
+                            $this->afficherVues("messagerie");
+                        }
+                        else
+                        {
+                            $msg_validation='Message envoyé';
+                            $this->afficherVues("messagerie");
+                        }
+                        break; 
+                        
 					/*default:		
 																								
 						trigger_error("Action invalide");
@@ -89,7 +109,51 @@
 		
 		
 		
-	}                                                                                               //fin de la classe ControleurMessagerie
-	
+	}                
+          
+/**
+ * @brief   fait le téléchargement d'un fichier
+ * @param   string| $nom_fichier   
+ * @param   string| $destination 
+ * @param   string| $fichier_taille
+ * @param   string| $nom_dest
+ * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
+ */
+function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
+{
+    $message = "";
+    if($_FILES[$nom_fichier]['error'] > 0){
+                $message = 'An error ocurred when uploading.';
+            }
+
+            if(!getimagesize($_FILES[$nom_fichier]['tmp_name'])){
+                $message = 'Please ensure you are uploading an image.';
+            }
+
+            // Check filetype
+            $valid_types = array("image/exe", "image/js");
+            if (in_array($_FILES[$nom_fichier]['type'], $valid_types)) {
+                $message = 'Unsupported filetype uploaded.';
+            }
+
+            // Check filesize
+            if($_FILES[$nom_fichier]['size'] > $fichier_taille * 1024 ){ //Bytes
+                $message = 'File uploaded exceeds maximum upload size.';
+            }
+
+            // Check if the file exists
+            if(file_exists($destination . $_FILES[$nom_fichier]['name'])){
+                $message = 'File with that name already exists.';
+            }
+
+            // Upload file
+            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $nom_dest)){
+                $message = 'Error uploading file - check destination is writeable.';
+            }
+
+            return $message;
+
+}
+
 		
 ?>
