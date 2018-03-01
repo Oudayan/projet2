@@ -112,6 +112,11 @@
 				return $this->requete($query, $donnees);
 			/*}*/
 		}
+        
+        public function sauvegarderMessage($destinataire, $sujet, $textMessage, $courriel){
+             return "aqui toy";
+        }
+           
 		
 	}
 ?>
