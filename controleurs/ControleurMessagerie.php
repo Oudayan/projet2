@@ -23,7 +23,7 @@
 					//====================================================Accéder à la messagerie==================================================================
 					
 					case "afficherMessagerie":
-<<<<<<< HEAD
+
                         if($_SESSION["courriel"])
                         {
                             $this->afficherVues("messagerie");
@@ -38,14 +38,14 @@
                     
                     case "messagesRecus":
                         
-                        $modeleMessages = $this->lireDAO("Messages");
+                        //$modeleMessages = $this->lireDAO("Messages");
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
-                        /*
+                        
                         echo "<pre>";
                         var_dump($recus);
-                        echo "</pre>";*/
+                        echo "</pre>";
                             
 							$donnees = array();
                             for ($i=0; $i< count($recus); $i++){
@@ -59,11 +59,11 @@
                                 $donnees[$i][6]=$recus[$i]->lireFichier_joint();
                                 $donnees[$i][7]=$recus[$i]->lireMessage();
                                 $donnees[$i][8]=$recus[$i]->lireMsg_date();
-                                $donnees[$i][9]=$recus[$i]->lireExpediteur();
-                                $donnees[$i][10]=$recus[$i]->lireM_actif();
+                                $donnees[$i][9]=$recus[$i]->lireM_actif();
+                                $donnees[$i][10]=$recus[$i]->lireExpediteur();
                         	}  
-                              //var_dump($donnees);
-                               // die();
+                              var_dump($donnees);
+                               die();
 							echo json_encode($donnees);
 							return;					                                                 //contient la liste des messages recus
 							break;  
