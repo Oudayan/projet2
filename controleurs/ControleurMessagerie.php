@@ -38,15 +38,14 @@
                     
                     case "messagesRecus":
                         
-                        //$modeleMessages = $this->lireDAO("Messages");
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
-                        
+                        /*
                         echo "<pre>";
                         var_dump($recus);
                         echo "</pre>";
-                            
+                        */    
 							$donnees = array();
                             for ($i=0; $i< count($recus); $i++){
                                 $donnees[$i]=array();
@@ -68,35 +67,32 @@
 							return;					                                                 //contient la liste des messages recus
 							break;  
                      case "msgEnvoyes":
-                        
-                        $modeleMessages = $this->lireDAO("Messages");
+                       
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         
                         $envoyes = $modeleMessagesDestinataires->messagesEnvoyes($_SESSION["courriel"]);
                         /*
                         echo "<pre>";
-                        var_dump($recus);
+                        var_dump($envoyes);
                         echo "</pre>";*/
-                            //$x = $recus->fetchAll();
+                           
 							$donnees = array();
-                            for ($i=0; $i< count($recus); $i++){
+                            for ($i=0; $i< count($envoyes); $i++){
                                 $donnees[$i]=array();
-                                $donnees[$i][0]= $recus[$i]->lireDestinataire();
-                                $donnees[$i][1]=$recus[$i]->lireLu(); 
-                                $donnees[$i][2]=$recus[$i]->lireD_actif();
-                                $donnees[$i][3]=$recus[$i]->lireId_message();
-                                $donnees[$i][4]=$recus[$i]->lireId_reference();
-                                $donnees[$i][5]=$recus[$i]->lireSujet();
-                                $donnees[$i][6]=$recus[$i]->lireFichier_joint();
-                                $donnees[$i][7]=$recus[$i]->lireMessage();
-                                $donnees[$i][8]=$recus[$i]->lireMsg_date();
-                                $donnees[$i][9]=$recus[$i]->lireExpediteur();
-                                $donnees[$i][10]=$recus[$i]->lireM_actif();
+                                $donnees[$i][0]= $envoyes[$i]->lireDestinataire();
+                                $donnees[$i][1]=$envoyes[$i]->lireLu(); 
+                                $donnees[$i][2]=$envoyes[$i]->lireD_actif();
+                                $donnees[$i][3]=$envoyes[$i]->lireId_message();
+                                $donnees[$i][4]=$envoyes[$i]->lireId_reference();
+                                $donnees[$i][5]=$envoyes[$i]->lireSujet();
+                                $donnees[$i][6]=$envoyes[$i]->lireFichier_joint();
+                                $donnees[$i][7]=$envoyes[$i]->lireMessage();
+                                $donnees[$i][8]=$envoyes[$i]->lireMsg_date();
+                                $donnees[$i][9]=$envoyes[$i]->lireExpediteur();
+                                $donnees[$i][10]=$envoyes[$i]->lireM_actif();
                         	}  
-                              //var_dump($donnees);
-                               // die();
 							echo json_encode($donnees);
-							return;					                                                 //contient la liste des messages recus
+							return;					                                                 //contient la liste des messages envoyes
 							break;  
                         
                     case "composerMessage" :
