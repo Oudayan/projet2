@@ -88,6 +88,20 @@
 						
 					break;
 					
+					case "chercher_courriel":
+							$json = array();
+							if (isset($params["x"]))
+								$courriel  = $params["x"];
+							$modeleUsagers = $this->lireDAO("Usagers");
+							$data = $modeleUsagers->obtenir_par_courriel($courriel); 
+							$json["data"] = $data;
+							if ($data)
+								echo json_encode("Oui");
+							else
+								echo json_encode("Non");
+							return;					//affiche la liste des sujets et des réponses
+					break;
+					
 					case "ajouterUsager" : 
 						$modeleTypeContact = $this->lireDAO("TypeContact");
 						$modeleTypePaiement = $this->lireDAO("TypePaiement");
@@ -133,7 +147,7 @@
 								$modeleUsagers = $this->lireDAO("Usagers");                                  
 								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],3,$params["id_paiement"],false,true);
 								$succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
-								$_SESSION["succes"]= "Votre compte a été crée, merci de attendre un confirmation dans votre courriel avate de s'authentifier ! ";
+								$_SESSION["succes"]= "Votre compte a été crée, merci de attendre un confirmation dans votre courriel avant de s'authentifier ! ";
 								header("Location: index.php");
 						}
 						break;

@@ -20,12 +20,11 @@
 		private $code_postal;
 		private $latitude;
 		private $longitude;
-		private $courriel;
 		private $id_type_logement;
-		private $premiere_photo;
 		private $prix;
 		private $evaluation;
 		private $description;
+		private $courriel;
 		private $nb_personnes;
 		private $nb_chambres;
 		private $nb_lits;
@@ -49,23 +48,28 @@
 		private $l_commentaire_banni;
 
         // Constructeur
-		private function __construct($id_logement = 0, $no_civique = 0, $apt = "", $rue = "", $ville = "", $province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, $premiere_photo = "", $prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, $nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, $est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, $est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, $l_date_banni = "", $l_commentaire_banni = "") {
-            $this->ecrireIdLogement($id_logement);
-            $this->ecrireNoCivique($no_civique);
-            $this->ecrireApt($apt);		
-            $this->ecrireRue($rue);
-            $this->ecrireVille($ville);
+		public function __construct($id_logement = null, $no_civique = 0, $apt = null, $rue = "", $ville = "", 
+		$province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, 
+		$prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, 
+		$nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, 
+		$est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, 
+		$est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, 
+		$l_date_banni = "", $l_commentaire_banni = "") {
+			$this->ecrireIdLogement($id_logement);
+			$this->ecrireNoCivique($no_civique);
+			$this->ecrireApt($apt);		
+			$this->ecrireRue($rue);
+			$this->ecrireVille($ville);
             $this->ecrireProvince($province);
             $this->ecrirePays($pays);
             $this->ecrireCodePostal($code_postal);
-            $this->ecrireLatitude($latitude);
+			$this->ecrireLatitude($latitude);
             $this->ecrireLongitude($longitude);
-            $this->ecrireCourriel($courriel);
             $this->ecrireIdTypeLogement($id_type_logement);		
-            $this->ecrirePremierePhoto($premiere_photo);
             $this->ecrirePrix($prix);
             $this->ecrireEvaluation($evaluation);
             $this->ecrireDescription($description);
+			$this->ecrireCourriel($courriel);
             $this->ecrireNbPersonnes($nb_personnes);
             $this->ecrireNbChambres($nb_chambres);
             $this->ecrireNbLits($nb_lits);
@@ -150,28 +154,16 @@
                 $this->longitude = $longitude;
             }
         }
-        // Écrire courriel
-        public function ecrireCourriel($courriel) {
-            if (is_string($courriel) && trim($courriel) != "") {
-                $this->courriel = $courriel;
-            }
-        }
         // Écrire id_type_logement
         public function ecrireIdTypeLogement($id_type_logement) {
             if (is_numeric($id_type_logement) && trim($id_type_logement) != "") {
                 $this->id_type_logement = $id_type_logement;
             }
         }
-        // Écrire premiere_photo
-        public function ecrirePremierePhoto($premiere_photo) {
-            if (is_string($premiere_photo) && trim($premiere_photo) != "") {
-                $this->premiere_photo = $premiere_photo;
-            }
-        }
         // Écrire prix
         public function ecrirePrix($prix) {
             if (is_numeric($prix) && trim($prix) != "") {
-                $this->id_logement = $prix;
+                $this->prix = $prix;
             }
         }
         // Écrire evaluation
@@ -186,6 +178,12 @@
                 $this->description = $description;
             }
         }
+        // Écrire courriel
+        public function ecrireCourriel($courriel) {
+            if (is_string($courriel) && trim($courriel) != "") {
+                $this->courriel = $courriel;
+            }
+        }		
         // Écrire nb_personnes
         public function ecrireNbPersonnes($nb_personnes) {
             if (is_numeric($nb_personnes) && trim($nb_personnes) != "") {
@@ -354,17 +352,10 @@
         public function lireLongitude() {
             return $this->longitude;
         }
-        // Lire courriel
-        public function lireCourriel() {
-            return $this->courriel;
-        }
+
         // Lire id_type_logement
         public function lireIdTypeLogement() {
             return $this->id_type_logement;
-        }
-        // Lire premiere_photo
-        public function lirePremierePhoto() {
-            return $this->premiere_photo;
         }
         // Lire prix
         public function lirePrix() {
@@ -378,6 +369,10 @@
         public function lireDescription() {
             return $this->description;
         }
+        // Lire courriel
+        public function lireCourriel() {
+            return $this->courriel;
+        }		
         // Lire nb_personnes
         public function lireNbPersonnes() {
             return $this->nb_personnes;

@@ -20,6 +20,7 @@
                 <div id="boiteTri" class="py-2">
                     <div class="form-group d-flex justify-content-between">
                         <h5>Trier par&nbsp;:</h5>
+						<?= var_dump($_SESSION["recherche"]["tri"]) ?>
                         <input type="checkbox" id="tri" name="tri" <?= $_SESSION["recherche"]["tri"] ?> data-toggle="toggle" data-on="Prix" data-off="Évaluation" data-onstyle="bleu" data-offstyle="orange">
                         <input type="checkbox" id="asc" name="asc" <?= $_SESSION["recherche"]["asc"] ?> data-toggle="toggle" data-on="Asc." data-off="Desc." data-onstyle="bleu" data-offstyle="orange">
                     </div>

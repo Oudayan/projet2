@@ -7,6 +7,7 @@ session_start();
 	 if (!is_dir($dir))
 	    	mkdir ($dir,0777); 
 	$chemin = $dir . '/';
+	var_dump($_FILES);
 	foreach ($_FILES["files"]["error"] as $key => $error) {
 		if ($error == UPLOAD_ERR_OK) {
 			$name = $_FILES["files"]["name"][$key];
