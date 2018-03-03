@@ -26,12 +26,12 @@
                   Affiche toujours la/les vue(s) entre les vues partielles entete.php et piedPage.php
 		* @param  [string/array]  $nomVue     Nom de la vue ou tableau contentant les noms des vues à afficher   
 		* @param  [array]         $donnees    Données passée à la/aux vues
-		* @param  [boolean]       $partielle  Vrai = vue(s) seulement / Faux = entête, vue(s) & pied de page
+		* @param  [boolean]       $complete   Vrai = entête, vue(s) & pied de page / Faux = vue(s) seulement
 		* @return message d'erreur ou une vue
 		*/
-        protected function afficherVues($nomVue, $donnees = null, $complete = true) {
+        protected function afficherVues($nomVue, $donnees = null, $complet = true) {
             // Inclure le header pour chaque vue
-            if ($complete) {
+            if ($complet) {
                 include(RACINE . "vues/entete.php");
             }
             // Si le nom de vue est une chaîne de charactère (seulement une vue partielle)
@@ -54,7 +54,7 @@
                 }
             }
             // Inclure le footer pour chaque vue
-            if ($complete) {
+            if ($complet) {
                 include(RACINE . "vues/piedPage.php");
             }
         }        
