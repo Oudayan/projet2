@@ -94,3 +94,4 @@
             $(this).remove(); 
 		});
 	}, 4000);
+</script>
