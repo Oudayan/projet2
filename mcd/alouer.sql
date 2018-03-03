@@ -33,7 +33,7 @@ CREATE TABLE al_disponibilite (
 #------------------------------------------------------------
 
 CREATE TABLE al_logements (
-    id_logement           Int (11) NOT NULL, 
+    id_logement           Int (11) NOT NULL AUTO_INCREMENT, 
     no_civique            Int (11) NOT NULL, 
     apt                   Varchar (75), 
     rue                   Varchar (75) NOT NULL, 
