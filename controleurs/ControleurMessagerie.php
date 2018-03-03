@@ -43,15 +43,25 @@
                         
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
                         
-                        echo "<pre>";
-                        var_dump($recus);
-                        echo "</pre>";
+                       
                             //$x = $recus->fetchAll();
 							$donnees = array();
                             for ($i=0; $i< count($recus); $i++){
-                                $donnees[$i]=array();
-                                $donnees[$i][0]= $recus[$i]->lireDestinataire();
-                                $donnees[$i][1]=$recus[$i]->lireLu(); 
+                                $donnees[$i]=array(
+                                    "destinataire" => $recus[$i]->lireDestinataire(),
+                                    "lu" => $recus[$i]->lireLu(),
+                                    "d_actif" => $recus[$i]->lireD_actif(),
+                                    "id_message" => $recus[$i]->lireId_message(),
+                                    "id_reference" => $recus[$i]->lireId_reference(),
+                                    "sujet" => $recus[$i]->lireSujet(),
+                                    "Fichier_join"=> $recus[$i]->lireFichier_joint(),
+                                    "texteMessage" => $recus[$i]->lireMessage(),
+                                    "msg_date" => $recus[$i]->lireMsg_date(),
+                                    "expediteur"=>$recus[$i]->lireExpediteur(),
+                                    "m_actif"=>$recus[$i]->lireM_actif()
+                                );
+                               // $donnees[$i][0]= $recus[$i]->lireDestinataire();
+                               /* $donnees[$i][1]=$recus[$i]->lireLu(); 
                                 $donnees[$i][2]=$recus[$i]->lireD_actif();
                                 $donnees[$i][3]=$recus[$i]->lireId_message();
                                 $donnees[$i][4]=$recus[$i]->lireId_reference();
@@ -60,17 +70,19 @@
                                 $donnees[$i][7]=$recus[$i]->lireMessage();
                                 $donnees[$i][8]=$recus[$i]->lireMsg_date();
                                 $donnees[$i][9]=$recus[$i]->lireExpediteur();
-                                $donnees[$i][10]=$recus[$i]->lireM_actif();
+                                $donnees[$i][10]=$recus[$i]->lireM_actif();*/
                         	}  
-                              //var_dump($donnees);
-                               // die();
+                              
 							echo json_encode($donnees);
-							return;					                                                 //contient la liste des messages recus
+                             //echo "<pre>";
+                       // var_dump(json_encode($recus));
+                        //echo "</pre>";
+							//return;					                                                 //contient la liste des messages recus
 							break;  
                         
-                        case "composerMessage" :
+                       /* case "composerMessage" :
                         $nom_fichier=$_FILES["fichierJoint"]["name"];
-                        var_dump($nom_fichier);
+                       // var_dump($nom_fichier);
                         $destination = "upload/";
                         $msg = "";
                         if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
@@ -89,7 +101,7 @@
                             $msg_validation='Message envoyé';
                             $this->afficherVues("messagerie");
                         }
-                        break; 
+                        break; */
                         
 					/*default:		
 																								
@@ -97,13 +109,13 @@
 					*/	
 				}                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
-			/*
+			
             else
 			{
 				//var_dump("No");
 				$this->afficherVues("messagerie"); 													//action par defaut- affiche la page d'accueil de la messagerie
 			}
-            */
+           
             // fin du else du param action	
 		}                                                                                           //fin de la fonction index
 		

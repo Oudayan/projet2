@@ -67,4 +67,4 @@ function validerExtension() {
    }
    return false; 
 }
-
+*/

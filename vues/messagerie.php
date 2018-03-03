@@ -124,9 +124,11 @@
         type: 'POST',
         dataType: 'json',
         success: function(json) {
+         console.log(json);
           $("#boiteReception").html("");
           $.each(json, function(i, item) {
-          $("#boiteReception").append("<tr><td><a href='#' onclick='lireMessage(" + item.id_message + ")'>" + item.lu + "</a></td><td>" + item.destinataire + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td><td class='hidden'>" + item.id_message + "</td></tr>");
+          $("#boiteReception").append("<tr><td><a href='#' onclick='lireMessage(" + item.id_message + ")'>" + item.lu + "</a></td><td>" + item.expediteur + "</td><td>" + item.sujet + "</td><td>" + item.fichier_joint + "</td><td>" + item.msg_date + "</td><td class='hidden'>" + item.id_message + "</td></tr>");
+          console.log(item.id_message);
           });
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -180,7 +182,7 @@
     $('.boiteLecture').addClass('hidden');
   }
 
- function transfereMessage(id){
+ /*function transfereMessage(id){
     $.ajax({
         url: 'index.php?Messagerie&action=destinatairesAjoutes', 
         type: 'POST',
@@ -196,7 +198,7 @@
               alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
     }); 
-  };
+  };*/
   
   
  /* $("#EnvoyerForm").on("click", function() {
