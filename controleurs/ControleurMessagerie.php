@@ -61,8 +61,9 @@
                                 $donnees[$i][9]=$recus[$i]->lireM_actif();
                                 $donnees[$i][10]=$recus[$i]->lireExpediteur();
                         	}  
-                              var_dump($donnees);
+                            /* var_dump($donnees);
                                die();
+							*/
 							echo json_encode($donnees);
 							return;					                                                 //contient la liste des messages recus
 							break;  
