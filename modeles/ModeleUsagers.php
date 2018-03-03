@@ -1,12 +1,12 @@
 <?php
 /**
 * @file Modele_Usagers.php
-* @author Jorge Subirats et Denise Ratté
+* @author Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats
 * @version 1.0
-* @date 27 octobre 2017
+* @date  11 février 2017
 * @brief Définit la classe Modele_Usagers
 *
-* @details Cette classe définit les attributs nécessaire pour tout ce qui touche les usagers du forum.
+* @details Cette classe définit les attributs nécessaire pour tout ce qui touche les usagers du site.
 * 
 */
 	
@@ -23,6 +23,7 @@
 		{
 			return "al_usager";
 		}
+
 		/**
 		* @brief Pour aller chercher un usager 
 		* @details Permet d'aller chercher les renseignements sur un usager utilisant le courriel.
@@ -37,6 +38,7 @@
 			$unUsager = $resultat->fetch();
 			return $unUsager;
 		}
+
 		/**
 		* @brief Obtenir tous les usagers 
 		* @details Permet d'obtenir les informations pour tous les ussagers.
@@ -49,6 +51,7 @@
 			$desUsagers = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Usagers");
 			return $desUsagers;
 		}
+
 		/**
 		* @brief Pour aller chercher un usager 
 		* @details Permet d'aller chercher les renseignements sur un usager utilisant le nom.

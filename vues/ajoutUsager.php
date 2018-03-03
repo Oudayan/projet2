@@ -52,6 +52,7 @@
 				<div class="form-group row">
 					<div class="col-lg-4">				
 						<label>Courriel</label>
+						<input id='valideCourriel' type="hidden"> 
 						<input class="form-control" type="text" name="courriel"  value="<?= $courriel; ?>" onblur="estCourriel()" required>
 						<span id="errCourriel" style="color:red; visibility:hidden">* Invalide ou requis</span>
 					</div>

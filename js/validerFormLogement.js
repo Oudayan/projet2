@@ -11,34 +11,56 @@
 * Description: valider le formulaire une fois que vous avez cliqué sur le bouton « submit »
 */
 
-
-function validateForm(){
+function validateFormLogement(){
 	cleanErreurs();
 	err = 0; 
-	err = estApt();
-	err = estNbCivique();
-	err = estRue();
-	err = estCodePostal();
-	err = estVille();
-	err = estProvince();
-	err = estPays();
-	err = estPrix();
-	err = estDescription();
-	err = estNbPersonnes();
-	err = estNbChambres();
-	err = estNbLits();
-	err = estNbSalleDeBain();
-	err = estNbDemiSalleDeBain();
+	err += estApt();
+		console.log(err);
+	err += estNbCivique();
+		console.log(err);
+	err += estRue();
+		console.log(err);
+	err += estVille();
+		console.log(err);
+	err += estProvince();
+		console.log(err);
+	err += estPays();
+		console.log(err);
+	err += estCodePostal();
+		console.log(err);
+	err += estLatitude();
+		console.log(err);
+	err += estLongitude();
+		console.log(err);
+	err += estPrix();
+		console.log(err);
+	err += estDescription();
+		console.log(err);
+	err += estNbPersonnes();
+		console.log(err);
+	err += estNbChambres();
+		console.log(err);
+	err += estNbLits();
+		console.log(err);
+	err += estNbSalleDeBain();
+		console.log(err);
+	err += estNbDemiSalleDeBain();
+	console.log(err);
 	if (err != 0)
 	{
 		alert ("Le formulaire est invalide");
 		return false;
 	}
 	else {
+			nbCivique = document.forms["form_ajoute"]["no_civique"].value;
+			Rue =  document.forms["form_ajoute"]["rue"].value;
+			Ville = document.forms["form_ajoute"]["ville"].value;
+			Province = document.forms["form_ajoute"]["province"].value;
+			codePostal = document.forms["form_ajoute"]["code_postal"].value;
+			adresse = nbCivique +' '+ Rue +' '+ Ville + ', '+ Province +' '+codePostal;
 		return true;
 	}
 }
-
 
 function cleanErreurs(){
 	document.getElementById("errApt").style.visibility="hidden";
@@ -58,12 +80,10 @@ function cleanErreurs(){
 	return;
 }
 
-
-
 function estApt() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["apt"].value;
-	if (x != null) {
+	if (x.length != 0) {
 		expr =/^([A-Z0-9]*[\s]?[a-zA-Z0-9]+[\s]?[\-]?[a-zA-Z ]*)$/g;
 		if (!x.match(expr)) {
 			document.getElementById("errApt").style.visibility="visible";
@@ -162,7 +182,25 @@ function estPays() {
 	}	
 	return (monErr);	
 }
+function estLatitude() {
+	monErr = 0;
+	x = document.forms["form_ajoute"]["latitude"].value;
+	if (x.length==0){
+		monErr = 1;
+		document.getElementById("errLat").style.visibility="visible"; }
+	return (monErr);
+}
 
+function estLongitude() {
+	monErr = 0;
+	x = document.forms["form_ajoute"]["longitude"].value;
+	console.log(x.length)
+	if (x.length==0) {
+		monErr = 1;
+		document.getElementById("errLong").style.visibility="visible";
+	}
+	return (monErr);
+}
 
 function estPrix() {
 	monErr = 0;
@@ -190,7 +228,6 @@ function estDescription() {
 	}	
 	return (monErr);	
 }
-
 
 function estNbPersonnes() {
 	monErr = 0;
@@ -255,6 +292,43 @@ function estNbDemiSalleDeBain() {
 		document.getElementById("errNbDemiSalleDeBain").style.visibility="hidden";
 	}	
 	return (monErr);	
+}
+
+function ValiderAdresse() {
+	nbCivique = document.forms["form_ajoute"]["no_civique"].value;
+	Rue =  document.forms["form_ajoute"]["rue"].value;
+	Ville = document.forms["form_ajoute"]["ville"].value;
+	Province = document.forms["form_ajoute"]["province"].value;
+	codePostal = document.forms["form_ajoute"]["code_postal"].value;
+	adresse = nbCivique +' '+ Rue +' '+ Ville + ', '+ Province +' '+codePostal;
+//	adresse =  Ville + ', '+ Province;
+	console.log(adresse);
+	LongLat(adresse);
+	return
+}
+
+function LongLat(adresse) {
+    var markers = Array();
+    var geocoder = new google.maps.Geocoder();
+	console.log(adresse);
+    geocoder.geocode({'address': adresse}, function(results, status) {
+		console.log(status);
+		if (status == google.maps.GeocoderStatus.OK) {
+			var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+			document.forms["form_ajoute"]["latitude"].setAttribute('value',latitude);
+			document.forms["form_ajoute"]["longitude"].setAttribute('value',longitude);
+			$('#errLat').hide();
+			$('#errLong').hide();
+			//document.getElementsByName('latitude').value=latitude;
+			return 
+		}
+		 else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+	});
+	console.log(markers);
+	return markers;
 }
 
 
