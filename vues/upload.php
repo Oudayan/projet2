@@ -3,7 +3,7 @@
 session_start();
 	$courriel = $_SESSION["courriel"];
 	var_dump($_SESSION["courriel"]);
-	$dir = '../images/' .$courriel ;
+	$dir = '../images/Logements/' .$courriel ;
 	 if (!is_dir($dir))
 	    	mkdir ($dir,0777); 
 	$chemin = $dir . '/';

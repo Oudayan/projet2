@@ -89,9 +89,7 @@
 							break;
 						case "enregistrerLogement" :
 								echo "<pre>";
-								var_dump($params);
 								$courriel=$_SESSION["courriel"];
-								var_dump($courriel);
 								if (isset($params['est_stationnement']))
 									$stationement = 1;
 								else
@@ -107,11 +105,11 @@
 								if (isset($params['$est_tv']))
 									$tv = 1;
 								else
-									$tv = 0;								
+									$tv = 0;
 								if (isset($params['$est_fer_a_repasser']))
 									$fer_a_repasser = 1;
 								else
-									$fer_a_repasser = 0;								
+									$fer_a_repasser = 0;
 								if (isset($params['est_ceintres']))
 									$ceintres = 1;
 								else
@@ -131,49 +129,46 @@
 								if (isset($params['est_secheuse']))
 									$secheuse = 1;
 								else
-									$secheuse = 0;								
-							
+									$secheuse = 0;
+								if (isset($params['est_chauffage']))
+									$chauffage = 1;
+								else
+									$chauffage = 0;			
 								$json = array();
 								$modeleLogement = $this->lireDAO("Logement");
-							    $nouveau["Logement"] = new Logement(
-								"",							
-								$_POST["no_civique"],
-								$_POST["apt"], 
-								$_POST["rue"], 
-								$_POST["ville"],
-								$_POST["province"], 
-								$_POST["pays"], 
-								$_POST["code_postal"], 
-								$_POST["latitude"], 
-								$_POST["longitude"],
-								$_POST["id_TypeLogement"],
-								$_POST["prix"],
-								null,	
-								$_POST["description"],
-								$courriel, 
-								$_POST["nb_personnes"], 
-								$_POST["nb_chambres"],
-								$_POST["nb_lits"], 
-								$_POST["nb_salle_de_bain"], 
-								$_POST["nb_demi_salle_de_bain"], 
-								$stationement, 
-								$wifi,
-								$cuisine,
-								$tv,	
-								$fer_a_repasser,	
-								$ceintres,
-								$seche_cheveux, 
-								$climatise, 
-								$laveuse,
-								$secheuse, 
-								false, 
-								true,  
-								false,
-								null,
-								null								
-							);			
-								$json["data"] = $modeleLogement->sauvegarderLogement($nouveau["Logement"]);
-								echo json_encode($json);
+							    $nouveau["Logement"] = new Logement("",	$_POST["no_civique"], $_POST["apt"], $_POST["rue"], $_POST["ville"], $_POST["province"], $_POST["pays"], 
+								$_POST["code_postal"], $_POST["latitude"], $_POST["longitude"], $_POST["id_TypeLogement"], $_POST["prix"],
+								null, $_POST["description"], $courriel, $_POST["nb_personnes"], $_POST["nb_chambres"], $_POST["nb_lits"], 
+								$_POST["nb_salle_de_bain"], $_POST["nb_demi_salle_de_bain"], $_POST["frais_nettoyage"], $stationement, 
+								$wifi, $cuisine, $tv, $fer_a_repasser, $ceintres, $seche_cheveux, $climatise, $laveuse, 
+								$secheuse, $chauffage, false, true, false, null, null );	
+								$id = $modeleLogement->sauvegarderLogement($nouveau["Logement"]);
+								/* &&&& Enregistrement des photos &&&& */ 
+								$ancienNom = "./images/Logements/".$courriel;
+								$nouveauNom = "./images/Logements/".$id;
+								$chemin = "images/Logements/".$id;
+								rename($ancienNom, $nouveauNom);
+								for ($i=0;$i<20;$i++){
+									$nomPhoto = false;
+									if (isset($_POST['files'][$i])){
+									  $nomFichier = $_POST['files'][$i];
+									  $nomPhoto = true;
+									  }
+								    else if ($_POST["image".$i]) {
+										$nomFichier = $_POST["image".$i];
+										$nomPhoto = true;										
+									}
+									if ($nomPhoto) {
+										$nomFichier = $chemin . $nomFichier ;
+										$modelePhotos = $this->lireDAO("PhotoLogement");
+										$piece = $_POST["piece".$i];
+										$nouvellePhoto = new PhotoLogement("", $nomFichier, $piece, $id);
+										$modelePhotos->sauvegarderPhotoLogement($nouvellePhoto);
+									}
+								}
+								
+								$_SESSION["succes"]= "Votre logement a été enregistré, merci de attendre un confirmation dans votre courriel ! ";
+								header("Location: index.php");
 								return;
 							break;
 							

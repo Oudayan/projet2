@@ -53,16 +53,15 @@
 		public function __construct($id_logement = null, $no_civique = 0, $apt = null, $rue = "", $ville = "", 
 		$province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, 
 		$prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, 
-		$nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $est_staionnement = NULL, $est_wifi = NULL, $est_cuisine = NULL, 
-		$est_tv = NULL, $est_fer_a_repasser = NULL, $est_cintres = NULL, $est_seche_cheveux = NULL, $est_climatise = NULL, 
-		$est_laveuse = NULL, $est_secheuse = NULL, $est_chauffage = NULL, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, 
+		$nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $frais_nettoyage=0, $est_staionnement = 0, $est_wifi = 0, $est_cuisine = 0, 
+		$est_tv = 0, $est_fer_a_repasser = 0, $est_cintres = 0, $est_seche_cheveux = 0, $est_climatise = 0, 
+		$est_laveuse = 0, $est_secheuse = 0, $est_chauffage = 0, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, 
 		$l_date_banni = "", $l_commentaire_banni = "") {
 			$this->ecrireIdLogement($id_logement);
 			$this->ecrireNoCivique($no_civique);
 			$this->ecrireApt($apt);		
 			$this->ecrireRue($rue);
 			$this->ecrireVille($ville);
-
             $this->ecrireProvince($province);
             $this->ecrirePays($pays);
             $this->ecrireCodePostal($code_postal);
@@ -226,67 +225,67 @@
         }
         // Écrire est_staionnement
         public function ecrireEstStaionnement($est_staionnement) {
-            if (is_bool($est_staionnement) && trim($est_staionnement) != "") {
+            if (is_numeric($est_staionnement) && trim($est_staionnement) != "") {
                 $this->est_staionnement = $est_staionnement;
             }
         }
         // Écrire est_wifi
         public function ecrireEstWifi($est_wifi) {
-            if (is_bool($est_wifi) && trim($est_wifi) != "") {
+            if (is_numeric($est_wifi) && trim($est_wifi) != "") {
                 $this->est_wifi = $est_wifi;
             }
         }
         // Écrire est_cuisine
         public function ecrireEstCuisine($est_cuisine) {
-            if (is_bool($est_cuisine) && trim($est_cuisine) != "") {
+            if (is_numeric($est_cuisine) && trim($est_cuisine) != "") {
                 $this->est_cuisine = $est_cuisine;
             }
         }
         // Écrire est_tv
         public function ecrireEstTv($est_tv) {
-            if (is_bool($est_tv) && trim($est_tv) != "") {
+            if (is_numeric($est_tv) && trim($est_tv) != "") {
                 $this->est_tv = $est_tv;
             }
         }
         // Écrire est_fer_a_repasser
         public function ecrireEstFerARepasser($est_fer_a_repasser) {
-            if (is_bool($est_fer_a_repasser) && trim($est_fer_a_repasser) != "") {
+            if (is_numeric($est_fer_a_repasser) && trim($est_fer_a_repasser) != "") {
                 $this->est_fer_a_repasser = $est_fer_a_repasser;
             }
         }
         // Écrire est_cintres
         public function ecrireEstCintres($est_cintres) {
-            if (is_bool($est_cintres) && trim($est_cintres) != "") {
+            if (is_numeric($est_cintres) && trim($est_cintres) != "") {
                 $this->est_cintres = $est_cintres;
             }
         }
         // Écrire est_seche_cheveux
         public function ecrireEstSecheCheveux($est_seche_cheveux) {
-            if (is_bool($est_seche_cheveux) && trim($est_seche_cheveux) != "") {
+            if (is_numeric($est_seche_cheveux) && trim($est_seche_cheveux) != "") {
                 $this->est_seche_cheveux = $est_seche_cheveux;
             }
         }
         // Écrire est_climatise
         public function ecrireEstClimatise($est_climatise) {
-            if (is_bool($est_climatise) && trim($est_climatise) != "") {
+            if (is_numeric($est_climatise) && trim($est_climatise) != "") {
                 $this->est_climatise = $est_climatise;
             }
         }
         // Écrire est_laveuse
         public function ecrireEstLaveuse($est_laveuse) {
-            if (is_bool($est_laveuse) && trim($est_laveuse) != "") {
+            if (is_numeric($est_laveuse) && trim($est_laveuse) != "") {
                 $this->est_laveuse = $est_laveuse;
             }
         }
         // Écrire est_secheuse
         public function ecrireEstSecheuse($est_secheuse) {
-            if (is_bool($est_secheuse) && trim($est_secheuse) != "") {
+            if (is_numeric($est_secheuse) && trim($est_secheuse) != "") {
                 $this->est_secheuse = $est_secheuse;
             }
         }
         // Écrire est_chauffage
         public function ecrireEstChauffage($est_chauffage) {
-            if (is_bool($est_chauffage) && trim($est_chauffage) != "") {
+            if (is_numeric($est_chauffage) && trim($est_chauffage) != "") {
                 $this->est_chauffage = $est_chauffage;
             }
         }

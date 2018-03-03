@@ -105,7 +105,14 @@
 				<input type="text" class="form-control" name="prix" value='160' onblur="estPrix()" required>
 				<span id="errPrix" style="color:red; visibility:hidden">* Prix invalide ou requis</span>				
 			</div>
-			<div class="col-lg-8">	
+			<div class="col-lg-4">
+				<label for="prix">Frais de nettoyage</label>
+				<input type="text" class="form-control" name="frais_nettoyage" value='35' onblur="estFraisNettoyage()" required>
+				<span id="errFraisNettoyage" style="color:red; visibility:hidden">* Frais de nettoyage invalide ou requis</span>				
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-lg-12">	
 				<label for="description">Description</label>
 				<textarea rows="6" cols="100" name="description" onblur="estDescription()" required>Esta es una descripcion</textarea>
 				<span id="errDescription" style="color:red; visibility:hidden">* Description invalide ou requis</span>
@@ -193,10 +200,13 @@
 					<p>Laveuse</p>
 				</div>	  
 				<div class="col-lg-2">
-
 					<input type="checkbox" name="est_secheuse" data-toggle="toggle">
 					<p>Sécheuse</p>
 				</div>
+				<div class="col-lg-2">
+					<input type="checkbox" name="est_chauffage" data-toggle="toggle">
+					<p>Chauffage</p>
+				</div>	
 			</div>
 		</fieldset>
 		<!-- Photo -->
