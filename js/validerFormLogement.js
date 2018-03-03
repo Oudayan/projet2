@@ -15,37 +15,22 @@ function validateFormLogement(){
 	cleanErreurs();
 	err = 0; 
 	err += estApt();
-		console.log(err);
 	err += estNbCivique();
-		console.log(err);
 	err += estRue();
-		console.log(err);
 	err += estVille();
-		console.log(err);
 	err += estProvince();
-		console.log(err);
 	err += estPays();
-		console.log(err);
 	err += estCodePostal();
-		console.log(err);
 	err += estLatitude();
-		console.log(err);
 	err += estLongitude();
-		console.log(err);
 	err += estPrix();
-		console.log(err);
+	err += estFraisNettoyage();
 	err += estDescription();
-		console.log(err);
 	err += estNbPersonnes();
-		console.log(err);
 	err += estNbChambres();
-		console.log(err);
 	err += estNbLits();
-		console.log(err);
 	err += estNbSalleDeBain();
-		console.log(err);
 	err += estNbDemiSalleDeBain();
-	console.log(err);
 	if (err != 0)
 	{
 		alert ("Le formulaire est invalide");
@@ -211,6 +196,19 @@ function estPrix() {
 	}
 	else {
 		document.getElementById("errPrix").style.visibility="hidden";
+	}	
+	return (monErr);	
+}
+
+function estFraisNettoyage() {
+	monErr = 0;
+	var x = document.forms["form_ajoute"]["frais_nettoyage"].value;
+	if (x<=0) {
+		document.getElementById("errFraisNettoyage").style.visibility="visible";
+		monErr ++;
+	}
+	else {
+		document.getElementById("errFraisNettoyage").style.visibility="hidden";
 	}	
 	return (monErr);	
 }

@@ -27,7 +27,7 @@
 				reader.readAsDataURL(input.files[0]);
 				courriel = document.getElementById('courriel').value;
 					$("#photo"+input.id).show()
-					.attr('src','images/'+courriel+'/' + input.files[0].name); 
+					.attr('src','images/Logements/'+courriel+'/' + input.files[0].name); 
 				$("#photo"+input.id).show();
 				$("#piece"+input.id).show();
 				$("#trash"+input.id).show();
@@ -66,12 +66,10 @@
 			});
 		courriel = document.getElementById('courriel').value;
 			for(i=0;i<input.files.length;i++){
-				file = 'images/'+courriel+'/' + input.files[i].name;
+				file = 'images/Logements/'+courriel+'/' + input.files[i].name;
 				 $("#photo"+i).show()
-					.attr('src','images/'+courriel+'/' + input.files[i].name); 
+					.attr('src','images/Logements/'+courriel+'/' + input.files[i].name); 
 					maEtiquette = "image"+i;
-				document.forms["form_ajoute"]["image0"].setAttribute('value',input.files[i].name);
-				document.getElementById(maEtiquette).value=input.files[i].name;
 				$("#trash"+i).show();
 				$("#piece"+i).show();
 			}
