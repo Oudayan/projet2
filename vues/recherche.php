@@ -28,7 +28,7 @@
                 <h5>Filtrer par&nbsp;:</h5>
                 <div class="form-group date-form">
                     <label for="datesLocation">Dates&nbsp;:</label>
-                    <input type="text" id="datesLocation" name="datesLocation" class="form-control">
+                    <input type="text" id="datesLocation" name="datesLocation" class="form-control" value="<?= $_SESSION["recherche"]["datesLocation"] ?>">
                     <i class="glyphicon glyphicon-calendar fa fa-calendar date-icon"></i>
                 </div>
                 <div class="form-group">
@@ -91,11 +91,20 @@
                         <option value="0" <?= ($_SESSION["recherche"]['prixMin'] == 0 ? 'selected' : '') ?>>Aucun prix minimum</option>
                         <option value="25" <?= ($_SESSION["recherche"]['prixMin'] == 25 ? 'selected' : '') ?>>25 $</option>
                         <option value="50" <?= ($_SESSION["recherche"]['prixMin'] == 50 ? 'selected' : '') ?>>50 $</option>
-                        <option value="75" <?= ($_SESSION["recherche"]['prixMin'] == 75 ? 'selected' : '') ?>>75 $</option>
+                        <option value="60" <?= ($_SESSION["recherche"]['prixMin'] == 60 ? 'selected' : '') ?>>60 $</option>
+                        <option value="70" <?= ($_SESSION["recherche"]['prixMin'] == 70 ? 'selected' : '') ?>>70 $</option>
+                        <option value="80" <?= ($_SESSION["recherche"]['prixMin'] == 80 ? 'selected' : '') ?>>80 $</option>
+                        <option value="90" <?= ($_SESSION["recherche"]['prixMin'] == 90 ? 'selected' : '') ?>>90 $</option>
                         <option value="100" <?= ($_SESSION["recherche"]['prixMin'] == 100 ? 'selected' : '') ?>>100 $</option>
-                        <option value="125" <?= ($_SESSION["recherche"]['prixMin'] == 125 ? 'selected' : '') ?>>125 $</option>
+                        <option value="110" <?= ($_SESSION["recherche"]['prixMin'] == 110 ? 'selected' : '') ?>>110 $</option>
+                        <option value="120" <?= ($_SESSION["recherche"]['prixMin'] == 120 ? 'selected' : '') ?>>120 $</option>
+                        <option value="130" <?= ($_SESSION["recherche"]['prixMin'] == 130 ? 'selected' : '') ?>>130 $</option>
+                        <option value="140" <?= ($_SESSION["recherche"]['prixMin'] == 140 ? 'selected' : '') ?>>140 $</option>
                         <option value="150" <?= ($_SESSION["recherche"]['prixMin'] == 150 ? 'selected' : '') ?>>150 $</option>
-                        <option value="175" <?= ($_SESSION["recherche"]['prixMin'] == 175 ? 'selected' : '') ?>>175 $</option>
+                        <option value="160" <?= ($_SESSION["recherche"]['prixMin'] == 160 ? 'selected' : '') ?>>160 $</option>
+                        <option value="170" <?= ($_SESSION["recherche"]['prixMin'] == 170 ? 'selected' : '') ?>>170 $</option>
+                        <option value="180" <?= ($_SESSION["recherche"]['prixMin'] == 180 ? 'selected' : '') ?>>180 $</option>
+                        <option value="190" <?= ($_SESSION["recherche"]['prixMin'] == 190 ? 'selected' : '') ?>>190 $</option>
                         <option value="200" <?= ($_SESSION["recherche"]['prixMin'] == 200 ? 'selected' : '') ?>>200 $</option>
                         <option value="225" <?= ($_SESSION["recherche"]['prixMin'] == 225 ? 'selected' : '') ?>>225 $</option>
                         <option value="250" <?= ($_SESSION["recherche"]['prixMin'] == 250 ? 'selected' : '') ?>>250 $</option>
@@ -127,11 +136,20 @@
                         <option value="1000000" <?= ($_SESSION["recherche"]['prixMax'] == 1000000 ? 'selected' : '') ?>>Aucun prix maximum</option>
                         <option value="25" <?= ($_SESSION["recherche"]['prixMax'] == 25 ? 'selected' : '') ?>>25 $</option>
                         <option value="50" <?= ($_SESSION["recherche"]['prixMax'] == 50 ? 'selected' : '') ?>>50 $</option>
-                        <option value="75" <?= ($_SESSION["recherche"]['prixMax'] == 75 ? 'selected' : '') ?>>75 $</option>
+                        <option value="60" <?= ($_SESSION["recherche"]['prixMin'] == 60 ? 'selected' : '') ?>>60 $</option>
+                        <option value="70" <?= ($_SESSION["recherche"]['prixMin'] == 70 ? 'selected' : '') ?>>70 $</option>
+                        <option value="80" <?= ($_SESSION["recherche"]['prixMin'] == 80 ? 'selected' : '') ?>>80 $</option>
+                        <option value="90" <?= ($_SESSION["recherche"]['prixMin'] == 90 ? 'selected' : '') ?>>90 $</option>
                         <option value="100" <?= ($_SESSION["recherche"]['prixMax'] == 100 ? 'selected' : '') ?>>100 $</option>
-                        <option value="125" <?= ($_SESSION["recherche"]['prixMax'] == 125 ? 'selected' : '') ?>>125 $</option>
+                        <option value="110" <?= ($_SESSION["recherche"]['prixMax'] == 110 ? 'selected' : '') ?>>110 $</option>
+                        <option value="120" <?= ($_SESSION["recherche"]['prixMax'] == 120 ? 'selected' : '') ?>>120 $</option>
+                        <option value="130" <?= ($_SESSION["recherche"]['prixMax'] == 130 ? 'selected' : '') ?>>130 $</option>
+                        <option value="140" <?= ($_SESSION["recherche"]['prixMax'] == 140 ? 'selected' : '') ?>>140 $</option>
                         <option value="150" <?= ($_SESSION["recherche"]['prixMax'] == 150 ? 'selected' : '') ?>>150 $</option>
-                        <option value="175" <?= ($_SESSION["recherche"]['prixMax'] == 175 ? 'selected' : '') ?>>175 $</option>
+                        <option value="160" <?= ($_SESSION["recherche"]['prixMax'] == 160 ? 'selected' : '') ?>>160 $</option>
+                        <option value="170" <?= ($_SESSION["recherche"]['prixMax'] == 170 ? 'selected' : '') ?>>170 $</option>
+                        <option value="180" <?= ($_SESSION["recherche"]['prixMax'] == 180 ? 'selected' : '') ?>>180 $</option>
+                        <option value="190" <?= ($_SESSION["recherche"]['prixMax'] == 190 ? 'selected' : '') ?>>190 $</option>
                         <option value="200" <?= ($_SESSION["recherche"]['prixMax'] == 200 ? 'selected' : '') ?>>200 $</option>
                         <option value="225" <?= ($_SESSION["recherche"]['prixMax'] == 225 ? 'selected' : '') ?>>225 $</option>
                         <option value="250" <?= ($_SESSION["recherche"]['prixMax'] == 250 ? 'selected' : '') ?>>250 $</option>
@@ -282,10 +300,12 @@
                 ],
                 "firstDay": 1
             },
-            <?= (isset($_SESSION['disponibilite']['dateDebut']) ? '"minDate": "' . $_SESSION['disponibilite']['dateDebut'] . '", ' : '"minDate": new Date(), ') ?>
-            <?= (isset($_SESSION['disponibilite']['dateFin']) ? '"minDate": "' . $_SESSION['disponibilite']['dateFin'] . '", ' : '') ?>
-            <?= (isset($_SESSION['recherche']['debutLocation']) ? '"startDate": "' . $_SESSION['recherche']['debutLocation'] . '", ' : '') ?>
-            <?= (isset($_SESSION['recherche']['finLocation']) ? '"endDate": "' . $_SESSION['recherche']['finLocation'] . '", ' : '') ?>
+            // Date minimum est égale à aujourd'hui
+            "minDate": moment().format(), 
+            // Si la date de début du formulaire recherche est assigné en $_SESSION, mettre cette date comme date de début de la sélection, sinon à la date d'aujourd'hui
+            <?= (isset($_SESSION['recherche']['debutLocation']) ? '"startDate": "' . $_SESSION['recherche']['debutLocation'] . '", ' : ' "startDate": moment().format(), ') ?>
+            // Si la date de fin du formulaire recherche est assigné en $_SESSION, mettre cette date comme date de fin de la sélection, sinon à la date de demain
+            <?= (isset($_SESSION['recherche']['finLocation']) ? '"endDate": "' . $_SESSION['recherche']['finLocation'] . '", ' : '"endDate": moment(new Date()).add(1,"days"), ') ?>
             "applyClass": "btn-orange"
         }, function(start, end, label) {
             console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");

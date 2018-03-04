@@ -1,4 +1,14 @@
-                <?php if ($donnees["logements"]) {
+<?php
+/** 
+ * @file        rechercheFiches.php
+ * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version     1.0
+ * @date        15 février 2018
+ * @brief       Vue partielle pour afficher par fiches les résultats de recherche
+ * @details     Vue partielle rechercheFiches.php insérée dans la page recheche.php par requête Ajax
+ */ 
+
+                if ($donnees["logements"]) {
                     if (isset($donnees["succes"])) { ?>
                     <div id="alerte-resultat" class="alert alert-warning" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -46,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-8 description-fiche">
-                                <a href="index.php?Logement&action=afficherLogement">
+                                <a href="index.php?Logement&action=afficherLogement&idLogement=<?= $logement->lireIdLogement(); ?>">
                                     <div class="row">
                                         <h4 class="titre-fiche col-12 p-2"><?= $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince(); ?></h4>
                                         <div class="col-sm-12 text-left my-3">

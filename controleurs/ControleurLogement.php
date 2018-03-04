@@ -26,7 +26,15 @@
 					{
 
                         case "afficherLogement";
-                            $this->afficherVues("logement");
+                            if (isset($params["idLogement"])) {
+                                // Chercher les données du logement
+                                $modeleLogement = $this->lireDAO("Logement");
+                                $donnees["logement"] = $modeleLogement->lireLogementParId($params["idLogement"]);
+                            }
+                            else {
+                                $donnees["erreur"] = "Aucun logement n'est sélectionné";
+                            }
+                            $this->afficherVues("logement", $donnees);
                             break;
                             
 						case "getbyid":
