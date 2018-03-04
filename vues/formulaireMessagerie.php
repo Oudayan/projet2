@@ -9,8 +9,8 @@
  */
 ?>
 
-  <form class="boiteLecture hidden">
-    <button type="button" class="btn-bleu btn-sm">Répondre</button>
+
+    <button type="button" class="btn-bleu btn-sm repondre">Répondre</button>
     <button type="button" class="btn-bleu btn-sm">Transférer</button><hr>
     <div class="form-group row heigthFormBLecture">
       <label class="col-sm-2 col-form-label-sm">De :</label>
@@ -39,7 +39,7 @@
     </div>
     <div class="form-group row heigthFormBLecture">
       <div class="col-12">
-        <textarea class="form-control textMessage" rows="6"></textarea>
+        <textarea class="form-control textMessage" rows="6" disabled></textarea>
       </div>
     </div>
   </form>

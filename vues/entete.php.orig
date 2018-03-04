@@ -96,26 +96,17 @@
                             </div><!-- modal-dialog -->
                         </div><!-- modal fade -->
                     </div><!-- ml-auto -->
-				   <?php }
+				    <?php }
 					else { ?>
-<<<<<<< HEAD
-					<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
-						<a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link fa fa-sign-out fa-lg bg-login" aria-hidden="true"> Déconnexion</a>
+						<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
 						<a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
-=======
-					<div>
-                      <a href="index.php?Usagers&action=nouvelMessage"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
-                      <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
->>>>>>> 8734ae64959fd0c7512bf41c7c0b76bba62bda62
+                        <a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
+                        <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
 					</div>
 					<?php } ?>					
-					
                 </div><!-- container px-5 -->
             </nav>
-           <!-- <div class="my-4 text-center">
-            
-            </div>-->
-        </header>
+        </header >
       
 <script>
 	window.setTimeout(function() {
