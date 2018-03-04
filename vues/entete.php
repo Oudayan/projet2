@@ -4,21 +4,24 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>A Louer</title>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-toggle.css">
-        <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-toggle.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+		<!--  -->
+        <title>A Louer</title>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
         <script type="text/javascript" src="js/daterangepicker.js"></script>
+	 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3prxRP0MgiciOnRm7HODXcLJziJ_TJuc"></script>
     </head>
     <body>
         <header class="container-fluid"> 
             <nav class="navbar navbar-toggleable-sm bg-inverse navbar-inverse text-white row">
-                <div class="container px-5 px-sm-0 d-flex no-wrap justify-content-around">
+                <div class="container px-5 px-sm-0">
                     <a href="index.php?Recherche&action=accueil" class="navbar-brand mr-5"><img src="images/logo.png" alt="logo" style="width:60%"></a>
 						<?php if (isset($_SESSION["succes"])) {?>
 						<div class="alert alert-success" role="alert">
@@ -91,4 +94,7 @@
             $(this).remove(); 
 		});
 	}, 4000);
+
 </script>
+
+

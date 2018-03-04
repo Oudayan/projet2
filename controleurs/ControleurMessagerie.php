@@ -3,7 +3,7 @@
 * @file ControleurMessagerie.php
 * @autheurs Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
 * @version 1.0
-* @date 20 février 2018
+* @date 26 février 2018
 * @brief Définit la classe pour le controleur de la messagerie
 *
 * @details Cette classe définit les différentes activités concernant la messagerie.
@@ -13,214 +13,175 @@
 	{
 		public function index(array $params)
 		{
-
+            //si le paramètre action existe
 			if(isset($params["action"]))
 			{
-				
+				//switch en fonction de l'action qui nous est envoyée
 				switch($params["action"])
 				
 				{
 					//====================================================Accéder à la messagerie==================================================================
 					
 					case "afficherMessagerie":
-                         if(isset($params["courriel"]) )
-                         {
+
+                        if($_SESSION["courriel"])
+                        {
                             $this->afficherVues("messagerie");
-						
-                        
-                        
-                        
-                        
-                        
-                        
-                            }
-                        
-                        
-                        
-                        
-                        
-                        
+                        }
+                        else
+                        {  
+                            echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
+                        }
                         break;																			
-						
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        if(isset($params["courriel"]) && isset($params["MotDePasse"]) )
-						{
-								
-																									
-		
-								$modeleUsagers = $this->lireDao("Usagers");
-								//$nouveauUsager = new Usagers();
-								//$nouveauUsager->ecrireCourriel($params["courriel"]);
-								//$my=$nouveauUsager->lireCourriel();
-								// var_dump("my",$modeleUsagers);
-								$data = $modeleUsagers->obtenir_par_courriel($params["courriel"]);  
-								//var_dump($data);
-								if($data && $data->lireCourriel() == $params["courriel"] && $data->lireMotDePasse() == $params["MotDePasse"])	//verifie si $data est "vraie" et si les donnees de la bd sont pareil comme les entrées.
-								{																								//$data sera faux si le courriel ne se trouve pas dans la bd
-																		
-									if($data->lireestBanni() == 1)										//si l'usager est bannis
-									{
-										$this->afficherVues("MessageBanned");							//message pour les usagers bannis du site et destruction de la session
-										if (isset($_SESSION["courriel"]))
-											session_destroy();																	
-									}	
-									else															
-									{	
-			
-										 
-										// $controleur = "Sujets"; 									// chercher la classe avec le nom du controleur Sujets pour pouvoir afficher la liste des sujets
-										// $classe = "Controleur_" . $controleur;
-										//if(class_exists($classe))
-										/*{
-
-											$objetControleur = new $classe;							
-											if($objetControleur instanceof BaseControleur)
-											{
-												$_REQUEST["action"] = "afficheListeSujets";
-												$objetControleur->traite($_REQUEST);
-										 	}
-											else
-											trigger_error("Controleur invalide.");
-										} */
-									}
-									$_SESSION["courriel"] = $params["courriel"];	
-									$_SESSION["typeUser"] = $data->lireTypeUsager();
-								    $_SESSION["alert"]= "Reussi";
-									header("Location: index.php");
-							
-								}
-								else
-								{
-									var_dump("Le courriel ou le MotDePasse est inexact");   
-									$_SESSION["warning"]= "Le courriel ou le MotDePasse est inexact";
-									header("Location: index.php");
-								
-								}
-
-						}
-						else {
-							var_dump("Erreur en parametres");
-						    die();
-						}
-						
-					break;
-					
-					case "ajouterUsager" : 
-						$modeleTypeContact = $this->lireDAO("TypeContact");
-						$modeleTypePaiement = $this->lireDAO("TypePaiement");
-					  	$donnees["listeContacts"] = $modeleTypeContact->lireTousTypeContact();
-					  	$donnees["listePaiements"] = $modeleTypePaiement->lireTousTypePaiement();
-					  	$this->afficherVues("ajoutUsager", $donnees);
-					break;
-
-					//====================================================partie administrative===========================
-					
-				
-					case "afficheListeUsagers":														//affiche la liste des usagers
-						$this->afficheListeUsagers();
-					break;					
-									
-					
-					case "modifieUsager":															//va chercher un usager pour permettre la modification
-						
-						if(isset($params["courriel"]))
-						{
-							$modeleUsagers = $this->lireDAO("Usagers");
-							$data = $modeleUsagers->obtenir_par_courriel($params["courriel"]);		//obtenir les informations d'un usager en se servant du courriel de AfficheListeUsagers
-							$this->afficherVues("AfficheUsager", $data);								//affiche une vue de l'usager que l'on veut modifier
-						}
-						
-						else
-						{
-							trigger_error("Pas de courriel spécifié...");
-						}
-						break;
-					
-					
-					case "enregistrerUsager" :														//va chercher un usager pour permettre la modification
-						var_dump($params);
-						//die();
-						if(!isset($params["courriel"]) || !isset($params["nom"]) || !isset($params["prenom"]))
-						{	
-					       echo "Erreur .... !";
-							$this->afficherVues("AfficheUsager");
-						}
-						else
-						{
-								$modeleUsagers = $this->lireDAO("Usagers");                                  
-								$modification["Usager"] = new Usagers($params["courriel"],$params["nom"],$params["prenom"], $params["mot_de_passe"], $params["cellulaire"],"","","",$params["id_contact"],2,$params["id_paiement"]);
-								$succes= $modeleUsagers->sauvegarde($modification["Usager"]);		//sauvegarder les informations d'un usager en se servant d'un tableau
-								$this->afficheListeUsagers();
-						}
-						break;
-					case "Logout":																	//va chercher un usager pour permettre la modification
-					   $this->deconnection();
-					   header("Location: index.php");
-
-					break;
+						// aller chercher les messages recues
+                      
                     
-                    case "nouvelMessage":
-                      $this->afficherVues("messagerie");
+                    case "messagesRecus":
+                        
+                        $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
+                        
+                        $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
+                        /*
+                        echo "<pre>";
+                        var_dump($recus);
+                        echo "</pre>";
+                        */    
+							$donnees = array();
+                            for ($i=0; $i< count($recus); $i++){
+                                $donnees[$i]=array();
+                                $donnees[$i][0]= $recus[$i]->lireDestinataire();
+                                $donnees[$i][1]=$recus[$i]->lireLu(); 
+                                $donnees[$i][2]=$recus[$i]->lireD_actif();
+                                $donnees[$i][3]=$recus[$i]->lireId_message();
+                                $donnees[$i][4]=$recus[$i]->lireId_reference();
+                                $donnees[$i][5]=$recus[$i]->lireSujet();
+                                $donnees[$i][6]=$recus[$i]->lireFichier_joint();
+                                $donnees[$i][7]=$recus[$i]->lireMessage();
+                                $donnees[$i][8]=$recus[$i]->lireMsg_date();
+                                $donnees[$i][9]=$recus[$i]->lireM_actif();
+                                $donnees[$i][10]=$recus[$i]->lireExpediteur();
+                        	}  
+                            /* var_dump($donnees);
+                               die();
+							*/
+							echo json_encode($donnees);
+							return;					                                                 //contient la liste des messages recus
+							break;  
+                     case "msgEnvoyes":
+                       
+                        $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
+                        
+                        $envoyes = $modeleMessagesDestinataires->messagesEnvoyes($_SESSION["courriel"]);
+                        /*
+                        echo "<pre>";
+                        var_dump($envoyes);
+                        echo "</pre>";*/
+                           
+							$donnees = array();
+                            for ($i=0; $i< count($envoyes); $i++){
+                                $donnees[$i]=array();
+                                $donnees[$i][0]= $envoyes[$i]->lireDestinataire();
+                                $donnees[$i][1]=$envoyes[$i]->lireLu(); 
+                                $donnees[$i][2]=$envoyes[$i]->lireD_actif();
+                                $donnees[$i][3]=$envoyes[$i]->lireId_message();
+                                $donnees[$i][4]=$envoyes[$i]->lireId_reference();
+                                $donnees[$i][5]=$envoyes[$i]->lireSujet();
+                                $donnees[$i][6]=$envoyes[$i]->lireFichier_joint();
+                                $donnees[$i][7]=$envoyes[$i]->lireMessage();
+                                $donnees[$i][8]=$envoyes[$i]->lireMsg_date();
+                                $donnees[$i][9]=$envoyes[$i]->lireExpediteur();
+                                $donnees[$i][10]=$envoyes[$i]->lireM_actif();
+                        	}  
+							echo json_encode($donnees);
+							return;					                                                 //contient la liste des messages envoyes
+							break;  
+                        
+                    case "composerMessage" :
+                        $nom_fichier=$_FILES["fichierJoint"]["name"];
+                        var_dump($nom_fichier);
+                        $destination = "upload/";
+                        $msg = "";
+                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
+                        { 
+                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+                            $taille_max = 1024; //Taille en kilobytes
+                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);                           
+                        }
+                        if (trim($msg) != '')
+                        {
+                            $msg_validation= "La taille de l'image n'est pas valide";
+                            $this->afficherVues("messagerie");
+                        }
+                        else
+                        {
+                            $msg_validation='Message envoyé';
+                            $this->afficherVues("messagerie");
+                        }
+                        break; 
+                        
 					/*default:		
 																								
 						trigger_error("Action invalide");
 					*/	
-				}	
+				}                                                                                   // fin du switch	
+			}                                                                                       //fin du if params action
+			/*
+            else
+			{
+				//var_dump("No");
+				$this->afficherVues("messagerie"); 													//action par defaut- affiche la page d'accueil de la messagerie
 			}
-			else
-			{
-				var_dump("No");
-				$this->afficherVuess("FormLogin"); 													//action par defaut- affiche le login
-			}	
-		}
+            */
+            // fin du else du param action	
+		}                                                                                           //fin de la fonction index
 		
-		/**
-		* @brief Affiche la liste des usagers
-		* @details Prend les renseignements sur les usagers et les affiche. Puis ouvre la vue AfficheListeUsagers
-		* @details Utilise le Modele_Usagers
-		* @param point1 data
-		* @return à une vue.
-		*/
-
-		private function afficheListeUsagers()
-		{
-			$modeleUsagers = $this->lireDAO("Usagers");
-			$data["usagers"] = $modeleUsagers->obtenir_tous();
-			$this->afficherVues("AfficheListeUsagers", $data);
-		}
-
 		
-		/**
-		* @brief Permet la déconnection de la session
-		* @details Se retouve sur les pages ecepté sur la page de loggin
-		* @param point1 courriel
-		* @return aucun.
-		*/
-		private function deconnection()
-		{
 		
-			if (isset($_SESSION["courriel"])) 
-			{
-				unset($_SESSION["courriel"]);
-				setcookie("courriel", null, -1, '/');
-			}
-			if (isset($_SESSION["typeUser"]))
-			{
-				unset($_SESSION["typeUser"]);
-				setcookie("typeUser", null, -1, '/');
+	}                
+          
+/**
+ * @brief   fait le téléchargement d'un fichier
+ * @param   string| $nom_fichier   
+ * @param   string| $destination 
+ * @param   string| $fichier_taille
+ * @param   string| $nom_dest
+ * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
+ */
+function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
+{
+    $message = "";
+    if($_FILES[$nom_fichier]['error'] > 0){
+                $message = 'An error ocurred when uploading.';
+            }
 
-			}	
+            if(!getimagesize($_FILES[$nom_fichier]['tmp_name'])){
+                $message = 'Please ensure you are uploading an image.';
+            }
 
-		}
-		
-	}
-	
+            // Check filetype
+            $valid_types = array("image/exe", "image/js");
+            if (in_array($_FILES[$nom_fichier]['type'], $valid_types)) {
+                $message = 'Unsupported filetype uploaded.';
+            }
+
+            // Check filesize
+            if($_FILES[$nom_fichier]['size'] > $fichier_taille * 1024 ){ //Bytes
+                $message = 'File uploaded exceeds maximum upload size.';
+            }
+
+            // Check if the file exists
+            if(file_exists($destination . $_FILES[$nom_fichier]['name'])){
+                $message = 'File with that name already exists.';
+            }
+
+            // Upload file
+            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $nom_dest)){
+                $message = 'Error uploading file - check destination is writeable.';
+            }
+
+            return $message;
+
+}
+
 		
 ?>
