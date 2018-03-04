@@ -33,7 +33,6 @@
                             echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
                         }
                         break;
-                        
                     // aller chercher les messages recues 
                     case "messagesRecus":
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
@@ -54,6 +53,7 @@
                                   "m_actif"=>$recus[$i]->lireM_actif()
                                 );
                         	}  
+
 							echo json_encode($donnees);					                                                 //contient la liste des messages recus
 							break;
                             
@@ -92,6 +92,7 @@
                          //il ne faut pas retourne rien 
                       break;   
                     
+
                     case "composerMessage" :
                       if(isset($params["liste_contacts"]));
                       //cette liste de contacts vient séparés par virgule,
