@@ -32,74 +32,77 @@
                         {  
                             echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
                         }
-                        break;																			
-						// aller chercher les messages recues
-                      
-                    
+                        break;
+                    // aller chercher les messages recues 
                     case "messagesRecus":
-                        
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
-                        
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
-                        /*
-                        echo "<pre>";
-                        var_dump($recus);
-                        echo "</pre>";
-                        */    
 							$donnees = array();
                             for ($i=0; $i< count($recus); $i++){
-                                $donnees[$i]=array();
-                                $donnees[$i][0]= $recus[$i]->lireDestinataire();
-                                $donnees[$i][1]=$recus[$i]->lireLu(); 
-                                $donnees[$i][2]=$recus[$i]->lireD_actif();
-                                $donnees[$i][3]=$recus[$i]->lireId_message();
-                                $donnees[$i][4]=$recus[$i]->lireId_reference();
-                                $donnees[$i][5]=$recus[$i]->lireSujet();
-                                $donnees[$i][6]=$recus[$i]->lireFichier_joint();
-                                $donnees[$i][7]=$recus[$i]->lireMessage();
-                                $donnees[$i][8]=$recus[$i]->lireMsg_date();
-                                $donnees[$i][9]=$recus[$i]->lireM_actif();
-                                $donnees[$i][10]=$recus[$i]->lireExpediteur();
+                                $donnees[$i]=array(
+                                  "destinataire" => $recus[$i]->lireDestinataire(),
+                                  "lu" => $recus[$i]->lireLu(),
+                                  "d_actif" => $recus[$i]->lireD_actif(),
+                                  "id_message" => $recus[$i]->lireId_message(),
+                                  "id_reference" => $recus[$i]->lireId_reference(),
+                                  "sujet" => $recus[$i]->lireSujet(),
+                                  "Fichier_join"=> $recus[$i]->lireFichier_joint(),
+                                  "texteMessage" => $recus[$i]->lireMessage(),
+                                  "msg_date" => $recus[$i]->lireMsg_date(),
+                                  "expediteur"=>$recus[$i]->lireExpediteur(),
+                                  "m_actif"=>$recus[$i]->lireM_actif()
+                                );
                         	}  
-                            /* var_dump($donnees);
-                               die();
-							*/
-							echo json_encode($donnees);
-							return;					                                                 //contient la liste des messages recus
-							break;  
-                     case "msgEnvoyes":
-                       
+
+							echo json_encode($donnees);					                                                 //contient la liste des messages recus
+							break;
+                            
+                    case "msgEnvoyes":
+                        $modeleMessages = $this->lireDAO("Messages");
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
-                        
                         $envoyes = $modeleMessagesDestinataires->messagesEnvoyes($_SESSION["courriel"]);
-                        /*
-                        echo "<pre>";
-                        var_dump($envoyes);
-                        echo "</pre>";*/
-                           
 							$donnees = array();
                             for ($i=0; $i< count($envoyes); $i++){
-                                $donnees[$i]=array();
-                                $donnees[$i][0]= $envoyes[$i]->lireDestinataire();
-                                $donnees[$i][1]=$envoyes[$i]->lireLu(); 
-                                $donnees[$i][2]=$envoyes[$i]->lireD_actif();
-                                $donnees[$i][3]=$envoyes[$i]->lireId_message();
-                                $donnees[$i][4]=$envoyes[$i]->lireId_reference();
-                                $donnees[$i][5]=$envoyes[$i]->lireSujet();
-                                $donnees[$i][6]=$envoyes[$i]->lireFichier_joint();
-                                $donnees[$i][7]=$envoyes[$i]->lireMessage();
-                                $donnees[$i][8]=$envoyes[$i]->lireMsg_date();
-                                $donnees[$i][9]=$envoyes[$i]->lireExpediteur();
-                                $donnees[$i][10]=$envoyes[$i]->lireM_actif();
-                        	}  
+                                $donnees[$i]=array(
+                                  "destinataire" => $envoyes[$i]->lireDestinataire(),
+                                  "lu" => $envoyes[$i]->lireLu(),
+                                  "d_actif" => $envoyes[$i]->lireD_actif(),
+                                  "id_message" => $envoyes[$i]->lireId_message(),
+                                  "id_reference" => $envoyes[$i]->lireId_reference(),
+                                  "sujet" => $envoyes[$i]->lireSujet(),
+                                  "Fichier_join"=> $envoyes[$i]->lireFichier_joint(),
+                                  "texteMessage" => $envoyes[$i]->lireMessage(),
+                                  "msg_date" => $envoyes[$i]->lireMsg_date(),
+                                  "expediteur"=>$envoyes[$i]->lireExpediteur(),
+                                  "m_actif"=>$envoyes[$i]->lireM_actif()
+                                );
+                        	} 
 							echo json_encode($donnees);
-							return;					                                                 //contient la liste des messages envoyes
-							break;  
-                        
+											                                                 //contient la liste des messages recus
+							break; 
+                    case "supprimirMessage":    
+                         $_POST["id_message"]; //paramètre qu'envoie cotè client.                      
+                      //faire le code puur mettre inactif le message
+                      //il ne faut pas retourner rien
+                      break;
+                    case "messageLu":
+                         $_POST["id_message"];
+                         $_POST["message_lu"];//boolean
+                         //il faut faire update sur la table al_destinataire column lu
+                         //il ne faut pas retourne rien 
+                      break;   
+                    
+
                     case "composerMessage" :
-                        $nom_fichier=$_FILES["fichierJoint"]["name"];
-                        var_dump($nom_fichier);
-                        $destination = "upload/";
+                      if(isset($params["liste_contacts"]));
+                      //cette liste de contacts vient séparés par virgule,
+                      // au cas où de plusieurs destinataites
+                      //il faut alors les separé avec un fonction php lire manual
+                      //faire le insert BD.  
+                      
+                     /*  $nom_fichier=$_FILES["fichierJoint"]["name"];
+                       // var_dump($nom_fichier);
+                       $destination = "upload/";
                         $msg = "";
                         if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
@@ -116,8 +119,8 @@
                         {
                             $msg_validation='Message envoyé';
                             $this->afficherVues("messagerie");
-                        }
-                        break; 
+                        }*/
+                        break;
                         
 					/*default:		
 																								
@@ -125,13 +128,13 @@
 					*/	
 				}                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
-			/*
+			
             else
 			{
 				//var_dump("No");
 				$this->afficherVues("messagerie"); 													//action par defaut- affiche la page d'accueil de la messagerie
 			}
-            */
+           
             // fin du else du param action	
 		}                                                                                           //fin de la fonction index
 		
