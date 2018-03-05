@@ -78,7 +78,7 @@
                                 );
                         	} 
 							echo json_encode($donnees);
-											                                                 //contient la liste des messages recus
+			                                                 //contient la liste des messages recus
 							break; 
                     case "supprimirMessage":    
                          $_POST["id_message"]; //paramètre qu'envoie cotè client.                      
@@ -94,32 +94,54 @@
                     
 
                     case "composerMessage" :
-                      if(isset($params["liste_contacts"]));
-                      //cette liste de contacts vient séparés par virgule,
-                      // au cas où de plusieurs destinataites
-                      //il faut alors les separé avec un fonction php lire manual
-                      //faire le insert BD.  
-                      
-                     /*  $nom_fichier=$_FILES["fichierJoint"]["name"];
-                       // var_dump($nom_fichier);
-                       $destination = "upload/";
-                        $msg = "";
-                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
+						echo "<pre>";
+						var_dump("Entrando al controlador");
+						var_dump($_POST);
+						var_dump(isset($_POST["liste_contacts"]));
+						var_dump(isset($_POST["sujet"]));
+						var_dump(isset($_POST["textMessage"]));
+						if (isset($_FILES["fichierJoint"]["name"]))  // &&&&&&&&&& S'il y a un nom du fichier
+							$nom_fichier = $_FILES["fichierJoint"]["name"];
+					    else 
+							$nom_fichier = "";
+                       $destination = "pieces_jointes/";
+                       $msg = "";
+                        if(isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+							var_dump('Entrando');
+							$modeleMessagerie = $this->lireDAO("MessagesDestinataires"); // &&&&&&&&&& Variable de type classe Messagerie &&& 
+							$newMessage = new Message( // Selon le modele Message
+								"", // id_message
+								"", // id_reference
+								$_POST["sujet"], // Sujet
+								$_FILES["fichierJoint"]["name"], // Fichier joint 
+								$_POST["textMessage"], // Message
+								date(now()),  // msg_date
+								true, 
+								$_SESSION["courriel"]
+								
+							);
+							var_dump($newMessage);
+							die();
+							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
+                            $id_message = $modeleMessagerie->sauvegarderMessage($_POST["liste_contacts"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
                             $taille_max = 1024; //Taille en kilobytes
-                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);                           
+                            $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
                         }
+						else {
+							var_dump('Ahora no entró');
+							die();}
                         if (trim($msg) != '')
                         {
-                            $msg_validation= "La taille de l'image n'est pas valide";
+                          echo $msg;
                             $this->afficherVues("messagerie");
                         }
                         else
                         {
-                            $msg_validation='Message envoyé';
+                          echo $msg;
                             $this->afficherVues("messagerie");
-                        }*/
+                        }
+   
                         break;
                         
 					/*default:		

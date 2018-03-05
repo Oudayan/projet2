@@ -1,17 +1,15 @@
 <?php
 /**
- * @file     messagerie.php
- * @author   Zoraida Ortiz
+ * @file     admin.php
+ * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
  * @version  2.0
- * @date     20 fevrier 2018
- * @brief    vue messagerie
+ * @date     5 mars 2018
+ * @brief    vue admin
  * @details  
  * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
 ?> 
-<head> 
-  <script src="js/validerFormCompMsg.js"></script>
-</head>     
+
 
 <div class="container">
   <div class="d-flex flex-row">
