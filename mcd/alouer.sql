@@ -634,7 +634,7 @@ INSERT INTO `al_destinataire` (`destinataire`, `id_message`, `lu`, `d_actif`) VA
 -- 
 
 INSERT INTO `al_options` (`id_option`, `nom_option`, `valeurs_option`) VALUES
-(1, 'forumlaire_recherche', 'a:11:{s:9:"affichage";s:5:"carte";s:3:"tri";s:10:"evaluation";s:3:"asc";s:4:"DESC";s:6:"region";i:6;s:8:"latitude";d:45.57;s:9:"longitude";d:-73.57;s:5:"rayon";i:20;s:4:"zoom";i:11;s:7:"prixMin";i:0;s:7:"prixMax";i:1000000;s:10:"evaluation";i:0;}'), 
+(1, 'forumlaire_recherche', 'a:11:{s:9:"affichage";s:5:"carte";s:3:"tri";s:10:"evaluation";s:3:"asc";s:4:"DESC";s:11:"nbPersonnes";i:1;s:8:"latitude";d:45.57;s:9:"longitude";d:-73.57;s:5:"rayon";i:20;s:4:"zoom";i:11;s:7:"prixMin";i:0;s:7:"prixMax";i:1000000;s:10:"evaluation";i:0;}'), 
 (2, 'frais_service', '5.00'),
 (3, 'taxes_canada', 'a:10:{i:0;a:3:{i:0;s:6:"Canada";i:1;s:3:"TPS";i:2;d:5;}i:1;a:3:{i:0;s:2:"QC";i:1;s:3:"TVQ";i:2;d:9.975;}i:2;a:3:{i:0;s:2:"ON";i:1;s:3:"HST";i:2;d:8;}i:3;a:3:{i:0;s:2:"NB";i:1;s:3:"HST";i:2;d:10;}i:4;a:3:{i:0;s:2:"NS";i:1;s:3:"HST";i:2;d:10;}i:5;a:3:{i:0;s:2:"NF";i:1;s:3:"HST";i:2;d:10;}i:6;a:3:{i:0;s:2:"PE";i:1;s:3:"HST";i:2;d:10;}i:7;a:3:{i:0;s:2:"MB";i:1;s:3:"PST";i:2;d:8;}i:8;a:3:{i:0;s:2:"SK";i:1;s:3:"PST";i:2;d:6;}i:9;a:3:{i:0;s:2:"BC";i:1;s:3:"PST";i:2;d:7;}}');
 

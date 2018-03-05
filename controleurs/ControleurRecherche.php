@@ -60,7 +60,8 @@
                         $infosCarte = array();
                         for ($i = 0; $i<count($donnees["logements"]); $i++) {
                             $infosCarte[$i] = array();
-                            $infosCarte[$i][0] = '<a href="index.php?Logement&action=afficherLogement&idLogement=' . $donnees["logements"][$i]->lireIdLogement() . '"><h4 class="p-2">' . $donnees["logements"][$i]->lireNoCivique() . ' ' . $donnees["logements"][$i]->lireRue() . ' ' . $donnees["logements"][$i]->lireApt() . ', ' . $donnees["logements"][$i]->lireVille() . ', ' . $donnees["logements"][$i]->lireProvince() . '</h4></span><img src="' . $donnees["logements"][$i]->lirePremierePhoto() . '"><div class="d-flex justify-content-between"><span class="prix pt-2"><strong>' . $donnees["logements"][$i]->lirePrix() . '$</strong></span><span class="score"><span style="width:' . ($donnees["logements"][$i]->lireEvaluation() / 5) * 100 . '%"></span></div></a>';
+                            $premierePhoto = $modelePhotosLogement->lirePremierePhotoLogement($donnees["logements"][$i]->lireIdLogement());
+                            $infosCarte[$i][0] = '<a href="index.php?Logement&action=afficherLogement&idLogement=' . $donnees["logements"][$i]->lireIdLogement() . '"><h4 class="p-2">' . $donnees["logements"][$i]->lireNoCivique() . ' ' . $donnees["logements"][$i]->lireRue() . ' ' . $donnees["logements"][$i]->lireApt() . ', ' . $donnees["logements"][$i]->lireVille() . ', ' . $donnees["logements"][$i]->lireProvince() . '</h4></span><img src="' . $premierePhoto->lireCheminPhoto() . '"><div class="d-flex justify-content-between"><span class="prix pt-2"><strong>' . $donnees["logements"][$i]->lirePrix() . '$</strong></span><span class="score"><span style="width:' . ($donnees["logements"][$i]->lireEvaluation() / 5) * 100 . '%"></span></div></a>';
                             $infosCarte[$i][1] = $donnees["logements"][$i]->lireLatitude();
                             $infosCarte[$i][2] = $donnees["logements"][$i]->lireLongitude();
                             $infosCarte[$i][3] = ($donnees["logements"][$i]->lireIdTypeLogement() - 1);
@@ -153,15 +154,15 @@
                 $_SESSION["recherche"]["finLocation"] = $dates[1];
                 $_SESSION['recherche']['datesLocation'] = $dates[0] . "  au  " . $dates[1];
             }
-            // Région
-            if (isset($params["region"])) {
-                //$filtre .= ($filtre == "" ? "" : " AND ") . "region = " . $params["region"];
-                $_SESSION["recherche"]["region"] = $params["region"];
+            // Nombre de personnes
+            if (isset($params["nbPersonnes"])) {
+                $filtre .= ($filtre == "" ? "" : " AND ") . "nb_personnes >= " . $params["nbPersonnes"];
+                $_SESSION["recherche"]["nbPersonnes"] = $params["nbPersonnes"];
             }
-            else if (!isset($_SESSION["recherche"]["region"])) {
-                $_SESSION["recherche"]["region"] = $valeursOption["region"];
+            else if (!isset($_SESSION["recherche"]["nbPersonnes"])) {
+                $_SESSION["recherche"]["nbPersonnes"] = $valeursOption["nbPersonnes"];
             }
-            // Adresse
+            // Adresse de départ des recherches
             if (isset($params["adresseDepart"])) {
                 $_SESSION["recherche"]["adresseDepart"] = $params["adresseDepart"];
             }
@@ -182,7 +183,7 @@
             else if (!isset($_SESSION["recherche"]["longitude"])) {
                 $_SESSION["recherche"]["longitude"] = $valeursOption["longitude"];
             }
-            // Rayon
+            // Rayon de recherche du point de départ
             if (isset($params["rayon"])) {
                 $_SESSION["recherche"]["rayon"] = $params["rayon"];
                 // Tableau associatif des rayons de recherche et du niveau de zoom de la carte

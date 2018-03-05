@@ -4,7 +4,7 @@
             </div>
             <form id="location" method="post" action="index.php?Location" class="p-2">
                 <div class="modal-body">
-                    <aside class="location border rounded py-3 mt-2">
+                    <aside class="location border rounded p-3 mt-2">
                         <input type="hidden" id="action" name="action" value="louerLogement">
                         <input type="hidden" id="idLogement" name="idLogement" value="<?= $donnees["logement"]->lireIdLogement(); ?>">
                         <div class="row">
@@ -22,61 +22,66 @@
                             <input type="text" id="datesLocation" name="datesLocation" class="form-control">
                             <i class="glyphicon glyphicon-calendar fa fa-calendar date-icon"></i>
                         </div>
-                        <?php if (isset($donnees["location"]["nbJours"]) && $donnees["location"]["nbJours"] >= 1) { ?>
-                        <section class="p-3">
+                        <?php if (isset($_SESSION["location"]["nbJours"]) && $_SESSION["location"]["nbJours"] >= 1) { ?>
+                        <section class="py-3">
                             <div class="row">
                                 <label class="col-6 text-left">
-                                    <?= (isset($donnees["location"]["nbJours"]) ? $donnees["location"]["nbJours"] . " X " : ""); ?>
-                                    <?= (isset($donnees["location"]["prix"]) ? $donnees["location"]["prix"] . " <small>par nuit</small>" : ""); ?>
+                                    <?= (isset($_SESSION["location"]["nbJours"]) ? $_SESSION["location"]["nbJours"] . " X " : ""); ?>
+                                    <?= (isset($_SESSION["location"]["prix"]) ? $_SESSION["location"]["prix"] . " <small>par nuit</small>" : ""); ?>
                                 </label>
                                 <span class="col-6 text-right">
-                                    Sous-total&nbsp;: <?= (isset($donnees["location"]["sousTotal"]) ? $donnees["location"]["sousTotal"] : ""); ?>
+                                    Sous-total&nbsp;: <?= (isset($_SESSION["location"]["sousTotal"]) ? $_SESSION["location"]["sousTotal"] : ""); ?>
                                 </span>
                             </div>
                             <hr />
-                            <?php if (isset($donnees["location"]["nettoyage"]) && $donnees["location"]["nettoyage"] > 0) { ?>
+                            <?php if (isset($_SESSION["location"]["nettoyage"]) && $_SESSION["location"]["nettoyage"] > 0) { ?>
                             <div class="row">
                                 <label class="col-6 text-left">Frais de nettoyage&nbsp;:</label>
                                 <span class="col-6 text-right">
-                                    <?= $donnees["location"]["nettoyage"] ?>
+                                    <?= $_SESSION["location"]["nettoyage"] ?>
                                 </span>
                             </div>
                             <hr />
                             <?php } 
-                            if (isset($donnees["location"]["fraisService"]) && $donnees["location"]["fraisService"] > 0) { ?>
+                            if (isset($_SESSION["location"]["fraisService"]) && $_SESSION["location"]["fraisService"] > 0) { ?>
                             <div class="row">
                                 <label class="col-6 text-left">Frais de service&nbsp;:</label>
                                 <span class="col-6 text-right">
-                                    <?= $donnees["location"]["fraisService"] ?>
+                                    <?= $_SESSION["location"]["fraisService"] ?>
                                 </span>
                             </div>
                             <hr />
                             <?php } ?>
                             <div class="row">
-                            <?php if (isset($donnees["location"]["taxe"])) { ?>
+                            <?php if (isset($_SESSION["location"]["taxe"])) { ?>
                                 <h6 class="col-12 text-left">TAXES&nbsp;:</h6>
-                                <?php for ($i = 0; $i<count($donnees["location"]["taxe"]); $i++) { ?>
-                                    <label class="col-6 text-left"><?= $donnees["location"]["taxe"][$i] ?>&nbsp;: <?= $donnees["location"]["taux"][$i] ?>&nbsp;%</label>
-                                    <span class="col-6 text-right"><?= $donnees["location"]["sousTotalTaxe"][$i] ?></span>
+                                <?php for ($i = 0; $i<count($_SESSION["location"]["taxe"]); $i++) { ?>
+                                    <label class="col-6 text-left"><?= $_SESSION["location"]["taxe"][$i] ?>&nbsp;: <?= $_SESSION["location"]["taux"][$i] ?>&nbsp;%</label>
+                                    <span class="col-6 text-right"><?= $_SESSION["location"]["sousTotalTaxe"][$i] ?></span>
                                 <?php }
                             } ?>
                             </div>
                             <hr />
                             <div class="row">
                                 <label class="col-6 text-left"><h5>TOTAL&nbsp;:</h5></label>
-                                <h5 class="col-6 text-right"><?= (isset($donnees["location"]["prixTotal"]) ? $donnees["location"]["prixTotal"] : ""); ?></h5>
+                                <h5 class="col-6 text-right"><?= (isset($_SESSION["location"]["prixTotalFormate"]) ? $_SESSION["location"]["prixTotalFormate"] : ""); ?></h5>
                             </div>
                         </section>
+                        <?php } 
+                        else { ?>
+                        <div class="text-center text-danger p-1">
+                            <h5>Minimum 2 jours (1 nuit)</h5>                    
+                        </div>
                         <?php } ?>
                     </aside>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn" data-dismiss="modal">Annuler</button>
-                    <?php if (isset($_SESSION["courriel"])) { ?>
-                    <button type="submit" class="btn btn-orange">Louer !</button>
+                    <?php if (isset($_SESSION["courriel"]) && $_SESSION["courriel"] != $donnees["logement"]->lireCourriel() && isset($_SESSION["location"]["nbJours"]) && $_SESSION["location"]["nbJours"] >= 1) { ?>
+                        <button type="submit" class="btn btn-orange">Louer !</button>
                     <?php }
-                    else { ?>
-                    <a href="index.php?Usagers&action=ajouterUsager" class="btn btn-orange">Inscrivez-vous !</a>
+                    if (!isset($_SESSION["courriel"])){ ?>
+                        <a href="index.php?Usagers&action=ajouterUsager" class="btn btn-orange">Inscrivez-vous !</a>
                     <?php } ?>
                 </div>
             </form>

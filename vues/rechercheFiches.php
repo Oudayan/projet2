@@ -23,7 +23,7 @@
                                         <li data-target="#carousel_<?= $logement->lireIdLogement(); ?>" data-slide-to="0"></li>
                                     </ol>
                                     <div id="liste_image_<?= $logement->lireIdLogement(); ?>" class="carousel-inner">
-                                        <div class="carousel-item active"><img class="d-block w-100"  src="<?= $logement->lirePremierePhoto(); ?>"><div class="carousel-caption d-none d-md-block"><h5>Façade</h5></div></div>
+                                        <div class="carousel-item active"></div>
                                     </div>
                                     <a class="carousel-control-prev" href="#carousel_<?= $logement->lireIdLogement(); ?>" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

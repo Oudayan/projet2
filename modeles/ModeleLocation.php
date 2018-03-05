@@ -27,7 +27,7 @@
 		}
 		
 		public function lireLocationsAValider($id_proprietaire) {
-            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_proprietaire = " . $id_proprietaire . " AND valide = 0" ;
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_proprietaire = '" . $id_proprietaire . "' AND valide = 0" ;
 			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Location");
 		}
