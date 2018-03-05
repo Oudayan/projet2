@@ -79,11 +79,14 @@
 							echo json_encode($donnees);
 											                                                 //contient la liste des messages recus
 							break; 
-                    case "supprimirMessage":    
+                            
+                    case "supprimirMessage": 
+                      //tenir en compte que cela peut être plusieurs
                          $_POST["id_message"]; //paramètre qu'envoie cotè client.                      
                       //faire le code puur mettre inactif le message
                       //il ne faut pas retourner rien
                       break;
+                    
                     case "messageLu":
                          $_POST["id_message"];
                          $_POST["message_lu"];//true
