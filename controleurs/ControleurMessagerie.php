@@ -53,7 +53,6 @@
                                   "m_actif"=>$recus[$i]->lireM_actif()
                                 );
                         	}  
-
 							echo json_encode($donnees);					                                                 //contient la liste des messages recus
 							break;
                             
@@ -94,32 +93,42 @@
                     
 
                     case "composerMessage" :
-                      if(isset($params["liste_contacts"]));
+                      $_POST["liste_contacts"]; // , , plisieurs destinataires
+                      $_POST["sujet"];
+                      if(isset($_FILES["fichierJoint"])) {
+                        $_FILES["fichierJoint"]["name"]; //Nom du fichier
+                      }
+                      $_POST["textMessage"];
+                      
+                     /* if(isset($params["liste_contacts"])){  
+                        var_dump($params["liste_contacts"]);
+                      }*/
                       //cette liste de contacts vient séparés par virgule,
                       // au cas où de plusieurs destinataites
                       //il faut alors les separé avec un fonction php lire manual
                       //faire le insert BD.  
                       
-                     /*  $nom_fichier=$_FILES["fichierJoint"]["name"];
-                       // var_dump($nom_fichier);
-                       $destination = "upload/";
-                        $msg = "";
-                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
+                       $nom_fichier=$_FILES["fichierJoint"]["name"];
+                       $destination = "pieces_jointes/";
+                       $msg = "";
+                        if(trim($nom_fichier) != '' && isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+                            $id_message = "5_" . $_FILES["fichierJoint"]["name"];//sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
                             $taille_max = 1024; //Taille en kilobytes
-                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);                           
+                            $msg = charge_fichier("fichierJoint", $destination, $taille_max, $id_message);                           
                         }
                         if (trim($msg) != '')
                         {
-                            $msg_validation= "La taille de l'image n'est pas valide";
-                            $this->afficherVues("messagerie");
+                          echo $msg;
+                            /*$msg_validation= "La taille de l'image n'est pas valide";
+                            $this->afficherVues("messagerie");*/
                         }
                         else
                         {
-                            $msg_validation='Message envoyé';
-                            $this->afficherVues("messagerie");
-                        }*/
+                          echo "bien";
+                            /*$msg_validation='Message envoyé';
+                            $this->afficherVues("messagerie");*/
+                        }
                         break;
                         
 					/*default:		
@@ -157,13 +166,13 @@ function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
                 $message = 'An error ocurred when uploading.';
             }
 
-            if(!getimagesize($_FILES[$nom_fichier]['tmp_name'])){
+            /*if(!getimagesize($_FILES[$nom_fichier]['tmp_name'])){
                 $message = 'Please ensure you are uploading an image.';
-            }
+            }*/
 
             // Check filetype
-            $valid_types = array("image/exe", "image/js");
-            if (in_array($_FILES[$nom_fichier]['type'], $valid_types)) {
+            $invalid_types = array("application/vnd.microsoft.portable-executable", "text/javascript");
+            if (in_array($_FILES[$nom_fichier]['type'], $invalid_types)) {
                 $message = 'Unsupported filetype uploaded.';
             }
 
