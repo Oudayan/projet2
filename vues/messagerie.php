@@ -127,20 +127,29 @@
 </div><!-- container -->
 <script type="text/javascript">
   $(document).ready(function() {
-        //  $('.content').richText(); 
-          afficherBoiteReception();
-          afficherMsgEnvoyes();
+      afficherBoiteReception();
+      afficherMsgEnvoyes();
   });
   
+    class Message{
+    constructor(id_messsage, expediteur, destinataire, msg_date, sujet, fichierJoint, textMessage){
+      this.id_messsage = id_messsage;
+      this.expediteur = expediteur;
+      this.destinataire = destinataire;
+      this.msg_date = msg_date;
+      this.sujet = sujet;
+      this.fichierJoint = fichierJoint;
+      this.textMessage = textMessage;
+    }
+  };
+  //fonction pour la selection de destinataires pour envoyer un message
   function afficherSelection(){
     var listeContacts = document.getElementById('select-contacts').innerHTML;
     document.getElementById('liste_contacts').value = listeContacts;
     $('#modalContacts').modal('hide')
-}
-  
+    }
+    
   var mes_messages = {};
-  var message_selectione;
-  
   function afficherBoiteReception() {
     $.ajax({
         url: 'index.php?Messagerie&action=messagesRecus', 
@@ -218,18 +227,7 @@
     });
   }; 
   
-  class Message{
-    constructor(id_messsage, expediteur, destinataire, msg_date, sujet, fichierJoint, textMessage){
-      this.id_messsage = id_messsage;
-      this.expediteur = expediteur;
-      this.destinataire = destinataire;
-      this.msg_date = msg_date;
-      this.sujet = sujet;
-      this.fichierJoint = fichierJoint;
-      this.textMessage = textMessage;
-    }
-  };
-  
+  var message_selectione;
   function lireMessage(idMessage,reception){
     message_selectione = idMessage;
     var message = JSON.parse(mes_messages[idMessage]);
@@ -281,103 +279,7 @@
       $("#selectable").append("<li class='ui-widget-content' id='cont_" + index++ + "'>" + contact + "</li>")
     } 
   }
- 
- function envoyerMessage() {
-        // get the form data
-        // there are many ways to get this data using jQuery (you can use the class or id also)
-        var formData = {
-            'liste_contacts'  : $('input[name=liste_contacts]').val(),
-            'sujet'           : $('input[name=sujet]').val(),
-            'file_name'       : $('input[name=fichierJoint]').val(),
-            'textMessage'     : $('textarea[name=textMessage]').val()            
-        };
-        console.log(formData);
-        // process the form
-        $.ajax({
-            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-            url         : 'index.php?Messagerie&action=composerMessage', // the url where we want to POST
-            data        : formData, // our data object
-            dataType    : 'json', // what type of data do we expect back from the server
-            encode      : true
-        })
-  }
   
-  $(function(){
-    $("#formMessagerie").on("submit", function(e){
-          e.preventDefault();
-          var f = $(this);
-          var formData = new FormData(document.getElementById("formMessagerie"));
-          $.ajax({
-              type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-              url         : 'index.php?Messagerie&action=composerMessage', // the url where we want to POST
-              data: formData,
-              cache: false,
-              contentType: false,
-              processData: false
-          })
-    });
-  });
-  
-  function transfererMessage() {
-    var expediteurs = JSON.parse(mes_messages[message_selectione]).expediteur;
-    var dateMessage = JSON.parse(mes_messages[message_selectione]).msg_date;
-    var message = '\n_____________________________________\n' + 
-            expediteurs + ' a écrit le ' + dateMessage + '\n\n';
-    
-    $('input[name=liste_contacts]').val('');
-    $('input[name=sujet]').val('TR: ' + $('.sujet').val());
-    //$('input[name=fichierJoint]').val('por settear');
-    $('textarea[name=textMessage]').val(message + $('.textMessage').val());
-    
-    document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
-  }
-  
-  function repondreMessage() {
-    var expediteurs = JSON.parse(mes_messages[message_selectione]).expediteur;
-    var dateMessage = JSON.parse(mes_messages[message_selectione]).msg_date;
-    var message = '\n_____________________________________\n' + 
-            expediteurs + ' a écrit le ' + dateMessage + '\n\n';
-    
-    $('input[name=liste_contacts]').val(expediteurs);
-    $('input[name=sujet]').val('RE: ' + $('.sujet').val());
-    $('textarea[name=textMessage]').val(message + $('.textMessage').val());
-    
-    document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
-  }
-  
-  
- /* $("#EnvoyerForm").on("click", function() {
-    $.ajax({
-        url: 'index.php?Presentations&action=sauvegarderMessage',
-        type: 'POST',
-        data: { 
-                destinataire: $('#destinataire').val(),
-                sujet: $('#sujet').val(), 
-                fichierJoint: $('#fichierJoint').val(), 
-                date: $('#date').val(), 
-                textMessage: $('#textMessage').val(), 
-            }, 
-        dataType: 'html',
-       
-    });
-});
-
- /* $("#formMessagerie").on("change", function(){
-     var resultat = validaterFormMsg();
-     if(resultat){
-       console.log(resultat);
-       $("#EnvoyerForm").prop("disabled", false);
-     }
-     else{
-       $("#EnvoyerForm").prop("disabled", true);
-     }
-  });
-  
-  $("#fichierJoint").on("blur",function(){
-      validerExtension();
-  });*/
-  </script>
-<script>
   $( function() {
     $( "#selectable" ).selectable({
       stop: function() {
@@ -395,11 +297,85 @@
       }
     });
   } );
+ 
+ function envoyerMessage() {
+   
+        var formData = {
+            'liste_contacts'  : $('input[name=liste_contacts]').val(),
+            'sujet'           : $('input[name=sujet]').val(),
+            'file_name'       : $('input[name=fichierJoint]').val(),
+            'textMessage'     : $('textarea[name=textMessage]').val()            
+        };
+        console.log(formData);
+     
+        $.ajax({
+            type        : 'POST', 
+            url         : 'index.php?Messagerie&action=composerMessage',
+            data        : formData, 
+            dataType    : 'json',
+            encode      : true
+        })
+  }
   
+  $(function(){
+    $("#formMessagerie").on("submit", function(e){
+          e.preventDefault();
+          var f = $(this);
+          var formData = new FormData(document.getElementById("formMessagerie"));
+          $.ajax({
+              type        : 'POST', 
+              url         : 'index.php?Messagerie&action=composerMessage', 
+              data: formData,
+              cache: false,
+              contentType: false,
+              processData: false
+          })
+    });
+  });
   
+  function transfererMessage() {
+    var expediteurs = JSON.parse(mes_messages[message_selectione]).expediteur;
+    var dateMessage = JSON.parse(mes_messages[message_selectione]).msg_date;
+    var message = '\n________________________________________\n' + 
+            expediteurs + ' a écrit le ' + dateMessage + '\n\n';
+    
+    $('input[name=liste_contacts]').val('');
+    $('input[name=sujet]').val('TR: ' + $('.sujet').val());
+    //$('input[name=fichierJoint]').val('por settear');
+    $('textarea[name=textMessage]').val(message + $('.textMessage').val());
+    
+    document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
+  }
   
-
+  function repondreMessage() {
+    var expediteurs = JSON.parse(mes_messages[message_selectione]).expediteur;
+    var dateMessage = JSON.parse(mes_messages[message_selectione]).msg_date;
+    var message = '\n________________________________________\n' + 
+            expediteurs + ' a écrit le ' + dateMessage + '\n\n';
+    
+    $('input[name=liste_contacts]').val(expediteurs);
+    $('input[name=sujet]').val('RE: ' + $('.sujet').val());
+    $('textarea[name=textMessage]').val(message + $('.textMessage').val());
+    
+    document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
+  }
+  
+ /* $("#formMessagerie").on("change", function(){
+     var resultat = validaterFormMsg();
+     if(resultat){
+       console.log(resultat);
+       $("#EnvoyerForm").prop("disabled", false);
+     }
+     else{
+       $("#EnvoyerForm").prop("disabled", true);
+     }
+  });
+  
+  $("#fichierJoint").on("blur",function(){
+      validerExtension();
+  });*/
   </script>
+
   <style>
   #feedback { font-size: 0.9em; }
   #selectable .ui-selecting { background: #FECA40; }

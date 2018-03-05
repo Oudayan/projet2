@@ -86,49 +86,31 @@
                       break;
                     case "messageLu":
                          $_POST["id_message"];
-                         $_POST["message_lu"];//boolean
+                         $_POST["message_lu"];//true
                          //il faut faire update sur la table al_destinataire column lu
                          //il ne faut pas retourne rien 
                       break;   
                     
-
-                    case "composerMessage" :
-                      $_POST["liste_contacts"]; // , , plisieurs destinataires
-                      $_POST["sujet"];
-                      if(isset($_FILES["fichierJoint"])) {
-                        $_FILES["fichierJoint"]["name"]; //Nom du fichier
-                      }
-                      $_POST["textMessage"];
-                      
-                     /* if(isset($params["liste_contacts"])){  
-                        var_dump($params["liste_contacts"]);
-                      }*/
-                      //cette liste de contacts vient séparés par virgule,
-                      // au cas où de plusieurs destinataites
-                      //il faut alors les separé avec un fonction php lire manual
-                      //faire le insert BD.  
-                      
-                       $nom_fichier=$_FILES["fichierJoint"]["name"];
+                    case "composerMessage" :                      
+                       $nom_fichier = $_FILES["fichierJoint"]["name"];
                        $destination = "pieces_jointes/";
                        $msg = "";
                         if(trim($nom_fichier) != '' && isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-                            $id_message = "5_" . $_FILES["fichierJoint"]["name"];//sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+                            $id_message = sauvegarderMessage($_POST["liste_contacts"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
                             $taille_max = 1024; //Taille en kilobytes
-                            $msg = charge_fichier("fichierJoint", $destination, $taille_max, $id_message);                           
+                            $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
                         }
                         if (trim($msg) != '')
                         {
                           echo $msg;
-                            /*$msg_validation= "La taille de l'image n'est pas valide";
-                            $this->afficherVues("messagerie");*/
+                            $this->afficherVues("messagerie");
                         }
                         else
                         {
-                          echo "bien";
-                            /*$msg_validation='Message envoyé';
-                            $this->afficherVues("messagerie");*/
-                        }
+                          echo $msg;
+                            $this->afficherVues("messagerie");
+                            }
                         break;
                         
 					/*default:		
@@ -159,36 +141,32 @@
  * @param   string| $nom_dest
  * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
  */
-function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
+function charge_fichier($nom_fichier, $destination, $fichier_taille, $id_message)
 {
     $message = "";
     if($_FILES[$nom_fichier]['error'] > 0){
                 $message = 'An error ocurred when uploading.';
             }
 
-            /*if(!getimagesize($_FILES[$nom_fichier]['tmp_name'])){
-                $message = 'Please ensure you are uploading an image.';
-            }*/
-
             // Check filetype
             $invalid_types = array("application/vnd.microsoft.portable-executable", "text/javascript");
             if (in_array($_FILES[$nom_fichier]['type'], $invalid_types)) {
-                $message = 'Unsupported filetype uploaded.';
+                $message = "Erreur pendant l'envoi : Fichier non valide";
             }
 
             // Check filesize
             if($_FILES[$nom_fichier]['size'] > $fichier_taille * 1024 ){ //Bytes
-                $message = 'File uploaded exceeds maximum upload size.';
+                $message = "Le fichier téléchargé excède la taille de téléchargement maximale.";
             }
 
             // Check if the file exists
             if(file_exists($destination . $_FILES[$nom_fichier]['name'])){
-                $message = 'File with that name already exists.';
+                $message = "Le fichier avec ce nom existe déjà";
             }
 
             // Upload file
-            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $nom_dest)){
-                $message = 'Error uploading file - check destination is writeable.';
+            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $id_message)){
+                $message = "Erreur pendant l'envoi  - vérifier la destination.";
             }
 
             return $message;
