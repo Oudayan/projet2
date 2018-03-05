@@ -49,6 +49,7 @@
 		{
 			$resultat = $this->lireTous();  //reference BaseDAO
 			$desUsagers = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Usagers");
+			var_dump($desUsagers);
 			return $desUsagers;
 		}
 
@@ -66,6 +67,15 @@
 			return $unUsager;
 		}
 		
+		public function obtenir_listeaValider()
+		{
+			$query = "SELECT * FROM " . $this->lireNomTable() . " as u JOIN al_type_paiement as p ON u.id_paiement = p.id_paiement JOIN al_type_contact as c ON u.id_contact = c.id_contact JOIN al_type_usager as tu ON u.id_type_usager = tu.id_type_usager WHERE isnull(u_valide)" ;
+			$resultat=$this->requete($query);
+			$desUsagers = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Usagers'); 
+			return $desUsagers;
+		}			
+							
+
 		/**
 		* @brief Sauvegarde un usager
 		* @details Prend les informations entrées et les sauvegarde dans la base de données.
@@ -94,7 +104,7 @@
 			else
 			{ */
 				//insert
-				var_dump($unUsager);
+				// var_dump($unUsager);
 				$query = "INSERT INTO " . $this->lireNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
 				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),

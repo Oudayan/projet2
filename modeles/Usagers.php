@@ -26,7 +26,7 @@
 		private $u_actif;
 
 
-		public function __construct($courriel = "", $nom = "", $prenom = "", $cellulaire = "", $mot_de_passe = "", $u_banni = 0, $u_commentaire_banni = "", $u_date_banni = "", $id_contact = 0, $id_type_usager = 2, $id_paiement=0, $u_valide=false, $u_actif=true )
+		public function __construct($courriel = "", $nom = "", $prenom = "", $cellulaire = "", $mot_de_passe = "", $u_banni = 0, $u_commentaire_banni = "", $u_date_banni = "", $id_contact = 0, $id_type_usager = 2, $id_paiement=0, $u_valide=0, $u_actif=true )
 		{
 			$this->ecrireCourriel($courriel);
 			$this->ecrireNom($nom);
@@ -110,7 +110,7 @@
 		}
 
 		public function ecrireUValide($u_valide){
-			if (is_bool($u_valide)){
+			if (is_numeric($u_valide)){
 				$this->u_valide = $u_valide;
 			}
 		}
