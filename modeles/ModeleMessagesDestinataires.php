@@ -50,14 +50,25 @@
         }
         public function messagesEnvoyes($expediteur)
         {
-        $sql = "SELECT *
+        /*$sql = "SELECT *
         
         FROM " . $this->lireNomTable() .
         " JOIN al_messagerie  
         ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
         WHERE expediteur = '" . $expediteur . "'
         AND m_actif = 1 
-        ORDER BY al_messagerie.msg_date DESC";
+        ORDER BY al_messagerie.msg_date DESC";*/
+          
+        $sql = "SELECT GROUP_CONCAT( destinataire SEPARATOR ',') as destinataire," . 
+                "lu,d_actif,al_messagerie.id_message,id_reference,sujet,fichier_joint," .
+                "msg_date,m_actif,expediteur,message " . 
+                "FROM " . $this->lireNomTable() . " JOIN al_messagerie " . 
+                "ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message " .
+                "WHERE expediteur = '" . $expediteur . "' " . 
+                "AND m_actif = 1 " . 
+                "GROUP BY lu, d_actif,al_messagerie.id_message, id_reference," . 
+                "sujet, fichier_joint,msg_date,m_actif, expediteur,message " . 
+                "ORDER BY al_messagerie.msg_date DESC";  
         
         $resultat = $this->requete($sql);
         $resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "MessagesDestinataires"); 

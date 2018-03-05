@@ -32,92 +32,125 @@
                         {  
                             echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
                         }
-                        break;																			
-						// aller chercher les messages recues
-                      
-                    
+                        break;
+                    // aller chercher les messages recues 
                     case "messagesRecus":
-                        
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
-                        
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
-                        /*
-                        echo "<pre>";
-                        var_dump($recus);
-                        echo "</pre>";
-                        */    
 							$donnees = array();
                             for ($i=0; $i< count($recus); $i++){
-                                $donnees[$i]=array();
-                                $donnees[$i][0]= $recus[$i]->lireDestinataire();
-                                $donnees[$i][1]=$recus[$i]->lireLu(); 
-                                $donnees[$i][2]=$recus[$i]->lireD_actif();
-                                $donnees[$i][3]=$recus[$i]->lireId_message();
-                                $donnees[$i][4]=$recus[$i]->lireId_reference();
-                                $donnees[$i][5]=$recus[$i]->lireSujet();
-                                $donnees[$i][6]=$recus[$i]->lireFichier_joint();
-                                $donnees[$i][7]=$recus[$i]->lireMessage();
-                                $donnees[$i][8]=$recus[$i]->lireMsg_date();
-                                $donnees[$i][9]=$recus[$i]->lireM_actif();
-                                $donnees[$i][10]=$recus[$i]->lireExpediteur();
+                                $donnees[$i]=array(
+                                  "destinataire" => $recus[$i]->lireDestinataire(),
+                                  "lu" => $recus[$i]->lireLu(),
+                                  "d_actif" => $recus[$i]->lireD_actif(),
+                                  "id_message" => $recus[$i]->lireId_message(),
+                                  "id_reference" => $recus[$i]->lireId_reference(),
+                                  "sujet" => $recus[$i]->lireSujet(),
+                                  "Fichier_join"=> $recus[$i]->lireFichier_joint(),
+                                  "texteMessage" => $recus[$i]->lireMessage(),
+                                  "msg_date" => $recus[$i]->lireMsg_date(),
+                                  "expediteur"=>$recus[$i]->lireExpediteur(),
+                                  "m_actif"=>$recus[$i]->lireM_actif()
+                                );
                         	}  
-                            /* var_dump($donnees);
-                               die();
-							*/
-							echo json_encode($donnees);
-							return;					                                                 //contient la liste des messages recus
-							break;  
-                     case "msgEnvoyes":
-                       
+							echo json_encode($donnees);					                                                 //contient la liste des messages recus
+							break;
+                            
+                    case "msgEnvoyes":
+                        $modeleMessages = $this->lireDAO("Messages");
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
-                        
                         $envoyes = $modeleMessagesDestinataires->messagesEnvoyes($_SESSION["courriel"]);
-                        /*
-                        echo "<pre>";
-                        var_dump($envoyes);
-                        echo "</pre>";*/
-                           
 							$donnees = array();
                             for ($i=0; $i< count($envoyes); $i++){
-                                $donnees[$i]=array();
-                                $donnees[$i][0]= $envoyes[$i]->lireDestinataire();
-                                $donnees[$i][1]=$envoyes[$i]->lireLu(); 
-                                $donnees[$i][2]=$envoyes[$i]->lireD_actif();
-                                $donnees[$i][3]=$envoyes[$i]->lireId_message();
-                                $donnees[$i][4]=$envoyes[$i]->lireId_reference();
-                                $donnees[$i][5]=$envoyes[$i]->lireSujet();
-                                $donnees[$i][6]=$envoyes[$i]->lireFichier_joint();
-                                $donnees[$i][7]=$envoyes[$i]->lireMessage();
-                                $donnees[$i][8]=$envoyes[$i]->lireMsg_date();
-                                $donnees[$i][9]=$envoyes[$i]->lireExpediteur();
-                                $donnees[$i][10]=$envoyes[$i]->lireM_actif();
-                        	}  
+                                $donnees[$i]=array(
+                                  "destinataire" => $envoyes[$i]->lireDestinataire(),
+                                  "lu" => $envoyes[$i]->lireLu(),
+                                  "d_actif" => $envoyes[$i]->lireD_actif(),
+                                  "id_message" => $envoyes[$i]->lireId_message(),
+                                  "id_reference" => $envoyes[$i]->lireId_reference(),
+                                  "sujet" => $envoyes[$i]->lireSujet(),
+                                  "Fichier_join"=> $envoyes[$i]->lireFichier_joint(),
+                                  "texteMessage" => $envoyes[$i]->lireMessage(),
+                                  "msg_date" => $envoyes[$i]->lireMsg_date(),
+                                  "expediteur"=>$envoyes[$i]->lireExpediteur(),
+                                  "m_actif"=>$envoyes[$i]->lireM_actif()
+                                );
+                        	} 
 							echo json_encode($donnees);
-							return;					                                                 //contient la liste des messages envoyes
-							break;  
-                        
+			                                                 //contient la liste des messages recus
+							break; 
+                            
+                    case "supprimirMessage": 
+                      //tenir en compte que cela peut être plusieurs
+                         $_POST["id_message"]; //paramètre qu'envoie cotè client.                      
+                      //faire le code puur mettre inactif le message
+                      //il ne faut pas retourner rien
+                      break;
+                    
+                    case "messageLu":
+                         $_POST["id_message"];
+                         $_POST["message_lu"];//true
+                         //il faut faire update sur la table al_destinataire column lu
+                         //il ne faut pas retourne rien 
+                      break;   
+                    
+
+
                     case "composerMessage" :
-                        $nom_fichier=$_FILES["fichierJoint"]["name"];
-                        var_dump($nom_fichier);
-                        $destination = "upload/";
-                        $msg = "";
-                        if(trim($nom_fichier) != '' || trim($nom_fichier) == '' && isset($_POST["destinataire"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
+						echo "<pre>";
+						var_dump("Entrando al controlador");
+						var_dump($_POST);
+						var_dump(isset($_POST["liste_contacts"]));
+						var_dump(isset($_POST["sujet"]));
+						var_dump(isset($_POST["textMessage"]));
+						if (isset($_FILES["fichierJoint"]["name"]))  // &&&&&&&&&& S'il y a un nom du fichier
+							$nom_fichier = $_FILES["fichierJoint"]["name"];
+					    else 
+							$nom_fichier = "";
+                       $destination = "pieces_jointes/";
+                       $msg = "";
+                        if(isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-                            $id_message = sauvegarderMessage($_POST["destinataire"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+							var_dump('Entrando');
+							$modeleMessagerie = $this->lireDAO("MessagesDestinataires"); // &&&&&&&&&& Variable de type classe Messagerie &&& 
+							$newMessage = new Message( // Selon le modele Message
+								"", // id_message
+								"", // id_reference
+								$_POST["sujet"], // Sujet
+								$_FILES["fichierJoint"]["name"], // Fichier joint 
+								$_POST["textMessage"], // Message
+								date(now()),  // msg_date
+								true, 
+								$_SESSION["courriel"]
+								
+							);
+							var_dump($newMessage);
+							die();
+							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
+                            $id_message = $modeleMessagerie->sauvegarderMessage($_POST["liste_contacts"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
+
                             $taille_max = 1024; //Taille en kilobytes
-                            $msg = charge_image("fichierJoint", $destination, $taille_max, $id_message);                           
+                            $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
                         }
+						else {
+							var_dump('Ahora no entró');
+							die();}
                         if (trim($msg) != '')
                         {
-                            $msg_validation= "La taille de l'image n'est pas valide";
+                          echo $msg;
                             $this->afficherVues("messagerie");
                         }
                         else
                         {
-                            $msg_validation='Message envoyé';
+                          echo $msg;
                             $this->afficherVues("messagerie");
+
                         }
-                        break; 
+   
+
+                            }
+
+                        break;
                         
 					/*default:		
 																								
@@ -125,13 +158,13 @@
 					*/	
 				}                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
-			/*
+			
             else
 			{
 				//var_dump("No");
 				$this->afficherVues("messagerie"); 													//action par defaut- affiche la page d'accueil de la messagerie
 			}
-            */
+           
             // fin du else du param action	
 		}                                                                                           //fin de la fonction index
 		
@@ -147,36 +180,32 @@
  * @param   string| $nom_dest
  * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
  */
-function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
+function charge_fichier($nom_fichier, $destination, $fichier_taille, $id_message)
 {
     $message = "";
     if($_FILES[$nom_fichier]['error'] > 0){
                 $message = 'An error ocurred when uploading.';
             }
 
-            if(!getimagesize($_FILES[$nom_fichier]['tmp_name'])){
-                $message = 'Please ensure you are uploading an image.';
-            }
-
             // Check filetype
-            $valid_types = array("image/exe", "image/js");
-            if (in_array($_FILES[$nom_fichier]['type'], $valid_types)) {
-                $message = 'Unsupported filetype uploaded.';
+            $invalid_types = array("application/vnd.microsoft.portable-executable", "text/javascript");
+            if (in_array($_FILES[$nom_fichier]['type'], $invalid_types)) {
+                $message = "Erreur pendant l'envoi : Fichier non valide";
             }
 
             // Check filesize
             if($_FILES[$nom_fichier]['size'] > $fichier_taille * 1024 ){ //Bytes
-                $message = 'File uploaded exceeds maximum upload size.';
+                $message = "Le fichier téléchargé excède la taille de téléchargement maximale.";
             }
 
             // Check if the file exists
             if(file_exists($destination . $_FILES[$nom_fichier]['name'])){
-                $message = 'File with that name already exists.';
+                $message = "Le fichier avec ce nom existe déjà";
             }
 
             // Upload file
-            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $nom_dest)){
-                $message = 'Error uploading file - check destination is writeable.';
+            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $id_message)){
+                $message = "Erreur pendant l'envoi  - vérifier la destination.";
             }
 
             return $message;

@@ -457,7 +457,7 @@ label {
     background-color: rgb(75, 76, 76);
   }
   
-#v-pills-profile {
+#v-pills-boitRecp, #v-pills-mEnvoyes {
    height: 40vh;
    overflow: scroll;
   }
