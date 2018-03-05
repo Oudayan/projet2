@@ -13,7 +13,7 @@
         <h1>Recherche de logements À Louer</h1>
     </div>
     <div class="row">
-        <aside class="recherche col-lg-3 border rounded py-3 mt-2">
+        <aside class="recherche col-lg-3 border rounded py-2 mt-2">
             <form id="formulaire_recherche" method="post" action="<?= $_SESSION["recherche"]["action"] ?>" class="py-2">
                 <input type="hidden" id="action" name="action" value="recherche">
                 <input type="hidden" id="affichage" name="affichage" value="carte">
