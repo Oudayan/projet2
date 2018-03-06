@@ -30,7 +30,7 @@
 								
 																									
 		
-								$modeleUsagers = $this->lireDao("Usagers");
+								$modeleUsagers = $this->lireDAO("Usagers");
 								//$nouveauUsager = new Usagers();
 								//$nouveauUsager->ecrireCourriel($params["courriel"]);
 								//$my=$nouveauUsager->lireCourriel();
@@ -69,7 +69,20 @@
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
 									$_SESSION["prenom"] = $data->lirepreNom();
 								    $_SESSION["succes"]= "Bienvenue ! " . $_SESSION["prenom"] . " " ;
-									header("Location: index.php");
+                                    
+                                    // Redirection des administrateurs à la page d'administration du site
+                                    if ($_SESSION["typeUser"] == 1) {
+                                        header("Location: index.php?Proprietaire&action=afficherLogements");
+                                        //header("Location: index.php?Administration&action=afficherAdministration");
+                                    }
+									// Redirection des propriétaires à la page de gestion de logements
+                                    else if ($_SESSION["typeUser"] == 2) {
+                                        header("Location: index.php?Proprietaire&action=afficherLogements");
+                                    }
+                                    // Redirection des locataires à la page de recherche
+                                    else {
+                                        header("Location: index.php?Recherche&action=recherche");
+                                    }
 							
 								}
 								else

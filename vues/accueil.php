@@ -19,30 +19,3 @@
                 </div>
             </div>
         </main>
-
-        <script>
-            /* Source : http://callmenick.com/post/advanced-parallax-scrolling-effect 
-            (function(){
-                var parallax = document.querySelectorAll(".background"), speed = 0.5;
-                window.onscroll = function(){
-                    [].slice.call(parallax).forEach(function(el,i) {
-                        var windowYOffset = window.pageYOffset, elBackgrounPos = "0 " + (windowYOffset * speed) + "px";
-                        el.style.backgroundPosition = elBackgrounPos;
-                    });
-                };
-            })();*/
-        </script>
-
-        <script type="text/javascript">
-            /*$(window).on("load resize", function() {
-                var url = window.location.search.substring(1);
-                var home1 = new RegExp(/&action=accueil/, "gi");
-                var home2 = new RegExp(/&action=/, "gi");
-                if ((home1.test(url) ^ home2.test(url)) || $(window).width() < 768) {
-                    $("header").removeClass("accueil");
-                }
-                else {
-                    $("header").addClass("accueil");
-                }
-            });*/
-        </script>

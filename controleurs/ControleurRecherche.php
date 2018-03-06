@@ -51,83 +51,6 @@
                             $donnees["erreur"] = "Aucun logement trouvé&nbsp;!";
                         }
                         $this->afficherVues("rechercheFiches", $donnees, false);
-                        //var_dump($donnees["logements"] );
-                        /*if ($donnees["logements"]) {
-                            foreach ($donnees["logements"] as $logement) {
-                                echo '<article id="fiche_' . $logement->lireIdLogement() . '" class="row border rounded text-center m-2 p-2">';
-                                echo    '<div class="col-lg-4">';
-                                echo        '<div id="carousel_' . $logement->lireIdLogement() . '" class="carousel slide mb-5" data-ride="carousel">';
-                                echo            '<ol id="carousel_pagination_' . $logement->lireIdLogement() . '" class="carousel-indicators">';
-                                $imagesCarousel = $modelePhotosLogement->lireToutesPhotosParLogement($logement->lireIdLogement());
-                                for ($i=0; $i<count($imagesCarousel); $i++) {
-                                    if ($i == 0) {
-                                        echo        '<li data-target="#carousel_' . $logement->lireIdLogement() . '" data-slide-to="' . $i . '" active></li>';
-                                    }
-                                    else {
-                                        echo        '<li data-target="#carousel_' . $logement->lireIdLogement() . '" data-slide-to="' . $i . '"></li>';
-                                    }
-                                }
-                                echo            '</ol>';
-                                echo            '<div id="liste_image_' . $logement->lireIdLogement() . '" class="carousel-inner">';
-                                for ($i=0; $i<count($imagesCarousel); $i++) {
-                                    if ($i == 0) {
-                                        echo        '<div class="carousel-item active">';
-                                    }
-                                    else {
-                                        echo        '<div class="carousel-item">';
-                                    }
-                                    $pieces = $modelePieces->lirePieceParId($imagesCarousel[$i]->lireIdPiece());
-                                    echo                '<img class="d-block w-100" src="' . $imagesCarousel[$i]->lireCheminPhoto() . '" alt="' . $pieces->lireDescriptionPiece() . '">';
-                                    echo                '<div class="carousel-caption d-none d-md-block">';
-                                    echo                    '<h5>' . $pieces->lireDescriptionPiece() . '</h5>';
-                                    echo                '</div>';
-                                    echo            '</div>';
-                                }
-                                echo            '</div>';
-                                echo            '<a class="carousel-control-prev" href="#carousel_' . $logement->lireIdLogement() . '" role="button" data-slide="prev">';
-                                echo                '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-                                echo                '<span class="sr-only">Previous</span>';
-                                echo            '</a>';
-                                echo            '<a class="carousel-control-next" href="#carousel_' . $logement->lireIdLogement() . '" role="button" data-slide="next">';
-                                echo                '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-                                echo                '<span class="sr-only">Next</span>';
-                                echo            '</a>';
-                                echo        '</div>';
-                                echo    '</div>';
-                                echo    '<div class="col-lg-8 description-fiche">';
-                                echo        '<a href="index.php?Logement&action=afficherLogement">';
-                                echo            '<div class="row">';
-                                echo                '<h4 class="titre-fiche col-12 p-2">' . $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince() . '</h4>';
-                                echo                '<div class="col-sm-12 text-left my-3">';
-                                echo                    $logement->lireDescription() . '<br>';
-                                echo                '</div>';
-                                echo                '<div class="col-sm-12 text-left my-1">';
-                                $typesLogements = $modeleTypeLogement->lireTousTypeLogements();
-                                foreach ($typesLogements as $typeLogement) { 
-                                    if ($typeLogement->lireIdTypeLogement() == $logement->lireIdTypeLogement()) {
-                                        echo            "Type de logement&nbsp;:&nbsp;" . $typeLogement->lireTypeLogement();
-                                    }
-                                }
-                                echo                '</div>';
-                                echo                '<div class="col-sm-6 text-center text-sm-left my-3">';
-                                echo                    'Prix&nbsp;:&nbsp;<br><span class="prix mt-3"><strong>' . $logement->lirePrix() . '&nbsp;$</strong></span>';
-                                echo                '</div>';
-                                echo                '<div class="col-sm-6 text-center text-sm-right my-3">';
-                                echo                    'Évaluation&nbsp;:&nbsp;' . round($logement->lireEvaluation(), 2) . '&nbsp;/&nbsp;5';
-                                echo                    '<br><span class="score"><span style="width:' . ($logement->lireEvaluation() / 5) * 100 . ' %"></span></span>';
-                                echo                '</div>';
-                                echo            '</div>';
-                                echo        '</a>';
-                                echo    '</div>';
-                                echo '</article>';
-                            }
-                        }
-                        else {
-                            echo    '<div class="text-center m-5 py-5">';
-                            echo        '<h3 class="m-5 py-5">Désolé, il n\'y a aucun logement trouvé avec ces critères de&nbsp;recherche.</h3>';
-                            echo    '</div>';
-                        }*/
-                        //$this->afficherVues("recherche", $donnees);
                         break;
 
                     // Affichage de la recherche par carte avec ajax
@@ -137,7 +60,8 @@
                         $infosCarte = array();
                         for ($i = 0; $i<count($donnees["logements"]); $i++) {
                             $infosCarte[$i] = array();
-                            $infosCarte[$i][0] = '<a href="index.php?Logement&action=afficherLogement"><h4 class="p-2">' . $donnees["logements"][$i]->lireNoCivique() . ' ' . $donnees["logements"][$i]->lireRue() . ' ' . $donnees["logements"][$i]->lireApt() . ', ' . $donnees["logements"][$i]->lireVille() . ', ' . $donnees["logements"][$i]->lireProvince() . '</h4></span><img src="' . $donnees["logements"][$i]->lirePremierePhoto() . '"><div class="d-flex justify-content-between"><span class="prix pt-2"><strong>' . $donnees["logements"][$i]->lirePrix() . '$</strong></span><span class="score"><span style="width:' . ($donnees["logements"][$i]->lireEvaluation() / 5) * 100 . '%"></span></div></a>';
+                            $premierePhoto = $modelePhotosLogement->lirePremierePhotoLogement($donnees["logements"][$i]->lireIdLogement());
+                            $infosCarte[$i][0] = '<a href="index.php?Logement&action=afficherLogement&idLogement=' . $donnees["logements"][$i]->lireIdLogement() . '"><h4 class="p-2">' . $donnees["logements"][$i]->lireNoCivique() . ' ' . $donnees["logements"][$i]->lireRue() . ' ' . $donnees["logements"][$i]->lireApt() . ', ' . $donnees["logements"][$i]->lireVille() . ', ' . $donnees["logements"][$i]->lireProvince() . '</h4></span><img src="' . $premierePhoto->lireCheminPhoto() . '"><div class="d-flex justify-content-between"><span class="prix pt-2"><strong>' . $donnees["logements"][$i]->lirePrix() . '$</strong></span><span class="score"><span style="width:' . ($donnees["logements"][$i]->lireEvaluation() / 5) * 100 . '%"></span></div></a>';
                             $infosCarte[$i][1] = $donnees["logements"][$i]->lireLatitude();
                             $infosCarte[$i][2] = $donnees["logements"][$i]->lireLongitude();
                             $infosCarte[$i][3] = ($donnees["logements"][$i]->lireIdTypeLogement() - 1);
@@ -181,8 +105,27 @@
             $modeleTypeLogement = $this->lireDAO("TypeLogement");
             $modelePhotosLogement = $this->lireDAO("PhotoLogement");
             $modelePieces = $this->lireDAO("Piece");
-
-           // Affichage de la carte ou des fiches
+            $modeleOption = $this->lireDAO("Option");
+            
+            // Aller chercher les valeurs défaut du formulaire de recherche dans la table options
+            $option = $modeleOption->lireOptionParId(1);
+            $valeursOption = unserialize($option->lireValeursOption());
+            //var_dump($valeursOption["latitude"]);
+            
+            //$options = ["affichage"=>"carte", "tri"=>"evaluation", "asc"=>"DESC", "region"=>6, "latitude"=>45.57, "longitude"=>-73.57, "rayon"=>20, "zoom"=>11, "prixMin"=>0, "prixMax"=>1000000, "evaluation"=>0];
+            /*$options = [["Canada", "TPS", 5.0000], 
+                        ["QC", "TVQ", 9.9750], 
+                        ["ON", "HST", 8.0000], 
+                        ["NB", "HST", 10.0000], 
+                        ["NS", "HST", 10.0000], 
+                        ["NF", "HST", 10.0000], 
+                        ["PE", "HST", 10.0000], 
+                        ["MB", "PST", 8.0000], 
+                        ["SK", "PST", 6.0000], 
+                        ["BC", "PST", 7.0000]];
+            var_dump(serialize($options));*/
+            
+            // Affichage de la carte ou des fiches
             $_SESSION["recherche"]["action"] = "index.php?Recherche&carte=true";
             $_SESSION["recherche"]["affichage"] = "carte";
             if (isset($params["fiches"])) {
@@ -190,29 +133,36 @@
                 $_SESSION["recherche"]["affichage"] = "fiches";
             }
             // Construction du filtre de la requête
-            $filtre = "l_actif = true";
+            $filtre = "l_actif = true AND d_active = true";
             // Date de location
-            $dates[0] = date("Y-m-d");
-            $dates[1] = date("Y-m-d");
-            if (!isset($_SESSION["recherche"]["datesLocation"])) {
-                $_SESSION["recherche"]["datesLocation"] = $dates[0] . "  au  " . $dates[1];
+            $aujourdhui = new DateTime();
+            $demain = new DateTime("+1 day");
+            if (!isset($_SESSION['recherche']['datesLocation'])) {
+                $_SESSION['recherche']['datesLocation'] = $aujourdhui->format("Y-m-d") . "  au  " . $demain->format("Y-m-d");
             }
-            if (isset($params["datesLocation"])) {
+            if (!isset($_SESSION['recherche']['debutLocation'])) {
+                $_SESSION['recherche']['debutLocation'] = $aujourdhui->format("Y-m-d");
+            }
+            if (!isset($_SESSION['recherche']['finLocation'])) {
+                $_SESSION['recherche']['finLocation'] = $demain->format("Y-m-d");
+            }
+            if (isset($params["datesLocation"]) && $params["datesLocation"] != "") {
                 $dates = explode("  au  ", $params["datesLocation"]);
                 //var_dump($dates);
                 $filtre .= ($filtre == "" ? "" : " AND ") . "date_debut <= '" . $dates[0] . "' AND date_fin >= '" . $dates[1] . "'";
                 $_SESSION["recherche"]["debutLocation"] = $dates[0];
                 $_SESSION["recherche"]["finLocation"] = $dates[1];
+                $_SESSION['recherche']['datesLocation'] = $dates[0] . "  au  " . $dates[1];
             }
-            // Région
-            if (isset($params["region"])) {
-                //$filtre .= ($filtre == "" ? "" : " AND ") . "region = " . $params["region"];
-                $_SESSION["recherche"]["region"] = $params["region"];
+            // Nombre de personnes
+            if (isset($params["nbPersonnes"])) {
+                $filtre .= ($filtre == "" ? "" : " AND ") . "nb_personnes >= " . $params["nbPersonnes"];
+                $_SESSION["recherche"]["nbPersonnes"] = $params["nbPersonnes"];
             }
-            else if (!isset($_SESSION["recherche"]["region"])) {
-                $_SESSION["recherche"]["region"] = 6;
+            else if (!isset($_SESSION["recherche"]["nbPersonnes"])) {
+                $_SESSION["recherche"]["nbPersonnes"] = $valeursOption["nbPersonnes"];
             }
-            // Adresse
+            // Adresse de départ des recherches
             if (isset($params["adresseDepart"])) {
                 $_SESSION["recherche"]["adresseDepart"] = $params["adresseDepart"];
             }
@@ -224,16 +174,16 @@
                 $_SESSION["recherche"]["latitude"] = $params["latitude"];
             }
             else if (!isset($_SESSION["recherche"]["latitude"])) {
-                $_SESSION["recherche"]["latitude"] = 45.57;
+                $_SESSION["recherche"]["latitude"] = $valeursOption["latitude"];
             }
             // Longitude
             if (isset($params["longitude"])) {
                 $_SESSION["recherche"]["longitude"] = $params["longitude"];
             }
             else if (!isset($_SESSION["recherche"]["longitude"])) {
-                $_SESSION["recherche"]["longitude"] = -73.57;
+                $_SESSION["recherche"]["longitude"] = $valeursOption["longitude"];
             }
-            // Rayon
+            // Rayon de recherche du point de départ
             if (isset($params["rayon"])) {
                 $_SESSION["recherche"]["rayon"] = $params["rayon"];
                 // Tableau associatif des rayons de recherche et du niveau de zoom de la carte
@@ -245,8 +195,8 @@
                 }
             }
             else if (!isset($_SESSION["recherche"]["rayon"])) {
-                $_SESSION["recherche"]["rayon"] = 20;
-                $_SESSION["recherche"]["zoom"] = 11;
+                $_SESSION["recherche"]["rayon"] = $valeursOption["rayon"];
+                $_SESSION["recherche"]["zoom"] = $valeursOption["zoom"];
             }
             // Prix minimum
             if (isset($params["prixMin"])) {
@@ -254,7 +204,7 @@
                 $_SESSION["recherche"]["prixMin"] = $params["prixMin"];
             }
             else if (!isset($_SESSION["recherche"]["prixMin"])) {
-                $_SESSION["recherche"]["prixMin"] = 0;
+                $_SESSION["recherche"]["prixMin"] = $valeursOption["prixMin"];
             }
             // Prix Maximum
             if (isset($params["prixMax"])) {
@@ -262,7 +212,7 @@
                 $_SESSION["recherche"]["prixMax"] = $params["prixMax"];
             }
             else if (!isset($_SESSION["recherche"]["prixMax"])) {
-                $_SESSION["recherche"]["prixMax"] = 1000000;
+                $_SESSION["recherche"]["prixMax"] = $valeursOption["prixMax"];
             }
             // Type de logement
             $_SESSION["recherche"]["typesLogements"] = $modeleTypeLogement->lireTousTypeLogements();
@@ -298,7 +248,7 @@
                 $_SESSION["recherche"]["evaluation"] = $params["evaluation"];
             }
             else if (!isset($_SESSION["recherche"]["evaluation"])) {
-                $_SESSION["recherche"]["evaluation"] = 0;
+                $_SESSION["recherche"]["evaluation"] = $valeursOption["evaluation"];
             }
             // Construction du tri de la requête
             $tri = "";

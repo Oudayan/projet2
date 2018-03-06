@@ -16,7 +16,6 @@
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
         <script type="text/javascript" src="js/daterangepicker.js"></script>
-	
     </head>
     <body>
         <header class="container-fluid"> 
