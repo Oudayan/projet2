@@ -22,6 +22,15 @@
 			return $resultat->fetch();
 		}
 		
+        // Lire la première photo d'un logement
+		public function lirePremierePhotoLogement($idLogement) {
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement=? GROUP BY id_logement";
+            $donnees = array($idLogement);
+            $resultat =  $this->requete($sql, $donnees);
+			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'PhotoLogement'); 
+			return $resultat->fetch();
+		}
+		
         // Lire toutes les photos d'un logement
         public function lireToutesPhotosParLogement($idLogement) {
             $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement=?";

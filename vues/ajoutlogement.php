@@ -18,9 +18,9 @@
 
 <main>
 		<?php $courriel = $_SESSION["courriel"];
-		   $evaluation = null ?>
+		   $evaluation = null; ?>
 		<div class="container">
-		<input id='courriel' type="hidden" name="country" value=<?= $courriel?>>
+		<input id='courriel' type="hidden" name="country" value="<?= $courriel?>">
 		<form id="form_ajoute" onsubmit="return validateFormLogement()" action="index.php?Logement&action=enregistrerLogement" method="post"> <!--  -->
 		<h3>Ajouter un logement</h3>
 		<fieldset style="border:2px groove">
@@ -82,7 +82,7 @@
 		</fieldset>
 		<hr>
 		<div class="col-lg-4">	
-			<Label>Type de logement</label>
+			<label>Type de logement</label>
             <select class="form-control" name='id_TypeLogement'>
 				<?php
                 foreach($donnees["TypeLogements"] as $Tlogement)

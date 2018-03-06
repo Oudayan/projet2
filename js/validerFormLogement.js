@@ -328,18 +328,3 @@ function LongLat(adresse) {
 	console.log(markers);
 	return markers;
 }
-
-
-
-
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
