@@ -162,7 +162,7 @@
 																								
 						trigger_error("Action invalide");
 					*/	
-				}                                                                                   // fin du switch	
+				                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
 			
             else
