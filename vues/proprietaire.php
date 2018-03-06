@@ -10,7 +10,9 @@
 ?>
     <main class="container-fluid">
     <?php if (isset($_SESSION["courriel"]) && ($_SESSION["typeUser"] == 1 || $_SESSION["typeUser"] == 2)) { ?>
-        <h1 class="text-center text-warning mt-3">Gestion de mes propriétés</h1>
+        <div class="d-flex justify-content-around mt-3">
+            <h1>Gestion de mes propriétés</h1>
+        </div>
         <div id="locationsProprietaire" class="collapse my-3">
         </div>
         <!-- <div class="container"> -->
@@ -87,7 +89,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php for ($i=0; $i<count($donnees["locations"]); $i++) { ?>
+                                <?php for ($i=0; $i<count($donnees["locations"]); $i++) { 
+                                    if ($donnees["locations"][$i]->lireValide() == 0 || $donnees["locations"][$i]->lireValide() == 1) { ?>
                                     <tr>
                                         <th scope="row" class="pt-4"><?= (count($donnees["locations"]) - $i) ?></th>
                                         <td class="pt-4"><?= $donnees["logement"][$i]->lireNoCivique() . " " . $donnees["logement"][$i]->lireRue() . " " . $donnees["logement"][$i]->lireApt() . ", " . $donnees["logement"][$i]->lireVille() . ", " . $donnees["logement"][$i]->lireProvince() . ", " . $donnees["logement"][$i]->lirePays() . ", " . $donnees["logement"][$i]->lireCodePostal(); ?></td>
@@ -102,9 +105,10 @@
                                             Aucune
                                         <?php } ?>
                                         </td>
-                                        <td><button class="btn btn-secondary btn-sm" onclick="">Annuler</button></td>
+                                        <td><button class="btn btn-secondary btn-sm" onclick="" <?= (strtotime($donnees["locations"][$i]->lireDateDebut()) <= strtotime(date('Y-m-d')) ? "disabled" : "") ?>>Annuler</button></td>
                                     </tr>
-                                <?php } ?>
+                                    <?php }
+                                } ?>
                                 </tbody>
                             </table>
                         </article>
@@ -113,14 +117,34 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Logement</th>
                                         <th scope="col">Date début</th>
                                         <th scope="col">Date fin</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Locataire</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                <?php for ($i=0; $i<count($donnees["locations"]); $i++) { 
+                                    if ($donnees["locations"][$i]->lireValide() != 0 && $donnees["locations"][$i]->lireValide() != 1) { ?>
+                                    <tr>
+                                        <th scope="row" class="pt-4"><?= (count($donnees["locations"]) - $i) ?></th>
+                                        <td class="pt-4"><?= $donnees["logement"][$i]->lireNoCivique() . " " . $donnees["logement"][$i]->lireRue() . " " . $donnees["logement"][$i]->lireApt() . ", " . $donnees["logement"][$i]->lireVille() . ", " . $donnees["logement"][$i]->lireProvince() . ", " . $donnees["logement"][$i]->lirePays() . ", " . $donnees["logement"][$i]->lireCodePostal(); ?></td>
+                                        <td class="pt-4"><?= $donnees["locations"][$i]->lireDateDebut() ?></td>
+                                        <td class="pt-4"><?= $donnees["locations"][$i]->lireDateFin() ?></td>
+                                        <td class="pt-3"><a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $donnees["locataire"][$i]->lirepreNom() . " " . $donnees["locataire"][$i]->lireNom() ?></a></td>
+                                        <td class="pt-4">
+                                        <?=  ($donnees["locations"][$i]->lireValide() == 0 ? "À valider" : 
+                                        ($donnees["locations"][$i]->lireValide() == 1 ? "Acceptée" : 
+                                        ($donnees["locations"][$i]->lireValide() == 2 ? "Refusée" : 
+                                        ($donnees["locations"][$i]->lireValide() == 3 ? "Expirée" : 
+                                        ($donnees["locations"][$i]->lireValide() == 4 ? "Déclinée (Multiple)" : ""))))) ?>
+                                        </td>
+                                        <td><button class="btn btn-secondary btn-sm" onclick="" <?= (strtotime($donnees["locations"][$i]->lireDateDebut()) <= strtotime(date('Y-m-d')) ? "disabled" : "") ?>>Annuler</button></td>
+                                    </tr>
+                                    <?php }
+                                } ?>
                                 </tbody>
                             </table>
                         </article>

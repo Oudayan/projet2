@@ -31,7 +31,7 @@
 		private $nb_salle_de_bain;
 		private $nb_demi_salle_de_bain;
 		private $frais_nettoyage;
-		private $est_staionnement;
+		private $est_stationnement;
 		private $est_wifi;
 		private $est_cuisine;
 		private $est_tv;
@@ -53,7 +53,7 @@
 		public function __construct($id_logement = null, $no_civique = 0, $apt = null, $rue = "", $ville = "", 
 		$province = "", $pays = "", $code_postal = "", $latitude = "", $longitude = "", $id_type_logement = 0, 
 		$prix = 0, $evaluation = 0, $description = "", $courriel = "", $nb_personnes = 0, $nb_chambres = 0, $nb_lits = 0, 
-		$nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $frais_nettoyage=0, $est_staionnement = 0, $est_wifi = 0, $est_cuisine = 0, 
+		$nb_salle_de_bain = 0, $nb_demi_salle_de_bain = 0, $frais_nettoyage=0, $est_stationnement = 0, $est_wifi = 0, $est_cuisine = 0, 
 		$est_tv = 0, $est_fer_a_repasser = 0, $est_cintres = 0, $est_seche_cheveux = 0, $est_climatise = 0, 
 		$est_laveuse = 0, $est_secheuse = 0, $est_chauffage = 0, $l_valide = NULL, $l_actif = NULL, $l_banni = NULL, 
 		$l_date_banni = "", $l_commentaire_banni = "") {
@@ -78,7 +78,7 @@
             $this->ecrireNbSalleDeBain($nb_salle_de_bain);
             $this->ecrireNbDemiSalleDeBain($nb_demi_salle_de_bain);
             $this->ecrireFraisNettoyage($frais_nettoyage);
-            $this->ecrireEstStaionnement($est_staionnement);
+            $this->ecrireEstStationnement($est_stationnement);
             $this->ecrireEstWifi($est_wifi);
             $this->ecrireEstCuisine($est_cuisine);
             $this->ecrireEstTv($est_tv);
@@ -223,10 +223,10 @@
                 $this->frais_nettoyage = $frais_nettoyage;
             }
         }
-        // Écrire est_staionnement
-        public function ecrireEstStaionnement($est_staionnement) {
-            if (is_numeric($est_staionnement) && trim($est_staionnement) != "") {
-                $this->est_staionnement = $est_staionnement;
+        // Écrire est_stationnement
+        public function ecrireEstStationnement($est_stationnement) {
+            if (is_numeric($est_stationnement) && trim($est_stationnement) != "") {
+                $this->est_stationnement = $est_stationnement;
             }
         }
         // Écrire est_wifi
@@ -406,9 +406,9 @@
         public function lireFraisNettoyage() {
             return $this->frais_nettoyage;
         }
-        // Lire est_staionnement
-        public function lireEstStaionnement() {
-            return $this->est_staionnement;
+        // Lire est_stationnement
+        public function lireEstStationnement() {
+            return $this->est_stationnement;
         }
         // Lire est_wifi
         public function lireEstWifi() {
