@@ -3,7 +3,7 @@
  * @file     messagerie.php
  * @author   Zoraida Ortiz
  * @version  2.0
- * @date     20 fevrier 2018
+ * @date     05 mars 2018
  * @brief    vue messagerie
  * @details  
  * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
@@ -85,16 +85,18 @@
             </div>
             <textarea class="form-control" aria-label="With textarea" rows="6" name="textMessage" id="textMessage"></textarea>
           </div>
-            <input id="date" type="hidden" value="<?php echo date('Y-m-d H:i:sP');?>"><br>
             <input type="submit" class="btn-bleu btn-sm" value="Envoyer">
             <!--<input type="button" class="btn-bleu btn-sm" onclick="envoyerMessage()" value="Envoyer"> -->
         </form>
       </section><!-- composerMessage id="EnvoyerForm" id input envoyer-->
       
       <section class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+        <form  class="formSuppMsg"  method="POST">
         <table class="table table-sm responsive-sm table-hover display">
+          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>	
           <thead>
             <tr>
+              <th><input type="checkbox" class='tous'/></th>
               <th scope="col">lu</th>
               <th><i class="fa fa-level-down" aria-hidden="true"></i></th>
               <th>Sujet</th>
@@ -105,11 +107,15 @@
           <tbody id="boiteReception">
           </tbody>
         </table>
+       </form>    
       </section><!-- tab-pane boitRecp-->
       <section class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
+        <form class="formSuppMsg" method="POST">
         <table class="table table-sm responsive-sm table-hover display">
+          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>
           <thead>
             <tr>
+              <th><input type="checkbox" class='tous' /></th>
               <th><i class="fa fa-level-up" aria-hidden="true"></i></th>
               <th>Sujet</th>
               <th><i class="fa fa-paperclip" aria-hidden="true"></i></th>
@@ -118,6 +124,8 @@
           </thead>
           <tbody id="msgEnvoyes"></tbody>
         </table>
+          <input type="text" name="actif" value="false" hidden/>
+       </form>
       </section><!-- messagesEnvoyes -->
        <form class="boiteLecture hidden">
         <?php include 'formulaireMessagerie.php';?>
@@ -163,12 +171,12 @@
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
             $("#boiteReception").append(
                 "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",true)'>" +
+                  "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
                   "<td><i class='fa fa-envelope" + enveloppe + "' id='env_" + item.id_message + "' aria-hidden='true'></i></td>" +
                   "<td>" + expediteurs + "</td>" +
                   "<td>" + item.sujet + "</td>" +
                   "<td>" + joint + "</td>" +
                   "<td>" + item.msg_date + "</td>" +
-                  "<td class='hidden'>" + item.id_message + "</td>" +
                 "</tr>");
             mes_messages[item.id_message] = JSON.stringify(
               new Message(
@@ -202,11 +210,11 @@
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
            $("#msgEnvoyes").append(
               "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",false)'>" +
+                "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
                 "<td>" + destinateurs + "</td>" +
                 "<td>" + item.sujet + "</td>" +
                 "<td>" + joint + "</td>" +
                 "<td>" + item.msg_date + "</td>" +
-                "<td class='hidden'>" + item.id_message + "</td>" +
               "</tr>"); 
               mes_messages[item.id_message] = JSON.stringify(
                   new Message(
@@ -255,6 +263,7 @@
   function cacherBoitesLecture() {
     $('.boiteLecture').addClass('hidden');
     listeContacts();
+    $("input:checkbox").prop('checked', false);
   }
   
   function listeContacts(){
@@ -298,29 +307,67 @@
     });
   } );
  
- function envoyerMessage() {
-   
-        var formData = {
-            'liste_contacts'  : $('input[name=liste_contacts]').val(),
-            'sujet'           : $('input[name=sujet]').val(),
-            'file_name'       : $('input[name=fichierJoint]').val(),
-            'textMessage'     : $('textarea[name=textMessage]').val()            
-        };
-        console.log(formData);
-     
+$('document').ready(function(){
+   $('.tous').change(function () {
+      $("input:checkbox").prop('checked', $(this).prop("checked"));
+  });
+});
+/*
+function supprimerMessage() {
+$(".formSuppMsg").submit(function(e) {
+        var listeSupp = new Array();
+        $("input:checked").each(function() {
+           listeSupp.push($(this).val());
+             console.log($(this).val()); 
+        });
+       
         $.ajax({
-            type        : 'POST', 
-            url         : 'index.php?Messagerie&action=composerMessage',
-            data        : formData, 
-            dataType    : 'json',
-            encode      : true
-        })
-  }
-  
+            type: "POST",
+            url: 'index.php?Messagerie&action=supprimirMessage',
+            dataType: 'html',
+            data: { id_message: message.id_messsage,
+                    listeSupp:listeSupp },
+           /* success: function(data){
+                $('#myResponse').html(data)
+            }
+        });
+        e.preventDefault();
+  });
+}*/
+/*
+function supprimerMessage() {
+  var dataString = $(".formSuppMsg").serialize();
+   
+  $.ajax({
+      type:'POST',
+      url:'index.php?Messagerie&action=supprimirMessage',
+      data: dataString,
+      dataType: 'json',
+      success: function(json) {
+         alert('asf');
+      }
+  })
+  //return false;
+}*/
+
+  $(function(){
+    $(".formSuppMsg").on("submit", function(e){
+      var dataString = $(".formSuppMsg").serialize();
+      $.ajax({
+          type:'POST',
+          url:'index.php?Messagerie&action=supprimirMessage',
+          data: dataString,
+          dataType: 'json',
+          success: function(json) {
+            // alert('asf');
+          }
+      })
+      e.preventDefault();
+    });
+  });
+
   $(function(){
     $("#formMessagerie").on("submit", function(e){
-          e.preventDefault();
-          var f = $(this);
           var formData = new FormData(document.getElementById("formMessagerie"));
           $.ajax({
               type        : 'POST', 
@@ -330,6 +377,7 @@
               contentType: false,
               processData: false
           })
+          e.preventDefault();
     });
   });
   

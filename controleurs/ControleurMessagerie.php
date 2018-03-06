@@ -81,8 +81,11 @@
 							break; 
                             
                     case "supprimirMessage": 
+                      echo var_dump($_POST);
+                      $_POST["listeSupp"];//paramètre qu'envoie cotè client.  
+                      $_POST["actif"];
                       //tenir en compte que cela peut être plusieurs
-                         $_POST["id_message"]; //paramètre qu'envoie cotè client.                      
+                                   
                       //faire le code puur mettre inactif le message
                       //il ne faut pas retourner rien
                       break;
@@ -94,7 +97,9 @@
                          //il ne faut pas retourne rien 
                       break;   
                     
-                    case "composerMessage" :                      
+                    case "composerMessage" :
+                      $_POST["liste_contacts"];
+                      var_dump( $_POST["liste_contacts"]);
                        $nom_fichier = $_FILES["fichierJoint"]["name"];
                        $destination = "pieces_jointes/";
                        $msg = "";

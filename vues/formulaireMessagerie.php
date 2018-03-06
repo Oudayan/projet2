@@ -31,7 +31,7 @@
     <div class="form-group row heigthFormBLecture">
       <label for="file_id" class="col-sm-3 col-form-label-sm">Fichier joint</label>
       <div class="col-9">
-        <a href="#" download="">download
+        <a href="pieces_jointes/5_Autorizacion.pdf" download="test.pdf">download
         </a>
       </div>
     </div>

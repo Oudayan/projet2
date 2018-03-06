@@ -474,7 +474,9 @@ label {
 #btnEnvoyer{
   float:right;
   }
-  
+  #suppMsg{
+  float:right;
+  }  
 .boiteLecture{
     background: rgb(250, 251, 246);
     padding: 20px 20px 140px 20px;
