@@ -110,11 +110,11 @@
 									$cuisine = 1;
 								else
 									$cuisine = 0;
-								if (isset($params['$est_tv']))
+								if (isset($params['est_tv']))
 									$tv = 1;
 								else
 									$tv = 0;
-								if (isset($params['$est_fer_a_repasser']))
+								if (isset($params['est_fer_a_repasser']))
 									$fer_a_repasser = 1;
 								else
 									$fer_a_repasser = 0;

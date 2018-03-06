@@ -34,7 +34,7 @@
                                 $donnees["dispos"][$i] = $modeleDisponibilite->lireDisponibilitesParLogement($logements[$i]->lireIdLogement());
                                 $donnees["photos"][$i] = $modelePhotosLogement->lireToutesPhotosParLogement($logements[$i]->lireIdLogement());
                             }
-                            $locations = $modeleLocation->lireLocationsCourantesParProprietaire($_SESSION["courriel"]);
+                            $locations = $modeleLocation->lireLocationsParProprietaire($_SESSION["courriel"]);
                             for ($i=0; $i<count($locations); $i++) {
                                 $donnees["locations"][$i] = $locations[$i];
                                 $donnees["logement"][$i] = $modeleLogement->lireLogementParId($locations[$i]->lireIdLogement());
