@@ -13,10 +13,10 @@
 		public function index(array $params) {
 
             $modeleLogement = $this->lireDAO("Logement");
-            $modeleTypeLogement = $this->lireDAO("TypeLogement");
             $modelePhotosLogement = $this->lireDAO("PhotoLogement");
-            $modelePieces = $this->lireDAO("Piece");
             $modeleDisponibilite = $this->lireDAO("Disponibilite");
+            $modeleLocation = $this->lireDAO("Location");
+            $modeleUsagers = $this->lireDAO("Usagers");
 
             // Si le paramètre action existe
 			if (isset($params["action"])) {
@@ -25,14 +25,20 @@
 				switch($params["action"]) {
 					
                     // Affichage de la page de location
-                    case "afficherProprietes" :
+                    case "afficherLogements" :
                         $donnees["erreur"] = "";
                         if (isset($_SESSION["courriel"]) && isset($_SESSION["typeUser"]) && $_SESSION["typeUser"] != 3) {
                             $logements = $modeleLogement->lireLogementParProprietaire($_SESSION["courriel"]);
                             for ($i=0; $i<count($logements); $i++) {
-                                $donnees["logement"][$i] = $logements[$i];
-                                $donnees["logement"][$i]["dispos"] = $modeleDisponibilite->lireDisponibilitesParLogement($logements[$i]->lireIdLogement());
-                                $donnees["logement"][$i]["photos"] = $$modelePhotosLogement($logements[$i]->lireIdLogement());
+                                $donnees["logements"][$i] = $logements[$i];
+                                $donnees["dispos"][$i] = $modeleDisponibilite->lireDisponibilitesParLogement($logements[$i]->lireIdLogement());
+                                $donnees["photos"][$i] = $modelePhotosLogement->lireToutesPhotosParLogement($logements[$i]->lireIdLogement());
+                            }
+                            $locations = $modeleLocation->lireLocationsCourantesParProprietaire($_SESSION["courriel"]);
+                            for ($i=0; $i<count($locations); $i++) {
+                                $donnees["locations"][$i] = $locations[$i];
+                                $donnees["logement"][$i] = $modeleLogement->lireLogementParId($locations[$i]->lireIdLogement());
+                                $donnees["locataire"][$i] = $modeleUsagers->obtenir_par_courriel($locations[$i]->lireIdLocataire());
                             }
                         }
                         else {

@@ -76,18 +76,21 @@
                             </div><!-- modal-dialog -->
                         </div><!-- modal fade -->
                     </div><!-- ml-auto -->
-				   <?php }
+				    <?php }
 					else { ?>
-						<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
-						
-						<a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
-                        <a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
+				    <div>
+                        <span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
+						<a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
                         <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>
-						<?php 
-						if ($_SESSION["typeUser"]==1){
-							echo '<a href="index.php?Usagers&action=admin">Admin</a>';
-						}
-						?>
+                        <nav class="d-flex justify-content-between">
+                            <a href="index.php?Recherche&action=recherche">Recherche</a>
+                            <?php if ($_SESSION["typeUser"] == 1 || $_SESSION["typeUser"] == 2) { ?>
+                            <a href="index.php?Proprietaire&action=afficherLogements">Mes propriétés</a>
+                            <?php }
+                            if ($_SESSION["typeUser"] == 1) { ?>
+                                <a href="index.php?Usagers&action=admin">Admin</a>
+                            <?php } ?>
+                        </nav>
 					</div>
 					<?php } ?>					
                 </div><!-- container px-5 -->

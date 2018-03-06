@@ -153,9 +153,6 @@
 
                         }
    
-
-                            
-
                         break;
                         
 					/*default:		
@@ -164,7 +161,6 @@
 					*/	
 				                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
-			
             else
 			{
 				//var_dump("No");
