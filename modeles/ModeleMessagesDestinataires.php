@@ -24,6 +24,10 @@
 			return "al_destinataire";
 		}
         
+         public function lireNomTableMessagerie()
+		{
+			return "al_messagerie";
+		}
         /**
 		* @brief Pour aller chercher les messages pour un utilisateur qui est logger
 		* @details Permet d'aller chercher les renseignements sur les messages reçus en utilisant le courriel de l'utilisateur.
@@ -119,8 +123,8 @@
 		* @param point7 courriel
 		* @return aucun.
 		*/
-		/**
-        public function sauvegarde(Usagers $unUsager)
+		
+        public function sauvegarderMessage(Message $unMessage)
 		{
 
 		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
@@ -135,24 +139,23 @@
 			
 			else
 			{ */
+          
+              
 				//insert
-/**
-				//var_dump($unMessage);
-				$query = "INSERT INTO " . $this->checherNomTable() . "(sujet, fichier_joint, message, msg_date, courriel,) VALUES (?, ?, ?, ?, ?)";
-				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
-				$unMessage->lireMsg_date(),$unMessage->lireCourriel(),
-				$unMessage->lireContact(),$unMessage->lireTypeUsager(),	$unMessage->lireTypePaiement()
+				var_dump($unMessage);
+				$query = "INSERT INTO " . $this->lireNomTableMessagerie() . " (sujet, fichier_joint, message, msg_date, expediteur) VALUES (?, ?, ?, now(), ?)";
+				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(), $unMessage->lireMessage(),
+							$unMessage->lireExpediteur());
+				$this->requete($query, $donnees);
+				$query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
+					$donnees = $this->requete($query);
+					$donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'Message'); 
+					$id = $donnees->fetch();
+					$mon_id = $id->lireId_message();
+					var_dump($mon_id);
+				return $mon_id;
+			}
 
-				//var_dump($unUsager);
-				$query = "INSERT INTO " . $this->lireNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
-				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
-				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
-
-				);
-
-				return $this->requete($query, $donnees);
-			/*}*/
 
 	
         

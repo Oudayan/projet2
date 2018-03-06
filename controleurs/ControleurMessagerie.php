@@ -97,7 +97,7 @@
                          //il ne faut pas retourne rien 
                       break;   
                     
-                    case "composerMessage" :
+                      case "composerMessage" :
 						echo "<pre>";
 						var_dump("Entrando al controlador");
 						var_dump($_POST);
@@ -108,12 +108,11 @@
 							$nom_fichier = $_FILES["fichierJoint"]["name"];
 					    else 
 							$nom_fichier = "";
-
                        $destination = "pieces_jointes/";
                        $msg = "";
                         if(isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-							var_dump('Entrando');
+			
 							$modeleMessagerie = $this->lireDAO("MessagesDestinataires"); // &&&&&&&&&& Variable de type classe Messagerie &&& 
 							$newMessage = new Message( // Selon le modele Message
 								"", // id_message
@@ -121,16 +120,16 @@
 								$_POST["sujet"], // Sujet
 								$_FILES["fichierJoint"]["name"], // Fichier joint 
 								$_POST["textMessage"], // Message
-								date(now()),  // msg_date
+								'',  // msg_date
 								true, 
 								$_SESSION["courriel"]
 								
 							);
-							var_dump($newMessage);
-							die();
-							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
-                            $id_message = $modeleMessagerie->sauvegarderMessage($_POST["liste_contacts"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
 
+							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
+                            $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
+							var_dump($idMessage);
+							die();
                             $taille_max = 1024; //Taille en kilobytes
                             $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
                         }
@@ -147,10 +146,7 @@
                           echo $msg;
                             $this->afficherVues("messagerie");
 
-                        }
-   
-
-                            }
+                        }                    
 
                         break;
                         
@@ -158,8 +154,8 @@
 																								
 						trigger_error("Action invalide");
 					*/	
-				}                                                                                   // fin du switch	
-			}                                                                                       //fin du if params action
+				} // fin du switch	
+			}//fin du if params action
 			
             else
 			{
@@ -168,11 +164,11 @@
 			}
            
             // fin du else du param action	
-		}                                                                                           //fin de la fonction index
+		}//fin de la fonction index
 		
 		
 		
-	}                
+	}//fin class                
           
 /**
  * @brief   fait le téléchargement d'un fichier
