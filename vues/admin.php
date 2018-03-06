@@ -27,13 +27,12 @@
         <section class="tableauUserValider tab-pane fade show active" id="v-pills-validerUsagers" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <table class="table table-sm responsive-sm table-hover display">
           <thead>
-		  <h6>Usager à valider</h6>
+		  <h6>Usagers à valider</h6>
             <tr>
-              <th scope="col">lu</th>
-              <th><i class="fa fa-level-down" aria-hidden="true"></i></th>
-              <th>Sujet</th>
-              <th><i class="fa fa-paperclip" aria-hidden="true"></i></th>
-              <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
+              <th>Prenom</i></th>
+              <th>Nom</th>
+              <th><i class="fa fa-envelope" aria-hidden="true"></i></th>
+              <th><i class="fa fa-phone" aria-hidden="true"></i></th>
             </tr>
           </thead>
           <tbody id="tableauUserValider">
@@ -41,7 +40,7 @@
         </table>
       </section><!-- tab-pane validerLogements-->
 	  
-        <section class="boiteReception tab-pane fade show active" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+        <section class="boiteReception tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <table class="table table-sm responsive-sm table-hover display">
           <thead>
             <tr>
@@ -70,8 +69,8 @@
           <tbody id="msgEnvoyes"></tbody>
         </table>
       </section><!-- messagesEnvoyes -->
-       <form class="boiteLecture hidden">
-        <?php include 'formulaireMessagerie.php';?>
+       <form class="ficheUsager hidden">
+        <?php include 'ficheUsager.php';?>
       </form> 
     </aside><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
@@ -92,7 +91,7 @@
     $('#modalContacts').modal('hide')
 }
   
-  
+  usagersValider = {};
   function afficherUsagersaValider() {
     $.ajax({
         url: 'index.php?Usagers&action=listeavalider', 
@@ -101,26 +100,22 @@
         success: function(json) {
           $("#tableauUserValider").html("");
           $.each(json, function(i, item) {
-            var enveloppe = item.lu == '0' ? "" : '-open';
-            var expediteurs = item.expediteur.length > 30 ? item.expediteur.substr(0,28) + "...": item.expediteur;
-            var joint = item.fichier_joint == null ? "" : item.fichier_joint;
+			  id = "rangee"+i;
             $("#tableauUserValider").append(
-                "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",true)'>" +
-                  "<td><i class='fa fa-envelope" + enveloppe + "' id='env_" + item.id_message + "' aria-hidden='true'></i></td>" +
-                  "<td>" + expediteurs + "</td>" +
-                  "<td>" + item.sujet + "</td>" +
-                  "<td>" + joint + "</td>" +
-                  "<td>" + item.msg_date + "</td>" +
+
+                "<tr class='clickable-row' id="+id +" data-href='#' onclick='afficherUsager(" + i + ",true)'>" +
+                  "<td>" + item.nom + "</td>" +
+                  "<td>" + item.prenom + "</td>" +
+				  "<td>" + item.courriel + "</td>" +
+                  "<td>" + item.cellulaire + "</td>" +
                   "<td class='hidden'>" + item.id_message + "</td>" +
                 "</tr>");
-            mes_messages[item.id_message] = JSON.stringify(
-              new Message(
-                item.id_message,
-                item.expediteur,
-                item.msg_date,
-                item.sujet,
-                item.fichier_joint,
-                item.texteMessage
+            usagersValider[i] = JSON.stringify(
+              new Usager(
+                item.courriel,
+                item.nom,
+                item.prenom,
+                item.cellulaire
               )
             );
           });
@@ -143,7 +138,7 @@
             var destinateurs = item.destinataire.length > 30 ? item.destinataire.substr(0,28) + "...": item.destinataire;
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
            $("#msgEnvoyes").append(
-              "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",false)'>" +
+              "<tr class='clickable-row' data-href='#' onclick='afficherLogement(" + item.id_message + ",false)'>" +
                 "<td>" + destinateurs + "</td>" +
                 "<td>" + item.sujet + "</td>" +
                 "<td>" + joint + "</td>" +
@@ -179,31 +174,19 @@
     }
   };
   
-  function lireMessage(idMessage,reception){
-    var message = JSON.parse(mes_messages[idMessage]);
-    $('.boiteLecture').removeClass('hidden');
-    $('.expediteur').val(message.expediteur);
-    $('.sujet').val(message.sujet);
-    $('.dateCourriel').val(message.msg_date);
-    $('.textMessage').val(message.textMessage); 
-    $('#env_' + message.id_messsage).removeClass('fa-envelope');
-    $('#env_' + message.id_messsage).addClass('fa-envelope-open');
-    if(reception) {
-      $('.repondre').removeClass('hidden');
-    } else {
-      $('.repondre').addClass('hidden');
-    }
-     $.ajax({
-        url: 'index.php?Messagerie&action=messageLu', 
-        type: 'POST',
-        data: {id_message: message.id_messsage,
-                message_lu: true}    
-      });
+  function afficherUsager(i,reception){
+    var usager = JSON.parse(usagersValider[i]);
+    $('.ficheUsager').removeClass('hidden');
+    $('.nom').val(usager.nom);
+    $('.prenom').val(usager.prenom);
+	$('.courriel').val(usager.courriel);
+    $('.cellulaire').val(usager.cellulaire); 
+	$('.index').val(i); 
   }
   
   function cacherBoitesLecture() {
-    $('.boiteLecture').addClass('hidden');
-    listeContacts();
+    $('.ficheUsager').addClass('hidden');
+   // listeContacts();
   }
   
   function listeContacts(){
@@ -229,84 +212,6 @@
     } 
   }
 
-/*  function lireMessage(idMessage){
-    $.ajax({
-        url: 'index.php?Messagerie&action=messagesRecus', 
-        type: 'POST',
-        data: {id_message: id },
-        dataType: 'json',
-        success: function(donnes) {
-        mes_messages
-          if (item) {
-            
-              $('.boiteLecture').removeClass('hidden');
-              $('.expediteur').val(item.expediteur);
-              $('.sujet').val(item.sujet);
-              $('.dateCourriel').val(item.msg_date);
-              $(".textMessage").val("");
-               $(".textMessage").val(item.texteMessage);
-                 for(var i = 0; i < item.texteMessage.length; i++){
-                  $(".textMessage").val(item.texteMessage[i]);
-                }  
-          }
-       },
-       error: function(xhr, ajaxOptions, thrownError) {
-              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
-  };*/
-
- /*function transfereMessage(id){
-    $.ajax({
-        url: 'index.php?Messagerie&action=destinatairesAjoutes', 
-        type: 'POST',
-        data: {id_message: id },
-        dataType: 'json',
-        success: function(donnes) {
-          if (donnes) {
-             
-                }     
-          }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    }); 
-  };*/
-  
-  
- /* $("#EnvoyerForm").on("click", function() {
-    $.ajax({
-        url: 'index.php?Presentations&action=sauvegarderMessage',
-        type: 'POST',
-        data: { 
-                destinataire: $('#destinataire').val(),
-                sujet: $('#sujet').val(), 
-                fichierJoint: $('#fichierJoint').val(), 
-                date: $('#date').val(), 
-                textMessage: $('#textMessage').val(), 
-            }, 
-        dataType: 'html',
-       
-    });
-});
-
- /* $("#formMessagerie").on("change", function(){
-     var resultat = validaterFormMsg();
-     if(resultat){
-       console.log(resultat);
-       $("#EnvoyerForm").prop("disabled", false);
-     }
-     else{
-       $("#EnvoyerForm").prop("disabled", true);
-     }
-  });
-  
-  $("#fichierJoint").on("blur",function(){
-      validerExtension();
-  });*/
-  </script>
-<script>
   $( function() {
     $( "#selectable" ).selectable({
       stop: function() {
@@ -324,10 +229,39 @@
       }
     });
   } );
-  
-  
-  
 
+				
+    class Usager{
+    constructor(courriel, nom, prenom, cellulaire){
+      this.courriel = courriel;
+      this.nom = nom;
+      this.prenom = prenom;
+      this.cellulaire = cellulaire;
+    }
+  };
+	function validerUsager() {
+		courriel = document.getElementById("courriel").value;
+		i = document.getElementById("index").value;
+		console.log(courriel);
+		console.log(i);
+		 $.ajax({
+              type        : 'POST', 
+              url         : 'index.php?Usagers&action=validerUsager', 
+              data: {courriel:courriel},
+ 		  success: function(json) {
+			alert('Ok, validado',json);
+			cacherBoitesLecture();
+			$("#rangee"+i).hide();
+         },
+		  error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		}) 
+
+	};
+	function bannirUsager() {
+		 alert('Ha llamado a la funcion para bannir');
+	 }
   </script>
   <style>
   #feedback { font-size: 0.9em; }
