@@ -100,10 +100,9 @@
                       case "composerMessage" :
 						echo "<pre>";
 						var_dump("Entrando al controlador");
-						var_dump($_POST);
-						var_dump(isset($_POST["liste_contacts"]));
-						var_dump(isset($_POST["sujet"]));
-						var_dump(isset($_POST["textMessage"]));
+
+						$contact = explode(',',$_POST["liste_contacts"]);
+
 						if (isset($_FILES["fichierJoint"]["name"]))  // &&&&&&&&&& S'il y a un nom du fichier
 							$nom_fichier = $_FILES["fichierJoint"]["name"];
 					    else 
@@ -129,13 +128,22 @@
 							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
                             $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
 							var_dump($idMessage);
+							var_dump(count($contact));
+							for ($i=0;$i<count($contact);$i++){
+								$newDestinataire = new Destinataire(
+								$contact[$i],
+								$idMessage, 
+								false,
+								true );
+								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
+							}
 							die();
                             $taille_max = 1024; //Taille en kilobytes
                             $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
                         }
 						else {
 							var_dump('Ahora no entró');
-							die();}
+						}
                         if (trim($msg) != '')
                         {
                           echo $msg;
@@ -146,7 +154,8 @@
                           echo $msg;
                             $this->afficherVues("messagerie");
 
-                        }                    
+                        }
+                   
 
                         break;
                         

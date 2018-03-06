@@ -155,7 +155,16 @@
 					var_dump($mon_id);
 				return $mon_id;
 			}
+            
+        public function sauvegarderDestinataire(Destinataire $unMessage){
+			var_dump($unMessage);
+			$query = "INSERT INTO " . $this->lireNomTable() . " (destinataire, id_message, lu, d_actif) VALUES (?, ?, ?, ?)";
+			$donnees = array($unMessage->lireDestinataire(), $unMessage->lireId_message(),	$unMessage->lireLu(),
+							$unMessage->lireD_actif());
+			$this->requete($query, $donnees);
+			return;
 
+		}
 
 	
         
