@@ -93,16 +93,13 @@
                          //il faut faire update sur la table al_destinataire column lu
                          //il ne faut pas retourne rien 
                       break;   
-                    
-
 
                     case "composerMessage" :
 						echo "<pre>";
 						var_dump("Entrando al controlador");
-						var_dump($_POST);
-						var_dump(isset($_POST["liste_contacts"]));
-						var_dump(isset($_POST["sujet"]));
-						var_dump(isset($_POST["textMessage"]));
+
+						$contact = explode(',',$_POST["liste_contacts"]);
+
 						if (isset($_FILES["fichierJoint"]["name"]))  // &&&&&&&&&& S'il y a un nom du fichier
 							$nom_fichier = $_FILES["fichierJoint"]["name"];
 					    else 
@@ -111,7 +108,7 @@
                        $msg = "";
                         if(isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-							var_dump('Entrando');
+			
 							$modeleMessagerie = $this->lireDAO("MessagesDestinataires"); // &&&&&&&&&& Variable de type classe Messagerie &&& 
 							$newMessage = new Message( // Selon le modele Message
 								"", // id_message
@@ -119,22 +116,31 @@
 								$_POST["sujet"], // Sujet
 								$_FILES["fichierJoint"]["name"], // Fichier joint 
 								$_POST["textMessage"], // Message
-								date(now()),  // msg_date
+								'',  // msg_date
 								true, 
 								$_SESSION["courriel"]
 								
 							);
-							var_dump($newMessage);
-							die();
-							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
-                            $id_message = $modeleMessagerie->sauvegarderMessage($_POST["liste_contacts"], $_POST["sujet"], $_POST["textMessage"], $_SESSION["courriel"] );
 
+							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
+                            $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
+							var_dump($idMessage);
+							var_dump(count($contact));
+							for ($i=0;$i<count($contact);$i++){
+								$newDestinataire = new Destinataire(
+								$contact[$i],
+								$idMessage, 
+								false,
+								true );
+								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
+							}
+							die();
                             $taille_max = 1024; //Taille en kilobytes
                             $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
                         }
 						else {
 							var_dump('Ahora no entró');
-							die();}
+						}
                         if (trim($msg) != '')
                         {
                           echo $msg;
@@ -148,7 +154,7 @@
                         }
    
 
-                            }
+                            
 
                         break;
                         

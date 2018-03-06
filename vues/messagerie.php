@@ -297,15 +297,13 @@
   } );
  
  function envoyerMessage() {
-   
-        var formData = {
+         var formData = {
             'liste_contacts'  : $('input[name=liste_contacts]').val(),
             'sujet'           : $('input[name=sujet]').val(),
             'file_name'       : $('input[name=fichierJoint]').val(),
             'textMessage'     : $('textarea[name=textMessage]').val()            
         };
         console.log(formData);
-     
         $.ajax({
             type        : 'POST', 
             url         : 'index.php?Messagerie&action=composerMessage',

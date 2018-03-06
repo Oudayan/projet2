@@ -164,19 +164,26 @@
                     	$modeleUsagers = $this->lireDAO("Usagers"); 
                     	$modeleTypePaiement = $this->lireDAO("TypePaiement"); 
                     	$modeleTypeContact = $this->lireDAO("TypeContact"); 
-                    	$donnees["usagers"] = $modeleUsagers->obtenir_listeaValider();
-                    	var_dump($donnees);
+                    	$donnees = $modeleUsagers->obtenir_listeaValider();
                     	$data = array();
-                    	for ($i=0 ;$i<$donnees['usagers'].length;$i++){
+                    	for ($i=0 ;$i<count($donnees);$i++){
                     		$data[$i]=array(
-                    		'courriel'=>lireCourriel(),
-                    		'nom'=>lireNom(),
-                    		'prenom'=>lirepreNom(),
-                    		'cellulaire'=>lireCellulaire()
+                    		'courriel'=>$donnees[$i]->lireCourriel(),
+                    		'nom'=>$donnees[$i]->lireNom(),
+                    		'prenom'=>$donnees[$i]->lirepreNom(),
+                    		'cellulaire'=>$donnees[$i]->lireCellulaire()
                     		);
                     	}
-                    	  echo json_encode($data[$i]);
+                    	  echo json_encode($data);
                     break;
+					case "validerUsager":
+						if(isset($params["courriel"])) {
+							$courriel = $params["courriel"];
+							$modeleUsagers = $this->lireDAO("Usagers"); 
+							$data = $modeleUsagers->obtenir_par_courriel($courriel);
+							$modeleUsagers->Valider($data);
+						}
+					break;
 
                     case "nouvelMessage":
                       $this->afficherVues("messagerie");
