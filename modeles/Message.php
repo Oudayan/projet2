@@ -62,7 +62,8 @@
             }			
 		}
         public function ecrireMsg_date($msg_date) {
-         //   if (is_string($msg_date) && trim($msg_date) != "") {
+
+            //if (is_string($msg_date) && trim($msg_date) != "") {
                 $this->msg_date = $msg_date;
            // }			
 		}

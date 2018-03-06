@@ -96,8 +96,8 @@
                          //il faut faire update sur la table al_destinataire column lu
                          //il ne faut pas retourne rien 
                       break;   
-                    
-                      case "composerMessage" :
+
+                    case "composerMessage" :
 						echo "<pre>";
 						var_dump("Entrando al controlador");
 
@@ -155,7 +155,6 @@
                             $this->afficherVues("messagerie");
 
                         }
-                   
 
                         break;
                  
@@ -165,14 +164,11 @@
 					*/	
 				} // fin du switch	
 			}//fin du if params action
-			
             else
 			{
 				//var_dump("No");
-				$this->afficherVues("messagerie"); 													//action par defaut- affiche la page d'accueil de la messagerie
-			}
-           
-            // fin du else du param action	
+				$this->afficherVues("messagerie");//action par defaut- affiche la page d'accueil de la messagerie
+			}// fin du else du param action	
 		}//fin de la fonction index
 		
 		

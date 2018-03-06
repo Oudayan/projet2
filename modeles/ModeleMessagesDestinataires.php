@@ -23,11 +23,13 @@
 		{
 			return "al_destinataire";
 		}
-        
-         public function lireNomTableMessagerie()
+
+		
+        public function lireNomTableMessagerie()
 		{
 			return "al_messagerie";
 		}
+		
         /**
 		* @brief Pour aller chercher les messages pour un utilisateur qui est logger
 		* @details Permet d'aller chercher les renseignements sur les messages reçus en utilisant le courriel de l'utilisateur.
@@ -132,20 +134,19 @@
 				$query = "UPDATE " . $this->getTableName() . " SET nom=?, prenom=?, isAdmin=?, isBanned=? WHERE courriel = ?";
 				$donnees = array($unUsager->nom,$unUsager->prenom,$unUsager->isAdmin,$unUsager->isBanned,$unUsager->courriel) ;
 				$resultat = $this->requete($query, $donnees);
-			
 			}
-			
-			
-			
+
 			else
 			{ */
           
               
-				//insert
+
 				var_dump($unMessage);
+
 				$query = "INSERT INTO " . $this->lireNomTableMessagerie() . " (sujet, fichier_joint, message, msg_date, expediteur) VALUES (?, ?, ?, now(), ?)";
-				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(), $unMessage->lireMessage(),
-							$unMessage->lireExpediteur());
+				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
+
+                $unMessage->lireExpediteur());
 				$this->requete($query, $donnees);
 				$query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
 					$donnees = $this->requete($query);
@@ -155,6 +156,7 @@
 					var_dump($mon_id);
 				return $mon_id;
 			}
+
             
         public function sauvegarderDestinataire(Destinataire $unMessage){
 			var_dump($unMessage);
@@ -166,7 +168,8 @@
 
 		}
 
-	
+
+		
         
 	} //fin de la class ModeleMessagesDestinataires 
 		

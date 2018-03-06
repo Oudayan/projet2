@@ -134,7 +134,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="prixMax">Prix Maximum&nbsp;:</label>
+                    <label for="prixMax">Prix maximum&nbsp;:</label>
                     <select class="form-control" id="prixMax" name="prixMax">
                         <option value="1000000" <?= ($_SESSION["recherche"]['prixMax'] == 1000000 ? 'selected' : '') ?>>Aucun prix maximum</option>
                         <option value="25" <?= ($_SESSION["recherche"]['prixMax'] == 25 ? 'selected' : '') ?>>25 $</option>
@@ -305,6 +305,9 @@
             },
             // Date minimum est égale à aujourd'hui
             "minDate": moment().format(), 
+            "isInvalidDate": function(date) {
+                return false;
+            },
             // Si la date de début du formulaire recherche est assigné en $_SESSION, mettre cette date comme date de début de la sélection, sinon à la date d'aujourd'hui
             <?= (isset($_SESSION['recherche']['debutLocation']) ? '"startDate": "' . $_SESSION['recherche']['debutLocation'] . '", ' : ' "startDate": moment().format(), ') ?>
             // Si la date de fin du formulaire recherche est assigné en $_SESSION, mettre cette date comme date de fin de la sélection, sinon à la date de demain

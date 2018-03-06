@@ -307,6 +307,7 @@
     });
   } );
  
+
 $('document').ready(function(){
    $('.tous').change(function () {
       $("input:checkbox").prop('checked', $(this).prop("checked"));
@@ -320,7 +321,6 @@ $(".formSuppMsg").submit(function(e) {
            listeSupp.push($(this).val());
              console.log($(this).val()); 
         });
-       
         $.ajax({
             type: "POST",
             url: 'index.php?Messagerie&action=supprimirMessage',

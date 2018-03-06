@@ -80,7 +80,7 @@
                             $locations = $modeleLocation->lireLocationsAValider($_SESSION["courriel"]);
                             for ($i = 0; $i < count($locations); $i++) {
                                 // Vérifier si la demande de location est expirée
-                                if (strtotime($locations[$i]->lireDateDebut()) > strtotime(date('Y-m-d'))) {
+                                if (strtotime($locations[$i]->lireDateDebut()) >= strtotime(date('Y-m-d'))) {
                                     // Vérifier si le logement est encore disponible
                                     $disponible = false;
                                     $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($locations[$i]->lireIdLogement());

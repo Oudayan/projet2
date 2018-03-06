@@ -99,21 +99,26 @@
 			
 			}
 			
-			
-			
 			else
 			{ */
 				//insert
-				// var_dump($unUsager);
-				$query = "INSERT INTO " . $this->lireNomTable() . "(courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(),	$unUsager->lirepreNom(),
-				$unUsager->lireCellulaire(),$unUsager->lireMotDePasse(),
-				$unUsager->lireContact(),$unUsager->lireTypeUsager(),	$unUsager->lireTypePaiement()
-				);
-
+				$query = "INSERT INTO " . $this->lireNomTable() . "(
+				courriel, nom, prenom, cellulaire, mot_de_passe, id_contact, id_type_usager, 
+				id_paiement) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				$donnees = array($unUsager->lireCourriel(), $unUsager->lireNom(), $unUsager->lirepreNom(),
+				$unUsager->lireMotDePasse(), $unUsager->lireCellulaire(), $unUsager->lireContact(), $unUsager->lireTypeUsager(),	
+				$unUsager->lireTypePaiement());
 				return $this->requete($query, $donnees);
 			/*}*/
 		}
+		
+		public function valider(Usagers $courriel)
+		{
+			$query = "UPDATE " . $this->lireNomTable() . " SET u_valide = 1 WHERE Courriel = ?";
+			$data = array($courriel->lireCourriel());
+			return $this->requete($query, $data);
+		}
+		
 		
 	}
 
