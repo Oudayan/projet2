@@ -18,12 +18,12 @@ var typepaiement = null;
 function validateForm() {    
 	cleanErreurs();
 	err = 0 ; 					
-	err = estCourriel();			
-	err = estMotdePasse();				
-	err = estConfirmaMotdePasse();			
-	err = estNom();		
-	err = estPreNom();	
-	err = estCellulaire();	
+	err += estCourriel();			
+	err += estMotdePasse();				
+	err += estConfirmaMotdePasse();			
+	err += estNom();		
+	err += estPreNom();	
+	err += estCellulaire();	
 	if (err != 0) { 
         console.log(err);
 		alert ("Le formulaire est invalide");
@@ -57,11 +57,34 @@ function estCourriel() { // pour valider le courriel
 	var x = document.forms["ajoutUsager"]["courriel"].value;
 	expr =/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if (!x.match(expr)) {
+		document.getElementById("errCourriel").innerHTML = "Courriel invalide ou requis";
 		document.getElementById("errCourriel").style.visibility="visible";
 		monErr ++;
 	}
 	else {
-		document.getElementById("errCourriel").style.visibility="hidden";
+			document.getElementById("errCourriel").style.visibility="hidden";
+		  	 $.ajax({
+				type: "POST",
+				url: "index.php?Usagers&action=chercher_courriel",
+				dataType: 'json',				
+				data: {x:x},
+				async:false, 
+				success: function(json) {
+					// document.getElementById("response").innerHTML = res;
+					if (json=="Oui")
+						existant = true;
+					else 
+						existant = false;
+				},
+				error: function(){
+					alert('De regres no')
+				}
+				})
+			if(existant){
+					document.getElementById("errCourriel").innerHTML = "Le courriel n'est pas disponible";
+					document.getElementById("errCourriel").style.visibility="visible";
+					monErr ++;
+			}
 	}	
 	return (monErr);
 }
@@ -81,6 +104,7 @@ function estMotdePasse() { // pour valider le môt de passe
 }
 
 function estConfirmaMotdePasse() {  // pour valider la confirmation du môt de passe
+    console.log('?');
 	monErr = 0;
 	var x = document.forms["ajoutUsager"]["mot_de_passe"].value;
 	var y = document.forms["ajoutUsager"]["confirma_mot_de_passe"].value;

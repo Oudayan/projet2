@@ -13,14 +13,14 @@
         <h1>Recherche de logements À Louer</h1>
     </div>
     <div class="row">
-        <aside class="recherche col-lg-3 border rounded py-3 mt-2">
+        <aside class="recherche col-lg-3 border rounded py-2 mt-2">
             <form id="formulaire_recherche" method="post" action="<?= $_SESSION["recherche"]["action"] ?>" class="py-2">
                 <input type="hidden" id="action" name="action" value="recherche">
                 <input type="hidden" id="affichage" name="affichage" value="carte">
                 <div id="boiteTri" class="py-2">
                     <div class="form-group d-flex justify-content-between">
                         <h5>Trier par&nbsp;:</h5>
-                        <input type="checkbox" id="tri" name="tri" <?= $_SESSION["recherche"]["tri"] ?> data-toggle="toggle" data-on="Prix" data-off="Évaluation" data-onstyle="bleu" data-offstyle="orange">
+						<input type="checkbox" id="tri" name="tri" <?= $_SESSION["recherche"]["tri"] ?> data-toggle="toggle" data-on="Prix" data-off="Évaluation" data-onstyle="bleu" data-offstyle="orange">
                         <input type="checkbox" id="asc" name="asc" <?= $_SESSION["recherche"]["asc"] ?> data-toggle="toggle" data-on="Asc." data-off="Desc." data-onstyle="bleu" data-offstyle="orange">
                     </div>
                     <hr />
@@ -28,7 +28,7 @@
                 <h5>Filtrer par&nbsp;:</h5>
                 <div class="form-group date-form">
                     <label for="datesLocation">Dates&nbsp;:</label>
-                    <input type="text" id="datesLocation" name="datesLocation" class="form-control">
+                    <input type="text" id="datesLocation" name="datesLocation" class="form-control" value="<?= $_SESSION["recherche"]["datesLocation"] ?>">
                     <i class="glyphicon glyphicon-calendar fa fa-calendar date-icon"></i>
                 </div>
                 <div class="form-group">
@@ -40,28 +40,6 @@
                 </div>
                 <input type="hidden" id="latitude" name="latitude" value="<?= $_SESSION["recherche"]["latitude"] ?>">
                 <input type="hidden" id="longitude" name="longitude" value="<?= $_SESSION["recherche"]["longitude"] ?>">
-                <div class="form-group hidden">
-                    <label for="region">Région&nbsp;:</label>
-                    <select class="form-control" id="region" name="region">
-                        <option value="1" <?= ($_SESSION["recherche"]['region'] == 1 ? 'selected' : 'disabled') ?>>Bas-Saint-Laurent</option>
-                        <option value="2" <?= ($_SESSION["recherche"]['region'] == 2 ? 'selected' : 'disabled') ?>>Saguenay–Lac-Saint-Jean</option>
-                        <option value="3" <?= ($_SESSION["recherche"]['region'] == 3 ? 'selected' : 'disabled') ?>>Capitale-Nationale</option>
-                        <option value="4" <?= ($_SESSION["recherche"]['region'] == 4 ? 'selected' : 'disabled') ?>>Mauricie</option>
-                        <option value="5" <?= ($_SESSION["recherche"]['region'] == 5 ? 'selected' : 'disabled') ?>>Estrie</option>
-                        <option value="6" <?= ($_SESSION["recherche"]['region'] == 6 ? 'selected' : 'disabled') ?>>Montréal</option>
-                        <option value="7" <?= ($_SESSION["recherche"]['region'] == 7 ? 'selected' : 'disabled') ?>>Outaouais</option>
-                        <option value="8" <?= ($_SESSION["recherche"]['region'] == 8 ? 'selected' : 'disabled') ?>>Abitibi-Témiscamingue</option>
-                        <option value="9" <?= ($_SESSION["recherche"]['region'] == 9 ? 'selected' : 'disabled') ?>>Côte-Nord</option>
-                        <option value="10" <?= ($_SESSION["recherche"]['region'] == 10 ? 'selected' : 'disabled') ?>>Nord-du-Québec</option>
-                        <option value="11" <?= ($_SESSION["recherche"]['region'] == 11 ? 'selected' : 'disabled') ?>>Gaspésie–Îles-de-la-Madeleine</option>
-                        <option value="12" <?= ($_SESSION["recherche"]['region'] == 12 ? 'selected' : 'disabled') ?>>Chaudière-Appalaches</option>
-                        <option value="13" <?= ($_SESSION["recherche"]['region'] == 13 ? 'selected' : 'disabled') ?>>Laval</option>
-                        <option value="14" <?= ($_SESSION["recherche"]['region'] == 14 ? 'selected' : 'disabled') ?>>Lanaudière</option>
-                        <option value="15" <?= ($_SESSION["recherche"]['region'] == 15 ? 'selected' : 'disabled') ?>>Laurentides</option>
-                        <option value="16" <?= ($_SESSION["recherche"]['region'] == 16 ? 'selected' : 'disabled') ?>>Montérégie</option>
-                        <option value="17" <?= ($_SESSION["recherche"]['region'] == 17 ? 'selected' : 'disabled') ?>>Centre-du-Québec</option>
-                    </select>
-                </div>
                 <div class="form-group">
                     <label for="rayon">Rayon&nbsp;:</label>
                     <select class="form-control" id="rayon" name="rayon">
@@ -86,16 +64,50 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="prixMin">Entre&nbsp;:</label>
+                    <label for="nbPersonnes">Nombre de personnes&nbsp;:</label>
+                    <select class="form-control" id="nbPersonnes" name="nbPersonnes">
+                        <option value="1" <?= ($_SESSION["recherche"]['nbPersonnes'] == 1 ? 'selected' : '') ?>>1 personne</option>
+                        <option value="2" <?= ($_SESSION["recherche"]['nbPersonnes'] == 2 ? 'selected' : '') ?>>2 personnes</option>
+                        <option value="3" <?= ($_SESSION["recherche"]['nbPersonnes'] == 3 ? 'selected' : '') ?>>3 personnes</option>
+                        <option value="4" <?= ($_SESSION["recherche"]['nbPersonnes'] == 4 ? 'selected' : '') ?>>4 personnes</option>
+                        <option value="5" <?= ($_SESSION["recherche"]['nbPersonnes'] == 5 ? 'selected' : '') ?>>5 personnes</option>
+                        <option value="6" <?= ($_SESSION["recherche"]['nbPersonnes'] == 6 ? 'selected' : '') ?>>6 personnes</option>
+                        <option value="7" <?= ($_SESSION["recherche"]['nbPersonnes'] == 7 ? 'selected' : '') ?>>7 personnes</option>
+                        <option value="8" <?= ($_SESSION["recherche"]['nbPersonnes'] == 8 ? 'selected' : '') ?>>8 personnes</option>
+                        <option value="9" <?= ($_SESSION["recherche"]['nbPersonnes'] == 9 ? 'selected' : '') ?>>9 personnes</option>
+                        <option value="10" <?= ($_SESSION["recherche"]['nbPersonnes'] == 10 ? 'selected' : '') ?>>10 personnes</option>
+                        <option value="11" <?= ($_SESSION["recherche"]['nbPersonnes'] == 11 ? 'selected' : '') ?>>11 personnes</option>
+                        <option value="12" <?= ($_SESSION["recherche"]['nbPersonnes'] == 12 ? 'selected' : '') ?>>12 personnes</option>
+                        <option value="13" <?= ($_SESSION["recherche"]['nbPersonnes'] == 13 ? 'selected' : '') ?>>13 personnes</option>
+                        <option value="14" <?= ($_SESSION["recherche"]['nbPersonnes'] == 14 ? 'selected' : '') ?>>14 personnes</option>
+                        <option value="15" <?= ($_SESSION["recherche"]['nbPersonnes'] == 15 ? 'selected' : '') ?>>15 personnes</option>
+                        <option value="16" <?= ($_SESSION["recherche"]['nbPersonnes'] == 16 ? 'selected' : '') ?>>16 personnes</option>
+                        <option value="17" <?= ($_SESSION["recherche"]['nbPersonnes'] == 17 ? 'selected' : '') ?>>17 personnes</option>
+                        <option value="17" <?= ($_SESSION["recherche"]['nbPersonnes'] == 18 ? 'selected' : '') ?>>18 personnes</option>
+                        <option value="17" <?= ($_SESSION["recherche"]['nbPersonnes'] == 19 ? 'selected' : '') ?>>19 personnes</option>
+                        <option value="17" <?= ($_SESSION["recherche"]['nbPersonnes'] == 20 ? 'selected' : '') ?>>20 personnes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prixMin">Prix minumum&nbsp;:</label>
                     <select class="form-control" id="prixMin" name="prixMin">
                         <option value="0" <?= ($_SESSION["recherche"]['prixMin'] == 0 ? 'selected' : '') ?>>Aucun prix minimum</option>
                         <option value="25" <?= ($_SESSION["recherche"]['prixMin'] == 25 ? 'selected' : '') ?>>25 $</option>
                         <option value="50" <?= ($_SESSION["recherche"]['prixMin'] == 50 ? 'selected' : '') ?>>50 $</option>
-                        <option value="75" <?= ($_SESSION["recherche"]['prixMin'] == 75 ? 'selected' : '') ?>>75 $</option>
+                        <option value="60" <?= ($_SESSION["recherche"]['prixMin'] == 60 ? 'selected' : '') ?>>60 $</option>
+                        <option value="70" <?= ($_SESSION["recherche"]['prixMin'] == 70 ? 'selected' : '') ?>>70 $</option>
+                        <option value="80" <?= ($_SESSION["recherche"]['prixMin'] == 80 ? 'selected' : '') ?>>80 $</option>
+                        <option value="90" <?= ($_SESSION["recherche"]['prixMin'] == 90 ? 'selected' : '') ?>>90 $</option>
                         <option value="100" <?= ($_SESSION["recherche"]['prixMin'] == 100 ? 'selected' : '') ?>>100 $</option>
-                        <option value="125" <?= ($_SESSION["recherche"]['prixMin'] == 125 ? 'selected' : '') ?>>125 $</option>
+                        <option value="110" <?= ($_SESSION["recherche"]['prixMin'] == 110 ? 'selected' : '') ?>>110 $</option>
+                        <option value="120" <?= ($_SESSION["recherche"]['prixMin'] == 120 ? 'selected' : '') ?>>120 $</option>
+                        <option value="130" <?= ($_SESSION["recherche"]['prixMin'] == 130 ? 'selected' : '') ?>>130 $</option>
+                        <option value="140" <?= ($_SESSION["recherche"]['prixMin'] == 140 ? 'selected' : '') ?>>140 $</option>
                         <option value="150" <?= ($_SESSION["recherche"]['prixMin'] == 150 ? 'selected' : '') ?>>150 $</option>
-                        <option value="175" <?= ($_SESSION["recherche"]['prixMin'] == 175 ? 'selected' : '') ?>>175 $</option>
+                        <option value="160" <?= ($_SESSION["recherche"]['prixMin'] == 160 ? 'selected' : '') ?>>160 $</option>
+                        <option value="170" <?= ($_SESSION["recherche"]['prixMin'] == 170 ? 'selected' : '') ?>>170 $</option>
+                        <option value="180" <?= ($_SESSION["recherche"]['prixMin'] == 180 ? 'selected' : '') ?>>180 $</option>
+                        <option value="190" <?= ($_SESSION["recherche"]['prixMin'] == 190 ? 'selected' : '') ?>>190 $</option>
                         <option value="200" <?= ($_SESSION["recherche"]['prixMin'] == 200 ? 'selected' : '') ?>>200 $</option>
                         <option value="225" <?= ($_SESSION["recherche"]['prixMin'] == 225 ? 'selected' : '') ?>>225 $</option>
                         <option value="250" <?= ($_SESSION["recherche"]['prixMin'] == 250 ? 'selected' : '') ?>>250 $</option>
@@ -122,16 +134,25 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="prixMax">Et&nbsp;:</label>
+                    <label for="prixMax">Prix maximum&nbsp;:</label>
                     <select class="form-control" id="prixMax" name="prixMax">
                         <option value="1000000" <?= ($_SESSION["recherche"]['prixMax'] == 1000000 ? 'selected' : '') ?>>Aucun prix maximum</option>
                         <option value="25" <?= ($_SESSION["recherche"]['prixMax'] == 25 ? 'selected' : '') ?>>25 $</option>
                         <option value="50" <?= ($_SESSION["recherche"]['prixMax'] == 50 ? 'selected' : '') ?>>50 $</option>
-                        <option value="75" <?= ($_SESSION["recherche"]['prixMax'] == 75 ? 'selected' : '') ?>>75 $</option>
+                        <option value="60" <?= ($_SESSION["recherche"]['prixMin'] == 60 ? 'selected' : '') ?>>60 $</option>
+                        <option value="70" <?= ($_SESSION["recherche"]['prixMin'] == 70 ? 'selected' : '') ?>>70 $</option>
+                        <option value="80" <?= ($_SESSION["recherche"]['prixMin'] == 80 ? 'selected' : '') ?>>80 $</option>
+                        <option value="90" <?= ($_SESSION["recherche"]['prixMin'] == 90 ? 'selected' : '') ?>>90 $</option>
                         <option value="100" <?= ($_SESSION["recherche"]['prixMax'] == 100 ? 'selected' : '') ?>>100 $</option>
-                        <option value="125" <?= ($_SESSION["recherche"]['prixMax'] == 125 ? 'selected' : '') ?>>125 $</option>
+                        <option value="110" <?= ($_SESSION["recherche"]['prixMax'] == 110 ? 'selected' : '') ?>>110 $</option>
+                        <option value="120" <?= ($_SESSION["recherche"]['prixMax'] == 120 ? 'selected' : '') ?>>120 $</option>
+                        <option value="130" <?= ($_SESSION["recherche"]['prixMax'] == 130 ? 'selected' : '') ?>>130 $</option>
+                        <option value="140" <?= ($_SESSION["recherche"]['prixMax'] == 140 ? 'selected' : '') ?>>140 $</option>
                         <option value="150" <?= ($_SESSION["recherche"]['prixMax'] == 150 ? 'selected' : '') ?>>150 $</option>
-                        <option value="175" <?= ($_SESSION["recherche"]['prixMax'] == 175 ? 'selected' : '') ?>>175 $</option>
+                        <option value="160" <?= ($_SESSION["recherche"]['prixMax'] == 160 ? 'selected' : '') ?>>160 $</option>
+                        <option value="170" <?= ($_SESSION["recherche"]['prixMax'] == 170 ? 'selected' : '') ?>>170 $</option>
+                        <option value="180" <?= ($_SESSION["recherche"]['prixMax'] == 180 ? 'selected' : '') ?>>180 $</option>
+                        <option value="190" <?= ($_SESSION["recherche"]['prixMax'] == 190 ? 'selected' : '') ?>>190 $</option>
                         <option value="200" <?= ($_SESSION["recherche"]['prixMax'] == 200 ? 'selected' : '') ?>>200 $</option>
                         <option value="225" <?= ($_SESSION["recherche"]['prixMax'] == 225 ? 'selected' : '') ?>>225 $</option>
                         <option value="250" <?= ($_SESSION["recherche"]['prixMax'] == 250 ? 'selected' : '') ?>>250 $</option>
@@ -282,10 +303,15 @@
                 ],
                 "firstDay": 1
             },
-            <?= (isset($_SESSION['disponibilite']['dateDebut']) ? '"minDate": "' . $_SESSION['disponibilite']['dateDebut'] . '", ' : '"minDate": new Date(), ') ?>
-            <?= (isset($_SESSION['disponibilite']['dateFin']) ? '"minDate": "' . $_SESSION['disponibilite']['dateFin'] . '", ' : '') ?>
-            <?= (isset($_SESSION['recherche']['debutLocation']) ? '"startDate": "' . $_SESSION['recherche']['debutLocation'] . '", ' : '') ?>
-            <?= (isset($_SESSION['recherche']['finLocation']) ? '"endDate": "' . $_SESSION['recherche']['finLocation'] . '", ' : '') ?>
+            // Date minimum est égale à aujourd'hui
+            "minDate": moment().format(), 
+            "isInvalidDate": function(date) {
+                return false;
+            },
+            // Si la date de début du formulaire recherche est assigné en $_SESSION, mettre cette date comme date de début de la sélection, sinon à la date d'aujourd'hui
+            <?= (isset($_SESSION['recherche']['debutLocation']) ? '"startDate": "' . $_SESSION['recherche']['debutLocation'] . '", ' : ' "startDate": moment().format(), ') ?>
+            // Si la date de fin du formulaire recherche est assigné en $_SESSION, mettre cette date comme date de fin de la sélection, sinon à la date de demain
+            <?= (isset($_SESSION['recherche']['finLocation']) ? '"endDate": "' . $_SESSION['recherche']['finLocation'] . '", ' : '"endDate": moment(new Date()).add(1,"days"), ') ?>
             "applyClass": "btn-orange"
         }, function(start, end, label) {
             console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
@@ -377,7 +403,7 @@
                     tri: $('#tri:checked').val(), 
                     asc: $('#asc:checked').val(), 
                     datesLocation: $('#datesLocation').val(), 
-                    region: $('#region').val(), 
+                    nbPersonnes: $('#nbPersonnes').val(), 
                     adresseDepart: $('#adresseDepart').val(), 
                     latitude: $('#latitude').val(), 
                     longitude: $('#longitude').val(), 
@@ -409,7 +435,7 @@
                     tri: $('#tri:checked').val(), 
                     asc: $('#asc:checked').val(), 
                     datesLocation: $('#datesLocation').val(), 
-                    region: $('#region').val(), 
+                    nbPersonnes: $('#nbPersonnes').val(), 
                     adresseDepart: $('#adresseDepart').val(), 
                     latitude: $('#latitude').val(), 
                     longitude: $('#longitude').val(), 
@@ -431,7 +457,6 @@
                 if (logements.length) {
                     // Afficher les nouveraux marqueurs
                     chargerMarqueurs(logements);
-                    modifierZoom();
                     // Modifier le message d'alerte
                     $("#message-carte").text(logements.length + " logements trouvés !");
                 }
@@ -491,13 +516,6 @@
       'images/pink-dot.png'
     ]
 
-    //var logements = [
-        <?php //foreach ($donnees["logements"] as $logement) {
-            //echo '[\'<a href="index.php?Logement&action=afficherLogement"><h4 class="p-2">' . $logement->lireNoCivique() . ' ' . $logement->lireRue() . ' ' . $logement->lireApt() . ', ' . $logement->lireVille() . ', ' . $logement->lireProvince() . '</h4></span><img src="' . $logement->lirePremierePhoto() . '"><div class="d-flex justify-content-between"><span class="prix pt-2"><strong>' . $logement->lirePrix() . '$</strong></span><span class="score"><span style="width:' . ($logement->lireEvaluation() / 5) * 100 . '%"></span></div></a>\', ' . $logement->lireLatitude() . ', ' . $logement->lireLongitude() . ', ' . ($logement->lireIdTypeLogement() - 1). '], ';
-        //} 
-        ?>
-    //];
-
     function initialize() {
         var zoomlvl = <?= $_SESSION["recherche"]["zoom"] ?>;
         var latitude = <?= $_SESSION["recherche"]["latitude"] ?>;
@@ -519,9 +537,6 @@
         var infowindow = new google.maps.InfoWindow({
             maxWidth: 300
         });
-
-        //var zoomlvl = <?= $_SESSION["recherche"]["zoom"] ?>;
-        //map.setZoom(zoomlvl);        
 
         for (var i = 0; i < logements.length; i++) {
             ajouterMarqueur(logements[i][1], logements[i][2], icones[logements[i][3]]);
@@ -581,10 +596,5 @@
         masquerMarqueurs();
         marqueurs = [];
     }
-
-    function modifierZoom() {
-        var zoomlvl = <?= $_SESSION["recherche"]["zoom"] ?>;
-        map.setZoom(zoomlvl);        
-    };
 
 </script>

@@ -22,6 +22,15 @@
 			return $resultat->fetch();
 		}
 		
+        // Lire la première photo d'un logement
+		public function lirePremierePhotoLogement($idLogement) {
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement=? GROUP BY id_logement";
+            $donnees = array($idLogement);
+            $resultat =  $this->requete($sql, $donnees);
+			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'PhotoLogement'); 
+			return $resultat->fetch();
+		}
+		
         // Lire toutes les photos d'un logement
         public function lireToutesPhotosParLogement($idLogement) {
             $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement=?";
@@ -31,16 +40,16 @@
     	}
 
 		public function sauvegarderPhotoLogement(PhotoLogement $photoLogement) {
-			if ($photoLogement->lireIdPhotoLogement() && $this->lire($photoLogement->lireIdPhotoLogement())->fetch()) {
+			/*if ($photoLogement->lireIdPhotoLogement() && $this->lire($photoLogement->lireIdPhotoLogement())->fetch()) {
 				// update
 				$sql = "UPDATE " . $this->lireNomTable() . " SET chemin_photo=?, description_photo=?, id_logement=? WHERE " . $this->lireClePrimaire() . "=?";
                 $donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireIdPiece(), $photoLogement->lireIdLogement(), $photoLogement->lireIdPhotoLogement());
 			} 
-			else {
+			else {*/
 				// insert
-                $sql = "INSERT INTO " . $this->lireNomTable() . "(chemin_photo, description_photo, id_logement) VALUES (?, ?, ?)"; 
+                $sql = "INSERT INTO " . $this->lireNomTable() . "(chemin_photo, id_piece, id_logement) VALUES (?, ?, ?)"; 
 				$donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireIdPiece(), $photoLogement->lireIdLogement());
-			}
+			//}
            	return $this->requete($sql, $donnees);
 		}
        
