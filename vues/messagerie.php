@@ -3,15 +3,12 @@
  * @file     messagerie.php
  * @author   Zoraida Ortiz
  * @version  2.0
- * @date     05 mars 2018
+ * @date     5 mars 2018
  * @brief    vue messagerie
  * @details  
- * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
 ?> 
-<head> 
-  <script src="js/validerFormCompMsg.js"></script>
-</head>     
+
 
 <div class="container">
   <div class="d-flex flex-row">

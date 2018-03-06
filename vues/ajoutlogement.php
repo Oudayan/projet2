@@ -11,17 +11,16 @@
 ?>
 <!-- <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
 
-<style>
-
-
-</style>
+<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
 <script src="js/validerFormLogement.js"></script>
 <script src="js/managePhotos.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3prxRP0MgiciOnRm7HODXcLJziJ_TJuc"></script>
+
 <main>
 		<?php $courriel = $_SESSION["courriel"];
-		   $evaluation = null ?>
+		   $evaluation = null; ?>
 		<div class="container">
-		<input id='courriel' type="hidden" name="country" value=<?= $courriel?>>
+		<input id='courriel' type="hidden" name="country" value="<?= $courriel?>">
 		<form id="form_ajoute" onsubmit="return validateFormLogement()" action="index.php?Logement&action=enregistrerLogement" method="post"> <!--  -->
 		<h3>Ajouter un logement</h3>
 		<fieldset style="border:2px groove">
@@ -83,7 +82,7 @@
 		</fieldset>
 		<hr>
 		<div class="col-lg-4">	
-			<Label>Type de logement</label>
+			<label>Type de logement</label>
             <select class="form-control" name='id_TypeLogement'>
 				<?php
                 foreach($donnees["TypeLogements"] as $Tlogement)
@@ -676,5 +675,34 @@
     </form>
 	</div>
 	</div>
+	<button type="button" class="btn btn-lg btn-orange" data-toggle="modal" data-target="#modalLocation" c="chercherPrix()">Louez ce logement&nbsp;!</button>
+    <a target=_blank href="index.php?Recherche&action=recherche"><button type="button" class="btn btn-lg btn-bleu">Retour à la page recherche</button></a>
+
+    <div class="modal fade" id="modalLocation" tabindex="-1" role="dialog" aria-labelledby="modalLocationLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="modalLocation-content" class="modal-content">
+            </div>
+        </div>
+    </div>
 </main>
+
+
+<script>
+	 function chercherPrix() {
+		$.ajax({
+			url: 'index.php?Location&action=afficherLocation', 
+			type: 'POST',
+			data:  { 
+				<?= "idLogement: " . $donnees["logement"]->lireIdLogement() . ", "; ?> 
+				datesLocation: $("#datesLocation").val(), 
+			}, 
+			dataType: 'html',
+			success: function(donnees) {
+				$("#modalLocation-content").empty();
+				$("#modalLocation-content").html(donnees);
+			}
+		});
+	}
+	
+</script>
 

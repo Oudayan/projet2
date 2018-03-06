@@ -9,14 +9,13 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+
 		<!--  -->
         <title>A Louer</title>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
         <script type="text/javascript" src="js/daterangepicker.js"></script>
-	 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3prxRP0MgiciOnRm7HODXcLJziJ_TJuc"></script>
     </head>
     <body>
         <header class="container-fluid"> 
@@ -80,9 +79,15 @@
 				   <?php }
 					else { ?>
 						<div><span>Usager: <strong><?= $_SESSION["prenom"];?></strong></span>
+						
 						<a href="index.php?Logement&action=formAjoutLogement">Ajouter un logement</a>
                         <a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
-                        <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>                        
+                        <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>
+						<?php 
+						if ($_SESSION["typeUser"]==1){
+							echo '<a href="index.php?Usagers&action=admin">Admin</a>';
+						}
+						?>
 					</div>
 					<?php } ?>					
                 </div><!-- container px-5 -->

@@ -30,7 +30,7 @@
 								
 																									
 		
-								$modeleUsagers = $this->lireDao("Usagers");
+								$modeleUsagers = $this->lireDAO("Usagers");
 								//$nouveauUsager = new Usagers();
 								//$nouveauUsager->ecrireCourriel($params["courriel"]);
 								//$my=$nouveauUsager->lireCourriel();
@@ -69,7 +69,20 @@
 									$_SESSION["typeUser"] = $data->lireTypeUsager();
 									$_SESSION["prenom"] = $data->lirepreNom();
 								    $_SESSION["succes"]= "Bienvenue ! " . $_SESSION["prenom"] . " " ;
-									header("Location: index.php");
+                                    
+                                    // Redirection des administrateurs à la page d'administration du site
+                                    if ($_SESSION["typeUser"] == 1) {
+                                        header("Location: index.php?Proprietaire&action=afficherLogements");
+                                        //header("Location: index.php?Administration&action=afficherAdministration");
+                                    }
+									// Redirection des propriétaires à la page de gestion de logements
+                                    else if ($_SESSION["typeUser"] == 2) {
+                                        header("Location: index.php?Proprietaire&action=afficherLogements");
+                                    }
+                                    // Redirection des locataires à la page de recherche
+                                    else {
+                                        header("Location: index.php?Recherche&action=recherche");
+                                    }
 							
 								}
 								else
@@ -112,7 +125,10 @@
 
 					//====================================================partie administrative===========================
 					
-				
+					case "admin":
+						$this->afficherVues("admin");
+					break;
+					
 					case "afficheListeUsagers":														//affiche la liste des usagers
 						$this->afficheListeUsagers();
 					break;					
@@ -124,7 +140,7 @@
 						{
 							$modeleUsagers = $this->lireDAO("Usagers");
 							$data = $modeleUsagers->obtenir_par_courriel($params["courriel"]);		//obtenir les informations d'un usager en se servant du courriel de AfficheListeUsagers
-							$this->afficherVues("AfficheUsager", $data);								//affiche une vue de l'usager que l'on veut modifier
+							$this->afficherVues("admin", $data);								//affiche une vue de l'usager que l'on veut modifier
 						}
 						
 						else
@@ -156,7 +172,25 @@
 					   header("Location: index.php");
 
 					break;
-                    
+
+                    case "listeavalider":
+                    	$modeleUsagers = $this->lireDAO("Usagers"); 
+                    	$modeleTypePaiement = $this->lireDAO("TypePaiement"); 
+                    	$modeleTypeContact = $this->lireDAO("TypeContact"); 
+                    	$donnees["usagers"] = $modeleUsagers->obtenir_listeaValider();
+                    	var_dump($donnees);
+                    	$data = array();
+                    	for ($i=0 ;$i<$donnees['usagers'].length;$i++){
+                    		$data[$i]=array(
+                    		'courriel'=>lireCourriel(),
+                    		'nom'=>lireNom(),
+                    		'prenom'=>lirepreNom(),
+                    		'cellulaire'=>lireCellulaire()
+                    		);
+                    	}
+                    	  echo json_encode($data[$i]);
+                    break;
+
                     case "nouvelMessage":
                       $this->afficherVues("messagerie");
 					/*default:		
