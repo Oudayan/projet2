@@ -3,7 +3,7 @@
 * @file MessagesDestinataires.php
 * @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
 * @version 1.0
-* @date 26 fevrier 2018
+* @date 3 mars 2018
 * @brief Définit la classe MessagesDestinataires.
 * @details Cette classe définit les attributs des MessagesDestinataires 
 * 

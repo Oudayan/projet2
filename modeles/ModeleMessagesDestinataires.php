@@ -35,7 +35,6 @@
         public function messagesRecus($destinataire)
         {
         $sql = "SELECT *
-        
         FROM " . $this->lireNomTable() .
         " JOIN al_messagerie  
         ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
@@ -51,7 +50,6 @@
         public function messagesEnvoyes($expediteur)
         {
         $sql = "SELECT *
-        
         FROM " . $this->lireNomTable() .
         " JOIN al_messagerie  
         ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
@@ -65,53 +63,72 @@
           
         }
         
-        /**
-		* @brief Pour aller chercher un message
-		* @details Permet d'aller chercher les renseignements sur un message reçu en utilisant le id du message.
-		* @param point1 id_message
-		* @param point2 resultat
-		* @return array unMessage.
-		*/
-		public function obtenir_par_id_message($id_message)
-		{
-			$resultat = $this->lire($id_message);//reference BaseDAO
-			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, '"MessagesDestinataires"'); 
-			$unMessage = $resultat->fetch();
-			return $unMessage;
-		}
         
-         /**
-		* @brief Pour aller chercher un message
-		* @details Permet d'aller chercher les renseignements sur un message reçu en utilisant le courriel de l'utilisateur.
-		* @param point1 expediteur
-		* @param point2 resultat
-		* @return array unMessage.
-		*/
-		public function obtenir_par_expediteur($expediteur)
-		{
-			$resultat = $this->lire($expediteur, "expediteur");//reference BaseDAO
-			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Messages'); 
-			$unMessage = $resultat->fetch();
-			return $unMessage;
-		}
 		
         
         /**
-		* @brief Sauvegarde un message
+		* @brief Sauvegarder un message dans la table destinataire
 		* @details Prend les informations entrées et les sauvegarde dans la base de données.
-		* @param point1 unMessage
+		* @param point1 leMessage
 		* @param point2 id_message
-		* @param point3 sujet
-		* @param point4 fichier_joint
-		* @param point5 message
-		* @param point6 msg_date
-		* @param point7 courriel
+		* @param point3 destinataire
+		* @param point4 lu
+		* @param point5 d_actif
 		* @return aucun.
 		*/
 		/**
+		
+		public function sauvegardeDestinataire(MessagesDestinatires $leMessage) 
+		{
+			$query = "INSERT INTO " . $this->getTableName() . " (id_message, destinataire, lu, d_actif) VALUES (?, ?, ?, ?)";
+				
+			$donnees = array($leMessage->id_message, $leMessage->destinataire, $leMessage->lu, $leMessage->d_actif);
+				
+			return $this->requete($query, $donnees);
+			
+		}
+		
+		
+		/**
+		* @brief Sauvegarder un message dans la table messagerie
+		* @details Prend les informations entrées et les sauvegarde dans la base de données.
+		* @param point1 leMessage
+		* @param point2 id_message
+		* @param point2 id_reference
+		* @param point3 sujet
+		* @param point5 message
+		* @param point6 msg_date
+		* @param point7 expediteur
+		* @param point5 m_actif
+		* @return aucun.
+		*/
+		/**
+		public function sauvegardeMessage(MessagesDestinatires $leMessage) 
+		{
+			$query = "INSERT INTO al_messagerie (id_message, id_reference, sujet, message, msg_date, expediteur, m_actif) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				
+			$donnees = array($leMessage->id_message, $leMessage->id_reference, $leMessage->sujet, $leMessage->message, $leMessage->msg_date, $leMessage->expediteur, $leMessage->m_actif);
+				
+			return $this->requete($query, $donnees); 
+		}
+		
+		
+		
+		
+		
+		public function sauvegardeFichierJoint(MessagesDestinatires $leMessage) 
+		{
+			$query = "INSERT INTO al_messagerie (id_message, id_reference, sujet, msg_date, expediteur, m_actif) VALUES (?, ?, ?, ?, ?, ?)";
+				
+			$donnees = array($leMessage->id_message, $leMessage->id_reference, $leMessage->sujet, $leMessage->msg_date, $leMessage->expediteur, $leMessage->m_actif);
+				
+			return $this->requete($query, $donnees);
+			
+		}
+		
         public function sauvegarde(Usagers $unUsager)
 		{
-
+		
 		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
 			{
 				$query = "UPDATE " . $this->getTableName() . " SET nom=?, prenom=?, isAdmin=?, isBanned=? WHERE courriel = ?";
@@ -143,7 +160,35 @@
 				return $this->requete($query, $donnees);
 			/*}*/
 
-	
+		/**
+		* @brief Pour aller chercher un message
+		* @details Permet d'aller chercher les renseignements sur un message reçu en utilisant le id du message.
+		* @param point1 id_message
+		* @param point2 resultat
+		* @return array unMessage.
+		*/
+		public function obtenir_par_id_message($id_message)
+		{
+			$resultat = $this->lire($id_message);//reference BaseDAO
+			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, '"MessagesDestinataires"'); 
+			$unMessage = $resultat->fetch();
+			return $unMessage;
+		}
+        
+         /**
+		* @brief Pour aller chercher un message
+		* @details Permet d'aller chercher les renseignements sur un message reçu en utilisant le courriel de l'utilisateur.
+		* @param point1 expediteur
+		* @param point2 resultat
+		* @return array unMessage.
+		*/
+		public function obtenir_par_expediteur($expediteur)
+		{
+			$resultat = $this->lire($expediteur, "expediteur");//reference BaseDAO
+			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Messages'); 
+			$unMessage = $resultat->fetch();
+			return $unMessage;
+		}
         
 	} //fin de la class ModeleMessagesDestinataires 
 		

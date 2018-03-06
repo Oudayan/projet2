@@ -26,7 +26,7 @@
 
                         if($_SESSION["courriel"])
                         {
-                            $this->afficherVues("messagerie");
+                            $this->afficherVues("Tableaubord");
                         }
                         else
                         {  
@@ -35,7 +35,19 @@
                         break;																			
 						// aller chercher les messages recues
                       
-                    
+                    case "listeDestinataires" :	
+							$modeleMessagesDestinataires = $this->getDAO("MessagesDestinataires");
+							$personnes = $modeleMessagesDestinataires->obtenirListeDestinataires();
+							
+								echo "<option value='0' selected disabled> Choisir  Destinataire </option>";
+								foreach ($personnes as $personne)
+								{
+									echo '<option value='. $personne->destinataire . '>' . $personne->destinataire .'</option>';
+								}
+							
+							
+							break;
+						/*
                     case "messagesRecus":
                         
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
@@ -45,7 +57,8 @@
                         echo "<pre>";
                         var_dump($recus);
                         echo "</pre>";
-                        */    
+                        */
+						/*
 							$donnees = array();
                             for ($i=0; $i< count($recus); $i++){
                                 $donnees[$i]=array();
@@ -64,6 +77,7 @@
                             /* var_dump($donnees);
                                die();
 							*/
+							/*
 							echo json_encode($donnees);
 							return;					                                                 //contient la liste des messages recus
 							break;  
@@ -76,7 +90,7 @@
                         echo "<pre>";
                         var_dump($envoyes);
                         echo "</pre>";*/
-                           
+                        /*   
 							$donnees = array();
                             for ($i=0; $i< count($envoyes); $i++){
                                 $donnees[$i]=array();
@@ -94,8 +108,34 @@
                         	}  
 							echo json_encode($donnees);
 							return;					                                                 //contient la liste des messages envoyes
-							break;  
-                        
+							break; 
+						*/
+                    case "sauvegardeMessage":
+							if(isset($params["destinataire"]) && isset($params["lu"]) && isset($params["d_actif"])
+								&& isset($params["id_reference"])&& isset($params["sujet"])&& isset($params["fichier_joint"])
+							&& isset($params["message"])&& isset($params["msg_date"])&& isset($params["expediteur"])&& isset($params["m_actif"]))
+							{		
+									$modeleMessagesDestinataires = $this->getDAO("MessagesDestinataires");
+									$nouvelle = new MessagesDestinataires($params["destinataire"], $params["lu"], $params["d_actif"], $params["id_reference"], $params["sujet"], $params["fichier_joint"], 
+									$params["message"], $params["msg_date"], $params["expediteur"]), $params["m_actif"]); 
+									$succes1 = $modeleMessagesDestinataires->sauvegardeMessage($nouvelle);
+									$succes2 = $modeleMessagesDestinataires->sauvegardeDestinataire($nouvelle);
+									
+									//var_dump($nouvelle);
+									
+							}
+							else
+							{
+								
+								trigger_error($params["action"] . " Action invalide.");	
+							}
+							break;
+
+
+
+					/*
+
+					
                     case "composerMessage" :
                         $nom_fichier=$_FILES["fichierJoint"]["name"];
                         var_dump($nom_fichier);
@@ -125,7 +165,7 @@
 					*/	
 				}                                                                                   // fin du switch	
 			}                                                                                       //fin du if params action
-			/*
+			
             else
 			{
 				//var_dump("No");
@@ -182,6 +222,46 @@ function charge_fichier($nom_fichier, $destination, $fichier_taille, $nom_dest)
             return $message;
 
 }
+
+// ajouter au Ajax
+/**
+* function qui permet de soumettre le message envoyé pour pouvoir le sauvegarder dans la BD et ensuite de l'ajouter à la section des messages-envoyés
+* 
+*/		
+/*		
+	$("#Envoyer").on("click", function() {
+		$.ajax({
+            // Ce qui est envoyé au controlleur, avec le case (&action=...)
+            url : 'index.php?Messagerie&action=sauvegardeMessage',
+            type: 'POST',
+            data: { 
+					destinataire:$('#destinataire').val(),
+                    lu : $('#lu').val(),
+					d_actif : $('#d_actif').val(),
+					id_message:$('#id_message').val(),
+					id_reference:$('#id_reference').val(),
+					sujet:$('#sujet').val(),
+					fichier_joint:$('#fichier_joint').val(),
+					message:$('#message').val(),
+					msg_date:$('#msg_date').val(),
+					m_actif:$('#m_actif').val(),
+					expediteur:$('#expediteur').val(),
+                },
+            // Ce qui est retourné à la vue
+            dataType : 'html', 
+            // result tient ce que le controlleur retourne en echo
+            success : function(result, status) {
+                $("#target").empty();
+                // Insertion de result dans une div de la vue
+                $(result).appendTo("#target");
+				//rafraichit la vue;
+				accordion();
+				erase();
+            }
+        });
+    });
+*/
+
 
 		
 ?>

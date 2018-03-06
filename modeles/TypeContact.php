@@ -1,7 +1,7 @@
 <?php
 /**
 * @file Usager.php
-* @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+* @author Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
 * @version 1.0
 * @date 14 février 2018
 * @brief Définit la classe TypeContact.
