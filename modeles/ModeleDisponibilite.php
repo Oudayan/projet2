@@ -21,7 +21,8 @@
 		}
 		
 		public function lireDisponibilitesParLogement($id) {
-            $resultat = $this->lire($id, "id_logement");
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement = '" . $id . "' AND d_active = 1 ORDER BY date_debut" ;
+			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Disponibilite");
 		}
 		

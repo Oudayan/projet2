@@ -22,7 +22,7 @@
 		}
 		
 		public function lireLogementParProprietaire($idProprietaire) {
-            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE courriel = " . $idProprietaire;
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE courriel = '" . $idProprietaire . "'";
             $resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
 		}
