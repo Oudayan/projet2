@@ -106,7 +106,7 @@
                         $json = array();
                         // Instanciation de la classe Logement
                         $nouveau["Logement"] = new Logement("",	$_POST["no_civique"], $_POST["apt"], $_POST["rue"], $_POST["ville"], $_POST["province"], $_POST["pays"], 
-                        $_POST["code_postal"], $_POST["latitude"], $_POST["longitude"], $_POST["id_TypeLogement"], $_POST["prix"],
+                        $_POST["code_postal"], "0", "0", $_POST["id_TypeLogement"], $_POST["prix"],
                         null, $_POST["description"], $courriel, $_POST["nb_personnes"], $_POST["nb_chambres"], $_POST["nb_lits"], 
                         $_POST["nb_salle_de_bain"], $_POST["nb_demi_salle_de_bain"], $_POST["frais_nettoyage"], $stationement, 
                         $wifi, $cuisine, $tv, $fer_a_repasser, $ceintres, $seche_cheveux, $climatise, $laveuse, 
@@ -137,8 +137,9 @@
                         }
 
                         $_SESSION["succes"]= "Votre logement a été enregistré, merci de attendre un confirmation dans votre courriel ! ";
-                        header("Location: index.php?Proprietaire&action=afficherLogements");
-                        return;
+						die();
+                       // header("Location: index.php?Proprietaire&action=afficherLogements");
+                      //  return;
                         break;
 
                     default:
