@@ -138,8 +138,8 @@
 
                         $_SESSION["succes"]= "Votre logement a été enregistré, merci de attendre un confirmation dans votre courriel ! ";
 						die();
-                       // header("Location: index.php?Proprietaire&action=afficherLogements");
-                      //  return;
+                        header("Location: index.php?Proprietaire&action=afficherLogements");
+                        return;
                         break;
 
                     default:
