@@ -132,8 +132,27 @@
 					case "afficheListeUsagers":														//affiche la liste des usagers
 						$this->afficheListeUsagers();
 					break;					
-									
-					
+					case "afficheListeUsagersJson":														//affiche la liste des usagers
+						$modeleUsagers = $this->lireDAO("Usagers"); 
+                    	$modeleTypePaiement = $this->lireDAO("TypePaiement"); 
+                    	$modeleTypeContact = $this->lireDAO("TypeContact"); 
+                    	$donnees = $modeleUsagers->obtenir_tous();
+                    	$data = array();
+                    	for ($i=0 ;$i<count($donnees);$i++){
+                    		$data[$i]=array(
+                    		'courriel'=>$donnees[$i]->lireCourriel(),
+                    		'nom'=>$donnees[$i]->lireNom(),
+                    		'prenom'=>$donnees[$i]->lirepreNom(),
+                    		'cellulaire'=>$donnees[$i]->lireCellulaire(),
+							'mot_de_passe'=>$donnees[$i]->lireCourriel(),
+							'u_banni'=>$donnees[$i]->lireestBanni(),
+							'u_commentaire_banni'=>$donnees[$i]->lireCommentaireBanni(),
+							'u_date_banni'=>$donnees[$i]->lireDateBanni(),
+							'u_valide'=>$donnees[$i]->lireUValide()
+                    		);
+                    	}
+                    	  echo json_encode($data);
+					break;	
 					case "modifieUsager":															//va chercher un usager pour permettre la modification
 						
 						if(isset($params["courriel"]))
@@ -201,8 +220,10 @@
 					case "bannirUsager":
 						if(isset($params["courriel"]) && $_SESSION["typeUser"] == 1)  {
 							$courriel = $params["courriel"];
+							$descript = $params["description"];
 							$modeleUsagers = $this->lireDAO("Usagers"); 
-							$data = $modeleUsagers->obtenir_par_courriel($courriel);
+							$data = new Usagers($courriel, '', '', '','' , '',$descript );
+							var_dump($data);
 							$modeleUsagers->Bannir($data);
 						}					
 					break;
