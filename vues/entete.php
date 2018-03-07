@@ -82,8 +82,8 @@
                         <span>Usager: <strong><?= $_SESSION["prenom"];?><?=$_SESSION["typeUser"]?> </strong></span>
 						<a href="index.php?Messagerie&action=afficherMessagerie"><i class="fa fa-envelope iconMessage"></i><?= $_SESSION["courriel"];?></a>
                         <a href="index.php?Usagers&action=Logout" id="myBtn" class="nav-item nav-link" aria-hidden="true"><li class="fa fa-sign-out fa-lg bg-login"></li>Déconnexion</a>
-                      <!--  <nav class="d-flex justify-content-between"> -->
-						<i><?= $_SESSION["typeUser"];?></i>
+                        <nav class="d-flex justify-content-between">
+                            <i><?= $_SESSION["typeUser"];?></i>
                             <a href="index.php?Recherche&action=recherche">Recherche</a>
                             <?php if ($_SESSION["typeUser"] == 1 || $_SESSION["typeUser"] == 2) { ?>
                             <a href="index.php?Proprietaire&action=afficherLogements">Mes propriétés</a>
@@ -91,7 +91,7 @@
                             if ($_SESSION["typeUser"] == 1) { ?>
                                 <a href="index.php?Usagers&action=admin">Admin</a>
                             <?php } ?>
-                       <!-- </nav> -->
+                       </nav>
 					</div>
 					<?php } ?>					
                 </div><!-- container px-5 -->
