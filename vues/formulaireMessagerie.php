@@ -30,7 +30,7 @@
     </div>
     <div class="form-group row heigthFormBLecture">
       <label for="file_id" class="col-sm-3 col-form-label-sm">Fichier joint</label>
-      <div class="download col-9">
+      <div id="file_id" class="download col-9">
       
       </div>
     </div>

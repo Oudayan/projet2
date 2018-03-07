@@ -20,7 +20,7 @@
 				switch($params["action"])
 				
 				{
-					//====================================================Accéder à la messagerie==================================================================
+                  //====================Accéder à la messagerie===========
 					
 					case "afficherMessagerie":
 
@@ -58,7 +58,6 @@
 							break;
                             
                     case "msgEnvoyes":
-                        $modeleMessages = $this->lireDAO("Messages");
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         $envoyes = $modeleMessagesDestinataires->messagesEnvoyes($_SESSION["courriel"]);
 							$donnees = array();
@@ -98,14 +97,33 @@
                          //il ne faut pas retourne rien 
                       break;  
                     
-                    case "messageAutomatique":
-                      $params["message"];
-                      $params["locataire"];
-                      $_SESSION["proprietaire"];
-                      
+                    case "messageAutomatique":                     
+                      if(isset($params["message"]) && isset($params["sujet"]) && isset($params["locataire"]) && isset($params["proprietaire"])){
+                        
+                        $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                        $lu = false;
+                        $m_actif = true;
+                        $newDestinataire = new Destinataire(
+								$params["locataire"],
+								$idMessage, 
+								$lu,
+								$m_actif );
+								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
+							
+                        $newMessage = new Message( // Selon le modele Message
+                              "", // id_message
+                              "", // id_reference
+                              $params["sujet"], // Sujet
+                              "", // Fichier joint 
+                              $params["message"], // Message
+                              '',  // msg_date
+                              true, 
+                              $params["proprietaire"]
+							);
+                        $modeleMessagerie->sauvegarderMessage($newMessage); 
+                      }
                       break;
-                  
-
+                    
                     case "composerMessage" :
 						$contact = explode(',',$_POST["liste_contacts"]);
                         //condition pour remplir la variable à utiliser pour la destination du fichier
@@ -120,6 +138,7 @@
                         { 
                           // Variable de type classe Messagerie
                           $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                          
                           $newMessage = new Message( // Selon le modele Message
                               "", // id_message
                               "", // id_reference
@@ -130,7 +149,6 @@
                               true, 
                               $_SESSION["courriel"]
 							);
-
                           // Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message 
                           $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
                           
