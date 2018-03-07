@@ -441,7 +441,7 @@ label {
     margin-bottom: 25px;
   }
   
-#v-pills-tab {
+nav.v-pills-tab {
     /*background: rgb(29, 145, 188);*/
     background: linear-gradient(to right, rgba(11, 42, 52, 0.99), rgb(75, 76, 76));
     border-radius: 5px;

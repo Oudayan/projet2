@@ -13,7 +13,7 @@
 
 <div class="container">
   <div class="d-flex flex-row">
-    <nav class="nav flex-column nav-pills col-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <nav class="nav flex-column nav-pills col-3 v-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link" id="v-pills-validerUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()" data-toggle="pill"  role="tab" aria-controls="v-pills-validerUsagers" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Admin</a> <!-- href="#v-pills-validerUsagers" -->
        <div class="dropdown-divider"></div>
       <a class="nav-link" id="v-pills-validerUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerUsagers" role="tab" aria-controls="v-pills-validerUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-folder-open" aria-hidden="true"></i>Valider usagers</a>      

@@ -56,25 +56,6 @@
         }
         public function messagesEnvoyes($expediteur)
         {
-        /*$sql = "SELECT *
-        
-        FROM " . $this->lireNomTable() .
-        " JOIN al_messagerie  
-        ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
-        WHERE expediteur = '" . $expediteur . "'
-        AND m_actif = 1 
-        ORDER BY al_messagerie.msg_date DESC";*/
-          
-       /* $sql = "SELECT *, GROUP_CONCAT( destinataire SEPARATOR ',')  from " . $this->lireNomTableMessagerie() .  " as m 
-            JOIN " . $this->lireNomTable() . " as d ON d.id_message = m.id_message 
-            WHERE expediteur = '" . $expediteur . "'
-            GROUP by d.id_message";
-        */
-          /*$sql = "SELECT *, GROUP_CONCAT( destinataire SEPARATOR ',')  from " . $this->lireNomTableMessagerie() . " as m 
-        JOIN " . $this->lireNomTable() . " as d ON d.id_message = m.id_message 
-        WHERE expediteur = '" . $expediteur . "'
-        GROUP by d.id_message"; */
-          
        $sql = "SELECT GROUP_CONCAT( destinataire SEPARATOR ',') as destinataire," . 
                 "lu,d_actif,al_messagerie.id_message,id_reference,sujet,fichier_joint," .
                 "msg_date,m_actif,expediteur,message " . 
@@ -138,36 +119,20 @@
 		
         public function sauvegarderMessage(Message $unMessage)
 		{
-
-		/*	if($unUsager->courriel && $this->lire($unUsager->courriel)->fetch())
-			{
-				$query = "UPDATE " . $this->getTableName() . " SET nom=?, prenom=?, isAdmin=?, isBanned=? WHERE courriel = ?";
-				$donnees = array($unUsager->nom,$unUsager->prenom,$unUsager->isAdmin,$unUsager->isBanned,$unUsager->courriel) ;
-				$resultat = $this->requete($query, $donnees);
-			}
-
-			else
-			{ */
-          
-              
-
-				var_dump($unMessage);
-
-				$query = "INSERT INTO " . $this->lireNomTableMessagerie() . 
-                        " (sujet, fichier_joint, message, msg_date, m_actif, expediteur) VALUES (?, ?, ?, now(),?, ?)";
-				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
-                                  $unMessage->lireM_actif(), $unMessage->lireExpediteur());
-				$this->requete($query, $donnees);
-				$query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
-					$donnees = $this->requete($query);
-					$donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'Message'); 
-					$id = $donnees->fetch();
-					$mon_id = $id->lireId_message();
-					var_dump($mon_id);
-				return $mon_id;
-			}
-
-            
+            $query = "INSERT INTO " . $this->lireNomTableMessagerie() . 
+                    " (sujet, fichier_joint, message, msg_date, m_actif, expediteur) VALUES (?, ?, ?, now(),?, ?)";
+            $donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
+                              $unMessage->lireM_actif(), $unMessage->lireExpediteur());
+            $this->requete($query, $donnees);
+            $query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
+                $donnees = $this->requete($query);
+                $donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'Message'); 
+                $id = $donnees->fetch();
+                $mon_id = $id->lireId_message();
+                var_dump($mon_id);
+            return $mon_id;
+        }
+ 
         public function sauvegarderDestinataire(Destinataire $unMessage){
 			var_dump($unMessage);
 			$query = "INSERT INTO " . $this->lireNomTable() . " (destinataire, id_message, lu, d_actif) VALUES (?, ?, ?, ?)";
@@ -177,11 +142,5 @@
 			return;
 
 		}
-
-
-		
-        
-	} //fin de la class ModeleMessagesDestinataires 
-		
-	
+	}	
 ?>

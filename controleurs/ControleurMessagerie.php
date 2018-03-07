@@ -96,40 +96,44 @@
                          $_POST["message_lu"];//true
                          //il faut faire update sur la table al_destinataire column lu
                          //il ne faut pas retourne rien 
-                      break;   
+                      break;  
+                    
+                    case "messageAutomatique":
+                      $params["message"];
+                      $params["locataire"];
+                      $_SESSION["proprietaire"];
+                      
+                      break;
+                  
 
                     case "composerMessage" :
-						echo "<pre>";
-						var_dump("Entrando al controlador");
-
 						$contact = explode(',',$_POST["liste_contacts"]);
-
-						if (isset($_FILES["fichierJoint"]["name"]))  // &&&&&&&&&& S'il y a un nom du fichier
+                        //condition pour remplir la variable à utiliser pour la destination du fichier
+						if (isset($_FILES["fichierJoint"]["name"]))
 							$nom_fichier = $_FILES["fichierJoint"]["name"];
 					    else 
 							$nom_fichier = "";
+                        
                        $destination = "pieces_jointes/";
                        $msg = "";
                         if(isset($_POST["liste_contacts"]) && isset($_POST["sujet"]) && isset($_POST["textMessage"]))                        
                         { 
-			
-							$modeleMessagerie = $this->lireDAO("MessagesDestinataires"); // &&&&&&&&&& Variable de type classe Messagerie &&& 
-							$newMessage = new Message( // Selon le modele Message
-								"", // id_message
-								"", // id_reference
-								$_POST["sujet"], // Sujet
-								$_FILES["fichierJoint"]["name"], // Fichier joint 
-								$_POST["textMessage"], // Message
-								'',  // msg_date
-								true, 
-								$_SESSION["courriel"]
-								
+                          // Variable de type classe Messagerie
+                          $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                          $newMessage = new Message( // Selon le modele Message
+                              "", // id_message
+                              "", // id_reference
+                              $_POST["sujet"], // Sujet
+                              $_FILES["fichierJoint"]["name"], // Fichier joint 
+                              $_POST["textMessage"], // Message
+                              '',  // msg_date
+                              true, 
+                              $_SESSION["courriel"]
 							);
 
-							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
+                          // Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message 
                           $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
-                            
-							//var_dump(count($contact));
+                          
                             $lu = false;
                             $m_actif = true;
 							for ($i=0;$i<count($contact);$i++){
@@ -140,17 +144,13 @@
 								$m_actif );
 								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
 							}
-                            echo '********************';
-                            var_dump($_FILES["fichierJoint"]);
+                            
                             if($nom_fichier != "") {
                               $taille_max = 1024; //Taille en kilobytes
                               $msg = charge_fichier("fichierJoint", $destination, $taille_max, $idMessage);   
                             }                     
                         }
-						else {
-							var_dump('Ahora no entró');
-						}
-                        if(trim($msg) != '')
+						else if(trim($msg) != '')
                         {
                           echo $msg;
                             $this->afficherVues("messagerie");
@@ -164,22 +164,16 @@
 
                         break;
                  
-					/*default:		
-																								
-						trigger_error("Action invalide");
-					*/	
-				} // fin du switch	
-			}//fin du if params action
+					default:																	
+						trigger_error("Action invalide");					
+				} 
+			}
             else
 			{
-				//var_dump("No");
-				$this->afficherVues("messagerie");//action par defaut- affiche la page d'accueil de la messagerie
-			}// fin du else du param action	
-		}//fin de la fonction index
-		
-		
-		
-	}//fin class                
+				$this->afficherVues("messagerie");
+			}	
+		}	
+	}               
           
 /**
  * @brief   fait le téléchargement d'un fichier
@@ -193,33 +187,31 @@ function charge_fichier($fichierJoint, $destination, $fichier_taille, $id_messag
 {
     $message = "";
     if($_FILES[$fichierJoint]['error'] > 0){
-                $message = 'An error ocurred when uploading.';
-            }
+        $message = 'An error ocurred when uploading.';
+    }
 
-            // Check filetype
-            $invalid_types = array("application/vnd.microsoft.portable-executable", "text/javascript");
-            if (in_array($_FILES[$fichierJoint]['type'], $invalid_types)) {
-                $message = "Erreur pendant l'envoi : Fichier non valide";
-            }
+    // Vérification type de fichier
+    $invalid_types = array("application/vnd.microsoft.portable-executable", "text/javascript");
+    if (in_array($_FILES[$fichierJoint]['type'], $invalid_types)) {
+        $message = "Erreur pendant l'envoi : Fichier non valide";
+    }
 
-            // Check filesize
-            if($_FILES[$fichierJoint]['size'] > $fichier_taille * 1024 ){ //Bytes
-                $message = "Le fichier téléchargé excède la taille de téléchargement maximale.";
-            }
+    // Vérification taille fichier
+    if($_FILES[$fichierJoint]['size'] > $fichier_taille * 1024 ){ //Bytes
+        $message = "Le fichier téléchargé excède la taille de téléchargement maximale.";
+    }
 
-            // Check if the file exists
-            if(file_exists($destination . $_FILES[$fichierJoint]['name'])){
-                $message = "Le fichier avec ce nom existe déjà";
-            }
+    // Vérification si le fichier existe déjà
+    if(file_exists($destination . $_FILES[$fichierJoint]['name'])){
+        $message = "Le fichier avec ce nom existe déjà";
+    }
 
-            // Upload file
-            if(!move_uploaded_file($_FILES[$fichierJoint]['tmp_name'], $destination . $id_message)){
-                $message = "Erreur pendant l'envoi  - vérifier la destination.";
-            }
+    // Téléverser fichier.
+    if(!move_uploaded_file($_FILES[$fichierJoint]['tmp_name'], $destination . $id_message)){
+        $message = "Erreur pendant l'envoi  - vérifier la destination.";
+    }
 
-            return $message;
-
+    return $message;
 }
-
 		
 ?>

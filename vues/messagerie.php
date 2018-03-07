@@ -12,7 +12,7 @@
 <main class="container-fluid">
   <div class="row">
     <aside class="col-lg-3">
-    <nav class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <nav class="nav flex-column nav-pills v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link" id="v-pills-compMessage-tab list-group-item-action" onclick="cacherBoitesLecture()" data-toggle="pill" href="#v-pills-compMessage" role="tab" aria-controls="v-pills-compMessage" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Composer un message</a>
        <div class="dropdown-divider"></div>
       <a class="nav-link" id="v-pills-boitRecp-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-boitRecp" role="tab" aria-controls="v-pills-boitRecp" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false">14</span><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
@@ -245,9 +245,9 @@
     $('.sujet').val(message.sujet);
     $('.dateCourriel').val(message.msg_date);
     $('.textMessage').val(message.textMessage); 
-   // if(message.fichier_joint != ""){
+    if(message.fichier_joint != ""){
     $('.download').html("<a href='pieces_jointes/"+ message.id_messsage +"' download='"+ message.fichierJoint +"'>"+ message.fichierJoint +"</a>");
-     //}
+     }
     $('#env_' + message.id_messsage).removeClass('fa-envelope');
     $('#env_' + message.id_messsage).addClass('fa-envelope-open');
     if(reception) {
@@ -383,8 +383,7 @@ function supprimerMessage() {
               cache: false,
               contentType: false,
               processData: false
-          });
-        e.preventDefault();
+          });  
     });
   });
   
