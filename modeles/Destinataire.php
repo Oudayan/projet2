@@ -37,7 +37,7 @@
         }
 		
 		public function ecrireLu($lu) {
-            if (is_bool($lu) && trim($lu) != "") {
+            if (is_bool($lu)) {
                 $this->lu = $lu;
             }			
 		}

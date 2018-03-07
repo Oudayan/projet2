@@ -65,7 +65,17 @@
         AND m_actif = 1 
         ORDER BY al_messagerie.msg_date DESC";*/
           
-        $sql = "SELECT GROUP_CONCAT( destinataire SEPARATOR ',') as destinataire," . 
+       /* $sql = "SELECT *, GROUP_CONCAT( destinataire SEPARATOR ',')  from " . $this->lireNomTableMessagerie() .  " as m 
+            JOIN " . $this->lireNomTable() . " as d ON d.id_message = m.id_message 
+            WHERE expediteur = '" . $expediteur . "'
+            GROUP by d.id_message";
+        */
+          /*$sql = "SELECT *, GROUP_CONCAT( destinataire SEPARATOR ',')  from " . $this->lireNomTableMessagerie() . " as m 
+        JOIN " . $this->lireNomTable() . " as d ON d.id_message = m.id_message 
+        WHERE expediteur = '" . $expediteur . "'
+        GROUP by d.id_message"; */
+          
+       $sql = "SELECT GROUP_CONCAT( destinataire SEPARATOR ',') as destinataire," . 
                 "lu,d_actif,al_messagerie.id_message,id_reference,sujet,fichier_joint," .
                 "msg_date,m_actif,expediteur,message " . 
                 "FROM " . $this->lireNomTable() . " JOIN al_messagerie " . 
@@ -74,7 +84,7 @@
                 "AND m_actif = 1 " . 
                 "GROUP BY lu, d_actif,al_messagerie.id_message, id_reference," . 
                 "sujet, fichier_joint,msg_date,m_actif, expediteur,message " . 
-                "ORDER BY al_messagerie.msg_date DESC";  
+                "ORDER BY al_messagerie.msg_date DESC";
         
         $resultat = $this->requete($sql);
         $resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "MessagesDestinataires"); 
@@ -143,10 +153,10 @@
 
 				var_dump($unMessage);
 
-				$query = "INSERT INTO " . $this->lireNomTableMessagerie() . " (sujet, fichier_joint, message, msg_date, expediteur) VALUES (?, ?, ?, now(), ?)";
+				$query = "INSERT INTO " . $this->lireNomTableMessagerie() . 
+                        " (sujet, fichier_joint, message, msg_date, m_actif, expediteur) VALUES (?, ?, ?, now(),?, ?)";
 				$donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
-
-                $unMessage->lireExpediteur());
+                                  $unMessage->lireM_actif(), $unMessage->lireExpediteur());
 				$this->requete($query, $donnees);
 				$query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
 					$donnees = $this->requete($query);

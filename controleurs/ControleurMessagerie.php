@@ -46,14 +46,15 @@
                                   "id_message" => $recus[$i]->lireId_message(),
                                   "id_reference" => $recus[$i]->lireId_reference(),
                                   "sujet" => $recus[$i]->lireSujet(),
-                                  "Fichier_join"=> $recus[$i]->lireFichier_joint(),
+                                  "fichier_joint"=> $recus[$i]->lireFichier_joint(),
                                   "texteMessage" => $recus[$i]->lireMessage(),
                                   "msg_date" => $recus[$i]->lireMsg_date(),
                                   "expediteur"=>$recus[$i]->lireExpediteur(),
                                   "m_actif"=>$recus[$i]->lireM_actif()
                                 );
                         	}  
-							echo json_encode($donnees);					                                                 //contient la liste des messages recus
+							echo json_encode($donnees);
+                            //contient la liste des messages recus
 							break;
                             
                     case "msgEnvoyes":
@@ -69,7 +70,7 @@
                                   "id_message" => $envoyes[$i]->lireId_message(),
                                   "id_reference" => $envoyes[$i]->lireId_reference(),
                                   "sujet" => $envoyes[$i]->lireSujet(),
-                                  "Fichier_join"=> $envoyes[$i]->lireFichier_joint(),
+                                  "fichier_joint"=> $envoyes[$i]->lireFichier_joint(),
                                   "texteMessage" => $envoyes[$i]->lireMessage(),
                                   "msg_date" => $envoyes[$i]->lireMsg_date(),
                                   "expediteur"=>$envoyes[$i]->lireExpediteur(),
@@ -126,25 +127,30 @@
 							);
 
 							// &&&&&&&&&& Creer un nouveau objet de classe Messagerie avec les donnes pour enregistrer uniquement le message &&&&&&&&&&
-                            $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
-							var_dump($idMessage);
-							var_dump(count($contact));
+                          $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage);
+                            
+							//var_dump(count($contact));
+                            $lu = false;
+                            $m_actif = true;
 							for ($i=0;$i<count($contact);$i++){
 								$newDestinataire = new Destinataire(
 								$contact[$i],
 								$idMessage, 
-								false,
-								true );
+								$lu,
+								$m_actif );
 								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
 							}
-							die();
-                            $taille_max = 1024; //Taille en kilobytes
-                            $msg = charge_fichier($nom_fichier, $destination, $taille_max, $id_message);                           
+                            echo '********************';
+                            var_dump($_FILES["fichierJoint"]);
+                            if($nom_fichier != "") {
+                              $taille_max = 1024; //Taille en kilobytes
+                              $msg = charge_fichier("fichierJoint", $destination, $taille_max, $idMessage);   
+                            }                     
                         }
 						else {
 							var_dump('Ahora no entró');
 						}
-                        if (trim($msg) != '')
+                        if(trim($msg) != '')
                         {
                           echo $msg;
                             $this->afficherVues("messagerie");
@@ -183,31 +189,31 @@
  * @param   string| $nom_dest
  * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
  */
-function charge_fichier($nom_fichier, $destination, $fichier_taille, $id_message)
+function charge_fichier($fichierJoint, $destination, $fichier_taille, $id_message)
 {
     $message = "";
-    if($_FILES[$nom_fichier]['error'] > 0){
+    if($_FILES[$fichierJoint]['error'] > 0){
                 $message = 'An error ocurred when uploading.';
             }
 
             // Check filetype
             $invalid_types = array("application/vnd.microsoft.portable-executable", "text/javascript");
-            if (in_array($_FILES[$nom_fichier]['type'], $invalid_types)) {
+            if (in_array($_FILES[$fichierJoint]['type'], $invalid_types)) {
                 $message = "Erreur pendant l'envoi : Fichier non valide";
             }
 
             // Check filesize
-            if($_FILES[$nom_fichier]['size'] > $fichier_taille * 1024 ){ //Bytes
+            if($_FILES[$fichierJoint]['size'] > $fichier_taille * 1024 ){ //Bytes
                 $message = "Le fichier téléchargé excède la taille de téléchargement maximale.";
             }
 
             // Check if the file exists
-            if(file_exists($destination . $_FILES[$nom_fichier]['name'])){
+            if(file_exists($destination . $_FILES[$fichierJoint]['name'])){
                 $message = "Le fichier avec ce nom existe déjà";
             }
 
             // Upload file
-            if(!move_uploaded_file($_FILES[$nom_fichier]['tmp_name'], $destination . $id_message)){
+            if(!move_uploaded_file($_FILES[$fichierJoint]['tmp_name'], $destination . $id_message)){
                 $message = "Erreur pendant l'envoi  - vérifier la destination.";
             }
 

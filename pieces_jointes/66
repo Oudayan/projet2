@@ -1,0 +1,8 @@
+update table set active = $activ where id in ($liste);
+
+$liste = 1,21,3,45;
+
+update table set active = false where id in (1,2,3,4);
+liste = [1,2,3,4] --> array()
+
+update table set active = false where amount > 10;

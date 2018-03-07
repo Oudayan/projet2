@@ -164,6 +164,7 @@
         type: 'POST',
         dataType: 'json',
         success: function(json) {
+          console.log(json);
           $("#boiteReception").html("");
           $.each(json, function(i, item) {
             var enveloppe = item.lu == '0' ? "" : '-open';
@@ -239,10 +240,14 @@
   function lireMessage(idMessage,reception){
     message_selectione = idMessage;
     var message = JSON.parse(mes_messages[idMessage]);
+    console.log(message);
     $('.boiteLecture').removeClass('hidden');
     $('.sujet').val(message.sujet);
     $('.dateCourriel').val(message.msg_date);
     $('.textMessage').val(message.textMessage); 
+   // if(message.fichier_joint != ""){
+    $('.download').html("<a href='pieces_jointes/"+ message.id_messsage +"' download='"+ message.fichierJoint +"'>"+ message.fichierJoint +"</a>");
+     //}
     $('#env_' + message.id_messsage).removeClass('fa-envelope');
     $('#env_' + message.id_messsage).addClass('fa-envelope-open');
     if(reception) {
@@ -379,7 +384,7 @@ function supprimerMessage() {
               contentType: false,
               processData: false
           });
-         // e.preventDefault();
+        e.preventDefault();
     });
   });
   
