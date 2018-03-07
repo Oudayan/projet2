@@ -1,27 +1,27 @@
 <?php
 /**
- * @file     admin.php
- * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @file     messagerie.php
+ * @author   Zoraida Ortiz
  * @version  2.0
  * @date     5 mars 2018
- * @brief    vue admin
+ * @brief    vue messagerie
  * @details  
- * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
 ?> 
 
-
-<div class="container">
-  <div class="d-flex flex-row">
-    <nav class="nav flex-column nav-pills col-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+<main class="container-fluid">
+  <div class="row">
+    <aside class="col-lg-3">
+    <nav class="nav flex-column nav-pills v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link" id="v-pills-compMessage-tab list-group-item-action" onclick="cacherBoitesLecture()" data-toggle="pill" href="#v-pills-compMessage" role="tab" aria-controls="v-pills-compMessage" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Composer un message</a>
        <div class="dropdown-divider"></div>
       <a class="nav-link" id="v-pills-boitRecp-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-boitRecp" role="tab" aria-controls="v-pills-boitRecp" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false">14</span><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
       <a class="nav-link" id="v-pills-mEnvoyes-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-mEnvoyes" role="tab" aria-controls="v-pills-mEnvoyes" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
     </nav><!-- nav flex-column -->
+  </aside>  
 
-    <aside class="tab-messagerie tab-content col-9" id="v-pills-tabContent">
-      <section class="composerMessage tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
+    <section class="tab-messagerie tab-content col-lg-9" id="v-pills-tabContent">
+      <div class="composerMessage tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
         <form enctype="multipart/form-data" id="formMessagerie" method="post">
          <div class="input-group input-group-sm mb-3 col-6">
            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="liste_contacts" id="liste_contacts">
@@ -83,16 +83,19 @@
             </div>
             <textarea class="form-control" aria-label="With textarea" rows="6" name="textMessage" id="textMessage"></textarea>
           </div>
-            <input id="date" type="hidden" value="<?php echo date('Y-m-d H:i:sP');?>"><br>
             <input type="submit" class="btn-bleu btn-sm" value="Envoyer">
+            <input type="submit" class="btn-orange btn-sm" value="Anuler">
             <!--<input type="button" class="btn-bleu btn-sm" onclick="envoyerMessage()" value="Envoyer"> -->
         </form>
-      </section><!-- composerMessage id="EnvoyerForm" id input envoyer-->
+      </div><!-- composerMessage id="EnvoyerForm" id input envoyer-->
       
-      <section class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+      <div class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+        <form  class="formSuppMsg"  method="POST">
         <table class="table table-sm responsive-sm table-hover display">
+          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>	
           <thead>
             <tr>
+              <th><input type="checkbox" class='tous'/></th>
               <th scope="col">lu</th>
               <th><i class="fa fa-level-down" aria-hidden="true"></i></th>
               <th>Sujet</th>
@@ -103,11 +106,15 @@
           <tbody id="boiteReception">
           </tbody>
         </table>
-      </section><!-- tab-pane boitRecp-->
-      <section class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
+       </form>    
+      </div><!-- tab-pane boitRecp-->
+      <div class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
+        <form class="formSuppMsg" method="POST">
         <table class="table table-sm responsive-sm table-hover display">
+          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>
           <thead>
             <tr>
+              <th><input type="checkbox" class='tous' /></th>
               <th><i class="fa fa-level-up" aria-hidden="true"></i></th>
               <th>Sujet</th>
               <th><i class="fa fa-paperclip" aria-hidden="true"></i></th>
@@ -116,20 +123,22 @@
           </thead>
           <tbody id="msgEnvoyes"></tbody>
         </table>
-      </section><!-- messagesEnvoyes -->
+          <input type="text" name="actif" value="false" hidden/>
+       </form>
+      </div><!-- messagesEnvoyes -->
        <form class="boiteLecture hidden">
         <?php include 'formulaireMessagerie.php';?>
       </form> 
-    </aside><!-- tab-messagerie -->
+    </section><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
-</div><!-- container -->
+</main>
 <script type="text/javascript">
   $(document).ready(function() {
       afficherBoiteReception();
       afficherMsgEnvoyes();
   });
   
-    class Message{
+  class Message{
     constructor(id_messsage, expediteur, destinataire, msg_date, sujet, fichierJoint, textMessage){
       this.id_messsage = id_messsage;
       this.expediteur = expediteur;
@@ -140,6 +149,7 @@
       this.textMessage = textMessage;
     }
   };
+  
   //fonction pour la selection de destinataires pour envoyer un message
   function afficherSelection(){
     var listeContacts = document.getElementById('select-contacts').innerHTML;
@@ -154,6 +164,7 @@
         type: 'POST',
         dataType: 'json',
         success: function(json) {
+          console.log(json);
           $("#boiteReception").html("");
           $.each(json, function(i, item) {
             var enveloppe = item.lu == '0' ? "" : '-open';
@@ -161,12 +172,12 @@
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
             $("#boiteReception").append(
                 "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",true)'>" +
+                  "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
                   "<td><i class='fa fa-envelope" + enveloppe + "' id='env_" + item.id_message + "' aria-hidden='true'></i></td>" +
                   "<td>" + expediteurs + "</td>" +
                   "<td>" + item.sujet + "</td>" +
                   "<td>" + joint + "</td>" +
                   "<td>" + item.msg_date + "</td>" +
-                  "<td class='hidden'>" + item.id_message + "</td>" +
                 "</tr>");
             mes_messages[item.id_message] = JSON.stringify(
               new Message(
@@ -201,11 +212,11 @@
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
            $("#msgEnvoyes").append(
               "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",false)'>" +
+                "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
                 "<td>" + destinateurs + "</td>" +
                 "<td>" + item.sujet + "</td>" +
                 "<td>" + joint + "</td>" +
                 "<td>" + item.msg_date + "</td>" +
-                "<td class='hidden'>" + item.id_message + "</td>" +
               "</tr>"); 
               mes_messages[item.id_message] = JSON.stringify(
                   new Message(
@@ -230,10 +241,14 @@
   function lireMessage(idMessage,reception){
     message_selectione = idMessage;
     var message = JSON.parse(mes_messages[idMessage]);
+    console.log(message);
     $('.boiteLecture').removeClass('hidden');
     $('.sujet').val(message.sujet);
     $('.dateCourriel').val(message.msg_date);
     $('.textMessage').val(message.textMessage); 
+    if(message.fichier_joint != ""){
+    $('.download').html("<a href='pieces_jointes/"+ message.id_messsage +"' download='"+ message.fichierJoint +"'>"+ message.fichierJoint +"</a>");
+     }
     $('#env_' + message.id_messsage).removeClass('fa-envelope');
     $('#env_' + message.id_messsage).addClass('fa-envelope-open');
     if(reception) {
@@ -254,6 +269,7 @@
   function cacherBoitesLecture() {
     $('.boiteLecture').addClass('hidden');
     listeContacts();
+    $("input:checkbox").prop('checked', false);
   }
   
   function listeContacts(){
@@ -267,7 +283,7 @@
       }
     }
     $("#contacts").find('option').remove().end();
-    $("#contacts").append("<option selected value='0'>Selectionner Destinataire</option>")
+    $("#contacts").append("<option selected value='0'>Selectionner Destinataire</option>");
     $("#contacts").append("<option value='Chucknorris@gmail'>Admin</option>");
     $("#selectable").find('li').remove().end();
     var index = 0;
@@ -275,7 +291,7 @@
       $("#contacts").append(
          "<option value='" + contact + "'>" + contact + "</option>"   
       );
-      $("#selectable").append("<li class='ui-widget-content' id='cont_" + index++ + "'>" + contact + "</li>")
+      $("#selectable").append("<li class='ui-widget-content' id='cont_" + index++ + "'>" + contact + "</li>");
     } 
   }
   
@@ -297,27 +313,69 @@
     });
   } );
  
- function envoyerMessage() {
-         var formData = {
-            'liste_contacts'  : $('input[name=liste_contacts]').val(),
-            'sujet'           : $('input[name=sujet]').val(),
-            'file_name'       : $('input[name=fichierJoint]').val(),
-            'textMessage'     : $('textarea[name=textMessage]').val()            
-        };
-        console.log(formData);
+
+$('document').ready(function(){
+   $('.tous').change(function () {
+      $("input:checkbox").prop('checked', $(this).prop("checked"));
+  });
+});
+/*
+function supprimerMessage() {
+$(".formSuppMsg").submit(function(e) {
+        var listeSupp = new Array();
+        $("input:checked").each(function() {
+           listeSupp.push($(this).val());
+             console.log($(this).val()); 
+        });
         $.ajax({
-            type        : 'POST', 
-            url         : 'index.php?Messagerie&action=composerMessage',
-            data        : formData, 
-            dataType    : 'json',
-            encode      : true
-        })
-  }
-  
+            type: "POST",
+            url: 'index.php?Messagerie&action=supprimirMessage',
+            dataType: 'html',
+            data: { id_message: message.id_messsage,
+                    listeSupp:listeSupp },
+           /* success: function(data){
+                $('#myResponse').html(data)
+            }
+        });
+        e.preventDefault();
+  });
+}*/
+/*
+function supprimerMessage() {
+  var dataString = $(".formSuppMsg").serialize();
+   
+  $.ajax({
+      type:'POST',
+      url:'index.php?Messagerie&action=supprimirMessage',
+      data: dataString,
+      dataType: 'json',
+      success: function(json) {
+         alert('asf');
+      }
+  })
+  //return false;
+}*/
+
+//function pour supprimir un message
+  $(function(){
+    $(".formSuppMsg").on("submit", function(e){
+      var dataString = $(".formSuppMsg").serialize();
+      $.ajax({
+          type:'POST',
+          url:'index.php?Messagerie&action=supprimirMessage',
+          data: dataString,
+          dataType: 'json',
+          success: function(json) {
+            // alert('asf');
+          }
+      });
+      e.preventDefault();
+    });
+  });
+
+//function pour envoyer un message
   $(function(){
     $("#formMessagerie").on("submit", function(e){
-          e.preventDefault();
-          var f = $(this);
           var formData = new FormData(document.getElementById("formMessagerie"));
           $.ajax({
               type        : 'POST', 
@@ -326,7 +384,7 @@
               cache: false,
               contentType: false,
               processData: false
-          })
+          });  
     });
   });
   
@@ -374,11 +432,11 @@
   </script>
 
   <style>
-  #feedback { font-size: 0.9em; }
-  #selectable .ui-selecting { background: #FECA40; }
-  #selectable .ui-selected { background: #F39814; color: white; }
-  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #selectable li { margin-left: 5px; padding: 0em; font-size: 0.8em; }
+    #feedback { font-size: 0.9em; }
+    #selectable .ui-selecting { background: #FECA40; }
+    #selectable .ui-selected { background: #F39814; color: white; }
+    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #selectable li { margin-left: 5px; padding: 0em; font-size: 0.8em; }
   </style>
         
  
