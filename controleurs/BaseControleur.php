@@ -38,9 +38,13 @@
             if (is_string($nomVue)) {
                 $cheminVue = RACINE . "vues/" . $nomVue . ".php";
                     if (file_exists($cheminVue)){
-                    include($cheminVue);
+						include($cheminVue);
+						}
+					else {
+                        trigger_error("Erreur 404! La vue $cheminVue n'existe pas.");
+                    }
                 }
-            }
+            
             // Si le nom de vue est contenu dans une tableau (plusieurs vues partielles)
             else if (is_array($nomVue)) {
                 foreach ($nomVue as $vue) {

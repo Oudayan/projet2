@@ -90,7 +90,7 @@
             }			
 		}
         public function ecrireM_actif($m_actif) {
-            if (is_string($m_actif) && trim($m_actif) != "") {
+            if (is_bool($m_actif) && trim($m_actif) != "") {
                 $this->m_actif = $m_actif;
             }			
 		}

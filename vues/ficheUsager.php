@@ -35,6 +35,11 @@
         <input class="form-control-plaintext form-control-sm cellulaire" type="text" disabled>
       </div>
     </div>
+    <div class="form-group row heigthFormBLecture">
+      <div class="col-12">
+        <textarea class="form-control description" rows="6" disabled></textarea>
+      </div>
     </div>
+
 
     

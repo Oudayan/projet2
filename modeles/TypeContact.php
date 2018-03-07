@@ -1,14 +1,14 @@
 <?php
 /**
-* @file Usager.php
-* @author Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
-* @version 1.0
-* @date 14 février 2018
-* @brief Définit la classe TypeContact.
-*
-* @details Cette classe définit les attributs d'un usager
-* 
-*/
+ * @file TypeContact.php
+ * @author Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @version 1.0
+ * @date 14 février 2018
+ * @brief Définit la classe TypeContact.
+ *
+ * @details Cette classe définit les attributs d'un usager
+ * 
+ */
 
 	class TypeContact {
 		private $id_contact;
