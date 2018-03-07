@@ -41,22 +41,22 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testPhotoLogementEgaleEcrireLireSucces() 
 		{
-            $id_photo_logement = new PhotoLogement;
+            $id_photo_logement = new PhotoLogement();
 			$valeur = 1234;
 			$id_photo_logement->ecrireIdPhotoLogement($valeur);
 			$this->assertEquals($valeur, $id_photo_logement->lireIdPhotoLogement());
 			
-			$chemin_photo = new PhotoLogement;
+			$chemin_photo = new PhotoLogement();
 			$valeur = "texte";
 			$chemin_photo->ecrireCheminPhoto($valeur);
 			$this->assertEquals($valeur, $chemin_photo->lireCheminPhoto());
 			
-			$id_piece = new PhotoLogement;
+			$id_piece = new PhotoLogement();
 			$valeur = 1234;
 			$id_piece->ecrireIdPiece($valeur);
 			$this->assertEquals($valeur, $id_piece->lireIdPiece());
 			
-			$id_logement = new PhotoLogement;
+			$id_logement = new PhotoLogement();
 			$valeur = 1234;
 			$id_logement->ecrireIdLogement($valeur);
 			$this->assertEquals($valeur, $id_logement->lireIdLogement());
@@ -74,22 +74,22 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testPhotoLogementPasEgaleEcrireLireSucces() 
 		{
-            $id_photo_logement = new PhotoLogement;
+            $id_photo_logement = new PhotoLogement();
 			$valeur = "texte";
 			$id_photo_logement->ecrireIdPhotoLogement($valeur);
 			$this->assertNotEquals($valeur, $id_photo_logement->lireIdPhotoLogement());
 			
-			$chemin_photo = new PhotoLogement;
+			$chemin_photo = new PhotoLogement();
 			$valeur = 1234;
 			$chemin_photo->ecrireCheminPhoto($valeur);
 			$this->assertNotEquals($valeur, $chemin_photo->lireCheminPhoto());
 			
-			$id_piece = new PhotoLogement;
+			$id_piece = new PhotoLogement();
 			$valeur = "texte";
 			$id_piece->ecrireIdPiece($valeur);
 			$this->assertNotEquals($valeur, $id_piece->lireIdPiece());
 			
-			$id_logement = new PhotoLogement;
+			$id_logement = new PhotoLogement();
 			$valeur = "texte";
 			$id_logement->ecrireIdLogement($valeur);
 			$this->assertNotEquals($valeur, $id_logement->lireIdLogement());

@@ -37,12 +37,12 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testTypePaiementEgaleEcrireLireSucces() 
 		{
-            $id_paiement = new TypePaiement;
+            $id_paiement = new TypePaiement();
 			$valeur = 1234;
 			$id_paiement->ecrireidPaiement($valeur);
 			$this->assertEquals($valeur, $id_paiement->lireidPaiement());
 			
-			$paiement = new TypePaiement;
+			$paiement = new TypePaiement();
 			$valeur = "texte";
 			$paiement->ecrirePaiement($valeur);
 			$this->assertEquals($valeur, $paiement->lirePaiement());
@@ -56,17 +56,17 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testTypePaiementPasEgaleEcrireLireSucces() 
 		{
-            $id_paiement = new TypePaiement;
+            $id_paiement = new TypePaiement();
 			$valeur = "texte";
 			$id_paiement->ecrireidPaiement($valeur);
 			$this->assertNotEquals($valeur, $id_paiement->lireidPaiement());
 			
-			$paiement = new TypePaiement;
+			$paiement = new TypePaiement();
 			$valeur = 1234;
 			$paiement->ecrirePaiement($valeur);
 			$this->assertNotEquals($valeur, $paiement->lirePaiement());
 			
-			$id_paiement = new TypePaiement;
+			$id_paiement = new TypePaiement();
 			$valeur = -1234;
 			$id_paiement->ecrireidPaiement($valeur);
 			$this->assertEquals($valeur, $id_paiement->lireidPaiement());

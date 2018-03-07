@@ -37,12 +37,12 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testTypeContactEgaleEcrireLireSucces() 
 		{
-            $id_contact = new TypeContact;
+            $id_contact = new TypeContact();
 			$valeur = 1234;
 			$id_contact->ecrireIdcontact($valeur);
 			$this->assertEquals($valeur, $id_contact->lireDestinataire());
 			
-			$contact = new TypeContact;
+			$contact = new TypeContact();
 			$valeur = "texte";
 			$contact->ecrireContact($valeur);
 			$this->assertEquals($valeur, $contact->lireContact());
@@ -57,17 +57,17 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testTypeContactPasEgaleEcrireLireSucces() 
 		{
-            $id_contact = new TypeContact;
+            $id_contact = new TypeContact();
 			$valeur = 1234;
 			$id_contact->ecrireIdcontact($valeur);
 			$this->assertNotEquals($valeur, $id_contact->lireIdcontact());
 			
-			$contact = new TypeContact;
+			$contact = new TypeContact();
 			$valeur = "texte";
 			$contact->ecrireContact($valeur);
 			$this->assertNotEquals($valeur, $contact->lireContact());
 			
-			$id_contact = new TypeContact;
+			$id_contact = new TypeContact();
 			$valeur = -1234;
 			$id_contact->ecrireIdcontact($valeur);
 			$this->assertNotEquals($valeur, $id_contact->lireIdcontact());

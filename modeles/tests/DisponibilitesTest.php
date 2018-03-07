@@ -47,27 +47,27 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testDisponibilitesEgaleEcrireLireSucces()
 		{
-            $id_disponibilite = new Disponibilites;
+            $id_disponibilite = new Disponibilites();
 			$valeur = 1234;
 			$id_disponibilite->ecrireId_disponibilite($valeur);
 			$this->assertEquals($valeur, $id_disponibilite->lireId_disponibilite());
 			
-			$id_logement = new Disponibilites;
+			$id_logement = new Disponibilites();
 			$valeur = 1234;
 			$id_logement->ecrireId_logement($valeur);
 			$this->assertEquals($valeur, $id_logement->lireId_logement());
 			
-			$date_debut = new Disponibilites;
+			$date_debut = new Disponibilites();
 			$valeur = "texte";
 			$date_debut->ecrireDate_debut($valeur);
 			$this->assertEquals($valeur, $date_debut->lireDate_debut());
 			
-			$date_fin = new Disponibilites;
+			$date_fin = new Disponibilites();
 			$valeur = "texte";
 			$date_fin->ecrireDate_fin($valeur);
 			$this->assertEquals($valeur, $date_fin->lireDate_fin());
 			
-			$expire = new Disponibilites;
+			$expire = new Disponibilites();
 			$valeur = true;
 			$expire->ecrireExpire($valeur);
 			$this->assertEquals($valeur, $expire->lireExpire());
@@ -87,32 +87,32 @@ use PHPUnit\Framework\TestCase;
 		 * @covers            \tests\Disponibilites::lireExpire
 		 */
 		public function testDisponibilitesPasEgalEcrireLireSucces() {
-            $id_disponibilite = new Disponibilites;
+            $id_disponibilite = new Disponibilites();
 			$valeur = "texte";
 			$id_disponibilite->ecrireId_disponibilite($valeur);
 			$this->assertNotEquals($valeur, $id_disponibilite->lireId_disponibilite());
 			
-			$id_logement = new Disponibilites;
+			$id_logement = new Disponibilites();
 			$valeur = "texte";
 			$id_logement->ecrireId_logement($valeur);
 			$this->assertNotEquals($valeur, $id_logement->lireId_logement());
 			*/
-			$date_debut = new Disponibilites;
+			$date_debut = new Disponibilites();
 			$valeur = 1234;
 			$date_debut->ecrireDate_debut($valeur);
 			$this->assertNotEquals($valeur, $date_debut->lireDate_debut());
 			
-			$date_fin = new Disponibilites;
+			$date_fin = new Disponibilites();
 			$valeur = 1234;
 			$date_fin->ecrireDate_fin($valeur);
 			$this->assertNotEquals($valeur, $date_fin->lireDate_fin());
 			
-			$expire = new Disponibilites;
+			$expire = new Disponibilites();
 			$valeur = "texte"
 			$expire->ecrireExpire($valeur);
 			$this->assertNotEquals($valeur, $expire->lireExpire());
 			
-			$id_logement = new Disponibilites;
+			$id_logement = new Disponibilites();
 			$valeur = -1234;
 			$id_logement->ecrireId_logement($valeur);
 			$this->assertNotEquals($valeur, $id_logement->lireId_logement());

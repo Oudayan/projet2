@@ -64,58 +64,58 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testMessagesDestinatairesEgaleEcrireLireSucces() 
 		{
-            $destinataire = new MessagesDestinataires;
+            $destinataire = new MessagesDestinataires();
 			$valeur = "texte";
 			$destinataire->ecrireDestinataire($valeur);
 			$this->assertEquals($valeur, $destinataire->lireDestinataire());
 			
-			$lu = new MessagesDestinataires;
+			$lu = new MessagesDestinataires();
 			$valeur = true;
 			$lu->ecrireLu($valeur);
 			$this->assertEquals($valeur, $lu->lireLu());
 			
-			$d_actif = new MessagesDestinataires;
+			$d_actif = new MessagesDestinataires();
 			$valeur = true;
 			$d_actif->ecrireD_actif($valeur);
 			$this->assertEquals($valeur, $d_actif->lireD_actif());
 			
-			$id_message = new MessagesDestinataires;
+			$id_message = new MessagesDestinataires();
 			$valeur = 4;
 			$id_message->ecrireId_message($valeur);
 			$this->assertEquals($valeur, $id_message->lireId_message());
 			
-			$id_reference = new MessagesDestinataires;
+			$id_reference = new MessagesDestinataires();
 			$valeur = 4;
 			$id_reference->ecrireId_reference($valeur);
 			$this->assertEquals($valeur, $id_reference->lireId_reference());
 			
-			$sujet = new MessagesDestinataires;
+			$sujet = new MessagesDestinataires();
 			$valeur = "texte";
 			$sujet->ecrireSujet($valeur);
 			$this->assertEquals($valeur, $sujet->lireSujet());
 			
-			$fichier_joint = new MessagesDestinataires;
+			$fichier_joint = new MessagesDestinataires();
 			$valeur = "texte";
 			$fichier_joint->ecrireFichier_joint($valeur);
 			$this->assertEquals($valeur, $fichier_joint->lireFichier_joint());
 			
-			$message = new MessagesDestinataires;
+			$message = new MessagesDestinataires();
 			$valeur = "texte";
 			$message->ecrireMessage($valeur);
 			$this->assertEquals($valeur, $message->lireMessage());
 			
-			$msg_date = new MessagesDestinataires;
+			$msg_date = new MessagesDestinataires();
 			$valeur = "2018-02-21 08:00";
 			$msg_date->ecrireMsg_date($valeur);
 			$this->assertEquals($valeur, $msg_date->lireMsg_date());
 			
-			$m_actif = new MessagesDestinataires;
+			$m_actif = new MessagesDestinataires();
 			//a corriger apres une mise à jour
 			$valeur = "texte";
 			$m_actif->ecrireM_actif($valeur);
 			$this->assertEquals($valeur, $m_actif->lireM_actif());
 			
-			$expediteur = new MessagesDestinataires;
+			$expediteur = new MessagesDestinataires();
 			$valeur = "texte";
 			$expediteur->ecrireExpediteur($valeur);
 			$this->assertEquals($valeur, $expediteur->lireExpediteur());
@@ -146,22 +146,22 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testMessagesDestinatairesPasEgalEcrireLireSucces() 
 		{
-            $destinataire = new MessagesDestinataires;
+            $destinataire = new MessagesDestinataires();
 			$valeur = 123;
 			$destinataire->ecrireDestinataire($valeur);
 			$this->assertNotEquals($valeur, $destinataire->lireDestinataire());
 			
-			$lu = new MessagesDestinataires;
+			$lu = new MessagesDestinataires();
 			$valeur = "texte";
 			$lu->ecrireLu($valeur);
 			$this->assertNotEquals($valeur, $lu->lireLu());
 			
-			$d_actif = new MessagesDestinataires;
+			$d_actif = new MessagesDestinataires();
 			$valeur = "texte";
 			$d_actif->ecrireD_actif($valeur);
 			$this->assertNotEquals($valeur, $d_actif->lireD_actif());
 			
-			$id_message = new MessagesDestinataires;
+			$id_message = new MessagesDestinataires();
 			$valeur = "texte";
 			$id_message->ecrireId_message($valeur);
 			$this->assertNotEquals($valeur, $id_message->lireId_message());
@@ -171,37 +171,37 @@ use PHPUnit\Framework\TestCase;
 			$id_reference->ecrireId_reference($valeur);
 			$this->assertNotEquals($valeur, $id_reference->lireId_reference());
 			
-			$sujet = new MessagesDestinataires;
+			$sujet = new MessagesDestinataires();
 			$valeur = 123;
 			$sujet->ecrireSujet($valeur);
 			$this->assertNotEquals($valeur, $sujet->lireSujet());
 			
-			$fichier_joint = new MessagesDestinataires;
+			$fichier_joint = new MessagesDestinataires();
 			$valeur = 123;
 			$fichier_joint->ecrireFichier_joint($valeur);
 			$this->assertNotEquals($valeur, $fichier_joint->lireFichier_joint());
 			
-			$message = new MessagesDestinataires;
+			$message = new MessagesDestinataires();
 			$valeur = 123;
 			$message->ecrireMessage($valeur);
 			$this->assertNotEquals($valeur, $message->lireMessage());
 			
-			$msg_date = new MessagesDestinataires;
+			$msg_date = new MessagesDestinataires();
 			$valeur = 123;
 			$msg_date->ecrireMsg_date($valeur);
 			$this->assertNotEquals($valeur, $msg_date->lireMsg_date());
 			
-			$m_actif = new MessagesDestinataires;
+			$m_actif = new MessagesDestinataires();
 			$valeur = 123;
 			$m_actif->ecrireM_actif($valeur);
 			$this->assertNotEquals($valeur, $m_actif->lireM_actif());
 			
-			$expediteur = new MessagesDestinataires;
+			$expediteur = new MessagesDestinataires();
 			$valeur = 123;
 			$expediteur->ecrireExpediteur($valeur);
 			$this->assertNotEquals($valeur, $expediteur->lireExpediteur());
 			
-			$expediteur = new MessagesDestinataires;
+			$expediteur = new MessagesDestinataires();
 			$valeur = -123;
 			$expediteur->ecrireExpediteur($valeur);
 			$this->assertNotEquals($valeur, $expediteur->lireExpediteur());

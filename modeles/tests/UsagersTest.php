@@ -70,67 +70,67 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testUsagersEgaleEcrireLireSucces() 
 		{
-            $courriel = new Usagers;
+            $courriel = new Usagers();
 			$valeur = "Texte";
 			$courriel->ecrireCourriel($valeur);
 			$this->assertEquals($valeur, $courriel->lireCourriel());
 			
-			$nom = new Usagers;
+			$nom = new Usagers();
 			$valeur = "Texte";
 			$nom->ecrireNom($valeur);
 			$this->assertEquals($valeur, $nom->lireNom());
 			
-			$prenom = new Usagers;
+			$prenom = new Usagers();
 			$valeur = "Texte";
 			$prenom->ecrirepreNom($valeur);
 			$this->assertEquals($valeur, $prenom->lirepreNom());
 			
-			$cellulaire = new Usagers;
+			$cellulaire = new Usagers();
 			$valeur = "Texte";
 			$cellulaire->ecrireCellulaire($valeur);
 			$this->assertEquals($valeur, $cellulaire->lireCellulaire());
 			
-			$mot_de_passe = new Usagers;
+			$mot_de_passe = new Usagers();
 			$valeur = "Texte";
 			$mot_de_passe->ecrireMotDePasse($valeur);
 			$this->assertEquals($valeur, $mot_de_passe->lireMotDePasse());
 			
-			$u_banni = new Usagers;
+			$u_banni = new Usagers();
 			$valeur = 1234;
 			$u_banni->ecrireestBanni($valeur);
 			$this->assertEquals($valeur, $u_banni->lireestBanni());
 			
-			$u_commentaire_banni = new Usagers;
+			$u_commentaire_banni = new Usagers();
 			$valeur = "texte";
 			$u_commentaire_banni->ecrireCommentaireBanni($valeur);
 			$this->assertEquals($valeur, $u_commentaire_banni->lireCommentaireBanni());
 			
-			$u_date_banni = new Usagers;
+			$u_date_banni = new Usagers();
 			$valeur = "texte";
 			$u_date_banni->ecrireDateBanni($valeur);
 			$this->assertEquals($valeur, $u_date_banni->lireDateBanni());
 			
-			$id_contact = new Usagers;
+			$id_contact = new Usagers();
 			$valeur = 1234;
 			$id_contact->ecrireContact($valeur);
 			$this->assertEquals($valeur, $id_contact->lireContact());
 			
-			$id_type_usager = new Usagers;
+			$id_type_usager = new Usagers();
 			$valeur = 1234;
 			$id_type_usager->ecrireTypeUsager($valeur);
 			$this->assertEquals($valeur, $id_type_usager->lireTypeUsager());
 			
-			$id_paiement = new Usagers;
+			$id_paiement = new Usagers();
 			$valeur = 1234;
 			$id_paiement->ecrireTypePaiement($valeur);
 			$this->assertEquals($valeur, $id_paiement->lireTypePaiement());
 			
-			$u_valide = new Usagers;
+			$u_valide = new Usagers();
 			$valeur = true;
 			$u_valide->ecrireUValide($valeur);
 			$this->assertEquals($valeur, $u_valide->lireUValide());
 			
-			$u_actif = new Usagers;
+			$u_actif = new Usagers();
 			$valeur = true;
 			$u_actif->ecrireUActif($valeur);
 			$this->assertEquals($valeur, $u_actif->lireUActif());
@@ -165,82 +165,82 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testUsagersPasEgaleEcrireLireSucces() 
 		{
-            $courriel = new Usagers;
+            $courriel = new Usagers();
 			$valeur = 1234;
 			$courriel->ecrireCourriel($valeur);
 			$this->assertNotEquals($valeur, $courriel->lireCourriel());
 			
-			$nom = new Usagers;
+			$nom = new Usagers();
 			$valeur = 1234;
 			$nom->ecrireNom($valeur);
 			$this->assertNotEquals($valeur, $nom->lireNom());
 			
-			$prenom = new Usagers;
+			$prenom = new Usagers();
 			$valeur = 1234;
 			$prenom->ecrirepreNom($valeur);
 			$this->assertNotEquals($valeur, $prenom->lirepreNom());
 			
-			$cellulaire = new Usagers;
+			$cellulaire = new Usagers();
 			$valeur = 1234;
 			$cellulaire->ecrireCellulaire($valeur);
 			$this->assertNotEquals($valeur, $cellulaire->lireCellulaire());
 			
-			$mot_de_passe = new Usagers;
+			$mot_de_passe = new Usagers();
 			$valeur = 1234;
 			$mot_de_passe->ecrireMotDePasse($valeur);
 			$this->assertNotEquals($valeur, $mot_de_passe->lireMotDePasse());
 			
-			$u_banni = new Usagers;
+			$u_banni = new Usagers();
 			$valeur = "texte";
 			$u_banni->ecrireestBanni($valeur);
 			$this->assertEquals($valeur, $u_banni->lireestBanni());
 			
-			$u_commentaire_banni = new Usagers;
+			$u_commentaire_banni = new Usagers();
 			$valeur = 1234;
 			$u_commentaire_banni->ecrireCommentaireBanni($valeur);
 			$this->assertNotEquals($valeur, $u_commentaire_banni->lireCommentaireBanni());
 			
-			$u_date_banni = new Usagers;
+			$u_date_banni = new Usagers();
 			$valeur = 1234;
 			$u_date_banni->ecrireDateBanni($valeur);
 			$this->assertNotEquals($valeur, $u_date_banni->lireDateBanni());
 			
-			$id_contact = new Usagers;
+			$id_contact = new Usagers();
 			$valeur = "texte";
 			$id_contact->ecrireContact($valeur);
 			$this->assertEquals(assertNotEquals);
 			
-			$id_type_usager = new Usagers;
+			$id_type_usager = new Usagers();
 			$valeur = "texte";
 			$id_type_usager->ecrireTypeUsager($valeur);
 			$this->assertNotEquals($valeur, $id_type_usager->lireTypeUsager());
 			
-			$id_paiement = new Usagers;
+			$id_paiement = new Usagers();
 			$valeur = "texte";
 			$id_paiement->ecrireTypePaiement($valeur);
 			$this->assertNotEquals($valeur, $id_paiement->lireTypePaiement());
 			
-			$u_valide = new Usagers;
+			$u_valide = new Usagers();
 			$valeur = "texte";
 			$u_valide->ecrireUValide($valeur);
 			$this->assertNotEquals($valeur, $u_valide->lireUValide());
 			
-			$u_actif = new Usagers;
+			$u_actif = new Usagers();
 			$valeur = "texte";
 			$u_actif->ecrireUActif($valeur);
 			$this->assertNotEquals($valeur, $u_actif->lireUActif());
 			
-			$u_valide = new Usagers;
+			$u_valide = new Usagers();
 			$valeur = 1234;
 			$u_valide->ecrireUValide($valeur);
 			$this->assertNotEquals($valeur, $u_valide->lireUValide());
 			
-			$u_actif = new Usagers;
+			$u_actif = new Usagers();
 			$valeur = 1234;
 			$u_actif->ecrireUActif($valeur);
 			$this->assertNotEquals($valeur, $u_actif->lireUActif());
 			
-			$id_contact = new Usagers;
+			$id_contact = new Usagers();
 			$valeur = -1234;
 			$id_contact->ecrireContact($valeur);
 			$this->assertEquals(assertNotEquals);

@@ -34,12 +34,12 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testPieceEgaleEcrireLireSucces() 
 		{
-            $id_piece = new Piece;
+            $id_piece = new Piece();
 			$valeur = "John";
 			$id_piece->ecrireId_piece($valeur);
 			$this->assertEquals($valeur, $id_piece->lireId_piece());
 			
-			$description_piece = new Piece;
+			$description_piece = new Piece();
 			$valeur = true;
 			$description_piece->ecrireDescription_piece($valeur);
 			$this->assertEquals($valeur, $description_piece->lireDescription_piece());
@@ -53,12 +53,12 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testPiecePasEgaleEcrireLireSucces() 
 		{
-            $id_piece = new Piece;
+            $id_piece = new Piece();
 			$valeur = "John";
 			$id_piece->ecrireIdpiece($valeur);
 			$this->assertNotEquals($valeur, $id_piece->lireIdpiece());
 			
-			$description_piece = new Piece;
+			$description_piece = new Piece();
 			$valeur = true;
 			$description_piece->ecrireDescriptionPiece($valeur);
 			$this->assertNotEquals($valeur, $description_piece->lireDescriptionPiece());

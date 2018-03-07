@@ -58,47 +58,47 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testLocationEgaleEcrireLireSucces() 
 		{
-            $id_location = new Location;
+            $id_location = new Location();
 			$valeur = 1234;
 			$id_location->EcrireIdReservation($valeur);
 			$this->assertEquals($valeur, $id_location->lireIdReservation());
 			
-			$id_logement = new Location;
+			$id_logement = new Location();
 			$valeur = 1234;
 			$id_logement->ecrireIdLogement($valeur);
 			$this->assertEquals($valeur, $id_logement->lireIdLogement());
 			
-			$id_proprietaire = new Location;
+			$id_proprietaire = new Location();
 			$valeur = "texte";
 			$id_proprietaire->ecrireIdProprietaire($valeur);
 			$this->assertEquals($valeur, $id_proprietaire->lireIdProprietaire());
 			
-			$id_locataire = new Location;
+			$id_locataire = new Location();
 			$valeur = "texte";
 			$id_locataire->ecrireIdLocataire($valeur);
 			$this->assertEquals($valeur, $id_locataire->lireIdLocataire());
 			
-			$date_debut = new Location;
+			$date_debut = new Location();
 			$valeur = "texte";
 			$date_debut->ecrireDateDebut($valeur);
 			$this->assertEquals($valeur, $date_debut->lireDateDebut());
 			
-			$date_retour = new Location;
+			$date_retour = new Location();
 			$valeur = "texte";
 			$date_retour->ecrireDateRetour($valeur);
 			$this->assertEquals($valeur, $date_retour->lireDateRetour());
 			
-			$date_location = new Location;
+			$date_location = new Location();
 			$valeur = "texte";
 			$date_location->ecrireDateReservation($valeur);
 			$this->assertEquals($valeur, $date_location->lireDateReservation());
 			
-			$cout = new Location;
+			$cout = new Location();
 			$valeur = 1234;
 			$cout->ecrireCout($valeur);
 			$this->assertEquals($valeur, $cout->lireCout());
 			
-			$valide = new Location;
+			$valide = new Location();
 			$valeur = true;
 			$valide->ecrireValide($valeur);
 			$this->assertEquals($valeur, $valide->lireValide());
@@ -126,54 +126,54 @@ use PHPUnit\Framework\TestCase;
 		 */
 		public function testLocationPasEgaleEcrireLireSucces()
 		{
-            $id_location = new Location;
+            $id_location = new Location();
 			$valeur = "texte";
 			$id_location->EcrireIdReservation($valeur);
 			$this->assertNotEquals($valeur, $id_location->lireIdReservation());
 			
-			$id_logement = new Location;
+			$id_logement = new Location();
 			$valeur = "texte";
 			$id_logement->ecrireIdLogement($valeur);
 			$this->assertNotEquals($valeur, $id_logement->lireIdLogement());
 			
-			$id_proprietaire = new Location;
+			$id_proprietaire = new Location();
 			$valeur = 1234;
 			$id_proprietaire->ecrireIdProprietaire($valeur);
 			$this->assertNotEquals($valeur, $id_proprietaire->lireIdProprietaire());
 			
-			$id_locataire = new Location;
+			$id_locataire = new Location();
 			$valeur = 1234;
 			$id_locataire->ecrireIdLocataire($valeur);
 			$this->assertNotEquals($valeur, $id_locataire->lireIdLocataire());
 			
-			$date_debut = new Location;
+			$date_debut = new Location();
 			$valeur = 1234;
 			$date_debut->ecrireDateDebut($valeur);
 			$this->assertNotEquals($valeur, $date_debut->lireDateDebut());
 			
-			$date_retour = new Location;
+			$date_retour = new Location();
 			$valeur = 1234;
 			$date_retour->ecrireDateRetour($valeur);
 			$this->assertNotEquals($valeur, $date_retour->lireDateRetour());
 			
-			$date_location = new Location;
+			$date_location = new Location();
 			$valeur = 1234;
 			$date_location->ecrireDateReservation($valeur);
 			$this->assertNotEquals($valeur, $date_location->lireDateReservation());
 			
-			$cout = new Location;
+			$cout = new Location();
 			$valeur = "texte";
 			$cout->ecrireCout($valeur);
 			$this->assertNotEquals($valeur, $cout->lireCout());
 			
-			$valide = new Location;
+			$valide = new Location();
 			$valeur = "texte";
 			$valide->ecrireValide($valeur);
 			$this->assertNotEquals($valeur, $valide->lireValide());
 			
-			$valide = new Location;
+			$valide = new Location();
 			$valeur = 1234;
 			$valide->ecrireValide($valeur);
 			$this->assertNotEquals($valeur, $valide->lireValide());
         }
-    }
+    }//fin de la classe

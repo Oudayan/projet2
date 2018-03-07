@@ -37,12 +37,12 @@
 		 */
 		public function testTypeLogementEgaleEcrireLireSucces() 
 		{
-            $id_type_logement = new TypeLogement;
+            $id_type_logement = new TypeLogement();
 			$valeur = 1234;
 			$id_type_logement->ecrireIdTypeLogement($valeur);
 			$this->assertNotEquals($valeur, $id_type_logement->lireIdTypeLogement());
 			
-			$type_logement = new TypeLogement;
+			$type_logement = new TypeLogement();
 			$valeur = "texte";
 			$type_logement->ecrireTypeLogement($valeur);
 			$this->assertEquals($valeur, $type_logement->lireTypeLogement());
@@ -57,17 +57,17 @@
 		 */
 		public function testTypeLogementPasEgaleEcrireLireSucces() 
 		{
-            $id_type_logement = new TypeLogement;
+            $id_type_logement = new TypeLogement();
 			$valeur = "texte";
 			$id_type_logement->ecrireIdTypeLogement($valeur);
 			$this->assertNotEquals($valeur, $id_type_logement->lireIdTypeLogement());
 			
-			$type_logement = new TypeLogement;
+			$type_logement = new TypeLogement();
 			$valeur = 1234;
 			$type_logement->ecrireTypeLogement($valeur);
 			$this->assertEquals($valeur, $type_logement->lireTypeLogement());
 			
-			$id_type_logement = new TypeLogement;
+			$id_type_logement = new TypeLogement();
 			$valeur = -1234;
 			$id_type_logement->ecrireIdTypeLogement($valeur);
 			$this->assertNotEquals($valeur, $id_type_logement->lireIdTypeLogement());
