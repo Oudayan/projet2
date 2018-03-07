@@ -94,8 +94,8 @@
       
       <div class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <form  class="formSuppMsg"  method="POST">
+        <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>
         <table class="table table-sm responsive-sm table-hover display">
-          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>	
           <thead>
             <tr>
               <th><input type="checkbox" class='tous'/></th>
@@ -249,13 +249,13 @@
     $('.sujet').val(message.sujet);
     $('.dateCourriel').val(message.msg_date);
     $('.textMessage').val(message.textMessage); 
-      //if (!message.fichier_joint){
-      //  $('#file_id').addClass('hidden');
-    //  } else {
-      //  $('#file_id').empty();
+     if (!message.fichierJoint){
+       $('#file_id').addClass('hidden');
+      } else {
+       $('#file_id').empty();
         $("<a href='pieces_jointes/"+ message.id_messsage +"' download='"+ message.fichierJoint +"'>"+ message.fichierJoint +"</a>").appendTo('#file_id');
-      //  $('#file_id').removeClass('hidden');
-     //  }
+        $('#file_id').removeClass('hidden');
+      }
      
     $('#env_' + message.id_messsage).removeClass('fa-envelope');
     $('#env_' + message.id_messsage).addClass('fa-envelope-open');
@@ -368,13 +368,14 @@ function supprimerMessage() {
   $(function(){
     $(".formSuppMsg").on("submit", function(e){
       var dataString = $(".formSuppMsg").serialize();
+         alert('asf');
       $.ajax({
           type:'POST',
-          url:'index.php?Messagerie&action=supprimirMessage',
+          url:'index.php?Messagerie&action=supprimerMessage',
           data: dataString,
           dataType: 'json',
           success: function(json) {
-            // alert('asf');
+           alert('asf');
           }
       });
       e.preventDefault();

@@ -40,8 +40,7 @@
         
         public function messagesRecus($destinataire)
         {
-        $sql = "SELECT *
-        
+        $sql = "SELECT *        
         FROM " . $this->lireNomTable() .
         " JOIN al_messagerie  
         ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
@@ -57,13 +56,13 @@
         public function messagesEnvoyes($expediteur)
         {
        $sql = "SELECT GROUP_CONCAT( destinataire SEPARATOR ',') as destinataire," . 
-                "lu,d_actif,al_messagerie.id_message,id_reference,sujet,fichier_joint," .
+                "d_actif,al_messagerie.id_message,id_reference,sujet,fichier_joint," .
                 "msg_date,m_actif,expediteur,message " . 
                 "FROM " . $this->lireNomTable() . " JOIN al_messagerie " . 
                 "ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message " .
                 "WHERE expediteur = '" . $expediteur . "' " . 
                 "AND m_actif = 1 " . 
-                "GROUP BY lu, d_actif,al_messagerie.id_message, id_reference," . 
+                "GROUP BY d_actif,al_messagerie.id_message, id_reference," . 
                 "sujet, fichier_joint,msg_date,m_actif, expediteur,message " . 
                 "ORDER BY al_messagerie.msg_date DESC";  
 
@@ -102,8 +101,7 @@
 			$unMessage = $resultat->fetch();
 			return $unMessage;
 		}
-		
-        
+		        
         /**
 		* @brief Sauvegarde un message
 		* @details Prend les informations entrées et les sauvegarde dans la base de données.
@@ -121,26 +119,41 @@
 		{
             $query = "INSERT INTO " . $this->lireNomTableMessagerie() . 
                     " (sujet, fichier_joint, message, msg_date, m_actif, expediteur) VALUES (?, ?, ?, now(),?, ?)";
-            $donnees = array($unMessage->lireSujet(), $unMessage->lireFichier_joint(),	$unMessage->lireMessage(),
-                              $unMessage->lireM_actif(), $unMessage->lireExpediteur());
+            $donnees = array(
+                $unMessage->lireSujet(),
+                $unMessage->lireFichier_joint(),
+                $unMessage->lireMessage(),
+                $unMessage->lireM_actif(),
+                $unMessage->lireExpediteur());
+            
             $this->requete($query, $donnees);
             $query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
                 $donnees = $this->requete($query);
                 $donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'Message'); 
                 $id = $donnees->fetch();
                 $mon_id = $id->lireId_message();
-                var_dump($mon_id);
             return $mon_id;
         }
  
         public function sauvegarderDestinataire(Destinataire $unMessage){
-			var_dump($unMessage);
 			$query = "INSERT INTO " . $this->lireNomTable() . " (destinataire, id_message, lu, d_actif) VALUES (?, ?, ?, ?)";
-			$donnees = array($unMessage->lireDestinataire(), $unMessage->lireId_message(),	$unMessage->lireLu(),
-							$unMessage->lireD_actif());
+			$donnees = array(
+                $unMessage->lireDestinataire(),
+                $unMessage->lireId_message(),
+                $unMessage->lireLu(),
+                $unMessage->lireD_actif());
+            
 			$this->requete($query, $donnees);
 			return;
-
 		}
+        
+        public function CourrielLu($destinataire, $idMessage, $boolean){
+            $query  = "UPDATE " . $this->lireNomTable() . " SET lu = " . $boolean . " "
+               . "WHERE id_message = " . $idMessage . ""
+               . " AND destinataire = '" . $destinataire . "'";
+            $this->requete($query);
+          
+        }
 	}	
+    
 ?>

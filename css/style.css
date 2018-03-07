@@ -459,9 +459,10 @@ nav.v-pills-tab {
   }
   
 #v-pills-boitRecp, #v-pills-mEnvoyes {
-   height: 40vh;
+   height: 50vh;
    overflow: scroll;
   }
+
   
 .btnsMessagerie {
      background-color: rgba(58, 90, 101, 0);
@@ -475,7 +476,7 @@ nav.v-pills-tab {
 #btnEnvoyer{
   float:right;
   }
-  #suppMsg{
+#suppMsg{
   float:right;
   }  
 .boiteLecture{

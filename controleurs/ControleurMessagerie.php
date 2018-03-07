@@ -33,7 +33,7 @@
                             echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
                         }
                         break;
-                    // aller chercher les messages recues 
+                    
                     case "messagesRecus":
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
@@ -80,7 +80,7 @@
 			                                                 //contient la liste des messages recus
 							break; 
                             
-                    case "supprimirMessage": 
+                    case "supprimerMessage": 
                       echo var_dump($_POST);
                       $_POST["listeSupp"];//paramètre qu'envoie cotè client.  
                       $_POST["actif"];
@@ -91,8 +91,11 @@
                       break;
                     
                     case "messageLu":
-                         $_POST["id_message"];
-                         $_POST["message_lu"];//true
+                         if(isset($_SESSION["courriel"]) && isset($_POST["id_message"]) && isset($_POST["message_lu"])){ 
+                             $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                             $modeleMessagerie->CourrielLu($_SESSION["courriel"], $_POST["id_message"], $_POST["message_lu"]);
+                         }
+                      
                          //il faut faire update sur la table al_destinataire column lu
                          //il ne faut pas retourne rien 
                       break;  
