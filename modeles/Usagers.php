@@ -1,9 +1,9 @@
 <?php
 /**
-* @file Usager.php
-* @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+* @file Usagers.php
+* @author Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
 * @version 1.0
-* @date 27 octobre 2017
+* @date 9 février 2018
 * @brief Définit la classe Usagers.
 *
 * @details Cette classe définit les attributs d'un usager
