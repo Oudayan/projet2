@@ -196,6 +196,7 @@
           $("#msgEnvoyes").html("");
           var summaireMessage = {};
           $.each(json, function(i, item) {
+			  console.log("Envoye",json);
             var destinateurs = item.destinataire.length > 30 ? item.destinataire.substr(0,28) + "...": item.destinataire;
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
            $("#msgEnvoyes").append(

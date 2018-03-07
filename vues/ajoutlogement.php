@@ -33,34 +33,34 @@
 			</div>
 			<div class="col-lg-3">
 				<label for="no_civique">Exterieur:</label>
-				<input type="text" class="form-control" name="no_civique" onblur="estNbCivique()" value='2030' required>
+				<input type="text" class="form-control" name="no_civique" onblur="estNbCivique()" required>
 				<span id="errNbCivique" style="color:red; visibility:hidden">* Numéro invalide ou requis</span>
 			</div>	
 			<div class="col-lg-3">
 				<label for="rue">Rue</label>
-				<input type="rue" class="form-control" name="rue" onblur="estRue()" value='Pie-IX'required>
+				<input type="rue" class="form-control" name="rue" onblur="estRue()" required>
 				<span id="errRue" style="color:red; visibility:hidden">* Rue invalide ou requise</span>
 			</div>
 			<div class="col-lg-3">
 			    <label for="code_postal">Code postal</label>
-				<input type="text" class="form-control" name="code_postal" onblur="estCodePostal()" value='H1V-2C8' required>
+				<input type="text" class="form-control" name="code_postal" onblur="estCodePostal()" required>
 				<span id="errCodePostal" style="color:red; visibility:hidden">* Code Postal invalide ou requis</span>
 			</div>	
 		</div>
 		<div class="form-group row">
 			<div class="col-lg-4">
 				<label for="ville">Ville</label>
-				<input type="text" class="form-control" name="ville" onblur="estVille()" value='Montreal' required>
+				<input type="text" class="form-control" name="ville" onblur="estVille()" required>
 				<span id="errVille" style="color:red; visibility:hidden">* Ville invalide ou requise</span>
 			</div>
 			<div class="col-lg-4">
 				<label for="province">Province</label>
-				<input type="text" class="form-control" name="province" onblur="estProvince()" value='Quebec' required>
+				<input type="text" class="form-control" name="province" onblur="estProvince()"required>
 				<span id="errProvince" style="color:red; visibility:hidden">* Province invalide ou requise</span>
 			</div>
 			<div class="col-lg-4">
 				<label for="pays">Pays</label>
-				<input type="text" class="form-control" name="pays" onblur="estPays()" value='Canada' required>
+				<input type="text" class="form-control" name="pays" onblur="estPays()" required>
 				<span id="errPays" style="color:red; visibility:hidden">* Pays invalide ou requis</span>
 			</div>
 		</div>
@@ -101,19 +101,19 @@
 		<div class="form-group row">
 			<div class="col-lg-4">
 				<label for="prix">Prix</label>
-				<input type="text" class="form-control" name="prix" value='160' onblur="estPrix()" required>
+				<input type="text" class="form-control" name="prix" onblur="estPrix()" required>
 				<span id="errPrix" style="color:red; visibility:hidden">* Prix invalide ou requis</span>				
 			</div>
 			<div class="col-lg-4">
 				<label for="prix">Frais de nettoyage</label>
-				<input type="text" class="form-control" name="frais_nettoyage" value='35' onblur="estFraisNettoyage()" required>
+				<input type="text" class="form-control" name="frais_nettoyage" onblur="estFraisNettoyage()" required>
 				<span id="errFraisNettoyage" style="color:red; visibility:hidden">* Frais de nettoyage invalide ou requis</span>				
 			</div>
 		</div>
 		<div class="form-group row">
 			<div class="col-lg-12">	
 				<label for="description">Description</label>
-				<textarea rows="6" cols="100" name="description" onblur="estDescription()" required>Esta es una descripcion</textarea>
+				<textarea rows="6" cols="100" name="description" onblur="estDescription()" required></textarea>
 				<span id="errDescription" style="color:red; visibility:hidden">* Description invalide ou requis</span>
 			</div>
 		</div><hr>
@@ -122,29 +122,29 @@
 		<div class="form-group row">
 			<div class="col-lg-2">			
 				<label for="nb_personnes">Personnes</label>
-				<input type="number" class="form-control" name="nb_personnes" value='5' onblur="estNbPersonnes()" required>
+				<input type="number" class="form-control" name="nb_personnes" onblur="estNbPersonnes()" required>
 				<span id="errNbPersonnes" style="color:red; visibility:hidden">* Nombre de personnes invalide ou requis</span>
 			</div>
 			<div class="col-lg-2">			
 				<label for="nb_chambres">Chambres</label>
-				<input type="number" class="form-control" name="nb_chambres" value='4' onblur="estNbChambres()" required>
+				<input type="number" class="form-control" name="nb_chambres" onblur="estNbChambres()" required>
 				<span id="errNbChambres" style="color:red; visibility:hidden">* Nombre de chambres invalide ou requis</span>
 			</div>
 			<div class="col-lg-2">			
 				<label for="nb_lits">Lits</label>
-				<input type="number" class="form-control" name="nb_lits" value='3' onblur="estNbLits()" required>
+				<input type="number" class="form-control" name="nb_lits" onblur="estNbLits()" required>
 				<span id="errNbLits" style="color:red; visibility:hidden">* Nombre de lits invalide ou requis</span>
 			</div>
 	<!--	</div>
 		<div class="form-group row"> -->
 			<div class="col-lg-2">			
 				<label for="nb_salle_de_bain">Salles de bain</label>
-				<input type="number" class="form-control" onblur="estNbSalleDeBain()" value='2' name="nb_salle_de_bain">
+				<input type="number" class="form-control" onblur="estNbSalleDeBain()" name="nb_salle_de_bain">
 				<span id="errNbSalleDeBain" style="color:red; visibility:hidden">* Nombre de salle de bain invalide ou requis</span>
 			</div>
 			<div class="col-lg-2">
 				<label for="nb_demi_salle_de_bain">Demi-salles de bain</label>
-				<input type="number" class="form-control" onblur="estNbDemiSalleDeBain()" value='1' name="nb_demi_salle_de_bain">
+				<input type="number" class="form-control" onblur="estNbDemiSalleDeBain()" name="nb_demi_salle_de_bain">
 				<span id="errNbDemiSalleDeBain" style="color:red; visibility:hidden">* Nombre de demi salle de bain invalide ou requis</span>
 			</div>
 		</div>

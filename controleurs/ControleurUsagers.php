@@ -190,12 +190,21 @@
                     	  echo json_encode($data);
                     break;
 					case "validerUsager":
-						if(isset($params["courriel"])) {
+						if(isset($params["courriel"]) && $_SESSION["typeUser"] == 1)  {
 							$courriel = $params["courriel"];
 							$modeleUsagers = $this->lireDAO("Usagers"); 
 							$data = $modeleUsagers->obtenir_par_courriel($courriel);
 							$modeleUsagers->Valider($data);
 						}
+					break;
+
+					case "bannirUsager":
+						if(isset($params["courriel"]) && $_SESSION["typeUser"] == 1)  {
+							$courriel = $params["courriel"];
+							$modeleUsagers = $this->lireDAO("Usagers"); 
+							$data = $modeleUsagers->obtenir_par_courriel($courriel);
+							$modeleUsagers->Bannir($data);
+						}					
 					break;
 
                     case "nouvelMessage":

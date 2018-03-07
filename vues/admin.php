@@ -11,9 +11,20 @@
 ?> 
 
 
-<div class="container">
-  <div class="d-flex flex-row">
-    <nav class="nav flex-column nav-pills col-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+	<div class="row">
+		<aside class="col-lg-3">
+                </aside>
+                <section class="col-lg-9">
+                </section>
+	</div>
+</main>
+
+
+<main class="container-fluid">
+  <div class="row">
+  <aside class="col-lg-3">
+    <nav class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link" id="v-pills-validerUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()" data-toggle="pill"  role="tab" aria-controls="v-pills-validerUsagers" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Admin</a> <!-- href="#v-pills-validerUsagers" -->
        <div class="dropdown-divider"></div>
       <a class="nav-link" id="v-pills-validerUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerUsagers" role="tab" aria-controls="v-pills-validerUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-folder-open" aria-hidden="true"></i>Valider usagers</a>      
@@ -22,25 +33,25 @@
       <a class="nav-link" id="v-pills-listeLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeLogements" role="tab" aria-controls="v-pills-listeLogements" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Liste des logements</a>
 
 	</nav><!-- nav flex-column -->
-
-    <aside class="tab-messagerie tab-content col-9" id="v-pills-tabContent">
-        <section class="tableauUserValider tab-pane fade show active" id="v-pills-validerUsagers" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+</aside>
+    <section class="tab-messagerie tab-content col-lg-9" id="v-pills-tabContent">
+        <div class="tableauUserValider tab-pane fade show active" id="v-pills-validerUsagers" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <table class="table table-sm responsive-sm table-hover display">
           <thead>
 		  <h6>Usagers à valider</h6>
             <tr>
-              <th>Prenom</i></th>
+              <th>Prenom</th>
               <th>Nom</th>
-              <th><i class="fa fa-envelope" aria-hidden="true"></i></th>
-              <th><i class="fa fa-phone" aria-hidden="true"></i></th>
+              <th>Courriel</th>  <!-- <i class="fa fa-envelope" aria-hidden="true"></i> -->
+              <th>Téléphone</th>  <!-- i class="fa fa-phone" aria-hidden="true"></i> -->
             </tr>
           </thead>
           <tbody id="tableauUserValider">
           </tbody>
         </table>
-      </section><!-- tab-pane validerLogements-->
+      </div><!-- tab-pane validerLogements-->
 	  
-        <section class="boiteReception tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+        <div class="boiteReception tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <table class="table table-sm responsive-sm table-hover display">
           <thead>
             <tr>
@@ -54,9 +65,9 @@
           <tbody id="boiteReception">
           </tbody>
         </table>
-      </section><!-- tab-pane validerLogements-->
+      </div><!-- tab-pane validerLogements-->
 	  
-      <section class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
+      <div class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
         <table class="table table-sm responsive-sm table-hover display">
           <thead>
             <tr>
@@ -68,13 +79,46 @@
           </thead>
           <tbody id="msgEnvoyes"></tbody>
         </table>
-      </section><!-- messagesEnvoyes -->
+      </div><!-- messagesEnvoyes -->
        <form class="ficheUsager hidden">
         <?php include 'ficheUsager.php';?>
       </form> 
-    </aside><!-- tab-messagerie -->
+    </section><!-- tab-messagerie -->
   </div><!-- d-flex flex-row -->
-</div><!-- container -->
+  <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Open modal
+</button>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Bannir un Usager</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+           <div class="col-lg-12"> 
+              <label for="description">Description</label>
+              <textarea rows="6" cols="50" name="Explanation" onblur="estDescription()" required></textarea>
+              <span id="errDescription" style="color:red; visibility:hidden">* Description invalide ou requis</span>
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main><!-- container -->
 <script type="text/javascript">
   $(document).ready(function() {
         //  $('.content').richText(); 
@@ -102,14 +146,13 @@
           $.each(json, function(i, item) {
 			  id = "rangee"+i;
             $("#tableauUserValider").append(
-
                 "<tr class='clickable-row' id="+id +" data-href='#' onclick='afficherUsager(" + i + ",true)'>" +
                   "<td>" + item.nom + "</td>" +
                   "<td>" + item.prenom + "</td>" +
-				  "<td>" + item.courriel + "</td>" +
+				          "<td>" + item.courriel + "</td>" +
                   "<td>" + item.cellulaire + "</td>" +
                   "<td class='hidden'>" + item.id_message + "</td>" +
-                "</tr>");
+                 "</tr>");
             usagersValider[i] = JSON.stringify(
               new Usager(
                 item.courriel,
@@ -242,8 +285,6 @@
 	function validerUsager() {
 		courriel = document.getElementById("courriel").value;
 		i = document.getElementById("index").value;
-		console.log(courriel);
-		console.log(i);
 		 $.ajax({
               type        : 'POST', 
               url         : 'index.php?Usagers&action=validerUsager', 
@@ -258,10 +299,33 @@
 			}
 		}) 
 
-	};
+	}
+
 	function bannirUsager() {
-		 alert('Ha llamado a la funcion para bannir');
+       $('#myModal').modal('show');
+      courriel = document.getElementById("courriel").value;
+      i = document.getElementById("index").value;
+
+      
+    /*  $.ajax({
+              type        : 'POST', 
+              url         : 'index.php?Usagers&action=bannirUsager', 
+              data: {courriel:courriel},
+      success: function(json) {
+          alert('Ok, Banni',json);
+          cacherBoitesLecture();
+          $("#rangee"+i).hide();
+           },
+      error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+      }
+    }) */
+
+		 
 	 }
+
+
+
   </script>
   <style>
   #feedback { font-size: 0.9em; }
