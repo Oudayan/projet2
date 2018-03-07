@@ -10,6 +10,9 @@
 ?> 
 
 <main class="container-fluid">
+  <div class="d-flex justify-content-around mt-3">
+        <h1>Messagerie interne</h1>
+    </div>
   <div class="row">
     <aside class="col-lg-3">
     <nav class="nav flex-column nav-pills v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -246,9 +249,14 @@
     $('.sujet').val(message.sujet);
     $('.dateCourriel').val(message.msg_date);
     $('.textMessage').val(message.textMessage); 
-    if(message.fichier_joint != ""){
-    $('.download').html("<a href='pieces_jointes/"+ message.id_messsage +"' download='"+ message.fichierJoint +"'>"+ message.fichierJoint +"</a>");
-     }
+      //if (!message.fichier_joint){
+      //  $('#file_id').addClass('hidden');
+    //  } else {
+      //  $('#file_id').empty();
+        $("<a href='pieces_jointes/"+ message.id_messsage +"' download='"+ message.fichierJoint +"'>"+ message.fichierJoint +"</a>").appendTo('#file_id');
+      //  $('#file_id').removeClass('hidden');
+     //  }
+     
     $('#env_' + message.id_messsage).removeClass('fa-envelope');
     $('#env_' + message.id_messsage).addClass('fa-envelope-open');
     if(reception) {
@@ -396,7 +404,6 @@ function supprimerMessage() {
     
     $('input[name=liste_contacts]').val('');
     $('input[name=sujet]').val('TR: ' + $('.sujet').val());
-    //$('input[name=fichierJoint]').val('por settear');
     $('textarea[name=textMessage]').val(message + $('.textMessage').val());
     
     document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
