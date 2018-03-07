@@ -147,6 +147,7 @@
                         header("Location: index.php?Proprietaire&action=afficherLogements");
                         return;
 						}
+
                         break;
                     default:
                         trigger_error($params["action"] . " Action invalide.");		

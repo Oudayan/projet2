@@ -19,7 +19,7 @@
         private $m_actif;
 		private $expediteur;
 
-		public function __construct($id_message = null, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $m_actif= "", $expediteur = NULL )
+		public function __construct($id_message = null, $id_reference = 0, $sujet = "", $fichier_joint = "", $message = "", $msg_date = "", $m_actif= false, $expediteur = NULL )
 		{
             $this->ecrireId_message($id_message);
 			$this->ecrireId_reference($id_reference);
@@ -62,12 +62,13 @@
             }			
 		}
         public function ecrireMsg_date($msg_date) {
+
             //if (is_string($msg_date) && trim($msg_date) != "") {
                 $this->msg_date = $msg_date;
            // }			
 		}
         public function ecrireM_actif($m_actif) {
-            if (is_string($m_actif) && trim($m_actif) != "") {
+            if (is_bool($m_actif)) {
                 $this->m_actif = $m_actif;
             }			
 		}

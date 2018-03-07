@@ -9,18 +9,6 @@
  * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
 ?> 
-
-
-
-	<div class="row">
-		<aside class="col-lg-3">
-                </aside>
-                <section class="col-lg-9">
-                </section>
-	</div>
-</main>
-
-
 <main class="container-fluid">
   <div class="row">
   <aside class="col-lg-3">
@@ -36,62 +24,62 @@
 		<a class="nav-link" id="v-pills-listeLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeLogements" role="tab" aria-controls="v-pills-listeLogements" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Liste des logements</a>
 		
 	</nav><!-- nav flex-column -->
-</aside>
-    <section class="tab-usagers tab-content col-lg-9" id="v-pills-tabContent">
-        <div class="tableauUserValider tab-pane fade show active" id="v-pills-validerUsagers" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
-        <table class="table table-sm responsive-sm table-hover display">
-          <thead>
-		  <h6>Usagers à valider</h6>
-            <tr>
-              <th>Prenom</th>
-              <th>Nom</th>
-              <th><i class="fa fa-envelope" aria-hidden="true"></i></th>  
-              <th><i class="fa fa-phone" aria-hidden="true"></i></th>  
-            </tr>
-          </thead>
-          <tbody id="tableauUserValider">
-          </tbody>
-        </table>
-      </div><!-- tab-pane validerUsagers-->
+  </aside>
+  <section class="tab-usagers tab-content col-lg-9" id="v-pills-tabContent">
+      <div class="tableauUserValider tab-pane fade show active" id="v-pills-validerUsagers" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+      <table class="table table-sm responsive-sm table-hover display">
+        <thead>
+        <h6>Usagers à valider</h6>
+          <tr>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>  
+            <th><i class="fa fa-phone" aria-hidden="true"></i></th>  
+          </tr>
+        </thead>
+        <tbody id="tableauUserValider">
+        </tbody>
+      </table>
+    </div><!-- tab-pane validerUsagers-->
 	  
-	  <div class="listeUsagers tab-pane fade" id="v-pills-listeUsagers" role="tabpanel" aria-labelledby="v-pills-listeUsagers-tab">
-        <table class="table table-sm responsive-sm table-hover display">
-          <thead>
-		  <h6>Liste d'usagers</h6>
-            <tr>
-              <th>Prenom</th>
-              <th>Nom</th>
-              <th><i class="fa fa-envelope" aria-hidden="true"></i></th>  
-              <th><i class="fa fa-phone" aria-hidden="true"></i></th>  
-            </tr>
-          </thead>
-          <tbody id="tableauListeUsagers"></tbody>
-        </table>
-      </div><!-- listeUsagers -->
+    <div class="listeUsagers tab-pane fade" id="v-pills-listeUsagers" role="tabpanel" aria-labelledby="v-pills-listeUsagers-tab">
+      <table class="table table-sm responsive-sm table-hover display">
+        <thead>
+        <h6>Liste d'usagers</h6>
+          <tr>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>  
+            <th><i class="fa fa-phone" aria-hidden="true"></i></th>  
+          </tr>
+        </thead>
+        <tbody id="tableauListeUsagers"></tbody>
+      </table>
+    </div><!-- listeUsagers -->
 	  
-        <div class="boiteReception tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
-        <table class="table table-sm responsive-sm table-hover display">
-          <thead>
-            <tr>
-				<h6>Logements à valider</h6>
-              <th>Adresse </th>
-              <th><i class="fa fa-level-down" aria-hidden="true"></i></th>
-              <th>Sujet</th>
-              <th><i class="fa fa-paperclip" aria-hidden="true"></i></th>
-              <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
-            </tr>
-          </thead>
-          <tbody id="boiteReception">
-          </tbody>
-        </table>
-      </div><!-- tab-pane validerLogements-->
+    <div class="boiteReception tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
+    <table class="table table-sm responsive-sm table-hover display">
+      <thead>
+        <tr>
+            <h6>Logements à valider</h6>
+          <th>Adresse </th>
+          <th><i class="fa fa-level-down" aria-hidden="true"></i></th>
+          <th>Sujet</th>
+          <th><i class="fa fa-paperclip" aria-hidden="true"></i></th>
+          <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
+        </tr>
+      </thead>
+      <tbody id="boiteReception">
+      </tbody>
+    </table>
+  </div><!-- tab-pane validerLogements-->
 	  
 
-       <form class="ficheUsager hidden">
-        <?php include 'ficheUsager.php';?>
-      </form> 
-    </section><!-- tab-messagerie -->
-  </div><!-- d-flex flex-row -->
+      <form class="ficheUsager hidden">
+       <?php include 'ficheUsager.php';?>
+     </form> 
+   </section><!-- tab-messagerie -->
+ </div><!-- d-flex flex-row -->
   <!-- Button to Open the Modal -->
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> 
   Open modal
