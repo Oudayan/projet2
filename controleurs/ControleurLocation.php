@@ -102,7 +102,9 @@
                                         // Envoyer mail au locataire
                                         $locataire = $modeleLocation->lireIdLocataire();
                                         $proprietaire = $modeleLocation->lireIdProprietaire();
+                                        $sujet = "Location déclinée";
                                         $message = $donnees["erreur"];
+                                        //header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $message);
                                     }
                                 }
                                 else {

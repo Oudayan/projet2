@@ -16,7 +16,10 @@
 
             $modeleLogement = $this->lireDAO("Logement");
             $modeleTypeLogement = $this->lireDAO("TypeLogement");
+            $modelePhotosLogement = $this->lireDAO("PhotoLogement");
             $modelePiece = $this->lireDAO("Piece");
+            $modeleDisponibilite = $this->lireDAO("Disponibilite");
+            $modeleUsagers = $this->lireDAO("Usagers");
             
 			if (isset($params["action"])) {	
 
@@ -26,6 +29,9 @@
                         if (isset($params["idLogement"])) {
                             // Chercher les données du logement
                             $donnees["logement"] = $modeleLogement->lireLogementParId($params["idLogement"]);
+                            $donnees["proprietaire"] = $modeleUsagers->obtenir_par_courriel($donnees["logement"]->lireCourriel());
+                            $donnees["typeLogement"] = $modeleTypeLogement->lireTypeLogementParId($donnees["logement"]->lireIdTypeLogement());
+                            $donnees["disposLogement"] = $modeleDisponibilite->lireDisponibilitesParLogement($params["idLogement"]);
                         }
                         else {
                             $donnees["erreur"] = "Aucun logement n'est sélectionné";

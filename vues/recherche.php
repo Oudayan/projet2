@@ -563,9 +563,9 @@
     };
 
     // Ajoute un marqueur à la carte et le rajoute au tableau marqueurs[]
-    function ajouterMarqueur(latitude, longitide, icone) {
+    function ajouterMarqueur(latitude, longitude, icone) {
         marqueur = new google.maps.Marker({
-            position: new google.maps.LatLng(latitude, longitide),
+            position: new google.maps.LatLng(latitude, longitude),
             map: map,
             icon: icone,
             title: 'Cliquer pour agrandir', 
