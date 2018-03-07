@@ -13,7 +13,7 @@
         <h1>Recherche de logements À Louer</h1>
     </div>
     <div class="row">
-        <aside class="recherche col-lg-3 border rounded py-2 mt-2">
+        <aside class="recherche col-xl-3 border rounded py-2 mt-2">
             <form id="formulaire_recherche" method="post" action="<?= $_SESSION["recherche"]["action"] ?>" class="py-2">
                 <input type="hidden" id="action" name="action" value="recherche">
                 <input type="hidden" id="affichage" name="affichage" value="carte">
@@ -207,7 +207,7 @@
                 <!-- <input type="text" class="form-control-plaintext" placeholder="test" disabled> -->
             </form>
         </aside>
-        <div class="col-lg-9 mt-2">
+        <div class="col-xl-9 mt-2">
             <nav>
                 <div id="nav-tab" class="nav nav-tabs row mx-0" role="tablist">
                     <a class="nav-item nav-link col-6 active" id="nav-fiches-tab" data-toggle="tab" href="#fiches-tab" role="tab" aria-controls="nav-fiches" aria-selected="true"><h3>Fiches</h3></a>
@@ -563,9 +563,9 @@
     };
 
     // Ajoute un marqueur à la carte et le rajoute au tableau marqueurs[]
-    function ajouterMarqueur(latitude, longitide, icone) {
+    function ajouterMarqueur(latitude, longitude, icone) {
         marqueur = new google.maps.Marker({
-            position: new google.maps.LatLng(latitude, longitide),
+            position: new google.maps.LatLng(latitude, longitude),
             map: map,
             icon: icone,
             title: 'Cliquer pour agrandir', 
