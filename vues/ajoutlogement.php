@@ -32,7 +32,7 @@
 				<span id="errApt" style="color:red; visibility:hidden">* Numéro d'appartement invalide ou requis</span>
 			</div>
 			<div class="col-lg-3">
-				<label for="no_civique">Exterieur:</label>
+				<label for="no_civique">No Civique</label>
 				<input type="text" class="form-control" name="no_civique" onblur="estNbCivique()" required>
 				<span id="errNbCivique" style="color:red; visibility:hidden">* Numéro invalide ou requis</span>
 			</div>	
