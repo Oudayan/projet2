@@ -100,7 +100,9 @@
                                         $modeleLocation->validerLocation($locations[$i]->lireIdLocation(), 4);
                                         $donnees["erreur"] = "Désolé, ce logement n'est plus disponible entre ces dates.";
                                         // Envoyer mail au locataire
-                                        
+                                        $locataire = $modeleLocation->lireIdLocataire();
+                                        $proprietaire = $modeleLocation->lireIdProprietaire();
+                                        $message = $donnees["erreur"];
                                     }
                                 }
                                 else {
