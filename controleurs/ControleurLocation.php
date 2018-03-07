@@ -44,7 +44,7 @@
                                     $dates = explode("  au  ", $params["datesLocation"]);
                                     $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($params["idLogement"]);
                                     foreach ($dispos as $dispo) {
-                                        if ($dates[0] >= $dispo->lireDateDebut() && $dates[1] <= $dispo->lireDateFin() && $dispo->lireDActive() == 1) {
+                                        if (strtotime($dates[0]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[1]) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
                                             $disponible = true;
                                         }
                                     }
@@ -85,7 +85,7 @@
                                     $disponible = false;
                                     $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($locations[$i]->lireIdLogement());
                                     foreach ($dispos as $dispo) {
-                                        if ($locations[$i]->lireDateDebut() >= $dispo->lireDateDebut() && $locations[$i]->lireDateFin() <= $dispo->lireDateFin() && $dispo->lireDActive() == 1) {
+                                        if (strtotime($locations[$i]->lireDateDebut()) >= strtotime($dispo->lireDateDebut()) && strtotime($locations[$i]->lireDateFin()) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
                                             $disponible = true;
                                         }
                                     }
@@ -127,7 +127,7 @@
                                 // Gestion des disponibilités restantes
                                 $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($location->lireIdLogement());
                                 foreach ($dispos as $dispo) {
-                                    if ($location->lireDateDebut() >= $dispo->lireDateDebut() && $location->lireDateFin() <= $dispo->lireDateFin() && $dispo->lireDActive() == 1) {
+                                    if (strtotime($location->lireDateDebut()) >= strtotime($dispo->lireDateDebut()) && strtotime($location->lireDateFin()) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
                                         $disponible = true;
                                         // Désactiver la diponibilité courante
                                         $modeleDisponibilite->desactiverDisponibilite($dispo->lireIdDisponibilite());

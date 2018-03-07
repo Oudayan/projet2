@@ -22,7 +22,7 @@
 		}
 		
 		public function lireLogementParProprietaire($idProprietaire) {
-            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE courriel = '" . $idProprietaire . "'";
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE courriel = '" . $idProprietaire . "' AND l_actif = true";
             $resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
 		}
@@ -76,6 +76,14 @@
        
         public function effacerLogement($id) {
         	return $this->effacer($id);
+        }
+        
+        public function desactiverLogement($id) {
+            return $this->modifierChamp($id, "l_actif", false);
+        }
+        
+        public function reactiverLogement($id) {
+            return $this->modifierChamp($id, "l_actif", true);
         }
         
     }
