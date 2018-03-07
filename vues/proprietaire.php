@@ -40,7 +40,8 @@
                                                 <img src="<?= $donnees["photos"][$i][0]->lireCheminPhoto() ?>">
                                             </div>
                                             <div class="col-12 d-flex flex-col justify-content-between align-content-center">
-                                                <a href="index.php?Logement&action=modifierLogement&idLogement=<?= $donnees["logements"][$i]->lireIdLogement() ?>" class="btn btn-bleu my-2">Modifier ce logement</a>
+                                               <!-- <a href="index.php?Logement&action=modifierLogement&idLogement=<?= $donnees["logements"][$i]->lireIdLogement() ?>" class="btn btn-bleu my-2">Modifier ce logement</a> -->
+											   <a href="index.php?Logement&action=formAjoutLogement&idLogement=<?= $donnees["logements"][$i]->lireIdLogement() ?>" class="btn btn-bleu my-2">Modifier ce logement</a>
                                                 <a href="index.php?Logement&action=desactiverLogement&idLogement=<?= $donnees["logements"][$i]->lireIdLogement() ?>" class="btn btn-secondary my-2">Effacer ce logement</a>
                                             </div>
                                         </div>
