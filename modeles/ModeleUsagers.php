@@ -49,7 +49,6 @@
 		{
 			$resultat = $this->lireTous();  //reference BaseDAO
 			$desUsagers = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Usagers");
-			var_dump($desUsagers);
 			return $desUsagers;
 		}
 
@@ -69,7 +68,7 @@
 		
 		public function obtenir_listeaValider()
 		{
-			$query = "SELECT * FROM " . $this->lireNomTable() . " as u JOIN al_type_paiement as p ON u.id_paiement = p.id_paiement JOIN al_type_contact as c ON u.id_contact = c.id_contact JOIN al_type_usager as tu ON u.id_type_usager = tu.id_type_usager WHERE isnull(u_valide)" ;
+			$query = "SELECT * FROM " . $this->lireNomTable() . " as u JOIN al_type_paiement as p ON u.id_paiement = p.id_paiement JOIN al_type_contact as c ON u.id_contact = c.id_contact JOIN al_type_usager as tu ON u.id_type_usager = tu.id_type_usager WHERE isnull(u_valide) and isnull(u_banni)" ;
 			$resultat=$this->requete($query);
 			$desUsagers = $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Usagers'); 
 			return $desUsagers;
@@ -112,13 +111,36 @@
 			/*}*/
 		}
 		
-		public function valider(Usagers $courriel)
+		/**
+		* @brief Valider un usager
+		* @details change la valeur du champ pour valider un usager.
+		* @param point1 courriel
+		* @return aucun.
+		*/	
+		
+		public function Valider(Usagers $usager)
 		{
 			$query = "UPDATE " . $this->lireNomTable() . " SET u_valide = 1 WHERE Courriel = ?";
-			$data = array($courriel->lireCourriel());
+			$data = array($usager->lireCourriel());
 			return $this->requete($query, $data);
 		}
 		
+		/**
+		* @brief Bannir un usager
+		* @details change la valeur du champ pour bannir un usager.
+		* @param point1 description
+		* @param point2 courriel
+		* @return aucun.
+		*/	
+		
+		public function Bannir(Usagers $usager)
+		{
+			var_dump($usager);
+			$query = "UPDATE " . $this->lireNomTable() . " SET u_banni = 1, u_commentaire_banni =?, u_date_banni = now() WHERE Courriel = ?";
+			var_dump($query);
+			$data = array($usager->lireCommentaireBanni(), $usager->lireCourriel());
+			return $this->requete($query, $data);
+		}
 		
 	}
 

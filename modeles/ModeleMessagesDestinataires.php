@@ -65,8 +65,8 @@
                 "AND m_actif = 1 " . 
                 "GROUP BY lu, d_actif,al_messagerie.id_message, id_reference," . 
                 "sujet, fichier_joint,msg_date,m_actif, expediteur,message " . 
-                "ORDER BY al_messagerie.msg_date DESC";
-        
+                "ORDER BY al_messagerie.msg_date DESC";  
+
         $resultat = $this->requete($sql);
         $resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "MessagesDestinataires"); 
         return $resultat->fetchAll();

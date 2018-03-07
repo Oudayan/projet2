@@ -21,13 +21,7 @@
 		}
 		
 		public function lireLocationsParProprietaire($id_proprietaire) {
-            $resultat = $this->lire($id, "id_proprietaire");
-			$resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Location'); 
-			return $resultat->fetch();
-		}
-		
-		public function lireLocationsCourantesParProprietaire($id_proprietaire) {
-            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_proprietaire = '" . $id_proprietaire . "' AND valide = 1 ORDER BY date_debut DESC" ;
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_proprietaire = '" . $id_proprietaire . "' ORDER BY date_debut DESC" ;
 			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Location");
 		}
