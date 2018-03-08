@@ -456,7 +456,6 @@ nav.v-pills-tab {
     background: linear-gradient(to right, rgba(11, 42, 52, 0.99), rgb(75, 76, 76));
     border-radius: 5px;
     font-size: 0.7rem;
-    height: 650px;
   }
   
  a.nav-link {
