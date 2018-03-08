@@ -81,6 +81,11 @@
                             for ($i = 0; $i < count($locations); $i++) {
                                 // Vérifier si la demande de location est expirée
                                 if (strtotime($locations[$i]->lireDateDebut()) >= strtotime(date('Y-m-d'))) {
+                                    // Chercher les données de la location et du logement
+                                    $locataire = $locations[$i]->lireIdLocataire();
+                                    $proprietaire = $locations[$i]->lireIdProprietaire();
+                                    $logement = $modeleLogement->lireLogementParId($locations[$i]->lireIdLogement());
+                                    $adresse = $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince() . ", " . $logement->lirePays() . ", " . $logement->lireCodePostal();
                                     // Vérifier si le logement est encore disponible
                                     $disponible = false;
                                     $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($locations[$i]->lireIdLogement());
@@ -91,28 +96,26 @@
                                     }
                                     // Si le logement est disponible, sauvegarder la demande de location
                                     if ($disponible) {
-                                        $donnees["location"][$i] = $modeleLocation->lireLocationParId($locations[$i]->lireIdLocation());
-                                        $donnees["logement"][$i] = $modeleLogement->lireLogementParId($locations[$i]->lireIdLogement());
+                                        $donnees["location"][$i] = $locations[$i];
+                                        $donnees["logement"][$i] = $logement;
                                         $donnees["locataire"][$i] = $modeleUsagers->obtenir_par_courriel($locations[$i]->lireIdLocataire());
                                     }
                                     else {
                                         // Logement non disponible - mettre valide = 4 : 
                                         $modeleLocation->validerLocation($locations[$i]->lireIdLocation(), 4);
-                                        $donnees["erreur"] = "Désolé, ce logement n'est plus disponible entre ces dates.";
-                                        // Envoyer mail au locataire
-                                        $locataire = $modeleLocation->lireIdLocataire();
-                                        $proprietaire = $modeleLocation->lireIdProprietaire();
-                                        $sujet = "Location déclinée";
-                                        $message = $donnees["erreur"];
-                                        //header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $message);
+                                        // Envoyer message au locataire par la messagerie interne
+                                        $donnees["erreur"] = "Désolé, le logement situé au " . $adresse . " n'est plus disponible entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . ".";
+                                        $sujet = "Demande de location déclinée";
+                                        header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                     }
                                 }
                                 else {
                                     // Demande expirée - mettre valide=3 : 
                                     $modeleLocation->validerLocation($locations[$i]->lireIdLocation(), 3);
-                                    $donnees["erreur"] = "Désolé, la demande de location est expirée.";
-                                    // Envoyer mail au locataire
-                                    
+                                    // Envoyer message au locataire par la messagerie interne
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est expirée.";
+                                    $sujet = "Demande de location expirée";
+                                    header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                 }
                             }
                         }
@@ -126,6 +129,12 @@
 					case "approuverLocation" :
                         if (isset($params["idLocation"])) {
                             $location = $modeleLocation->lireLocationParId($params["idLocation"]);
+                            // Chercher les données de la location et du logement
+                            $locataire = $location->lireIdLocataire();
+                            $proprietaire = $location->lireIdProprietaire();
+                            $logement = $modeleLogement->lireLogementParId($location->lireIdLogement());
+                            $adresse = $logement->lireNoCivique() . " " . $logement->lireRue() . " " . $logement->lireApt() . ", " . $logement->lireVille() . ", " . $logement->lireProvince() . ", " . $logement->lirePays() . ", " . $logement->lireCodePostal();
+                            // Vérifier que l'usager est propriétaire du logement
                             if (isset($_SESSION["courriel"]) && isset($_SESSION["courriel"]) == $location->lireIdProprietaire()) {
                                 $disponible = false;
                                 // Gestion des disponibilités restantes
@@ -172,15 +181,18 @@
                                     // Approuver la location
                                     $modeleLocation->validerLocation($params["idLocation"], 1);
                                     $donnees["success"] = "Demande de location approuvée !";
-                                    // Envoyer mail au locataire
-                                    
+                                    // Envoyer message au locataire par la messagerie interne
+                                    $donnees["erreur"] = "Votre demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est APPROUVÉE ! Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement. Merci !";
+                                    $sujet = "Demande de location approuvée";
+                                    header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                 }
                                 else {
                                     // Mettre la location à 3-Expiré
                                     $modeleLocation->validerLocation($params["idLocation"], 3);
-                                    $donnees["erreur"] = "Désolé, ce logement n'est plus disponible entre ces dates.";
-                                    // Envoyer mail au locataire
-                                    
+                                    // Envoyer message au locataire par la messagerie interne
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est expirée.";
+                                    $sujet = "Demande de location expirée";
+                                    header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                 }
                             }
                             else {
@@ -199,9 +211,10 @@
                             $location = $modeleLocation->lireLocationParId($params["idLocation"]);
                             if (isset($_SESSION["courriel"]) && isset($_SESSION["courriel"]) == $location->lireIdProprietaire()) {
                                 $modeleLocation->validerLocation($params["idLocation"], 2);
-                                $donnees["success"] = "Désolé, votre demande de location a été refusée.";
-                                // Envoyer mail au locataire
-                                
+                                // Envoyer message au locataire par la messagerie interne
+                                $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "a été déclinée.";
+                                $sujet = "Location déclinée";
+                                header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                             }
                             else {
                                 $donnees["erreur"] = "Vous n'avez pas les permissions nécessaires pour effectuer cette action.";

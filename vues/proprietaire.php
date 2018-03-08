@@ -58,7 +58,7 @@
                                                         <label class="pt-1" for="datesDisposLogement<?= $donnees["logements"][$i]->lireIdLogement() ?>">Dates de disponibilité&nbsp;:</label>
                                                         <button type="button" class="close mb-2" data-toggle="collapse" data-target="#dispos<?= $donnees["logements"][$i]->lireIdLogement() ?>" aria-expanded="false" aria-controls="dispos<?= $donnees["logements"][$i]->lireIdLogement() ?>" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                     </div>
-                                                    <input type="hidden" id="idDispoLogement<?= $donnees["logements"][$i]->lireIdLogement() ?>" name="idDispo" value="0">
+                                                    <input type="hidden" class="idDispoLogement" id="idDispoLogement<?= $donnees["logements"][$i]->lireIdLogement() ?>" name="idDispo" value="<?= $donnees["logements"][$i]->lireIdLogement() ?>">
                                                     <input type="text" id="datesDisposLogement<?= $donnees["logements"][$i]->lireIdLogement() ?>" name="datesdispos" class="datesDisposLogement form-control">
                                                     <i class="glyphicon glyphicon-calendar fa fa-calendar date-icon"></i>
                                                 </div>
@@ -230,7 +230,8 @@
         },
         "startDate": moment().format(),
         "endDate": moment().add(13, 'days').format(),
-        "applyClass": "btn-orange"
+        "applyClass": "btn-orange",
+        "opens": "left"
     }, function(start, end, label) {
         console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
     });
@@ -251,6 +252,7 @@
                     $("#locationsProprietaire").empty();
                     $(locations).appendTo("#locationsProprietaire");
                     $("#locationsProprietaire").collapse('show');
+                    rafraichirDisponibilites();
                 }
             });
         };
@@ -285,6 +287,26 @@
             });
         };
 
+        // Rafraîchir les disponibilites
+        function rafraichirDisponibilites() {
+            $(".idDispoLogement").each(function() {
+                var idLogement = $(this).val();
+                $.ajax({
+                    url: 'index.php?Proprietaire&action=rafraichirDisponibilites',
+                    type: 'POST',
+                    data: {
+                        "idLogement": idLogement,
+                    },
+                    dataType: 'html',
+                    success: function(dispos) {
+                        $("#disposLogement" + idLogement).empty();
+                        $(dispos).appendTo("#disposLogement" + idLogement);
+                    }
+                });
+            });
+        };
+        
+        
         // Ajouter un disponibilité au sélectionneur de date
         function ajouterDispo(idLogement) {
             $("#idDispoLogement" + idLogement).val(0);
@@ -311,6 +333,7 @@
                 success: function(dispos) {
                     $("#disposLogement" + idLogement).empty();
                     $(dispos).appendTo("#disposLogement" + idLogement);
+                    $("#dispos" + idLogement).collapse("hide");
                 }
             });      
         });
@@ -330,7 +353,7 @@
                     $("#datesDisposLogement" + idLogement).val(dispo.dateDebut + "  au  " + dispo.dateFin);
                     $("#datesDisposLogement" + idLogement).data('daterangepicker').setStartDate(dispo.dateDebut);
                     $("#datesDisposLogement" + idLogement).data('daterangepicker').setEndDate(dispo.dateFin);
-                    $("#dispos" + idLogement).collapse('show')
+                    $("#dispos" + idLogement).collapse("show");
                 }
             });            
         };

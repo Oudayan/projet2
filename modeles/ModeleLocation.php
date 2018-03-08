@@ -26,6 +26,12 @@
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Location");
 		}
 		
+		public function lireLocationsActivesParLogement($id_logement) {
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_logement = '" . $id_logement . "' AND valide = 1 ORDER BY date_debut DESC" ;
+			$resultat = $this->requete($sql);
+			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Location");
+		}
+		
 		public function lireLocationsAValider($id_proprietaire) {
             $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE id_proprietaire = '" . $id_proprietaire . "' AND valide = 0 ORDER BY date_debut DESC" ;
 			$resultat = $this->requete($sql);
