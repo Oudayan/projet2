@@ -51,7 +51,9 @@
                                     // Si le logement est disponible, sauvegarder la demande de location
                                     if ($disponible) {
                                         $maintenant = date('Y-m-d H:m:s');
-                                        $location = new Location(0, $params["idLogement"], $proprietaire, $_SESSION["courriel"], $dates[0], $dates[1], $maintenant, $_SESSION["location"]["prixTotal"], 0, NULL, NULL, NULL, NULL, NULL, NULL);
+                                        // Créer un jeton pour s'assurer que le bon locataire évalue le bon logement.
+                                        $jeton = $this->creerJeton(25);
+                                        $location = new Location(0, $params["idLogement"], $proprietaire, $_SESSION["courriel"], $dates[0], $dates[1], $maintenant, $_SESSION["location"]["prixTotal"], 0, $jeton, NULL, NULL, NULL, NULL, NULL, NULL);
                                         $modeleLocation->sauvegarderLocation($location);
                                         $donnees["succes"] = "Demande de location réussie.<br>Veuillez attendre la confirmation du propriétaire par messagerie&nbsp;interne.";
                                     }
@@ -180,10 +182,11 @@
                                 if ($disponible) {
                                     // Approuver la location
                                     $modeleLocation->validerLocation($params["idLocation"], 1);
+                                    // Créer le lien pour l'évaluation et commentaires sur le logement
+                                    $lienEvaluation = "<a href=" . RACINE . "/index.php?Evaluation&action=evaluerLogement&idLocation=" . $locations[$i]->lireIdLocation() . "&jeton=" . $locations[$i]->lireJeton() . "</a>";
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["success"] = "Votre demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est APPROUVÉE ! Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement. Merci !";
+                                    $donnees["success"] = "<p>Votre demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est APPROUVÉE !</p><p>Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement.</p><p>Voici le lien pour l'évaluation du logement :" . $lienEvaluation . ".<br>Ce lien sera fermé et compilé le lendemain de la date de fin de location.</p><p>Merci !</p>";
                                     $sujet = "Demande de location approuvée";
-                                    var_dump($donnees["erreur"]);
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["success"]);
                                 }
                                 else {
@@ -241,7 +244,7 @@
 
 
         // Fonction pour afficher le modal de demande de location d'un logement
-        function afficherLocation($params) {
+        public function afficherLocation($params) {
             $modeleLocation = $this->lireDAO("Location");
             $modeleLogement = $this->lireDAO("Logement");
             $modeleDisponibilite = $this->lireDAO("Disponibilite");
@@ -325,6 +328,18 @@
                 return $nombre;
             }
             return false;
+        }
+
+        // Fonction pour créer un jeton pour s'assurer qu'une location ait seulement une évaluation
+        // Source : https://stackoverflow.com/questions/1846202/php-how-to-generate-a-random-unique-alphanumeric-string/13733588#13733588
+        public function creerJeton($longueur){
+            $jeton = "";
+            $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz123456789";
+            $max = strlen($codeAlphabet);
+            for ($i=0; $i < $longueur; $i++) {
+                $jeton .= $codeAlphabet[random_int(0, $max-1)];
+            }
+            return $jeton;
         }
 
     }

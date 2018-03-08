@@ -114,30 +114,30 @@
                       break;  
                     
                     case "messageAutomatique":                     
-                      if (isset($params["message"]) && isset($params["sujet"]) && isset($params["locataire"]) && isset($params["proprietaire"])) {
-                        var_dump($params["message"]);
-                        $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
-                        $lu = false;
-                        $m_actif = true;
-                        $newDestinataire = new Destinataire (
-                            $params["locataire"],
-                            $idMessage, 
-                            $lu, 
-                            $m_actif);
-                        $modeleMessagerie->sauvegarderDestinataire($newDestinataire);
-							
-                        $newMessage = new Message ( // Selon le modele Message
-                            "", // id_message
-                            "", // id_reference
-                            $params["sujet"], // Sujet
-                            "", // Fichier joint 
-                            $params["message"], // Message
-                            '',  // msg_date
-                            true, 
-                            $params["proprietaire"]
-                        );
-                        $modeleMessagerie->sauvegarderMessage($newMessage);
-                        header("Location: index.php?Proprietaire&action=afficherLogements");
+                        if (isset($params["message"]) && isset($params["sujet"]) && isset($params["locataire"]) && isset($params["proprietaire"])) {
+                            var_dump($params["message"]);
+                            $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                            $lu = false;
+                            $m_actif = true;
+                            $newDestinataire = new Destinataire (
+                                $params["locataire"],
+                                $idMessage, 
+                                $lu, 
+                                $m_actif);
+                            $modeleMessagerie->sauvegarderDestinataire($newDestinataire);
+
+                            $newMessage = new Message ( // Selon le modele Message
+                                "", // id_message
+                                "", // id_reference
+                                $params["sujet"], // Sujet
+                                "", // Fichier joint 
+                                $params["message"], // Message
+                                '',  // msg_date
+                                true, 
+                                $params["proprietaire"]
+                            );
+                            $modeleMessagerie->sauvegarderMessage($newMessage);
+                            header("Location: index.php?Proprietaire&action=afficherLogements");
                       }
                       break;
                     
