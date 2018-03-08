@@ -106,7 +106,7 @@
                                         // Envoyer message au locataire par la messagerie interne
                                         $donnees["erreur"] = "Désolé, le logement situé au " . $adresse . " n'est plus disponible entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . ".";
                                         $sujet = "Demande de location déclinée";
-                                        header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
+                                        header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                     }
                                 }
                                 else {
@@ -115,7 +115,7 @@
                                     // Envoyer message au locataire par la messagerie interne
                                     $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est expirée.";
                                     $sujet = "Demande de location expirée";
-                                    header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
+                                    header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                 }
                             }
                         }
@@ -180,11 +180,11 @@
                                 if ($disponible) {
                                     // Approuver la location
                                     $modeleLocation->validerLocation($params["idLocation"], 1);
-                                    $donnees["success"] = "Demande de location approuvée !";
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["erreur"] = "Votre demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est APPROUVÉE ! Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement. Merci !";
+                                    $donnees["success"] = "Votre demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est APPROUVÉE ! Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement. Merci !";
                                     $sujet = "Demande de location approuvée";
-                                    header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
+                                    var_dump($donnees["erreur"]);
+                                    header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["success"]);
                                 }
                                 else {
                                     // Mettre la location à 3-Expiré
@@ -192,7 +192,7 @@
                                     // Envoyer message au locataire par la messagerie interne
                                     $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est expirée.";
                                     $sujet = "Demande de location expirée";
-                                    header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
+                                    header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                                 }
                             }
                             else {
@@ -214,7 +214,7 @@
                                 // Envoyer message au locataire par la messagerie interne
                                 $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "a été déclinée.";
                                 $sujet = "Location déclinée";
-                                header("Location: index.php/Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
+                                header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . $locataire . "&proprietaire=" . $proprietaire . "&sujet=" . $sujet . "&message=" . $donnees["erreur"]);
                             }
                             else {
                                 $donnees["erreur"] = "Vous n'avez pas les permissions nécessaires pour effectuer cette action.";
