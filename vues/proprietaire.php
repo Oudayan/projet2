@@ -18,11 +18,11 @@
         <!-- <div class="container"> -->
             <div class="row">
                 <aside class="col-xl-3">
-                    <div class="nav flex-column nav-pills" id="proprietaire-tab" role="tablist" aria-orientation="vertical">
+                    <nav class="nav flex-column nav-pills v-pills-tab" id="proprietaire-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link active" id="disponibilites-tab" data-toggle="pill" href="#disponibilites" role="tab" aria-controls="disponibilites" aria-selected="true">Logements - Disponibilites</a>
                         <a class="nav-link" id="locations-tab" data-toggle="pill" href="#locations" role="tab" aria-controls="locations" aria-selected="false">Historique des locations</a>
                         <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique" role="tab" aria-controls="historique" aria-selected="false">Historique des demandes de location</a>
-                    </div>
+                    </nav>
                 </aside>
                 <section class="col-xl-9">
                     <div class="tab-content" id="proprietaire-tabContent">

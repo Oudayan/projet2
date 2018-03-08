@@ -16,8 +16,10 @@
 
             $modeleLogement = $this->lireDAO("Logement");
             $modeleTypeLogement = $this->lireDAO("TypeLogement");
+            $modelePhotosLogement = $this->lireDAO("PhotoLogement");
             $modelePiece = $this->lireDAO("Piece");
-			$modelePhotos = $this->lireDAO("PhotoLogement");
+            $modeleDisponibilite = $this->lireDAO("Disponibilite");
+            $modeleUsagers = $this->lireDAO("Usagers");
             
 			if (isset($params["action"])) {	
 
@@ -27,6 +29,9 @@
                         if (isset($params["idLogement"])) {
                             // Chercher les données du logement
                             $donnees["logement"] = $modeleLogement->lireLogementParId($params["idLogement"]);
+                            $donnees["proprietaire"] = $modeleUsagers->obtenir_par_courriel($donnees["logement"]->lireCourriel());
+                            $donnees["typeLogement"] = $modeleTypeLogement->lireTypeLogementParId($donnees["logement"]->lireIdTypeLogement());
+                            $donnees["disposLogement"] = $modeleDisponibilite->lireDisponibilitesParLogement($params["idLogement"]);
                         }
                         else {
                             $donnees["erreur"] = "Aucun logement n'est sélectionné";
@@ -45,7 +50,7 @@
                         if (isset($_SESSION["courriel"])) {
 							if (isset($params['idLogement'])){
 								$donnees["Logement"]=$modeleLogement->lireLogementParId($params['idLogement']);
-								$donnees["Photos"]=$modelePhotos->lireToutesPhotosParLogement($params['idLogement']);
+								$donnees["Photos"]=$modelePhotosLogement->lireToutesPhotosParLogement($params['idLogement']);
 							}
                             $donnees["Pieces"]=$modelePiece->lireToutesPieces();
                             $donnees["TypeLogements"]=$modeleTypeLogement->lireTousTypeLogements();
@@ -137,10 +142,10 @@
 								}
 								if ($nomPhoto) {
 									$nomFichier = $chemin . '/'. $nomFichier ;
-									$modelePhotos = $this->lireDAO("PhotoLogement");
+									$modelePhotosLogement = $this->lireDAO("PhotoLogement");
 									$piece = $_POST["piece".$i];
 									$nouvellePhoto = new PhotoLogement("", $nomFichier, $piece, $id);
-									$modelePhotos->sauvegarderPhotoLogement($nouvellePhoto);
+									$modelePhotosLogement->sauvegarderPhotoLogement($nouvellePhoto);
 								}
 							}
                         $_SESSION["succes"]= "Votre logement a été enregistré, merci de attendre un confirmation dans votre courriel ! ";

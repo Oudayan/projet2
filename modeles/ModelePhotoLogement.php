@@ -40,16 +40,16 @@
     	}
 
 		public function sauvegarderPhotoLogement(PhotoLogement $photoLogement) {
-			/*if ($photoLogement->lireIdPhotoLogement() && $this->lire($photoLogement->lireIdPhotoLogement())->fetch()) {
+			if ($photoLogement->lireIdPhotoLogement() && $this->lire($photoLogement->lireIdPhotoLogement())->fetch()) {
 				// update
 				$sql = "UPDATE " . $this->lireNomTable() . " SET chemin_photo=?, description_photo=?, id_logement=? WHERE " . $this->lireClePrimaire() . "=?";
                 $donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireIdPiece(), $photoLogement->lireIdLogement(), $photoLogement->lireIdPhotoLogement());
 			} 
-			else {*/
+			else {
 				// insert
                 $sql = "INSERT INTO " . $this->lireNomTable() . "(chemin_photo, id_piece, id_logement) VALUES (?, ?, ?)"; 
 				$donnees = array($photoLogement->lireCheminPhoto(), $photoLogement->lireIdPiece(), $photoLogement->lireIdLogement());
-			//}
+			}
            	return $this->requete($sql, $donnees);
 		}
        
