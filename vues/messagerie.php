@@ -26,9 +26,9 @@
     <section class="tab-messagerie tab-content col-lg-9" id="v-pills-tabContent">
       <div class="composerMessage tab-pane fade " id="v-pills-compMessage" role="tabpanel" aria-labelledby="v-pills-compMessage-tab">
         <form enctype="multipart/form-data" id="formMessagerie" method="post">
-         <div class="input-group input-group-sm mb-3 col-6">
+         <div class="input-group input-group-sm mb-3 col-9">
            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="liste_contacts" id="liste_contacts">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContacts" data-whatever="@mdo">Ajouter destinataire</button>
+            <button type="button" class="btn btn-orange btn-sm" data-toggle="modal" data-target="#modalContacts" data-whatever="@mdo">Ajouter destinataire</button>
           </div><!--input-group -->
           
           <!-- Modal pour chercher un contcat-->
@@ -55,8 +55,8 @@
                     </div>
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="">Close</button>
-                  <button type="button" class="btn btn-primary"  onclick="afficherSelection();">Selection de contacts</button>
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="">Close</button>
+                  <button type="button" class="btn btn-orange btn-sm"  onclick="afficherSelection();">Selection de contacts</button>
                 </div><!-- modal-footer -->
               </div><!-- modal-content -->
             </div><!-- modal-dialog -->
@@ -71,14 +71,6 @@
           <div class="input-group group-sm mb-3 col-6">
               <label for="file_name"><p class="text-primary">Taille max 1 Mo :</p></label>
                 <input name="fichierJoint" type="file" id="file_name">
-              
-           <!--<div class="input-group-prepend">
-             <span class="input-group-text small">Fichier joint</span>
-           </div>
-           <div class="custom-file">
-             <input type="file" class="custom-file-input" id="fichierJoint" name="fichierJoint">
-             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-           </div>-->
           </div>
           <div class="input-group group-sm mb-3 ">
             <div class="input-group-prepend">
@@ -86,16 +78,16 @@
             </div>
             <textarea class="form-control" aria-label="With textarea" rows="6" name="textMessage" id="textMessage"></textarea>
           </div>
-            <input type="submit" class="btn-bleu btn-sm" value="Envoyer">
-            <input type="submit" class="btn-orange btn-sm" value="Anuler">
+            <input type="submit" class="btn btn-bleu btn-sm" value="Envoyer">
+            <input type="reset" class="btn btn-secondary btn-sm" value="Anuler">
             <!--<input type="button" class="btn-bleu btn-sm" onclick="envoyerMessage()" value="Envoyer"> -->
         </form>
       </div><!-- composerMessage id="EnvoyerForm" id input envoyer-->
       
       <div class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
-        <form  class="formSuppMsg"  method="POST">
-        <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>
+        <form  class="formSuppMsg1"  method="POST">
         <table class="table table-sm responsive-sm table-hover display">
+           <button type="submit" class="btn btn-secondary btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i>Effacer Messages</button>
           <thead>
             <tr>
               <th><input type="checkbox" class='tous'/></th>
@@ -106,15 +98,16 @@
               <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
             </tr>
           </thead>
-          <tbody id="boiteReception">
-          </tbody>
+          <tbody id="boiteReception" class="bodyScroll"></tbody>
         </table>
+           <input type="text" name="actif" value="false" hidden/>
        </form>    
       </div><!-- tab-pane boitRecp-->
+      
       <div class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
-        <form class="formSuppMsg" method="POST">
-        <table class="table table-sm responsive-sm table-hover display">
-          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>
+        <form class="formSuppMsg2" method="POST">
+        <table class="table table-sm responsive-sm table-hover  display">
+          <button type="submit" class="btn btn-secondary btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i>Effacer Messages</button>
           <thead>
             <tr>
               <th><input type="checkbox" class='tous' /></th>
@@ -124,7 +117,7 @@
               <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
             </tr>
           </thead>
-          <tbody id="msgEnvoyes"></tbody>
+            <tbody id="msgEnvoyes"></tbody>
         </table>
           <input type="text" name="actif" value="false" hidden/>
        </form>
@@ -139,7 +132,18 @@
   $(document).ready(function() {
       afficherBoiteReception();
       afficherMsgEnvoyes();
+      
+      $('.tous').change(function () {
+         $("input:checkbox").prop('checked', $(this).prop("checked"));
+      });
   });
+  
+  function cacherBoitesLecture() {
+    $('.boiteLecture').addClass('hidden');
+    listeContacts();
+    $("input:checkbox").prop('checked', false);
+    
+  }
   
   class Message{
     constructor(id_messsage, expediteur, destinataire, msg_date, sujet, fichierJoint, textMessage){
@@ -167,7 +171,6 @@
         type: 'POST',
         dataType: 'json',
         success: function(json) {
-          console.log(json);
           $("#boiteReception").html("");
           $.each(json, function(i, item) {
             var enveloppe = item.lu == '0' ? "" : '-open';
@@ -210,7 +213,7 @@
           $("#msgEnvoyes").html("");
           var summaireMessage = {};
           $.each(json, function(i, item) {
-			  console.log("Envoye",json);
+			  //console.log("Envoye",json);
             var destinateurs = item.destinataire.length > 30 ? item.destinataire.substr(0,28) + "...": item.destinataire;
             var joint = item.fichier_joint == null ? "" : item.fichier_joint;
            $("#msgEnvoyes").append(
@@ -244,7 +247,6 @@
   function lireMessage(idMessage,reception){
     message_selectione = idMessage;
     var message = JSON.parse(mes_messages[idMessage]);
-    console.log(message);
     $('.boiteLecture').removeClass('hidden');
     $('.sujet').val(message.sujet);
     $('.dateCourriel').val(message.msg_date);
@@ -261,9 +263,12 @@
     $('#env_' + message.id_messsage).addClass('fa-envelope-open');
     if(reception) {
       $('.expediteur').val(message.expediteur);
+      $('.destinataireLabel').addClass('hidden');
       $('.repondre').removeClass('hidden');
     } else {
-      $('.expediteur').val(message.destinataire);
+      $('.destinataire').val(message.destinataire);
+      $('.expediteurLabel').addClass('hidden');
+      $('.destinataireLabel').removeClass('hidden');
       $('.repondre').addClass('hidden');
     }
      $.ajax({
@@ -273,34 +278,23 @@
                 message_lu: true}    
       });
   }
-  
-  function cacherBoitesLecture() {
-    $('.boiteLecture').addClass('hidden');
-    listeContacts();
-    $("input:checkbox").prop('checked', false);
-  }
-  
+
   function listeContacts(){
-    var contacts = {};
-    for(var index in mes_messages) {
-      var expediteurs = JSON.parse(mes_messages[index]).expediteur;
-      var listeExpediteurs = expediteurs.split(",");
-      for(var i in listeExpediteurs){
-        var expediteur =  listeExpediteurs[i];
-        contacts[expediteur] = expediteur;
-      }
-    }
-    $("#contacts").find('option').remove().end();
-    $("#contacts").append("<option selected value='0'>Selectionner Destinataire</option>");
-    $("#contacts").append("<option value='Chucknorris@gmail'>Admin</option>");
-    $("#selectable").find('li').remove().end();
-    var index = 0;
-    for(var contact in contacts){
-      $("#contacts").append(
-         "<option value='" + contact + "'>" + contact + "</option>"   
-      );
-      $("#selectable").append("<li class='ui-widget-content' id='cont_" + index++ + "'>" + contact + "</li>");
-    } 
+     $.ajax({
+        url: 'index.php?Messagerie&action=listeContacts', 
+        type: 'POST',
+        dataType: 'json',
+        success: function(json) {
+           $("#contacts").find('option').remove().end();
+           $("#selectable").find('li').remove().end();
+            $("#contacts").append("<option value='Chucknorris@gmail'>Admin</option>");
+            $("#selectable").append("<li class='ui-widget-content' id='cont_0'>Chucknorris@gmail</li>");
+          $.each(json, function(i, item) {
+             $("#contacts").append("<option value='" + item + "'>" + item  + "</option>");
+             $("#selectable").append("<li class='ui-widget-content' id='cont_" + ++i + "'>" + item + "</li>");
+          }); 
+        }
+      });    
   }
   
   $( function() {
@@ -322,11 +316,16 @@
   } );
  
 
-$('document').ready(function(){
-   $('.tous').change(function () {
+/*$('document').ready(function(){
+   $('#tous1').change(function () {
       $("input:checkbox").prop('checked', $(this).prop("checked"));
   });
-});
+   $('#tous2').change(function () {
+      $("input:checkbox").prop('checked', $(this).prop("checked"));
+  });
+});*/
+
+
 /*
 function supprimerMessage() {
 $(".formSuppMsg").submit(function(e) {
@@ -364,23 +363,41 @@ function supprimerMessage() {
   //return false;
 }*/
 
-//function pour supprimir un message
+//function pour supprimir un message recu
   $(function(){
-    $(".formSuppMsg").on("submit", function(e){
-      var dataString = $(".formSuppMsg").serialize();
-         alert('asf');
+    $(".formSuppMsg1").on("submit", function(e){
+      var dataString = $(".formSuppMsg1").serialize();
+         alert('Désirez-vous supprimer les messages sélectionnés?');
       $.ajax({
           type:'POST',
           url:'index.php?Messagerie&action=supprimerMessage',
           data: dataString,
           dataType: 'json',
-          success: function(json) {
+        /*  success: function(json) {
            alert('asf');
-          }
+          }*/
       });
-      e.preventDefault();
-    });
+        e.preventDefault();
+    });    
   });
+  
+  $(function(){
+    $(".formSuppMsg2").on("submit", function(e){
+      var dataString = $(".formSuppMsg2").serialize();
+         alert('Désirez-vous supprimer les messages sélectionnés?');
+      $.ajax({
+          type:'POST',
+          url:'index.php?Messagerie&action=supprimerMessage',
+          data: dataString,
+          dataType: 'json',
+         /* success: function(json) {
+           alert('asf');
+          }*/
+     });
+      e.preventDefault();
+    });    
+  });
+  
 
 //function pour envoyer un message
   $(function(){
@@ -422,21 +439,7 @@ function supprimerMessage() {
     
     document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
   }
-  
- /* $("#formMessagerie").on("change", function(){
-     var resultat = validaterFormMsg();
-     if(resultat){
-       console.log(resultat);
-       $("#EnvoyerForm").prop("disabled", false);
-     }
-     else{
-       $("#EnvoyerForm").prop("disabled", true);
-     }
-  });
-  
-  $("#fichierJoint").on("blur",function(){
-      validerExtension();
-  });*/
+
   </script>
 
   <style>

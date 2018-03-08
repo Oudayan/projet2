@@ -45,7 +45,7 @@
         " JOIN al_messagerie  
         ON " . $this->lireNomTable() . ".id_message = al_messagerie.id_message 
         WHERE destinataire = '" . $destinataire . "'
-        AND d_actif = 1 
+        AND m_actif = 1 
         ORDER BY al_messagerie.msg_date DESC";
         
         $resultat = $this->requete($sql);
@@ -101,6 +101,17 @@
 			$unMessage = $resultat->fetch();
 			return $unMessage;
 		}
+        
+        public function listeContacts($destinataire)
+        {
+          $sql = "SELECT DISTINCT expediteur FROM " . $this->lireNomTableMessagerie() . " as m
+                  JOIN " . $this->lireNomTable() . " as d ON d.id_message = m.id_message 
+                  WHERE destinataire = '" . $destinataire . "'";
+          
+          $resultat = $this->requete($sql);
+          $resultat->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "MessagesDestinataires"); 
+          return $resultat->fetchAll();
+        }
 		        
         /**
 		* @brief Sauvegarde un message
@@ -125,8 +136,8 @@
                 $unMessage->lireMessage(),
                 $unMessage->lireM_actif(),
                 $unMessage->lireExpediteur());
-            
             $this->requete($query, $donnees);
+            
             $query = "SELECT * FROM " . $this->lireNomTableMessagerie() .  " ORDER BY id_message DESC LIMIT 1";
                 $donnees = $this->requete($query);
                 $donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'Message'); 
@@ -153,6 +164,17 @@
                . " AND destinataire = '" . $destinataire . "'";
             $this->requete($query);
           
+        }
+        
+        public function desactiverMessage($messagesSupprimes){
+          var_dump($messagesSupprimes);
+          $query  = "UPDATE " . $this->lireNomTableMessagerie() . " SET m_actif =?"
+               . "WHERE id_message =?";
+          $donnees = array(
+              $messagesSupprimes->lireM_actif(),
+              $messagesSupprimes->lireId_message());
+            $this->requete($query, $donnees);
+            var_dump($query);
         }
 	}	
     
