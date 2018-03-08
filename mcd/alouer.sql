@@ -90,6 +90,7 @@ CREATE TABLE al_location (
     date_location       Datetime NOT NULL, 
     cout                Decimal (15,2) NOT NULL, 
     valide              TinyINT NOT NULL, 
+    jeton               Varchar (25),  
     evaluation          Decimal (4,2), 
     commentaire         Text, 
     date_evaluation     Datetime, 
