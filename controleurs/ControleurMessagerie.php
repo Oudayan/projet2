@@ -33,7 +33,7 @@
                             echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
                         }
                         break;
-                    // aller chercher les messages recues 
+                    
                     case "messagesRecus":
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
@@ -79,20 +79,36 @@
 							echo json_encode($donnees);
 			                                                 //contient la liste des messages recus
 							break; 
+                    case "listeContacts":
+                      $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
+                      $recus = $modeleMessagesDestinataires->listeContacts($_SESSION["courriel"]);
+                      $donnees = array();
+                      for ($i=0; $i< count($recus); $i++){
+                        $donnees[$i]=array($recus[$i]->lireExpediteur());  
+                      }
+                      echo json_encode($donnees);
+                      break;
                             
-                    case "supprimirMessage": 
-                      echo var_dump($_POST);
-                      $_POST["listeSupp"];//paramètre qu'envoie cotè client.  
-                      $_POST["actif"];
-                      //tenir en compte que cela peut être plusieurs
-                                   
-                      //faire le code puur mettre inactif le message
-                      //il ne faut pas retourner rien
+                    case "supprimerMessage": 
+                      if(isset($_SESSION["courriel"]) && isset($_POST["listeSupp"]) && isset($_POST["actif"])){ 
+                           $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                           $msgSupp = $_POST["listeSupp"];
+                        	for ($i=0;$i<count($msgSupp);$i++){
+								$messagesSupprimes = new Message(
+								$msgSupp[$i],
+								$_SESSION["courriel"], 
+								$_POST["actif"]);
+								$modeleMessagerie->desactiverMessage($messagesSupprimes);                               
+							}  
+                      }
                       break;
                     
                     case "messageLu":
-                         $_POST["id_message"];
-                         $_POST["message_lu"];//true
+                         if(isset($_SESSION["courriel"]) && isset($_POST["id_message"]) && isset($_POST["message_lu"])){ 
+                             $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                             $modeleMessagerie->CourrielLu($_SESSION["courriel"], $_POST["id_message"], $_POST["message_lu"]);
+                         }
+                      
                          //il faut faire update sur la table al_destinataire column lu
                          //il ne faut pas retourne rien 
                       break;  
