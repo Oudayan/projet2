@@ -228,6 +228,13 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     text-shadow: 1px 1px 3px #666;
 }
 
+#carteLogement {
+    min-height: 33vh;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;
+    box-shadow: 1px 1px 2px #999;    
+}
+
 /* Styles pour les boutons */
 .btn-bleu {
     color: #f5f5f5;

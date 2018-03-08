@@ -9,7 +9,6 @@
  */
 
 	class ModeleLogement extends BaseDAO {
-
 		public function lireNomTable() {
 			return "al_logements";
 		}
@@ -68,7 +67,7 @@
             //return LAST_INSERT_ID();
             $query = "SELECT * FROM " . $this->lireNomTable() .  " ORDER BY id_logement DESC LIMIT 1";
             $donnees = $this->requete($query);
-            $donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,'Logement' ); 
+            $donnees->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Logement'); 
             $id = $donnees->fetch();
             $mon_id = $id->lireIdLogement();
         return $mon_id;

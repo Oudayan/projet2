@@ -12,6 +12,9 @@
 ?>
 <script src="js/validerFormUsager.js"></script>
 	<main>
+        <div class="d-flex justify-content-around mt-3">
+            <h1>Inscription d'un usager</h1>
+        </div>
         <?php
        //  var_dump($donnees);  
          if (!empty($_POST))
@@ -47,7 +50,7 @@
         <!-- <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="contenu">    -->
 		<div class="container">
 			<form name="ajoutUsager" onsubmit="return validateForm()" action="index.php?Usagers&action=enregistrerUsager" method="POST" id="contenu">    
-                <h3>Merci de remplir votres infos</h3>
+                <h3>Merci de remplir vos infos</h3>
 				<p>Votre courriel sera l'identifiant de votre compte</p><br/>
 				<div class="form-group row">
 					<div class="col-lg-4">				
@@ -86,7 +89,7 @@
 				</div><hr>
 				<div class="form-group row">
 					<div class="col-lg-4">	
-					<Label>Contact</label>
+					<label>Contact</label>
                     <select class="form-control" name='id_contact'>
 							<?php
                             foreach($donnees["listeContacts"] as $contact)
@@ -101,7 +104,7 @@
                     </select>
 					</div>
 					<div class="col-lg-4">	
-                   <Label>Type de paiement</Label>
+                    <label>Type de paiement</label>
                     <select class="form-control" name='id_paiement'>
 							<?php
                             foreach($donnees["listePaiements"] as $paiement)
@@ -116,8 +119,11 @@
 					</div>
 					</div><hr>
 		<!-- input type="hidden" name="action" value="ValiderUser" / -->
-		<button onclick ="window.location.href='index.php'" class="btn btn-orange">Accueil</button>
-		<input type="submit" value="Envoyer"/>
+        <nav class="d-flex justify-content-around mt-3">
+            <button onclick ="window.location.href='index.php'" class="btn btn-secondary">Accueil</button>
+            <a href="index.php?Recherche&action=recherche"><button type="button" class="btn btn btn-bleu">Page recherche</button></a>
+            <input type="submit" value="Envoyer" class="btn btn-orange"/>
+        </nav>
 		
 	</form>
 	
