@@ -13,6 +13,7 @@
     font-family: 'Pragati Narrow', sans-serif;
     font-family: 'Roboto', sans-serif;
 */
+
 body {
     /*font-family: 'Pragati Narrow', sans-serif;
     font-family: 'Roboto', sans-serif;
@@ -25,7 +26,12 @@ header {
     width: 100%;*/
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Pragati Narrow', sans-serif;
 }
 
@@ -35,11 +41,11 @@ main h1 {
 }
 
 h6 {
-  color: #1d91bc;
+    color: #1d91bc;
 }
 
 a:hover {
-  text-decoration: none;  
+    text-decoration: none;
 }
 
 img {
@@ -53,8 +59,9 @@ main {
 }
 
 /* Page d'accueil */
+
 .background {
-    background: url(../images/MONTREAL.jpg) no-repeat fixed; 
+    background: url(../images/MONTREAL.jpg) no-repeat fixed;
     background-size: contain;
     height: 70vh;
     margin-top: -13vh;
@@ -71,7 +78,7 @@ main {
     width: 125px;
     -webkit-box-shadow: 1px 1px 3px #666;
     -moz-box-shadow: 1px 1px 3px #666;
-    box-shadow: 1px 1px 3px #666;    
+    box-shadow: 1px 1px 3px #666;
 }
 
 @media (min-width: 1400px) {
@@ -84,7 +91,7 @@ main {
     main.background {
         height: 60vh;
     }
-    
+
     .depart {
         bottom: -37vh;
     }
@@ -94,7 +101,7 @@ main {
     main.background {
         height: 50vh;
     }
-    
+
     .depart {
         bottom: -30vh;
     }
@@ -102,7 +109,7 @@ main {
 
 @media (max-width: 991px) {
     main.background {
-        background-position: 0 18.5vh;
+        background-position: 0 10vh;
     }
 
     .depart {
@@ -116,13 +123,13 @@ main {
     }
 }
 
-@media (max-width: 800px) {    
+@media (max-width: 800px) {
     .depart {
         bottom: -45vh;
     }
 }
 
-@media (max-width: 700px) {    
+@media (max-width: 700px) {
     .depart {
         bottom: -40vh;
     }
@@ -135,10 +142,11 @@ main {
 }
 
 /* Page recherche */
+
 .recherche {
     -webkit-box-shadow: 1px 1px 1px #999;
     -moz-box-shadow: 1px 1px 1px #999;
-    box-shadow: 1px 1px 1px #999;    
+    box-shadow: 1px 1px 1px #999;
 }
 
 .date-form {
@@ -151,7 +159,8 @@ main {
     right: 0;
 }
 
-#formulaire_recherche a.btn.btn-orange, #formulaire_recherche a:hover.btn.btn-orange {
+#formulaire_recherche a.btn.btn-orange,
+#formulaire_recherche a:hover.btn.btn-orange {
     display: inline-flex;
     color: #f5f5f5;
     height: 3.5vh;
@@ -183,7 +192,7 @@ a:hover.nav-item {
     min-height: 86vh;
     -webkit-box-shadow: 1px 1px 2px #999;
     -moz-box-shadow: 1px 1px 2px #999;
-    box-shadow: 1px 1px 2px #999;    
+    box-shadow: 1px 1px 2px #999;
 }
 
 .legende img {
@@ -213,12 +222,13 @@ h4.titre-fiche {
     overflow: scroll;
     -webkit-box-shadow: 1px 1px 2px #999;
     -moz-box-shadow: 1px 1px 2px #999;
-    box-shadow: 1px 1px 2px #999;    
+    box-shadow: 1px 1px 2px #999;
 }
 
 /* Évaluations 
 Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rating-define-by-width
 */
+
 .score {
     display: inline-block;
     font-family: Wingdings;
@@ -227,7 +237,8 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     position: relative;
 }
 
-.score::before, .score span::before {
+.score::before,
+.score span::before {
     content: "\2605\2605\2605\2605\2605";
     display: block;
 }
@@ -251,10 +262,11 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     min-height: 33vh;
     -webkit-box-shadow: 1px 1px 2px #999;
     -moz-box-shadow: 1px 1px 2px #999;
-    box-shadow: 1px 1px 2px #999;    
+    box-shadow: 1px 1px 2px #999;
 }
 
 /* Styles pour les boutons */
+
 .btn-bleu {
     color: #f5f5f5;
     background-color: rgb(29, 145, 188);
@@ -267,18 +279,21 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     border-color: rgb(15, 110, 145) !important;
 }
 
-.btn-bleu:focus, .btn-bleu.focus {
+.btn-bleu:focus,
+.btn-bleu.focus {
     -webkit-box-shadow: 0 0 0 3px rgba(23, 133, 173, 0.5) !important;
     -moz-box-shadow: ;
     box-shadow: 0 0 0 3px rgba(23, 133, 173, 0.5) !important;
 }
 
-.btn-bleu.disabled, .btn-bleu:disabled {
+.btn-bleu.disabled,
+.btn-bleu:disabled {
     background-color: #78aeee;
     border-color: #78aeee;
 }
 
-.btn-bleu:active, .btn-bleu.active,
+.btn-bleu:active,
+.btn-bleu.active,
 .show > .btn-bleu.dropdown-toggle {
     color: #f5f5f5;
     background-color: rgb(23, 133, 173) !important;
@@ -298,18 +313,21 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
     border-color: rgb(205, 120, 45) !important;
 }
 
-.btn-orange:focus, .btn-orange.focus {
+.btn-orange:focus,
+.btn-orange.focus {
     -webkit-box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
     -moz-box-shadow: ;
     box-shadow: 0 0 0 3px rgba(205, 120, 45, 0.5) !important;
 }
 
-.btn-orange.disabled, .btn-orange:disabled {
+.btn-orange.disabled,
+.btn-orange:disabled {
     background-color: #deb995;
     border-color: #deb995;
 }
 
-.btn-orange:active, .btn-orange.active,
+.btn-orange:active,
+.btn-orange.active,
 .show > .btn-orange.dropdown-toggle {
     color: #f5f5f5;
     background-color: #e98d34 !important;
@@ -318,6 +336,7 @@ Source : https://stackoverflow.com/questions/30765441/use-font-awesome-star-rati
 }
 
 /** Carousel **/
+
 .carousel-indicators {
     margin-bottom: -25px;
     background: rgba(0, 0, 0, 0.67);
@@ -330,32 +349,36 @@ carousel-caption h5 {
     color: #999;
 }
 
-header a.nav-item.nav-link, a.nav-item {
+header a.nav-item.nav-link,
+a.nav-item {
     color: #e98d34;
 }
 
 /* Zoraida */
+
 .bg-login {
     color: #e98d34;
 }
-    
+
 .bg-login:hover {
-      color: #f6c784;
+    color: #f6c784;
 }
 
-.iconMessage, .iconNav {
+.iconMessage,
+.iconNav {
     color: #e98d34;
 }
-    
-.modal-header, h4 {
+
+.modal-header,
+h4 {
     background-color: rgba(23, 117, 152, 0);
     background: linear-gradient(to right, rgb(29, 145, 188), rgb(22, 90, 115));
     color: #fefefe !important;
     text-align: center;
     font-size: 20px;
 }
-    
-.modal-header {    
+
+.modal-header {
     height: 60px;
 }
 
@@ -365,12 +388,12 @@ header a.nav-item.nav-link, a.nav-item {
     color: #fefefe !important;
     background-color: rgba(23, 117, 152, 0);
 }
-    
-#btnModal {    
+
+#btnModal {
     height: 30px;
     color: #f5f5f5;
     background-color: #1d91bc;
-    border-color: #1d91bc; 
+    border-color: #1d91bc;
     border: none;
     border-radius: 4px;
 }
@@ -383,7 +406,7 @@ header a.nav-item.nav-link, a.nav-item {
     color: black;
 }
 
-#dialog { 
+#dialog {
     width: 300px;
     height: 100px;
 }
@@ -394,14 +417,14 @@ header a.nav-item.nav-link, a.nav-item {
 
 label {
     color: black;
-}    
+}
 
 #services {
     margin-top: 20px;
     background: #333;
     padding-top: 20px;
     padding-bottom: 20px;
-    }
+}
 
 .footerText {
     color: #9d9d96;
@@ -413,6 +436,7 @@ label {
 }
 
 /* style social icon*/
+
 .fa {
     padding: 10px;
     font-size: 40px;
@@ -423,12 +447,15 @@ label {
 }
 
 /* Add a hover effect if you want */
+
 .fa:hover {
     opacity: 0.7;
 }
 
 /* Mettez une couleur spécifique pour chaque icon */
+
 /* Facebook */
+
 .fa-facebook {
     background: #3B5998;
     color: white;
@@ -441,176 +468,291 @@ label {
 
 .fa-twitter {
     background: white;
-    color: #1b95e0;;
-}
-.fa-envelope{
-  color: #e98d34;
+    color: #1b95e0;
+    ;
 }
 
-.fa-envelope-open{
-  color: #6c757d;
+.fa-envelope {
+    color: #e98d34;
 }
+
+.fa-envelope-open {
+    color: #6c757d;
+}
+
 #info {
-    background-color: #f6f7eA;   
+    background-color: #f6f7eA;
     padding: 15px;
 }
 
 .circle {
     width: 250px;
-    height: 250px;   
-    background: #fefefe; 
-    -moz-border-radius: 50%; 
-    -webkit-border-radius: 50%; 
+    height: 250px;
+    background: #fefefe;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
     border-radius: 50%;
     margin: 20px;
     padding: 10px 15px 40px 15px;
     font-family: 'Pragati Narrow', sans-serif;
 }
+
 /* ------------
   Messagerie 
 -------------*/
-.nav-pills, .tab-messagerie {
+
+.nav-pills,
+.tab-messagerie {
     margin-top: 25px;
     margin-bottom: 25px;
-  }
-  
+}
+
 nav.v-pills-tab {
     /*background: rgb(29, 145, 188);*/
     background: linear-gradient(to right, rgba(11, 42, 52, 0.99), rgb(75, 76, 76));
     border-radius: 5px;
     font-size: 1rem;
-  }
-  
- a.nav-link {
+}
+
+a.nav-link {
     color: #F0EFE7;
-  }
-  
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
     color: #f5f5f5;
     background-color: rgb(205, 120, 45) !important;
     border-color: rgb(205, 120, 45) !important;
-  }
-  
-#v-pills-boitRecp, #v-pills-mEnvoyes {
-   height: 50vh;
-   overflow-y: auto;
-  }
+}
+
+#v-pills-boitRecp,
+#v-pills-mEnvoyes {
+    height: 50vh;
+    overflow-y: auto;
+}
 
 .btnsMessagerie {
-     background-color: rgba(58, 90, 101, 0);
-  } 
-  
+    background-color: rgba(58, 90, 101, 0);
+}
+
 .input-group-text {
     color: rgb(93, 94, 95) !important;
     background: #f6f7ea !important;
-  }  
-  
-#btnEnvoyer{
-  float:right;
-  }
-  
-#suppMsg{
-  float:right;
-  } 
-  
-.boiteLecture{
+}
+
+#btnEnvoyer {
+    float: right;
+}
+
+#suppMsg {
+    float: right;
+}
+
+.boiteLecture {
     background: rgb(250, 251, 246);
     padding: 20px 20px 140px 20px;
     border-style: solid;
     border-width: 1px;
     border-color: #dee2e6;
-  }
-  
+}
+
 .heigthFormBLecture {
     height: 15px;
-  }
-  
-  .display, .composerMessage{
+}
+
+.display,
+.composerMessage {
     border-style: solid;
-    border-width: 1px;  
+    border-width: 1px;
     border-color: #dee2e6;
     border-radius: 4px;
-  }
-    .composerMessage{
-     padding: 20px; 
-     margin: 0;
-  }
-  
-  #menuMessagerie{
+}
+
+.composerMessage {
+    padding: 20px;
+    margin: 0;
+}
+
+#menuMessagerie {
     padding: 0px;
-  }
-  
-  .textMessage {
+}
+
+.textMessage {
     border-style: solid;
     border-color: rgb(246, 247, 234);
     border-radius: 4px;
-  }
-  
-  .display th{
-    text-align: center !important;
-  }
+}
 
-   /* ------------
+.display th {
+    text-align: center !important;
+}
+
+/* ------------
   Modal Liste de contacts 
 -------------*/
-  #feedback { 
+
+#feedback {
     font-size: 0.9em;
-  }
-  
-  #selectable .ui-selecting { 
+}
+
+#selectable .ui-selecting {
     color: #f5f5f5;
     background-color: rgb(205, 120, 45) !important;
     border-color: rgb(205, 120, 45) !important;
-  }
-  
-  #selectable .ui-selected { 
+}
+
+#selectable .ui-selected {
     background: #e98d34;
-    color: #f5f5f5; 
-  }
-  
-  #selectable {
+    color: #f5f5f5;
+}
+
+#selectable {
     list-style-type: none;
-    margin: 0; 
+    margin: 0;
     padding: 0;
     width: 60%;
-  }
-  
-  #selectable li { 
-    margin-left: 5px; 
-    padding: 0em; 
+}
+
+#selectable li {
+    margin-left: 5px;
+    padding: 0em;
     font-size: 0.8em;
-  }
-  
-  .afficherContacts{
+}
+
+.afficherContacts {
     border-style: solid;
     border-radius: 4px;
     border-color: #dee2e6;
-  }
-  /*  images   */  
+}
+
+/* Funky radio buttons - Source : https://bootsnipp.com/snippets/featured/funky-radio-buttons */
+
+.funkyradio div {
+    clear: both;
+    overflow: hidden;
+}
+
+.funkyradio label {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #D1D3D4;
+    font-weight: normal;
+}
+
+.funkyradio input[type="radio"]:empty,
+.funkyradio input[type="checkbox"]:empty {
+    display: none;
+}
+
+.funkyradio input[type="radio"]:empty ~ label,
+.funkyradio input[type="checkbox"]:empty ~ label {
+    position: relative;
+    line-height: 2.5em;
+    text-indent: 3.25em;
+    margin-top: 2em;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.funkyradio input[type="radio"]:empty ~ label:before,
+.funkyradio input[type="checkbox"]:empty ~ label:before {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 2.5em;
+    background: #D1D3D4;
+    border-radius: 3px 0 0 3px;
+}
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+    color: #888;
+}
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+    content: '\2714';
+    text-indent: .9em;
+    color: #C2C2C2;
+}
+
+.funkyradio input[type="radio"]:checked ~ label,
+.funkyradio input[type="checkbox"]:checked ~ label {
+    color: #777;
+}
+
+.funkyradio input[type="radio"]:checked ~ label:before,
+.funkyradio input[type="checkbox"]:checked ~ label:before {
+    content: '\2714';
+    text-indent: .9em;
+    color: #333;
+    background-color: #ccc;
+}
+
+.funkyradio input[type="radio"]:focus ~ label:before,
+.funkyradio input[type="checkbox"]:focus ~ label:before {
+    box-shadow: 0 0 0 3px #999;
+}
+
+.funkyradio-orange input[type="radio"]:checked ~ label:before,
+.funkyradio-orange input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #e98d34;
+}
+
+.funkyradio-bleu input[type="radio"]:checked ~ label:before,
+.funkyradio-bleu input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: rgb(29, 145, 188);
+}
+
+/* Fin de Funky radio buttons */
+
+/*  images   */
+
 .image {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.image:hover {opacity: 0.7;}
+.image:hover {
+    opacity: 0.7;
+}
 
 /* The Modal (background) */
+
 #myModalimg {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
 }
 
 /* Modal Content (image) */
+
 .modal-contentImg {
     margin: auto;
     display: block;
@@ -619,6 +761,7 @@ nav.v-pills-tab {
 }
 
 /* Caption of Modal Image */
+
 #caption {
     margin: auto;
     display: block;
@@ -631,7 +774,9 @@ nav.v-pills-tab {
 }
 
 /* Add Animation */
-.modal-contentImg, #caption {    
+
+.modal-contentImg,
+#caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
@@ -639,16 +784,25 @@ nav.v-pills-tab {
 }
 
 @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
 }
 
 @keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
 }
 
 /* The Close Button */
+
 .close {
     position: absolute;
     top: 15px;
@@ -667,8 +821,9 @@ nav.v-pills-tab {
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
+
+@media only screen and (max-width: 700px) {
     .modal-contentImg {
         width: 100%;
     }
-}  
+}
