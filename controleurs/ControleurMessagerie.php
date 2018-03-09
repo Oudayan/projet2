@@ -115,17 +115,7 @@
                     
                     case "messageAutomatique":                     
                       if(isset($params["message"]) && isset($params["sujet"]) && isset($params["locataire"]) && isset($params["proprietaire"])){
-                        
                         $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
-                        $lu = false;
-                        $m_actif = true;
-                        $newDestinataire = new Destinataire(
-								$params["locataire"],
-								$idMessage, 
-								$lu,
-								$m_actif );
-								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
-							
                         $newMessage = new Message( // Selon le modele Message
                               "", // id_message
                               "", // id_reference
@@ -136,7 +126,15 @@
                               true, 
                               $params["proprietaire"]
 							);
-                        $modeleMessagerie->sauvegarderMessage($newMessage); 
+                        $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage); 
+                        $lu = false;
+                        $m_actif = true;
+                        $newDestinataire = new Destinataire(
+								$params["locataire"],
+								$idMessage, 
+								$lu,
+								$m_actif );
+                        $modeleMessagerie->sauvegarderDestinataire($newDestinataire);
                       }
                       break;
                     
