@@ -151,8 +151,8 @@
                 </div>
             </section>
             <nav class="d-flex justify-content-between my-3">
-                <a href="index.php?Recherche&action=recherche"><button type="button" class="btn btn btn-bleu">Page recherche</button></a>
-                <button type="button" class="btn btn btn-orange" data-toggle="modal" data-target="#modalLocation" onclick="chercherPrix()">Louez ce logement&nbsp;!</button>
+                <a href="index.php?Recherche&action=recherche"><button type="button" class="btn btn-lg  btn-bleu">Page recherche</button></a>
+                <button type="button" class="btn btn-lg  btn-orange" data-toggle="modal" data-target="#modalLocation" onclick="chercherPrix()">Louez ce logement&nbsp;!</button>
             </nav>
             <div class="modal fade" id="modalLocation" tabindex="-1" role="dialog" aria-labelledby="modalLocationLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
