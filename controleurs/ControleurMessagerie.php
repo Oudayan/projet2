@@ -1,12 +1,12 @@
 <?php
 /**
-* @file ControleurMessagerie.php
-* @autheurs Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
-* @version 1.0
-* @date 26 février 2018
-* @brief Définit la classe pour le controleur de la messagerie
-*
-* @details Cette classe définit les différentes activités concernant la messagerie.
+  * @file     ControleurMessagerie.php
+  * @autheurs Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+  * @version 1.0
+  * @date 26 février 2018
+  * @brief Définit la classe pour le controleur de la messagerie
+  *
+  * @details Cette classe définit les différentes activités concernant la messagerie.
 * 
 */
 	class ControleurMessagerie extends BaseControleur
