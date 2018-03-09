@@ -59,39 +59,39 @@
                             // Boucler à travers les disponibilités pour vérifier s'il y a conflit de plages de disponibilités
                             $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($params["idLogement"]);
                             foreach ($dispos as $dispo) {
-                                // Conflit date de début
-                                if (strtotime($dates[0]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[0]) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
-                                    $unique = false;
-                                    echo "<tr><th class='text-danger'>La date de début est en conflit avec une disponibilité existante.</th></tr>";
-                                }
-                                // Conflit date de fin
-                                if (strtotime($dates[1]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[1]) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
-                                    $unique = false;
-                                    echo "<tr><th class='text-danger'>La date de fin est en conflit avec une disponibilité existante.</th></tr>";
-                                }
                                 // Conflits dates début et fin
                                 if (strtotime($dates[0]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[0]) <= strtotime($dispo->lireDateFin()) && strtotime($dates[1]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[1]) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
                                     $unique = false;
-                                    echo "<tr><th class='text-danger'>La date de début et la date de fin sont en conflits avec une disponibilité existante.</th></tr>";
+                                    echo "<tr class='erreur'><td colspan='5' class='text-danger'>La date de début et la date de fin sont en conflits avec une disponibilité existante.</td></tr>";
+                                }
+                                // Conflit date de début
+                                else if (strtotime($dates[0]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[0]) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
+                                    $unique = false;
+                                    echo "<tr class='erreur'><td colspan='5' class='text-danger'>La date de début est en conflit avec une disponibilité existante.</td></tr>";
+                                }
+                                // Conflit date de fin
+                                else if (strtotime($dates[1]) >= strtotime($dispo->lireDateDebut()) && strtotime($dates[1]) <= strtotime($dispo->lireDateFin()) && $dispo->lireDActive() == 1) {
+                                    $unique = false;
+                                    echo "<tr class='erreur'><td colspan='5' class='text-danger'>La date de fin est en conflit avec une disponibilité existante.</td></tr>";
                                 }
                             }
                             // Boucler à travers les locations du logement pour vérifier s'il y a conflit de plages de disponibilités
                             $locations = $modeleLocation->lireLocationsActivesParLogement($params["idLogement"]);
                             foreach ($locations as $location) {
-                                // Conflit date de début
-                                if (strtotime($dates[0]) >= strtotime($location->lireDateDebut()) && strtotime($dates[0]) <= strtotime($location->lireDateFin())) {
-                                    $unique = false;
-                                    echo "<tr><th class='text-danger'>La date de début est en conflit avec une location existante.</th></tr>";
-                                }
-                                // Conflit date de fin
-                                if (strtotime($dates[1]) >= strtotime($location->lireDateDebut()) && strtotime($dates[1]) <= strtotime($location->lireDateFin())) {
-                                    $unique = false;
-                                    echo "<tr><th class='text-danger'>La date de fin est en conflit avec une location existante.</th></tr>";
-                                }
                                 // Conflits dates début et fin
                                 if (strtotime($dates[0]) >= strtotime($location->lireDateDebut()) && strtotime($dates[0]) <= strtotime($location->lireDateFin()) && strtotime($dates[1]) >= strtotime($location->lireDateDebut()) && strtotime($dates[1]) <= strtotime($location->lireDateFin())) {
                                     $unique = false;
-                                    echo "<tr><th class='text-danger'>La date de début et la date de fin sont en conflits avec une location existante.</th></tr>";
+                                    echo "<tr class='erreur'><td colspan='5' class='text-danger'>La date de début et la date de fin sont en conflits avec une location existante.</td></tr>";
+                                }
+                                // Conflit date de début
+                                else if (strtotime($dates[0]) >= strtotime($location->lireDateDebut()) && strtotime($dates[0]) <= strtotime($location->lireDateFin())) {
+                                    $unique = false;
+                                    echo "<tr class='erreur'><td colspan='5' class='text-danger'>La date de début est en conflit avec une location existante.</td></tr>";
+                                }
+                                // Conflit date de fin
+                                else if (strtotime($dates[1]) >= strtotime($location->lireDateDebut()) && strtotime($dates[1]) <= strtotime($location->lireDateFin())) {
+                                    $unique = false;
+                                    echo "<tr class='erreur'><td colspan='5' class='text-danger'>La date de fin est en conflit avec une location existante.</td></tr>";
                                 }
                             }
                             // Sauvegarder si aucun conflit
@@ -104,7 +104,7 @@
                             }
                         }
                         else {
-                            echo "<tr><th class='text-danger'>Données manquantes pour sauvegarder la disponibilité. Veuillez recommencer.</th></tr>";
+                            echo "<tr class='erreur'><td colspan='5' class='text-danger'>Données manquantes pour sauvegarder la disponibilité. Veuillez recommencer.</td></tr>";
                         }
                         $this->afficherDisponilitesLogement($params["idLogement"], $donnees["erreur"]);
                         break;
@@ -121,7 +121,7 @@
                             echo json_encode($dispo);
                         }
                         else {
-                            echo "<tr><th class='text-danger'>Données manquantes pour effacer la disponibilité. Veuillez recommencer.</th></tr>";
+                            echo "<tr class='erreur><td colspan='5' class='text-danger'>Données manquantes pour effacer la disponibilité. Veuillez recommencer.</td></tr>";
                         }
                         break;
 
@@ -132,7 +132,7 @@
                             $modeleDisponibilite->desactiverDisponibilite($params["idDisponibilite"]);
                         }
                         else {
-                            echo "<tr><th class='text-danger'>Données manquantes pour effacer la disponibilité. Veuillez recommencer.</th></tr>";
+                            echo "<tr class='erreur><td colspan='5' class='text-danger'>Données manquantes pour effacer la disponibilité. Veuillez recommencer.</td></tr>";
                         }
                         $this->afficherDisponilitesLogement($params["idLogement"]);
                         break;
@@ -144,7 +144,7 @@
                             $this->afficherDisponilitesLogement($params["idLogement"]);
                         }
                         else {
-                            echo "<tr><th class='text-danger'>Données manquantes pour effacer la disponibilité. Veuillez recommencer.</th></tr>";
+                            echo "<tr class='erreur><td colspan='5' class='text-danger'>Données manquantes pour effacer la disponibilité. Veuillez recommencer.</td></tr>";
                         }
                         break;
 

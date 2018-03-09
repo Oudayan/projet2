@@ -95,10 +95,29 @@
                 </div><!-- container px-5 -->
             </nav>
         </header>
+        <div id="alerteMessagerie" class="row collapse my-3">
+        </div>
+
         <script>
+            // Fade out de 4 secondes sur les alertes de login
             window.setTimeout(function() {
                 $(".navbar .alert").fadeTo(500, 0).slideUp(500, function(){
                     $(this).remove(); 
                 });
             }, 4000);
+
+            // Vérifier pour des nouveaux messages dans la messagerie interne
+            $(window).on("load", function() {
+                $.ajax({
+                    url: 'index.php?Messagerie&action=alerteMessagerie',
+                    type: 'POST',
+                    dataType: 'html',
+                    success: function(alerte) {
+                        $("#alerteMessagerie").empty();
+                        $(alerte).appendTo("#alerteMessagerie");
+                        $("#alerteMessagerie").collapse('show');
+                    }
+                });
+            });
+
         </script>

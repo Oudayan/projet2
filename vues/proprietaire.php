@@ -224,7 +224,7 @@
             // Date minimum est égale à aujourd'hui
             "minDate": moment().format(), 
             "isInvalidDate": function(date) {
-                return true;
+                return false;
             },
             "startDate": moment().format(),
             "endDate": moment().add(13, 'days').format(),
@@ -298,6 +298,7 @@
                         dataType: 'html',
                         success: function(dispos) {
                             $("#disposLogement" + idLogement).empty();
+                            $(".erreur").remove();
                             $(dispos).appendTo("#disposLogement" + idLogement);
                         }
                     });
@@ -330,6 +331,7 @@
                     dataType: 'html',
                     success: function(dispos) {
                         $("#disposLogement" + idLogement).empty();
+                        $(".erreur").remove();
                         $(dispos).appendTo("#disposLogement" + idLogement);
                         $("#dispos" + idLogement).collapse("hide");
                     }
@@ -368,6 +370,7 @@
                     dataType: 'html',
                     success: function(dispos) {
                         $("#disposLogement" + idLogement).empty();
+                        $(".erreur").remove();
                         $(dispos).appendTo("#disposLogement" + idLogement);
                     }
                 });            
