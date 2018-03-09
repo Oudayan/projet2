@@ -466,12 +466,12 @@
 	}
 	function bannirUsager() {
        $('#myModal').modal('show');
-      courriel = document.getElementById("courriel").value;
+      courriel = document.getElementById("vuCourriel").value;
       i = document.getElementById("index").value;
 	 }
 
    function bannir(){
-	   	courriel = document.getElementById("courriel").value;
+	   	courriel = document.getElementById("vuCourriel").value;
 		i = document.getElementById("index").value;
 		var x = document.getElementById("description").value;
 		if (x.trim()!=""){
