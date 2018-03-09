@@ -6,8 +6,7 @@
  * @date        15 février 2018
  * @brief       Vue partielle pour afficher par fiches les résultats de recherche
  * @details     Vue partielle rechercheFiches.php insérée dans la page recheche.php par requête Ajax
- */ 
-
+ */
                 if ($donnees["logements"]) {
                     if (isset($donnees["succes"])) { ?>
                     <div id="alerte-resultat" class="alert alert-warning" role="alert">

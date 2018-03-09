@@ -24,7 +24,7 @@
 					
 					case "afficherMessagerie":
 
-                        if($_SESSION["courriel"])
+                        if(isset($_SESSION["courriel"]))
                         {
                             $this->afficherVues("messagerie");
                         }
@@ -33,7 +33,7 @@
                             echo "<option value='0' selected disabled>Vous devez être inscrit pour avoir accès à la messagerie</option>";
                         }
                         break;
-                    // aller chercher les messages recues 
+                    
                     case "messagesRecus":
                         $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
                         $recus = $modeleMessagesDestinataires->messagesRecus($_SESSION["courriel"]);
@@ -79,49 +79,78 @@
 							echo json_encode($donnees);
 			                                                 //contient la liste des messages recus
 							break; 
+                    case "listeContacts":
+                      $modeleMessagesDestinataires = $this->lireDAO("MessagesDestinataires");
+                      $recus = $modeleMessagesDestinataires->listeContacts($_SESSION["courriel"]);
+                      $donnees = array();
+                      for ($i=0; $i< count($recus); $i++){
+                        $donnees[$i]=array($recus[$i]->lireExpediteur());  
+                      }
+                      echo json_encode($donnees);
+                      break;
                             
-                    case "supprimirMessage": 
-                      echo var_dump($_POST);
-                      $_POST["listeSupp"];//paramètre qu'envoie cotè client.  
-                      $_POST["actif"];
-                      //tenir en compte que cela peut être plusieurs
-                                   
-                      //faire le code puur mettre inactif le message
-                      //il ne faut pas retourner rien
+                    case "supprimerMessage": 
+                      if(isset($_SESSION["courriel"]) && isset($_POST["listeSupp"]) && isset($_POST["actif"])){ 
+                           $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                           $msgSupp = $_POST["listeSupp"];
+                        	for ($i=0;$i<count($msgSupp);$i++){
+								$messagesSupprimes = new Message(
+								$msgSupp[$i],
+								$_SESSION["courriel"], 
+								$_POST["actif"]);
+								$modeleMessagerie->desactiverMessage($messagesSupprimes);                               
+							}  
+                      }
                       break;
                     
                     case "messageLu":
-                         $_POST["id_message"];
-                         $_POST["message_lu"];//true
-                         //il faut faire update sur la table al_destinataire column lu
-                         //il ne faut pas retourne rien 
-                      break;  
-                    
-                    case "messageAutomatique":                     
-                      if(isset($params["message"]) && isset($params["sujet"]) && isset($params["locataire"]) && isset($params["proprietaire"])){
+                         if(isset($_SESSION["courriel"]) && isset($_POST["id_message"]) && isset($_POST["message_lu"])){ 
+                             $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                             $modeleMessagerie->CourrielLu($_SESSION["courriel"], $_POST["id_message"], $_POST["message_lu"]);
+                        }
+                        //il faut faire update sur la table al_destinataire column lu
+                        //il ne faut pas retourne rien 
+                        break;  
                         
-                        $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
-                        $lu = false;
-                        $m_actif = true;
-                        $newDestinataire = new Destinataire(
-								$params["locataire"],
-								$idMessage, 
-								$lu,
-								$m_actif );
-								$modeleMessagerie->sauvegarderDestinataire($newDestinataire);
-							
-                        $newMessage = new Message( // Selon le modele Message
-                              "", // id_message
-                              "", // id_reference
-                              $params["sujet"], // Sujet
-                              "", // Fichier joint 
-                              $params["message"], // Message
-                              '',  // msg_date
-                              true, 
-                              $params["proprietaire"]
-							);
-                        $modeleMessagerie->sauvegarderMessage($newMessage); 
-                      }
+                    case "alerteMessagerie" :
+                        if (isset($_SESSION["courriel"])) {
+                            $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                            $nbNouveauxMessages = $modeleMessagerie->nbNouveauxMessages($_SESSION["courriel"]);
+                            if ($nbNouveauxMessages["nbMessages"] > 0) {
+                                echo '<div class="col-sm-6 offset-sm-3 alert alert-secondary d-flex justify-content-between">';
+                                echo    '<h3 class="pt-1">Vous avez <a href="index.php?Messagerie&action=afficherMessagerie"><strong>' . $nbNouveauxMessages["nbMessages"] . ($nbNouveauxMessages["nbMessages"] == 1 ? "</strong> nouveau message" : "</strong> nouveaux messages") . '</a></h3>';
+                                echo    '<button type="button" class="close" data-toggle="collapse" data-target="#alerteMessagerie" aria-expanded="false" aria-controls="alerteMessagerie" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                                echo '</div>';
+                            }
+                        }
+                        break;  
+                    
+                    case "messageAutomatique" :
+                        if (isset($params["message"]) && isset($params["sujet"]) && isset($params["locataire"]) && isset($params["proprietaire"])) {
+                            echo $params["message"];
+                            $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
+                            $newMessage = new Message( // Selon le modele Message
+                                "", // id_message
+                                "", // id_reference
+                                $params["sujet"], // Sujet
+                                "", // Fichier joint 
+                                $params["message"], // Message
+                                '',  // msg_date
+                                true, 
+                                $params["proprietaire"]
+                            );
+                            $idMessage = $modeleMessagerie->sauvegarderMessage($newMessage); 
+                            $lu = false;
+                            $m_actif = true;
+                            $newDestinataire = new Destinataire(
+                                $params["locataire"],
+                                $idMessage, 
+                                $lu,
+                                $m_actif );
+                            $modeleMessagerie->sauvegarderDestinataire($newDestinataire);
+                            //header("Location: index.php?Proprietaire&action=afficherLogements");
+                        }
+
                       break;
                     
                     case "composerMessage" :

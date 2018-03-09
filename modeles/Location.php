@@ -19,6 +19,7 @@
 		private $date_location;
 		private $cout;
 		private $valide;
+		private $jeton;
 		private $evaluation;
 		private $commentaire;
 		private $date_evaluation;
@@ -27,7 +28,7 @@
 		private $e_commentaire_banni;
 
         // Constructeur
-		public function __construct($id_location = 0, $id_logement = 0, $id_proprietaire = "", $id_locataire = "", $date_debut = "", $date_fin = "", $date_location = "", $cout = 0, $valide = 0, $evaluation = NULL, $commentaire = NULL, $date_evaluation = NULL, $e_banni = NULL, $e_date_banni = NULL, $e_commentaire_banni = NULL) {
+		public function __construct($id_location = 0, $id_logement = 0, $id_proprietaire = "", $id_locataire = "", $date_debut = "", $date_fin = "", $date_location = "", $cout = 0, $valide = 0, $jeton = NULL,  $evaluation = NULL, $commentaire = NULL, $date_evaluation = NULL, $e_banni = NULL, $e_date_banni = NULL, $e_commentaire_banni = NULL) {
 			$this->ecrireIdLocation($id_location);
 			$this->ecrireIdLogement($id_logement);
 			$this->ecrireIdProprietaire($id_proprietaire);
@@ -37,6 +38,7 @@
 			$this->ecrireDateLocation($date_location);			
 			$this->ecrireCout($cout);			
 			$this->ecrireValide($valide);
+			$this->ecrireJeton($jeton);
             $this->ecrireEvaluation($evaluation);
             $this->ecrireCommentaire($commentaire);
             $this->ecrireDateEvaluation($date_evaluation);
@@ -100,7 +102,12 @@
                 $this->valide = $valide;
             }
         }
-
+        // Écrire jeton
+        public function ecrireJeton($jeton) {
+            if (is_string($jeton) && trim($jeton) != "") {
+                $this->jeton = $jeton;
+            }
+        }
         // Écrire evaluation
         public function ecrireEvaluation($evaluation) {
             if (is_numeric($evaluation) && trim($evaluation) != "") {
@@ -174,6 +181,10 @@
         // Lire valide
         public function lireValide() {
             return $this->valide;
+        }
+        // Lire jeton
+        public function lireJeton() {
+            return $this->jeton;
         }
         // Lire evaluation
         public function lireEvaluation() {

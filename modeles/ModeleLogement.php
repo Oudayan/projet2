@@ -90,6 +90,10 @@
             return $this->modifierChamp($id, "l_actif", true);
         }
         
+        public function nouvelleEvaluationLogement($id, $note) {
+            return $this->modifierChamp($id, "evaluation", $note);
+        }
+        
     }
 
 ?>

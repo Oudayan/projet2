@@ -57,7 +57,7 @@ main {
     background: url(../images/MONTREAL.jpg) no-repeat fixed; 
     background-size: contain;
     height: 70vh;
-    margin-top: -10vh;
+    margin-top: -12vh;
 }
 
 .depart {
@@ -86,7 +86,7 @@ main {
     }
     
     .depart {
-        bottom: -35vh;
+        bottom: -38vh;
     }
 }
 
@@ -100,18 +100,37 @@ main {
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 991px) {
     main.background {
+        background-position: 0 19.2vh;
     }
 
     .depart {
-        bottom: -42vh;
+        bottom: -38vh;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 875px) {
+    .depart {
+        bottom: -35vh;
+    }
+}
+
+@media (max-width: 800px) {    
+    .depart {
+        bottom: -45vh;
+    }
+}
+
+@media (max-width: 700px) {    
+    .depart {
+        bottom: -40vh;
+    }
+}
+
+@media (max-width: 537px) {
     main.background {
-        background-position: 0 11vh;
+        background-position: 0 22vh;
     }
 }
 
@@ -311,7 +330,7 @@ carousel-caption h5 {
     color: #999;
 }
 
-header a.nav-item.nav-link {
+header a.nav-item.nav-link, a.nav-item {
     color: #e98d34;
 }
 
@@ -324,7 +343,7 @@ header a.nav-item.nav-link {
       color: #f6c784;
 }
 
-.iconMessage {
+.iconMessage, .iconNav {
     color: #e98d34;
 }
     
@@ -424,7 +443,13 @@ label {
     background: white;
     color: #1b95e0;;
 }
+.fa-envelope{
+  color: #e98d34;
+}
 
+.fa-envelope-open{
+  color: #6c757d;
+}
 #info {
     background-color: #f6f7eA;   
     padding: 15px;
@@ -453,7 +478,7 @@ nav.v-pills-tab {
     /*background: rgb(29, 145, 188);*/
     background: linear-gradient(to right, rgba(11, 42, 52, 0.99), rgb(75, 76, 76));
     border-radius: 5px;
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
   
  a.nav-link {
@@ -461,15 +486,16 @@ nav.v-pills-tab {
   }
   
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff;
-    background-color: rgb(75, 76, 76);
+    color: #f5f5f5;
+    background-color: rgb(205, 120, 45) !important;
+    border-color: rgb(205, 120, 45) !important;
   }
   
 #v-pills-boitRecp, #v-pills-mEnvoyes {
-   height: 40vh;
-   overflow: scroll;
+   height: 50vh;
+   overflow-y: auto;
   }
-  
+
 .btnsMessagerie {
      background-color: rgba(58, 90, 101, 0);
   } 
@@ -482,9 +508,11 @@ nav.v-pills-tab {
 #btnEnvoyer{
   float:right;
   }
-  #suppMsg{
+  
+#suppMsg{
   float:right;
-  }  
+  } 
+  
 .boiteLecture{
     background: rgb(250, 251, 246);
     padding: 20px 20px 140px 20px;
@@ -497,16 +525,64 @@ nav.v-pills-tab {
     height: 15px;
   }
   
-  .display {
+  .display, .composerMessage{
     border-style: solid;
     border-width: 1px;  
     border-color: #dee2e6;
     border-radius: 4px;
-  }  
-
+  }
+    .composerMessage{
+     padding: 20px; 
+     margin: 0;
+  }
+  
+  #menuMessagerie{
+    padding: 0px;
+  }
+  
   .textMessage {
     border-style: solid;
     border-color: rgb(246, 247, 234);
     border-radius: 4px;
   }
   
+  .display th{
+    text-align: center !important;
+  }
+
+   /* ------------
+  Modal Liste de contacts 
+-------------*/
+  #feedback { 
+    font-size: 0.9em;
+  }
+  
+  #selectable .ui-selecting { 
+    color: #f5f5f5;
+    background-color: rgb(205, 120, 45) !important;
+    border-color: rgb(205, 120, 45) !important;
+  }
+  
+  #selectable .ui-selected { 
+    background: #e98d34;
+    color: #f5f5f5; 
+  }
+  
+  #selectable {
+    list-style-type: none;
+    margin: 0; 
+    padding: 0;
+    width: 60%;
+  }
+  
+  #selectable li { 
+    margin-left: 5px; 
+    padding: 0em; 
+    font-size: 0.8em;
+  }
+  
+  .afficherContacts{
+    border-style: solid;
+    border-radius: 4px;
+    border-color: #dee2e6;
+  }
