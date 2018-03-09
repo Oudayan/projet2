@@ -116,10 +116,12 @@
                         if (isset($_SESSION["courriel"])) {
                             $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
                             $nbNouveauxMessages = $modeleMessagerie->nbNouveauxMessages($_SESSION["courriel"]);
-                            echo '<div class="col-sm-6 offset-sm-3 alert alert-secondary d-flex justify-content-between">';
-                            echo    '<h3 class="pt-1">Vous avez <a href="index.php?Messagerie&action=afficherMessagerie"><strong>' . $nbNouveauxMessages["nbMessages"] . ($nbNouveauxMessages["nbMessages"] == 1 ? "</strong> nouveau message" : "</strong> nouveaux messages") . '</a></h3>';
-                            echo    '<button type="button" class="close" data-toggle="collapse" data-target="#alerteMessagerie" aria-expanded="false" aria-controls="alerteMessagerie" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-                            echo '</div>';
+                            if ($nbNouveauxMessages["nbMessages"] > 0) {
+                                echo '<div class="col-sm-6 offset-sm-3 alert alert-secondary d-flex justify-content-between">';
+                                echo    '<h3 class="pt-1">Vous avez <a href="index.php?Messagerie&action=afficherMessagerie"><strong>' . $nbNouveauxMessages["nbMessages"] . ($nbNouveauxMessages["nbMessages"] == 1 ? "</strong> nouveau message" : "</strong> nouveaux messages") . '</a></h3>';
+                                echo    '<button type="button" class="close" data-toggle="collapse" data-target="#alerteMessagerie" aria-expanded="false" aria-controls="alerteMessagerie" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                                echo '</div>';
+                            }
                         }
                         break;  
                     
