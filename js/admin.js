@@ -13,7 +13,7 @@
 			afficherUsagersaValider();
 			afficherListeUsagers();
 			afficherLogementsaValider();
-		//afficherListeLogements();
+		   // afficherListeLogements();
 		
 	var span = document.getElementById("closeImg");
 	span.onclick = function() { 
@@ -55,7 +55,7 @@
     });
   };
   
-   usagersListe = {};
+  usagersListe = {};
   function afficherListeUsagers() {
     $.ajax({
         url: 'index.php?Usagers&action=afficheListeUsagersJson',
@@ -64,7 +64,7 @@
         success: function(json) {
           $("#tableauListeUsagers").html("");
           $.each(json, function(i, item) {
-			  id = "rangee"+i;
+			  id = "lurangee"+i;
 			  banni = item.u_banni == 1 ? "Banni" : "";
 			  valide = item.u_valide != 1 && item.u_banni != 1 ? "À valider" : "";
             $("#tableauListeUsagers").append(
@@ -105,7 +105,7 @@
         success: function(json) {
           $("#validerLogements").html("");
           $.each(json, function(i, item) {
-			  id = "rangee"+i;
+			  id = "lvrangee"+i;
 			  if (item.apt == null)
 				  item.apt = '';
 			  else 
@@ -174,6 +174,86 @@
     });
  }
   
+ listeValider = {};
+ photosValider = {};
+ function afficherListeLogements(){
+	    $.ajax({
+        url: 'index.php?Logement&action=lireTousLogements',
+        type: 'POST',
+        dataType: 'json',
+        success: function(json) {
+          $("#validerLogements").html("");
+          $.each(json, function(i, item) {
+			  id = "lvrangee"+i;
+			  if (item.apt == null)
+				  item.apt = '';
+			  else 
+				  item.apt += '-';
+			  	banni = item.u_banni == 1 ? "Banni" : "";
+			  valide = item.u_valide != 1 && item.u_banni != 1 ? "À valider" : "";
+            $("#validerLogements").append(
+                "<tr class='clickable-row' id="+id +" data-href='#' onclick='afficherDetailLogement(" + i + ",true)'>" +
+                  "<td>" + item.apt + item.no_civique + "</td>" +
+				  "<td>" + item.rue + "</td>" +
+                  "<td>" + item.ville + "</td>" +
+				  "<td>" + item.province + "</td>" +
+				  "<td>" + item.pays + "</td>" +
+				  "<td>" + item.code_postal + "</td>" +
+                 "</tr>");
+				 photosValider[i] = {};
+				 $.each(item.Photos, function(j, photo){
+					 photosValider[i][j] = item.Photos[j];
+				 })
+            logementaValider[i] = JSON.stringify(
+              new Logement(
+				item.id_logement,
+                item.apt,
+				item.no_civique,
+				item.rue,
+				item.ville,
+				item.province,
+				item.pays,
+				item.code_postal, 
+				item.latitude,
+				item.longitude,
+				item.id_type_logement,
+				item.prix, 
+				item.evaluation,
+				item.description,
+				item.courriel,
+				item.nb_personnes,
+				item.nb_chambres,
+				item.nb_lits,
+				item.nb_salle_de_bain,
+				item.nb_demi_salle_de_bain,
+				item.frais_nettoyage,
+				item.est_stationnement,
+				item.est_wifi,
+				item.est_cuisine,
+				item.est_tv,
+				item.est_fer_a_repasser,
+				item.est_cintres,
+				item.est_seche_cheveux,
+				item.est_climatise,
+				item.est_laveuse,
+				item.est_secheuse,
+				item.est_chauffage,
+				item.l_valide,
+				item.l_actif,
+				item.l_banni,
+				item.l_date_banni,
+				item.l_commentaire_banni
+              )
+            );
+			
+          });
+		  // console.log(logementaValider[0]);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+ }
   function afficherValider(i,reception){
     var usager = JSON.parse(usagersValider[i]);
     $('.ficheUsager').removeClass('hidden');
@@ -373,7 +453,7 @@
  		  success: function(json) {
 			alert('Ok, validé',json);
 			cacherBoitesLecture();
-			$("#rangee"+i).hide();
+			$("#lvrangee"+i).hide();
          },
 		  error: function(xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

@@ -20,7 +20,7 @@
 			<a class="nav-link" id="v-pills-listeUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeUsagers" role="tab" aria-controls="v-pills-listeUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-users" aria-hidden="true"></i>Liste d'usagers</a>      
 			<div class="dropdown-divider"></div>
 			<a class="nav-link" id="v-pills-validerLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerLogements" role="tab" aria-controls="v-pills-validerLogements" aria-selected="false"><i class="fa fa-check-square-o" aria-hidden="true"></i>Valider logements</a>
-			<a class="nav-link" id="v-pills-listeLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeLogements" role="tab" aria-controls="v-pills-listeLogements" aria-selected="false"><i class="fa fa-home" aria-hidden="true"></i>Liste des logements</a>
+		<!--	<a class="nav-link" id="v-pills-listeLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeLogements" role="tab" aria-controls="v-pills-listeLogements" aria-selected="false"><i class="fa fa-home" aria-hidden="true"></i>Liste des logements</a> -->
 		</nav><!-- nav flex-column -->
 	  </aside>
   <section class="tab-usagers tab-content col-lg-9" id="v-pills-tabContent">
@@ -58,7 +58,7 @@
     </form>
     </div><!-- listeUsagers -->
 	  
-    <div class="validerLogements tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-validerLogements-tab" style="height:20vh; overflow: scroll;" >
+   <div class="validerLogements tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-validerLogements-tab" style="height:20vh; overflow: scroll;" >
    <form class="formSuppMsg" method="POST">
    <table class="table table-sm responsive-sm table-hover display">
 	<h6>Logements à valider</h6>
@@ -78,23 +78,27 @@
 	 <input type="text" name="actif" value="false" hidden/>
     </form>
   </div><!-- tab-pane validerLogements-->
-	      <div class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
-        <form class="formSuppMsg" method="POST">
-        <table class="table table-sm responsive-sm table-hover display">
-          <button type="submit" class="btn btn-orange btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i></button>
-          <thead>
-            <tr>
-              <th><input type="checkbox" class='tous' /></th>
-              <th><i class="fa fa-level-up" aria-hidden="true"></i></th>
-              <th>Sujet</th>
-              <th><i class="fa fa-paperclip" aria-hidden="true"></i></th>
-              <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
-            </tr>
-          </thead>
-          <tbody id="msgEnvoyes"></tbody>
-        </table>
-          <input type="text" name="actif" value="false" hidden/>
-       </form>
+   <div class="listeLogements tab-pane fade" id="v-pills-validerLogements" role="tabpanel" aria-labelledby="v-pills-validerLogements-tab" style="height:20vh; overflow: scroll;" >
+   <form class="formSuppMsg" method="POST">
+   <table class="table table-sm responsive-sm table-hover display">
+	<h6>Logements à valider</h6>
+      <thead>
+        <tr>
+           <th>Numéro </th>
+		   <th>Rue </th>
+           <th>Ville</th>
+           <th>Province</th>
+           <th>Pays</th>
+           <th>Code Postal</th>
+        </tr>
+      </thead>
+      <tbody id="validerLogements">
+      </tbody>
+    </table>
+	 <input type="text" name="actif" value="false" hidden/>
+    </form>
+	   
+	   
       </div><!-- messagesEnvoyes -->  
      <form class="ficheLogement hidden">
        <?php include 'ficheLogement.php';?>
