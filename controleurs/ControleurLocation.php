@@ -115,7 +115,7 @@
                                     // Demande expirée - mettre valide=3 : 
                                     $modeleLocation->validerLocation($locations[$i]->lireIdLocation(), 3);
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est expirée.";
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . " est expirée.";
                                     $sujet = "Demande de location expirée";
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["erreur"]));
                                 }
@@ -193,7 +193,7 @@
                                     // Mettre la location à 3-Expiré
                                     $modeleLocation->validerLocation($params["idLocation"], 3);
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . "est expirée.";
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est expirée.";
                                     $sujet = "Demande de location expirée";
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["erreur"]));
                                 }
