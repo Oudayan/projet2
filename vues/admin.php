@@ -9,21 +9,18 @@
  * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
 ?> 
-<head>
-	<script src="js/admin.js"></script>
-</head>
-<main class="container-fluid" style="height:900px">
+<main class="container-fluid" style="height:900px" id="myMain">
         <div class="d-flex justify-content-around mt-3">
             <h1>Tâches d'administrateur</h1>
         </div>
   <div class="row">
 	  <aside class="col-lg-3">
 		<nav class="nav flex-column nav-pills v-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			<a class="nav-link active" id="v-pills-validerUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerUsagers" role="tab" aria-controls="v-pills-validerUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-folder-open" aria-hidden="true"></i>Valider usagers</a>      
-			<a class="nav-link" id="v-pills-listeUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeUsagers" role="tab" aria-controls="v-pills-listeUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-folder-open" aria-hidden="true"></i>Liste d'usagers</a>      
+			<a class="nav-link active" id="v-pills-validerUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerUsagers" role="tab" aria-controls="v-pills-validerUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-check-square-o" aria-hidden="true"></i>Valider usagers</a>      
+			<a class="nav-link" id="v-pills-listeUsagers-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeUsagers" role="tab" aria-controls="v-pills-listeUsagers" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false"></span><i class="fa fa-users" aria-hidden="true"></i>Liste d'usagers</a>      
 			<div class="dropdown-divider"></div>
-			<a class="nav-link" id="v-pills-validerLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerLogements" role="tab" aria-controls="v-pills-validerLogements" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Valider logements</a>
-			<a class="nav-link" id="v-pills-listeLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeLogements" role="tab" aria-controls="v-pills-listeLogements" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Liste des logements</a>
+			<a class="nav-link" id="v-pills-validerLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-validerLogements" role="tab" aria-controls="v-pills-validerLogements" aria-selected="false"><i class="fa fa-check-square-o" aria-hidden="true"></i>Valider logements</a>
+			<a class="nav-link" id="v-pills-listeLogements-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-listeLogements" role="tab" aria-controls="v-pills-listeLogements" aria-selected="false"><i class="fa fa-home" aria-hidden="true"></i>Liste des logements</a>
 		</nav><!-- nav flex-column -->
 	  </aside>
   <section class="tab-usagers tab-content col-lg-9" id="v-pills-tabContent">
@@ -34,8 +31,8 @@
           <tr>
             <th>Prenom</th>
             <th>Nom</th>
-            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>  
-            <th><i class="fa fa-phone" aria-hidden="true"></i></th>  
+            <th>Adresse Courriel</i></th>  
+            <th>Téléphone</i></th>  
           </tr>
         </thead>
         <tbody id="tableauUserValider">
@@ -51,8 +48,8 @@
           <tr>
             <th>Prenom</th>
             <th>Nom</th>
-            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>  
-            <th><i class="fa fa-phone" aria-hidden="true"></i></th>  
+            <th>Adresse Courriel</i></th>  
+            <th>Téléphone</i></th>    
           </tr>
         </thead>
         <tbody id="tableauListeUsagers"></tbody>
@@ -142,7 +139,9 @@
   </div>
 </div>
 </main><!-- container -->
-
+<head>
+	<script src="js/admin.js"></script>
+</head>
   <style>
   #feedback { font-size: 0.9em; }
   #selectable .ui-selecting { background: #FECA40; }
