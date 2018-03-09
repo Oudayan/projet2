@@ -1,15 +1,15 @@
 <?php
 /**
- * @file     formulaire.php
+ * @file     ficheUsager.php
  * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
  * @version  1.0
- * @date     06 msrs 2018
+ * @date     06 mars 2018
  * @brief    formulaire pour afficher un usager dans le module admin
  * 
  */
 ?>
-    <button type="button" class="btn-bleu btn-sm repondre" onclick="validerUsager();">Valider</button>
-    <button type="button" class="btn-bleu btn-sm" onclick="bannirUsager()">Bannir</button><hr>
+    <button type="button" class="btn btn-bleu repondre" onclick="validerUsager();">Valider</button>
+    <button type="button" class="btn btn-secondary" onclick="bannirUsager()">Bannir</button><hr>
     <div class="form-group row heigthFormBLecture">
       <label class="col-sm-2 col-form-label-sm">Nom</label>
       <div class="col-sm-10">
@@ -26,7 +26,7 @@
       <label class="col-sm-2 col-form-label-sm">Courriel</label>
       <div class="col-sm-10">
 		<input type="hidden" class="index" id="index">
-        <input class="form-control-plaintext form-control-sm courriel" name='courriel' id='courriel' type="email" disabled>
+        <input class="form-control-plaintext form-control-sm courriel" name='courriel' type="email" disabled>
       </div>
     </div>
      <div class="form-group row heigthFormBLecture">

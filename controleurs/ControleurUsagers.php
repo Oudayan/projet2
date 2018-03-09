@@ -1,16 +1,22 @@
 <?php
 /**
-* @file Controleur_Usagers.php
-* @autheurs 
-* @version 1.0
-* @date 12 février 2018
-* @brief Définit la classe pour le controleur usagers
-*
-* @details Cette classe définit les différentes activités concernant les usagers du site.
-* 
-*/
+ * @file ControleurUsagers.php
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version 1.0
+ * @date 12 février 2018
+ * @brief Définit la classe pour le controleur usagers
+ *
+ * @details Cette classe définit les différentes activités concernant les usagers du site.
+ * 
+ */
 	class ControleurUsagers extends BaseControleur
 	{
+		/**
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params)
 		{
 
@@ -235,6 +241,8 @@
 						trigger_error("Action invalide");
 					*/
 					break;
+					default:
+                        trigger_error($params["action"] . " Action invalide.");		
 				}	
 			}
 			else
@@ -248,8 +256,8 @@
 		* @brief Affiche la liste des usagers
 		* @details Prend les renseignements sur les usagers et les affiche. Puis ouvre la vue AfficheListeUsagers
 		* @details Utilise le Modele_Usagers
-		* @param point1 data
-		* @return à une vue.
+		* @param [string] $data
+		* @return à la vue AfficheListeUsagers .
 		*/
 
 		private function afficheListeUsagers()
@@ -263,7 +271,7 @@
 		/**
 		* @brief Permet la déconnection de la session
 		* @details Se retouve sur les pages ecepté sur la page de loggin
-		* @param point1 courriel
+		* @param [string] courriel
 		* @return aucun.
 		*/
 		private function deconnection()
