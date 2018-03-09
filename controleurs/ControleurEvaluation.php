@@ -30,7 +30,7 @@
                         if (isset($params["idLocation"]) && isset($params["evaluation"]) && isset($params["commentaire"])) {
                             // Sauvegarder l'évaluation et commentaire dans la table location
                             $aujourdhui = date('Y-m-d h:m:s');
-                            $modeleLocation->nouvelleEvaluation($params["idLocation"], $params["evaluation"], $params["commentaire"], $aujourdhui);
+                            $modeleLocation->nouvelleEvaluation($params["idLocation"], $params["evaluation"], $params["commentaire"], $aujourdhui, false);
                             // Calculer la nouvelle moyenne d'évaluations pour le logement
                             $location = $modeleLocation->lireLocationParId($params["idLocation"]);
                             $notes = $modeleLocation->lireEvaluationsParLogement($location->lireIdLogement());

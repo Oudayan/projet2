@@ -33,7 +33,7 @@
 		}
 		
 		public function lireEvaluationsParLogement($id_logement) {
-            $sql = "SELECT evaluation FROM " . $this->lireNomTable() . " WHERE id_logement = '" . $id_logement . "' AND evaluation >= 0" ;
+            $sql = "SELECT evaluation FROM " . $this->lireNomTable() . " WHERE id_logement = '" . $id_logement . "' AND evaluation >= 0 AND e_banni = false" ;
 			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(\PDO::FETCH_ASSOC);
 		}
@@ -63,9 +63,9 @@
            	return $this->requete($sql, $donnees);
 		}
 
-		public function nouvelleEvaluation($id, $evaluation, $commentaire, $date) {
-            $sql = "UPDATE " . $this->lireNomTable() . " SET evaluation=?, commentaire=?, date_evaluation=? WHERE " . $this->lireClePrimaire() . "=?";
-            $donnees = array($evaluation, $commentaire, $date, $id);
+		public function nouvelleEvaluation($id, $evaluation, $commentaire, $date, $e_banni) {
+            $sql = "UPDATE " . $this->lireNomTable() . " SET evaluation=?, commentaire=?, date_evaluation=?, e_banni=? WHERE " . $this->lireClePrimaire() . "=?";
+            $donnees = array($evaluation, $commentaire, $date, $e_banni, $id);
             return $this->requete($sql, $donnees);
         }
 

@@ -176,6 +176,12 @@
             $this->requete($query, $donnees);
             var_dump($query);
         }
-	}	
-    
+
+        public function nbNouveauxMessages($destinataire){
+            $sql  = "SELECT COUNT(*) AS nbMessages FROM al_destinataire WHERE destinataire = '" . $destinataire . "' AND lu = false";
+            return $this->requete($sql)->fetch();
+        }
+
+	}
+
 ?>
