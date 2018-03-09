@@ -26,6 +26,11 @@
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
 		}
 		
+		public function obtenir_listeaValider() {
+            $sql = "SELECT * FROM " . $this->lireNomTable() . " WHERE isnull(l_valide)";
+            $resultat = $this->requete($sql);
+			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
+		}
         public function lireTousLogements() {
 			$resultat = $this->lireTous();
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
@@ -37,14 +42,14 @@
 			$resultat = $this->requete($sql);
 			return $resultat->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Logement");
     	}        
-
-		public function sauvegarderLogement(Logement $logement) {
-			if ($logement->lireIdLogement() && $this->lire($logement->lireIdLogement())->fetch()) {
+		public function actualiserLogement(Logement $logement) {
 				// update
-				$sql = "UPDATE " . $this->lireNomTable() . " SET no_civique=?, apt=?, rue=?, ville=?, province=?, pays=?, code_postal=?, latitude=?, longitude=?, id_type_logement=?, prix=?, frais_nettoyage=?, evaluation=?, description=?, courriel=?, nb_personnes=?, nb_chambres=?, nb_lits=?, nb_salle_de_bain=?, nb_demi_salle_de_bain=?, frais_nettoyage=?, est_stationnement=?, est_wifi=?, est_cuisine=?, est_tv=?, est_fer_a_repasser=?, est_cintres=?, est_seche_cheveux=?, est_climatise=?, est_laveuse=?, est_secheuse=?, est_chauffage=?, l_valide=?, l_actif=?, l_banni=?, l_date_banni=?, l_commentaire_banni=? WHERE " . $this->lireClePrimaire() . "=?";
-                $donnees = array($logement->lireNoCivique(), $logement->lireApt(), $logement->lireRue(), $logement->lireVille(), $logement->lireProvince(), $logement->lirePays(), $logement->lireCodePostal(), $logement->lireLatitude(), $logement->lireLongitude(), $logement->lireIdTypeLogement(), $logement->lirePrix(), $logement->lireFraisNettoyage(), $logement->lireEvaluation(), $logement->lireDescription(), $logement->lireCourriel(), $logement->lireNbPersonnes(), $logement->lireNbChambres(), $logement->lireNbLits(), $logement->lireNbSalleDeBain(), $logement->lireNbDemiSalleDeBain(), $logement->lireFraisNettoyage(), $logement->lireEstStationnement(), $logement->lireEstWifi(), $logement->lireEstCuisine(), $logement->lireEstTv(), $logement->lireEstFerARepasser(), $logement->lireEstCintres(), $logement->lireEstSecheCheveux(), $logement->lireEstClimatise(), $logement->lireEstLaveuse(), $logement->lireEstSecheuse(), $logement->lireEstChauffage(), $logement->lireLBanni(), $logement->lireLValide(), $logement->lireLActif(), $logement->lireLDateBanni(), $logement->lireLCommentaireBanni(), $logement->lireIdLogement());
-			}
-			else {
+			$sql = "UPDATE " . $this->lireNomTable() . " SET no_civique=?, apt=?, rue=?, ville=?, province=?, pays=?, code_postal=?, latitude=?, longitude=?, id_type_logement=?, prix=?, frais_nettoyage=?, evaluation=?, description=?, courriel=?, nb_personnes=?, nb_chambres=?, nb_lits=?, nb_salle_de_bain=?, nb_demi_salle_de_bain=?, frais_nettoyage=?, est_stationnement=?, est_wifi=?, est_cuisine=?, est_tv=?, est_fer_a_repasser=?, est_cintres=?, est_seche_cheveux=?, est_climatise=?, est_laveuse=?, est_secheuse=?, est_chauffage=?, l_valide=?, l_actif=?, l_banni=?, l_date_banni=?, l_commentaire_banni=? WHERE " . $this->lireClePrimaire() . "=?";
+            $donnees = array($logement->lireNoCivique(), $logement->lireApt(), $logement->lireRue(), $logement->lireVille(), $logement->lireProvince(), $logement->lirePays(), $logement->lireCodePostal(), $logement->lireLatitude(), $logement->lireLongitude(), $logement->lireIdTypeLogement(), $logement->lirePrix(), $logement->lireFraisNettoyage(), $logement->lireEvaluation(), $logement->lireDescription(), $logement->lireCourriel(), $logement->lireNbPersonnes(), $logement->lireNbChambres(), $logement->lireNbLits(), $logement->lireNbSalleDeBain(), $logement->lireNbDemiSalleDeBain(), $logement->lireFraisNettoyage(), $logement->lireEstStationnement(), $logement->lireEstWifi(), $logement->lireEstCuisine(), $logement->lireEstTv(), $logement->lireEstFerARepasser(), $logement->lireEstCintres(), $logement->lireEstSecheCheveux(), $logement->lireEstClimatise(), $logement->lireEstLaveuse(), $logement->lireEstSecheuse(), $logement->lireEstChauffage(), $logement->lireLBanni(), $logement->lireLValide(), $logement->lireLActif(), $logement->lireLDateBanni(), $logement->lireLCommentaireBanni(), $logement->lireIdLogement());
+			$this->requete($sql, $donnees);
+		}
+		public function sauvegarderLogement(Logement $logement) {
+
 				// insert
                 $sql = "INSERT INTO " . $this->lireNomTable() . "(
 					no_civique, apt, rue, ville, province, pays, code_postal, latitude, longitude, id_type_logement, prix,
@@ -53,7 +58,7 @@
 					est_seche_cheveux, est_climatise, est_laveuse, est_secheuse, est_chauffage, l_valide, l_actif, l_banni, 
 					l_date_banni, l_commentaire_banni) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                 	?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                // SELECT LAST_INSERT_ID();
+      
 				$donnees = array(
 					$logement->lireNoCivique(), $logement->lireApt(), $logement->lireRue(), $logement->lireVille(), $logement->lireProvince(), 
 					$logement->lirePays(), $logement->lireCodePostal(), $logement->lireLatitude(), $logement->lireLongitude(), $logement->lireIdTypeLogement(),
@@ -62,7 +67,7 @@
 					$logement->lireEstWifi(), $logement->lireEstCuisine(), $logement->lireEstTv(), $logement->lireEstFerARepasser(), $logement->lireEstCintres(), 
 					$logement->lireEstSecheCheveux(), $logement->lireEstClimatise(), $logement->lireEstLaveuse(), $logement->lireEstSecheuse(), $logement->lireEstChauffage(),
 					$logement->lireLvalide(), $logement->lireLactif(), $logement->lireLBanni(), $logement->lireLDateBanni(), $logement->lireLCommentaireBanni());
-			}
+		
             $this->requete($sql, $donnees);
             //return LAST_INSERT_ID();
             $query = "SELECT * FROM " . $this->lireNomTable() .  " ORDER BY id_logement DESC LIMIT 1";

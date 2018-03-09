@@ -52,7 +52,7 @@
         // "GETTERS"
         // Lire id_photo_logement
         public function lireIdPhotoLogement() {
-            return $this->id_type_logement;
+            return $this->id_photo_logement;
         }
         // Lire chemin_photo
         public function lireCheminPhoto() {

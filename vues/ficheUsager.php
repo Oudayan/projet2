@@ -1,9 +1,9 @@
 <?php
 /**
- * @file     formulaire.php
+ * @file     ficheUsager.php
  * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
  * @version  1.0
- * @date     06 msrs 2018
+ * @date     06 mars 2018
  * @brief    formulaire pour afficher un usager dans le module admin
  * 
  */
