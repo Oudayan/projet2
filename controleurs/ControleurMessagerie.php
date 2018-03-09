@@ -1,16 +1,22 @@
 <?php
 /**
-* @file ControleurMessagerie.php
-* @autheurs Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
-* @version 1.0
-* @date 26 février 2018
-* @brief Définit la classe pour le controleur de la messagerie
-*
-* @details Cette classe définit les différentes activités concernant la messagerie.
-* 
-*/
+ * @file    ControleurMessagerie.php
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version 1.0
+ * @date 	26 février 2018
+ * @brief 	Définit la classe pour le controleur de la messagerie
+ *
+ * @details Cette classe définit les différentes activités concernant la messagerie.
+ * 
+ */
 	class ControleurMessagerie extends BaseControleur
 	{
+		/**
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params)
 		{
             //si le paramètre action existe
@@ -224,10 +230,10 @@
           
 /**
  * @brief   fait le téléchargement d'un fichier
- * @param   string| $nom_fichier   
- * @param   string| $destination 
- * @param   string| $fichier_taille
- * @param   string| $nom_dest
+ * @param   [string] $nom_fichier   
+ * @param   [string] $destination 
+ * @param   [string] $fichier_taille
+ * @param   [string] $nom_dest
  * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
  */
 function charge_fichier($fichierJoint, $destination, $fichier_taille, $id_message)

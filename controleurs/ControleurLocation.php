@@ -5,11 +5,18 @@
  * @version     3.0
  * @date        25 février 2018
  * @brief       Controleur pour la location de logements
- * @details     
+ *
+ * @details 	Ce controleur définit les différentes activités concernant les activités de location d'un logement.
  */ 
 
 	class ControleurLocation extends BaseControleur {
 
+		/**
+         * @brief   Méthode qui sera appelée par les contrôleurs
+         * @details Méthode pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params) {
 
             $modeleLocation = $this->lireDAO("Location");
@@ -246,9 +253,12 @@
 		  	}
 
 	  	} // Fin d'index
-
-
-        // Fonction pour afficher le modal de demande de location d'un logement
+		/**
+		 * @brief Fonction pour afficher le modal de demande de location d'un logement
+		 * @details Prend les coordonnées et autres informations sur les logements. 
+		 * @details Utilise les modèles suivants: ModeleLocaton,ModeleLogement, ModeleDisponibilite et le ModeleOption
+		 * @return Puis ouvre la vue AfficheLocation.
+		 */
         public function afficherLocation($params) {
             $modeleLocation = $this->lireDAO("Location");
             $modeleLogement = $this->lireDAO("Logement");
@@ -326,7 +336,12 @@
             $this->afficherVues("location", $donnees, false);
         }
 
-        // Fonction pour formatter un chiffre en monnaie
+        /**
+		 * @brief Fonction pour formatter un nombre en monnaie
+		 * @details Prend un nombre  entier le met en float et lui met le signe de dollar
+		 * @param [numeric] nombre
+		 * @return un nombre.
+		 */
         public function formatMonnaie($nombre) {
             if (is_numeric($nombre)) {
                 $nombre = number_format(ceil($nombre / 0.01) * 0.01, 2, '.', ' ') . " $";
@@ -334,10 +349,11 @@
             }
             return false;
         }
-
-        // Fonction pour créer un jeton pour s'assurer qu'une location ait seulement une évaluation
-        // Source : https://stackoverflow.com/questions/1846202/php-how-to-generate-a-random-unique-alphanumeric-string/13733588#13733588
-        public function creerJeton($longueur){
+		/**
+         * Fonction pour créer un jeton pour s'assurer qu'une location ait seulement une évaluation
+         * Source : https://stackoverflow.com/questions/1846202/php-how-to-generate-a-random-unique-alphanumeric-string/13733588#13733588
+         */
+		public function creerJeton($longueur){
             $jeton = "";
             $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz123456789";
             $max = strlen($codeAlphabet);

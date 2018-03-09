@@ -9,7 +9,12 @@
  */ 
 
 	class ControleurEvaluation extends BaseControleur {
-
+		/**
+         * @brief   Méthode qui sera appelée par les contrôleurs
+         * @details Méthode pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params) {
 
             $modeleLocation = $this->lireDAO("Location");
@@ -63,7 +68,13 @@
 		  	}
 
 	  	} // Fin d'index
-
+		
+		/**
+		 * @brief Fonction pour afficher la page evaluation
+		 * @details Vérifie que l'utilisateur a les droits et que l'utilisateur évalue le bon logement 
+		 * @return Puis ouvre la vue evaluation.
+		 */
+		
         // Fonction pour afficher la page evaluation
         public function afficherEvaluation($params, $donnees = array()) {
             $modeleLocation = $this->lireDAO("Location");

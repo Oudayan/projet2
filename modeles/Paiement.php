@@ -11,10 +11,11 @@
 */
 	class Paiement
 	{
+		//attributs
 		public $id_paiement;
 		public $paiement;
 
-
+		//constructeur
 		public function __construct($id = 0, $p = "")
 		{
 			$this->id_paiement = $id;

@@ -5,10 +5,20 @@
  * @version 1.0
  * @date    9 février 2018
  * @brief   Route vers le bon controlleur 
+ *
  * @details Route toute les requêtes URL (query string) au bon controleur 
  */
 	class Routeur {
-
+		 /**
+         * @brief   Méthode qui sera appelée pour donner la route vers les controleurs ou utilisera le contrôleur par default
+         * @details Méthode static pour déclarer le controleur et si aucun n'a été spécifié il en donne un par defaut.
+         * @details Signale si le controleur est invalide ou s'il n'existe pas. 
+		 * @param   [string]  $chaineRequete    	
+		 * @param   [string]  $esperluette 
+		 * @param   [string]  $controleur
+		 * @param   [string]  $objectControleur		 
+         * @return  le no du contrôleur
+         */
 		public static function route() {
 			//obtenir le controleur qui devra traiter la requête.
 			$chaineRequete = $_SERVER["QUERY_STRING"];
