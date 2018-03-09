@@ -241,6 +241,8 @@
 						trigger_error("Action invalide");
 					*/
 					break;
+					default:
+                        trigger_error($params["action"] . " Action invalide.");		
 				}	
 			}
 			else

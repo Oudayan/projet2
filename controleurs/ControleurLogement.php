@@ -210,6 +210,18 @@
 						}
 
                         break;
+					case "validerLogement";
+						var_dump($params);
+						if(isset($_SESSION["courriel"]) && $_SESSION["typeUser"] == 1)  {
+								echo "OUi, loggé";
+								var_dump("dans le controleur");
+								$id_logement = $params["id_logement"];
+								$data = $modeleLogement->lireLogementParId($id_logement);
+								$modeleLogement->ValiderLogement($data);
+							}
+							else
+								echo "voues n'est pas loggé";
+					break;
                     default:
                         trigger_error($params["action"] . " Action invalide.");		
 					

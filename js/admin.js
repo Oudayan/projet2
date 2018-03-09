@@ -14,6 +14,12 @@
 			afficherListeUsagers();
 			afficherLogementsaValider();
 		//afficherListeLogements();
+		
+	var span = document.getElementById("closeImg");
+	span.onclick = function() { 
+    modal.style.display = "none";		
+	}
+	
   });
   
   usagersValider = {};
@@ -99,7 +105,6 @@
         success: function(json) {
           $("#validerLogements").html("");
           $.each(json, function(i, item) {
-			 console.log(item);
 			  id = "rangee"+i;
 			  if (item.apt == null)
 				  item.apt = '';
@@ -194,7 +199,7 @@
   
 	  function afficherDetailLogement(i,reception){
 		var logement = JSON.parse(logementaValider[i]);
-		 console.log(logement);
+		 document.getElementById("id_logement").value = logement.id_logement;
 		$('.ficheLogement').removeClass('hidden');
 		$('.mprix').val(logement.prix);
 		$('.frais_nettoyage').val(logement.frais_nettoyage);
@@ -202,7 +207,6 @@
 		$('.type_logement').val(logement.id_type_logement); 
 		$('.description').val(logement.description)
 		xyz = $('.stationnement');
-		console.log(xyz);
 		if (logement.est_stationnement == 1) 
 			document.getElementById('stationnement').innerHTML = "Oui";
 		else
@@ -250,7 +254,6 @@
 		$('.index').val(i);  // Valeur pour avoir le nombre  de ligne, dans le tableau
 		$('#mesPhotos').find('img').remove();
 		$.each(photosValider[i], function(j, photo){
-			console.log(j);
 				chemin = "http://127.0.0.1/projet2/"+photosValider[i][j];
 				$("#mesPhotos").append(  // ajouter des photos dans la fiche 
 
@@ -259,18 +262,10 @@
 			 });
   }
   
-  function verifierPhotos() {
-	  alert("Fonction photos");
-	   $("#lightgallery").lightGallery(); 
-	   alert("Fin");
-  }
-  
-  
   function cacherBoitesLecture() {
     $('.ficheUsager').addClass('hidden');
 	$('.ficheLogement').addClass('hidden');
   }
-  
 
   $( function() {
     $( "#selectable" ).selectable({
@@ -357,7 +352,7 @@
               url         : 'index.php?Usagers&action=validerUsager', 
               data: {courriel:courriel},
  		  success: function(json) {
-			alert('Ok, validado',json);
+			alert('Ok, validé',json);
 			cacherBoitesLecture();
 			$("#rangee"+i).hide();
          },
@@ -365,13 +360,30 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		}) 
-
 	}
 	
-	function validerLogement() {
-		
+	function validerLogement( ) {
+		 id_logement = document.getElementById('id_logement').value;
+		 i = document.getElementById("vlindex").value;
+		 console.log(id_logement);
+		 $.ajax({
+              type        : 'POST', 
+              url         : 'index.php?Logement&action=validerLogement', 
+              data: {id_logement:id_logement},
+ 		  success: function(json) {
+			alert('Ok, validé',json);
+			cacherBoitesLecture();
+			$("#rangee"+i).hide();
+         },
+		  error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		})
 	}
 	
+	function bannirLogement() {
+		alert("Allez, bannir");
+	}
 	function bannirUsager() {
        $('#myModal').modal('show');
       courriel = document.getElementById("courriel").value;
@@ -383,7 +395,6 @@
 		i = document.getElementById("index").value;
 		var x = document.getElementById("description").value;
 		if (x.trim()!=""){
-			alert('Ahora si, a bannir'); 
 		    $.ajax({
               type        : 'POST', 
               url         : 'index.php?Usagers&action=bannirUsager', 
@@ -399,7 +410,7 @@
             }) 
 			}
 		else
-			alert('No paso');
+			alert('Nous avons un probléme');
 		
    }
    
@@ -419,7 +430,7 @@
 	return (monErr);	
 }
 
-var modal = document.getElementById('myModal');
+var modal = document.getElementById('myModalimg');
 var modalImg = document.getElementById("img01");
 $('#mesPhotos').click(function (e) {
 			console.log(e.target.id);
@@ -427,8 +438,3 @@ $('#mesPhotos').click(function (e) {
 			modal.style.display = "block";
 			modalImg.src = img.src;
         });
-
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() { 
-    modal.style.display = "none";
-}

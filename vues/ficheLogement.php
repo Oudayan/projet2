@@ -8,10 +8,11 @@
  * 
  */
 ?>
-	<div style="height:500px">
-    <button type="button" class="btn-bleu btn-sm repondre" onclick="validerLogement();">Valider</button>
-    <button type="button" class="btn-bleu btn-sm" onclick="bannirLogement()">Bannir</button><hr>
+	<div style="height:500px" id="ficheLogement">
+    <button type="button" class="btn btn-bleu repondre" onclick="validerLogement();">Valider</button>
+    <button type="button" class="btn btn-secondary" onclick="bannirLogement()">Bannir</button><hr>
     <div class="form-group row heigthFormBLecture">
+	  <input type="hidden" name="id_logement" id="id_logement">
       <label class="col-sm-2 col-form-label-sm"><b>Prix</b></label>
       <div class="col-sm-10">
         <input class="form-control-plaintext form-control-sm mprix" type="text" disabled>
@@ -26,14 +27,14 @@
     <div class="form-group row heigthFormBLecture">
       <label class="col-sm-2 col-form-label-sm"><b>Courriel</b></label>
       <div class="col-sm-10">
-		<input type="hidden" class="index" id="index">
-        <input class="form-control-plaintext form-control-sm courriel" name='courriel' id='courriel' type="email" disabled>
+		<input type="hidden" class="index" id="vlindex">
+        <input class="form-control-plaintext form-control-sm courriel" name='courriel' type="email" disabled>
       </div>
     </div>
      <div class="form-group row heigthFormBLecture">
       <label class="col-sm-2 col-form-label-sm"><b>Type Logement</b></label>
 	  <div class="col-sm-10">
-	  <input class="form-control-plaintext form-control-sm type_logement" name='courriel' id='courriel' type="email" disabled>
+	  <input class="form-control-plaintext form-control-sm type_logement" name='courriel' type="email" disabled>
       </div>
     </div>
 	<div class="table-responsive">  <!-- form-group row heigthFormBLecture -->
@@ -83,9 +84,9 @@
 			<div class="container" id="mesPhotos" >
 					
 			</div> <!-- /container -->
-				<div id="myModal" class="modal">
-					<span class="close">&times;</span>
-					<img class="modal-content" id="img01">
+				<div id="myModalimg" class="modal">
+					<span class="close" id="closeImg">&times;</span>
+					<img class="modal-contentImg" id="img01">
 				</div>
 			</div> 
 		</div>
