@@ -507,14 +507,14 @@
 			document.getElementById("errDescription").style.visibility="hidden";
 			$("#bannir").prop("disabled", false);
 		}	
-	return (monErr);	
-}
+        return (monErr);	
+    }
 
-var modal = document.getElementById('myModalimg');
-var modalImg = document.getElementById("img01");
-$('#mesPhotos').click(function (e) {
-    console.log(e.target.id);
-    var img = document.getElementById(e.target.id);
-    modal.style.display = "block";
-    modalImg.src = img.src;
-});
+    var modal = document.getElementById('myModalimg');
+    var modalImg = document.getElementById("img01");
+    $('#mesPhotos').click(function (e) {
+        console.log(e.target.id);
+        var img = document.getElementById(e.target.id);
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    });
