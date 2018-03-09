@@ -28,7 +28,7 @@
       <label class="col-sm-2 col-form-label-sm"><b>Courriel</b></label>
       <div class="col-sm-10">
 		<input type="hidden" class="index" id="vlindex">
-        <input class="form-control-plaintext form-control-sm courriel" name='courriel' type="email" disabled>
+        <input class="form-control-plaintext form-control-sm courriel" name='courriel' id="vuCourriel" type="email" disabled>
       </div>
     </div>
      <div class="form-group row heigthFormBLecture">

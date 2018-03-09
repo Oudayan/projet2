@@ -425,7 +425,7 @@
 		
 	};
 	function validerUsager() {
-		courriel = document.getElementById("courriel").value;
+		courriel = document.getElementById("vuCourriel").value;
 		i = document.getElementById("index").value;
 		 $.ajax({
               type        : 'POST', 
