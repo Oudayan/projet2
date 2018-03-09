@@ -13,7 +13,13 @@
 			afficherUsagersaValider();
 			afficherListeUsagers();
 			afficherLogementsaValider();
-		//afficherListeLogements();
+		   // afficherListeLogements();
+		
+	var span = document.getElementById("closeImg");
+	span.onclick = function() { 
+    modal.style.display = "none";		
+	}
+	
   });
   
   usagersValider = {};
@@ -49,7 +55,7 @@
     });
   };
   
-   usagersListe = {};
+  usagersListe = {};
   function afficherListeUsagers() {
     $.ajax({
         url: 'index.php?Usagers&action=afficheListeUsagersJson',
@@ -58,7 +64,7 @@
         success: function(json) {
           $("#tableauListeUsagers").html("");
           $.each(json, function(i, item) {
-			  id = "rangee"+i;
+			  id = "lurangee"+i;
 			  banni = item.u_banni == 1 ? "Banni" : "";
 			  valide = item.u_valide != 1 && item.u_banni != 1 ? "À valider" : "";
             $("#tableauListeUsagers").append(
@@ -99,8 +105,7 @@
         success: function(json) {
           $("#validerLogements").html("");
           $.each(json, function(i, item) {
-			 console.log(item);
-			  id = "rangee"+i;
+			  id = "lvrangee"+i;
 			  if (item.apt == null)
 				  item.apt = '';
 			  else 
@@ -169,6 +174,86 @@
     });
  }
   
+ listeValider = {};
+ photosValider = {};
+ function afficherListeLogements(){
+	    $.ajax({
+        url: 'index.php?Logement&action=lireTousLogements',
+        type: 'POST',
+        dataType: 'json',
+        success: function(json) {
+          $("#validerLogements").html("");
+          $.each(json, function(i, item) {
+			  id = "lvrangee"+i;
+			  if (item.apt == null)
+				  item.apt = '';
+			  else 
+				  item.apt += '-';
+			  	banni = item.u_banni == 1 ? "Banni" : "";
+			  valide = item.u_valide != 1 && item.u_banni != 1 ? "À valider" : "";
+            $("#validerLogements").append(
+                "<tr class='clickable-row' id="+id +" data-href='#' onclick='afficherDetailLogement(" + i + ",true)'>" +
+                  "<td>" + item.apt + item.no_civique + "</td>" +
+				  "<td>" + item.rue + "</td>" +
+                  "<td>" + item.ville + "</td>" +
+				  "<td>" + item.province + "</td>" +
+				  "<td>" + item.pays + "</td>" +
+				  "<td>" + item.code_postal + "</td>" +
+                 "</tr>");
+				 photosValider[i] = {};
+				 $.each(item.Photos, function(j, photo){
+					 photosValider[i][j] = item.Photos[j];
+				 })
+            logementaValider[i] = JSON.stringify(
+              new Logement(
+				item.id_logement,
+                item.apt,
+				item.no_civique,
+				item.rue,
+				item.ville,
+				item.province,
+				item.pays,
+				item.code_postal, 
+				item.latitude,
+				item.longitude,
+				item.id_type_logement,
+				item.prix, 
+				item.evaluation,
+				item.description,
+				item.courriel,
+				item.nb_personnes,
+				item.nb_chambres,
+				item.nb_lits,
+				item.nb_salle_de_bain,
+				item.nb_demi_salle_de_bain,
+				item.frais_nettoyage,
+				item.est_stationnement,
+				item.est_wifi,
+				item.est_cuisine,
+				item.est_tv,
+				item.est_fer_a_repasser,
+				item.est_cintres,
+				item.est_seche_cheveux,
+				item.est_climatise,
+				item.est_laveuse,
+				item.est_secheuse,
+				item.est_chauffage,
+				item.l_valide,
+				item.l_actif,
+				item.l_banni,
+				item.l_date_banni,
+				item.l_commentaire_banni
+              )
+            );
+			
+          });
+		  // console.log(logementaValider[0]);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+ }
   function afficherValider(i,reception){
     var usager = JSON.parse(usagersValider[i]);
     $('.ficheUsager').removeClass('hidden');
@@ -194,7 +279,7 @@
   
 	  function afficherDetailLogement(i,reception){
 		var logement = JSON.parse(logementaValider[i]);
-		 console.log(logement);
+		 document.getElementById("id_logement").value = logement.id_logement;
 		$('.ficheLogement').removeClass('hidden');
 		$('.mprix').val(logement.prix);
 		$('.frais_nettoyage').val(logement.frais_nettoyage);
@@ -202,7 +287,6 @@
 		$('.type_logement').val(logement.id_type_logement); 
 		$('.description').val(logement.description)
 		xyz = $('.stationnement');
-		console.log(xyz);
 		if (logement.est_stationnement == 1) 
 			document.getElementById('stationnement').innerHTML = "Oui";
 		else
@@ -250,7 +334,6 @@
 		$('.index').val(i);  // Valeur pour avoir le nombre  de ligne, dans le tableau
 		$('#mesPhotos').find('img').remove();
 		$.each(photosValider[i], function(j, photo){
-			console.log(j);
 				chemin = "http://127.0.0.1/projet2/"+photosValider[i][j];
 				$("#mesPhotos").append(  // ajouter des photos dans la fiche 
 
@@ -259,18 +342,10 @@
 			 });
   }
   
-  function verifierPhotos() {
-	  alert("Fonction photos");
-	   $("#lightgallery").lightGallery(); 
-	   alert("Fin");
-  }
-  
-  
   function cacherBoitesLecture() {
     $('.ficheUsager').addClass('hidden');
 	$('.ficheLogement').addClass('hidden');
   }
-  
 
   $( function() {
     $( "#selectable" ).selectable({
@@ -350,14 +425,14 @@
 		
 	};
 	function validerUsager() {
-		courriel = document.getElementById("courriel").value;
+		courriel = document.getElementById("vuCourriel").value;
 		i = document.getElementById("index").value;
 		 $.ajax({
               type        : 'POST', 
               url         : 'index.php?Usagers&action=validerUsager', 
               data: {courriel:courriel},
  		  success: function(json) {
-			alert('Ok, validado',json);
+			alert('Ok, validé',json);
 			cacherBoitesLecture();
 			$("#rangee"+i).hide();
          },
@@ -365,25 +440,41 @@
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		}) 
-
 	}
 	
-	function validerLogement() {
-		
+	function validerLogement( ) {
+		 id_logement = document.getElementById('id_logement').value;
+		 i = document.getElementById("vlindex").value;
+		 console.log(id_logement);
+		 $.ajax({
+              type        : 'POST', 
+              url         : 'index.php?Logement&action=validerLogement', 
+              data: {id_logement:id_logement},
+ 		  success: function(json) {
+			alert('Ok, validé',json);
+			cacherBoitesLecture();
+			$("#lvrangee"+i).hide();
+         },
+		  error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		})
 	}
 	
+	function bannirLogement() {
+		alert("Allez, bannir");
+	}
 	function bannirUsager() {
        $('#myModal').modal('show');
-      courriel = document.getElementById("courriel").value;
+      courriel = document.getElementById("vuCourriel").value;
       i = document.getElementById("index").value;
 	 }
 
    function bannir(){
-	   	courriel = document.getElementById("courriel").value;
+	   	courriel = document.getElementById("vuCourriel").value;
 		i = document.getElementById("index").value;
 		var x = document.getElementById("description").value;
 		if (x.trim()!=""){
-			alert('Ahora si, a bannir'); 
 		    $.ajax({
               type        : 'POST', 
               url         : 'index.php?Usagers&action=bannirUsager', 
@@ -399,7 +490,7 @@
             }) 
 			}
 		else
-			alert('No paso');
+			alert('Nous avons un probléme');
 		
    }
    
@@ -416,19 +507,14 @@
 			document.getElementById("errDescription").style.visibility="hidden";
 			$("#bannir").prop("disabled", false);
 		}	
-	return (monErr);	
-}
+        return (monErr);	
+    }
 
-var modal = document.getElementById('myModal');
-var modalImg = document.getElementById("img01");
-$('#mesPhotos').click(function (e) {
-			console.log(e.target.id);
-			var img = document.getElementById(e.target.id);
-			modal.style.display = "block";
-			modalImg.src = img.src;
-        });
-
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() { 
-    modal.style.display = "none";
-}
+    var modal = document.getElementById('myModalimg');
+    var modalImg = document.getElementById("img01");
+    $('#mesPhotos').click(function (e) {
+        console.log(e.target.id);
+        var img = document.getElementById(e.target.id);
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    });

@@ -96,7 +96,7 @@ function estNbCivique() {
 function estRue() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["rue"].value;
-	expr =/^([A-Z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]*[\s]?[a-zA-Z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]+[\s]?[\-]?[a-zA-Z ]*)$/g;
+	expr =/^([A-Z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ,.-'"]*[\s]?[a-zA-Z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ,.-'"]+[\s]?[\-]?[a-zA-Z ]*)$/g;
 	if (!x.match(expr)) {
 		document.getElementById("errRue").style.visibility="visible";
 		monErr ++;
@@ -129,7 +129,7 @@ function estCodePostal() { // pour valider le code postal
 function estVille() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["ville"].value;
-	expr =/^([A-Z][a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]+[\s]?[\-]?[a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ ]*)$/g;
+	expr =/^([A-Z][a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"]+[\s]?[\-]?[a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"]*)$/g;
 	if (!x.match(expr)) {
 		document.getElementById("errVille").style.visibility="visible";
 		monErr ++;
@@ -143,7 +143,7 @@ function estVille() {
 function estProvince() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["province"].value;
-	expr =/^([A-Z][a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]+[\s]?[\-]?[a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]*)$/g;	
+	expr =/^([A-Z][a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"]+[\s]?[\-]?[a-zA-ZàâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"]*)$/g;	
 	if (!x.match(expr)) {
 		document.getElementById("errProvince").style.visibility="visible";
 		monErr ++;
@@ -157,7 +157,7 @@ function estProvince() {
 function estPays() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["pays"].value;
-	expr =/^([A-Z][a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]+[\s]?[\-]?[a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]*)$/g;
+	expr =/^([A-Z][a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"]+[\s]?[\-]?[a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"]*)$/g;
 	if (!x.match(expr)) {
 		document.getElementById("errPays").style.visibility="visible";
 		monErr ++;
@@ -203,7 +203,7 @@ function estPrix() {
 function estFraisNettoyage() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["frais_nettoyage"].value;
-	if (x<=0) {
+	if (x<0) {
 		document.getElementById("errFraisNettoyage").style.visibility="visible";
 		monErr ++;
 	}
@@ -216,7 +216,7 @@ function estFraisNettoyage() {
 function estDescription() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["description"].value;
-	expr =/^([A-Z][a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.]+[\s]?[\-]?[a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.]*)$/g;
+	expr =/^([A-Z][a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"!?]+[\s]?[\-]?[a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.-'"!?]*)$/g;
 	if (!x.match(expr)) {
 		document.getElementById("errDescription").style.visibility="visible";
 		monErr ++;

@@ -77,7 +77,14 @@
             $mon_id = $id->lireIdLogement();
         return $mon_id;
 		}
-       
+		
+		public function ValiderLogement(Logement $logement) {
+			var_dump("dans le modele");
+			$query = "UPDATE " . $this->lireNomTable() . " SET l_valide = 1 WHERE id_logement = ?";
+			$data = array($logement->lireIdLogement());
+			return $this->requete($query, $data);
+		}
+		
         public function effacerLogement($id) {
         	return $this->effacer($id);
         }
