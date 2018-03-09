@@ -57,7 +57,7 @@ main {
     background: url(../images/MONTREAL.jpg) no-repeat fixed; 
     background-size: contain;
     height: 70vh;
-    margin-top: -10vh;
+    margin-top: -12vh;
 }
 
 .depart {
@@ -86,7 +86,7 @@ main {
     }
     
     .depart {
-        bottom: -35vh;
+        bottom: -38vh;
     }
 }
 
@@ -100,18 +100,37 @@ main {
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 991px) {
     main.background {
+        background-position: 0 19.2vh;
     }
 
     .depart {
-        bottom: -42vh;
+        bottom: -38vh;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 875px) {
+    .depart {
+        bottom: -35vh;
+    }
+}
+
+@media (max-width: 800px) {    
+    .depart {
+        bottom: -45vh;
+    }
+}
+
+@media (max-width: 700px) {    
+    .depart {
+        bottom: -40vh;
+    }
+}
+
+@media (max-width: 537px) {
     main.background {
-        background-position: 0 11vh;
+        background-position: 0 22vh;
     }
 }
 
@@ -311,7 +330,7 @@ carousel-caption h5 {
     color: #999;
 }
 
-header a.nav-item.nav-link {
+header a.nav-item.nav-link, a.nav-item {
     color: #e98d34;
 }
 
@@ -324,7 +343,7 @@ header a.nav-item.nav-link {
       color: #f6c784;
 }
 
-.iconMessage {
+.iconMessage, .iconNav {
     color: #e98d34;
 }
     
@@ -527,7 +546,7 @@ nav.v-pills-tab {
     border-radius: 4px;
   }
   
-  .display th, td {
+  .display th{
     text-align: center !important;
   }
 

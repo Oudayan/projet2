@@ -213,7 +213,7 @@
           $.each(json, function(i, item) {
 			  console.log("Envoye",json);
             var destinateurs = item.destinataire.length > 30 ? item.destinataire.substr(0,28) + "...": item.destinataire;
-            var joint = item.fichier_joint == null ? "" : item.fichier_joint;
+            var joint = item.fichier_joint == null ? "" : "<i class='fa fa-paperclip' aria-hidden='true'</i>";  
            $("#msgEnvoyes").append(
               "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",false)'>" +
                 "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
