@@ -107,7 +107,7 @@
                                     <?php if (isset($donnees["locations"])) {
                                         for ($i=0; $i<count($donnees["locations"]); $i++) { 
                                             if ($donnees["locations"][$i]->lireValide() == 0 || $donnees["locations"][$i]->lireValide() == 1) { ?>
-                                            <tr>
+                                            <tr id="locationCourante<?= $donnees["locations"][$i]->lireIdLocation() ?>">
                                                 <th scope="row" class="pt-4"><?= (count($donnees["locations"]) - $i) ?></th>
                                                 <td class="pt-4"><?= $donnees["logement"][$i]->lireNoCivique() . " " . $donnees["logement"][$i]->lireRue() . " " . $donnees["logement"][$i]->lireApt() . ", " . $donnees["logement"][$i]->lireVille() . ", " . $donnees["logement"][$i]->lireProvince() . ", " . $donnees["logement"][$i]->lirePays() . ", " . $donnees["logement"][$i]->lireCodePostal(); ?></td>
                                                 <td class="pt-4"><?= $donnees["locations"][$i]->lireDateDebut() ?></td>
@@ -121,7 +121,7 @@
                                                     Aucune
                                                 <?php } ?>
                                                 </td>
-                                                <td><button class="btn btn-secondary btn-sm" onclick="" <?= (strtotime($donnees["locations"][$i]->lireDateDebut()) <= strtotime(date('Y-m-d')) ? "disabled" : "") ?>>Annuler</button></td>
+                                                <td><button class="btn btn-secondary btn-sm" onclick="refuserLocation(<?= $donnees["locations"][$i]->lireIdLocation() ?>)" <?= (strtotime($donnees["locations"][$i]->lireDateDebut()) <= strtotime(date('Y-m-d')) ? "disabled" : "") ?>>Annuler</button></td>
                                             </tr>
                                             <?php }
                                         }
@@ -146,7 +146,7 @@
                                     <?php if (isset($donnees["locations"])) {
                                         for ($i=0; $i<count($donnees["locations"]); $i++) { 
                                             if ($donnees["locations"][$i]->lireValide() != 0 && $donnees["locations"][$i]->lireValide() != 1) { ?>
-                                            <tr>
+                                            <tr id="locationHistorique<?= $donnees["locations"][$i]->lireIdLocation() ?>">
                                                 <th scope="row" class="pt-4"><?= (count($donnees["locations"]) - $i) ?></th>
                                                 <td class="pt-4"><?= $donnees["logement"][$i]->lireNoCivique() . " " . $donnees["logement"][$i]->lireRue() . " " . $donnees["logement"][$i]->lireApt() . ", " . $donnees["logement"][$i]->lireVille() . ", " . $donnees["logement"][$i]->lireProvince() . ", " . $donnees["logement"][$i]->lirePays() . ", " . $donnees["logement"][$i]->lireCodePostal(); ?></td>
                                                 <td class="pt-4"><?= $donnees["locations"][$i]->lireDateDebut() ?></td>
@@ -159,7 +159,7 @@
                                                 ($donnees["locations"][$i]->lireValide() == 3 ? "Expirée" : 
                                                 ($donnees["locations"][$i]->lireValide() == 4 ? "Déclinée (Multiple)" : ""))))) ?>
                                                 </td>
-                                                <td><button class="btn btn-secondary btn-sm" onclick="" <?= (strtotime($donnees["locations"][$i]->lireDateDebut()) <= strtotime(date('Y-m-d')) ? "disabled" : "") ?>>Annuler</button></td>
+                                                <td><button class="btn btn-bleu btn-sm" onclick="approuverLocation(<?= $donnees["locations"][$i]->lireIdLocation() ?>)" <?= (strtotime($donnees["locations"][$i]->lireDateDebut()) <= strtotime(date('Y-m-d')) ? "disabled" : "") ?>>Activer</button></td>
                                             </tr>
                                             <?php }
                                         }
@@ -266,6 +266,7 @@
                     dataType: 'html',
                     success: function(resultat) {
                         locationsAValider();
+                        $("#locationHistorique" + idLocation).remove();
                     }
                 });
             };
@@ -281,6 +282,8 @@
                     dataType: 'html',
                     success: function(resultat) {
                         locationsAValider();
+                        $("#locationCourante" + idLocation).remove();
+                        //$(resultat).appendTo("#locationHistorique" + idLocation);
                     }
                 });
             };

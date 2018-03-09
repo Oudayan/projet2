@@ -1,16 +1,22 @@
 <?php
 /**
-  * @file     ControleurMessagerie.php
-  * @autheurs Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
-  * @version 1.0
-  * @date 26 février 2018
-  * @brief Définit la classe pour le controleur de la messagerie
-  *
-  * @details Cette classe définit les différentes activités concernant la messagerie.
-* 
-*/
+ * @file    ControleurMessagerie.php
+ * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version 1.0
+ * @date 	26 février 2018
+ * @brief 	Définit la classe pour le controleur de la messagerie
+ *
+ * @details Cette classe définit les différentes activités concernant la messagerie.
+ * 
+ */
 	class ControleurMessagerie extends BaseControleur
 	{
+		/**
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params)
 		{
             //si le paramètre action existe
@@ -116,10 +122,12 @@
                         if (isset($_SESSION["courriel"])) {
                             $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
                             $nbNouveauxMessages = $modeleMessagerie->nbNouveauxMessages($_SESSION["courriel"]);
-                            echo '<div class="col-sm-6 offset-sm-3 alert alert-secondary d-flex justify-content-between">';
-                            echo    '<h3 class="pt-1">Vous avez <a href="index.php?Messagerie&action=afficherMessagerie"><strong>' . $nbNouveauxMessages["nbMessages"] . ($nbNouveauxMessages["nbMessages"] == 1 ? "</strong> nouveau message" : "</strong> nouveaux messages") . '</a></h3>';
-                            echo    '<button type="button" class="close" data-toggle="collapse" data-target="#alerteMessagerie" aria-expanded="false" aria-controls="alerteMessagerie" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-                            echo '</div>';
+                            if ($nbNouveauxMessages["nbMessages"] > 0) {
+                                echo '<div class="col-sm-6 offset-sm-3 alert alert-secondary d-flex justify-content-between">';
+                                echo    '<h3 class="pt-1">Vous avez <a href="index.php?Messagerie&action=afficherMessagerie"><strong>' . $nbNouveauxMessages["nbMessages"] . ($nbNouveauxMessages["nbMessages"] == 1 ? "</strong> nouveau message" : "</strong> nouveaux messages") . '</a></h3>';
+                                echo    '<button type="button" class="close" data-toggle="collapse" data-target="#alerteMessagerie" aria-expanded="false" aria-controls="alerteMessagerie" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                                echo '</div>';
+                            }
                         }
                         break;  
                     
@@ -222,10 +230,10 @@
           
 /**
  * @brief   fait le téléchargement d'un fichier
- * @param   string| $nom_fichier   
- * @param   string| $destination 
- * @param   string| $fichier_taille
- * @param   string| $nom_dest
+ * @param   [string] $nom_fichier   
+ * @param   [string] $destination 
+ * @param   [string] $fichier_taille
+ * @param   [string] $nom_dest
  * @return  les messages dans un cas où il y a des erreurs dans le format et la taille du fichier
  */
 function charge_fichier($fichierJoint, $destination, $fichier_taille, $id_message)

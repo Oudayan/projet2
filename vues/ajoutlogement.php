@@ -17,31 +17,31 @@
 		${"photo".$i }= "";
 		${"id_Piece".$i} = 0; 
 	}
-  if(isset($donnees['Logement'])) {
-		//echo '<PRE>';
-		//var_dump($donnees['Photos']);
-		//echo '</PRE>';
-			$id_logement = $donnees['Logement']->lireIdLogement();
-			$titre= "Modification de logement";
-			$apt = $donnees['Logement']->lireApt();
-			$no_civique = $donnees['Logement']->lireNoCivique();
-			$rue = $donnees['Logement']->lireRue();
-			$ville = $donnees['Logement']->lireVille();
-			$province = $donnees['Logement']->lireProvince();
-			$pays = $donnees['Logement']->lirePays();
-			$code_postal = $donnees['Logement']->lireCodePostal();
-			$latitude = $donnees['Logement']->lireLatitude();
-			$longitude = $donnees['Logement']->lireLongitude();
-			$id_TypeLogement = $donnees['Logement']->lireIdTypeLogement();
-			$prix = $donnees['Logement']->lirePrix();
-			$description = $donnees['Logement']->lireDescription();
-			$nb_personnes = $donnees['Logement']->lireNbPersonnes();
-			$nb_chambres = $donnees['Logement']->lireNbChambres();
-			$nb_lits = $donnees['Logement']->lireNbLits();
-			$nb_salle_de_bain = $donnees['Logement']->lireNbSalleDeBain();
-			$nb_demi_salle_de_bain = $donnees['Logement']->lireNbDemiSalleDeBain();
-			$frais_nettoyage = $donnees['Logement']->lireFraisNettoyage();
-			
+    if (isset($donnees['Logement'])) {
+        //echo '<PRE>';
+        //var_dump($donnees['Photos']);
+        //echo '</PRE>';
+        $id_logement = $donnees['Logement']->lireIdLogement();
+        $titre= "Modification de logement";
+        $apt = $donnees['Logement']->lireApt();
+        $no_civique = $donnees['Logement']->lireNoCivique();
+        $rue = $donnees['Logement']->lireRue();
+        $ville = $donnees['Logement']->lireVille();
+        $province = $donnees['Logement']->lireProvince();
+        $pays = $donnees['Logement']->lirePays();
+        $code_postal = $donnees['Logement']->lireCodePostal();
+        $latitude = $donnees['Logement']->lireLatitude();
+        $longitude = $donnees['Logement']->lireLongitude();
+        $id_TypeLogement = $donnees['Logement']->lireIdTypeLogement();
+        $prix = $donnees['Logement']->lirePrix();
+        $description = $donnees['Logement']->lireDescription();
+        $nb_personnes = $donnees['Logement']->lireNbPersonnes();
+        $nb_chambres = $donnees['Logement']->lireNbChambres();
+        $nb_lits = $donnees['Logement']->lireNbLits();
+        $nb_salle_de_bain = $donnees['Logement']->lireNbSalleDeBain();
+        $nb_demi_salle_de_bain = $donnees['Logement']->lireNbDemiSalleDeBain();
+        $frais_nettoyage = $donnees['Logement']->lireFraisNettoyage();
+
 		if ($donnees['Logement']->lireEstStationnement()==1)
 			$est_stationnement = 'checked';
 		else
@@ -114,22 +114,21 @@
   }
 ?>
 
-<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+<!-- <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet"> -->
 <script src="js/validerFormLogement.js"></script>
 <script src="js/managePhotos.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3prxRP0MgiciOnRm7HODXcLJziJ_TJuc"></script>
 
-<main>
-		<body onload="checkPhotos()">
+    <main class="container" onload="checkPhotos()">
+        <div class="d-flex justify-content-around mt-3">
+            <h1><?= $titre?></h1>
+        </div>
 		<?php $courriel = $_SESSION["courriel"];
-		   $evaluation = null; ?>
-		<div class="container">
-
+        $evaluation = null; ?>
 		<form id="form_ajoute" onsubmit="return validateFormLogement()" action="index.php?Logement&action=enregistrerLogement" method="post"> <!--  -->
-		<h3><?= $titre?></h3>
 			<input name='courriel' id='courriel' type="hidden" value="<?= $courriel?>">
 			<input name='id_logement' id='id_logement' type="hidden" value="<?= $id_logement?>">
-		<fieldset style="border:2px groove">
+		<fieldset style="border:2px groove" class="p-2">
 		<legend>Adresse</legend>
         <div class="form-group row">
 			<div class="col-lg-3">
@@ -212,7 +211,7 @@
 			</div>
 			<div class="col-lg-4">
 				<label for="prix">Frais de nettoyage</label>
-				<input type="text" class="form-control" value=<?= $frais_nettoyage?> name="frais_nettoyage" onblur="estFraisNettoyage()" required>
+				<input type="text" class="form-control" value='<?= $frais_nettoyage?>' name="frais_nettoyage" onblur="estFraisNettoyage()" required>
 				<span id="errFraisNettoyage" style="color:red; visibility:hidden">* Frais de nettoyage invalide ou requis</span>				
 			</div>
 		</div>
@@ -223,7 +222,7 @@
 				<span id="errDescription" style="color:red; visibility:hidden">* Description invalide ou requis</span>
 			</div>
 		</div><hr>
-		<fieldset style="border:2px groove">
+		<fieldset style="border:2px groove" class="p-2">
 		<legend>Nombres</legend>
 		<div class="form-group row">
 			<div class="col-lg-2">			
@@ -256,13 +255,15 @@
 		</div>
 		</fieldset>
 		<br>
-		<fieldset style="border:2px groove">
+		<fieldset style="border:2px groove" class="p-2">
 		<legend>Items </legend>
 			<div class="form-group row">
 				<div class="col-lg-2">
+				<div class="form-group d-flex justify-content-between">
 					<input type="checkbox" name="est_stationnement" <?= $est_stationnement?> data-toggle="toggle">
 					<p>Stationnement</p>
 				</div>	  
+				</div>
 				<div class="col-lg-2">
 					<input type="checkbox" name="est_wifi" <?= $est_wifi?> data-toggle="toggle">
 					<p>Wifi</p>
@@ -315,7 +316,7 @@
 			</div>
 		</fieldset>
 		<!-- Photo -->
-	    <fieldset style="border:2px groove">
+	    <fieldset style="border:2px groove" class="p-2">
 		<legend>Photos</legend>
 			<div id="monConteneur">
 				<legend>Choix multiple des photos</legend>
@@ -327,7 +328,7 @@
 						<div id="filediv">
 							<label class="btn btn-primary">
 								<i class="fa fa-upload"></i> Des photos ... 
-								<input id="multiplesPhotos" name="files[]" type="file" multiple="" accept="image/*" onchange="prePhotos(this) style="display:none;" />
+								<input id="multiplesPhotos" name="files[]" type="file" multiple="" accept="image/*" onchange="prePhotos(this)" style="display:none;" />
 							</label>
 						</div>
 					</div>
@@ -776,13 +777,13 @@
 		</fieldset>
 		<hr>
 		<br>
-       <button onclick ="window.location.href='index.php'" class="btn btn-orange">Accueil</button>
-		<input type="submit" value="Envoyer"/>
+        <div class="d-flex justify-content-around mt-3">
+            <a href="index.php?Recherche&action=recherche"><button type="button" class="btn btn-lg btn-secondary">Page recherche</button></a>
+            <a href="index.php?Proprietaire&action=afficherLogements"><button type="button" class="btn btn-lg btn-bleu">Mes propriétés</button></a>
+            <input type="submit" class="btn btn-lg btn-orange" value="Sauvegarder"/>
+        </div>
+	</div>
     </form>
-	</div>
-	</div>
-	<button type="button" class="btn btn-lg btn-orange" data-toggle="modal" data-target="#modalLocation" c="chercherPrix()">Louez ce logement&nbsp;!</button>
-    <a target=_blank href="index.php?Recherche&action=recherche"><button type="button" class="btn btn-lg btn-bleu">Retour à la page recherche</button></a>
 
     <div class="modal fade" id="modalLocation" tabindex="-1" role="dialog" aria-labelledby="modalLocationLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -791,7 +792,6 @@
         </div>
     </div>
 </main>
-
 
 <script>
 	 function chercherPrix() {

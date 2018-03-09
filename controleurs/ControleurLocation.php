@@ -5,11 +5,18 @@
  * @version     3.0
  * @date        25 février 2018
  * @brief       Controleur pour la location de logements
- * @details     
+ *
+ * @details 	Ce controleur définit les différentes activités concernant les activités de location d'un logement.
  */ 
 
 	class ControleurLocation extends BaseControleur {
 
+		/**
+         * @brief   Méthode qui sera appelée par les contrôleurs
+         * @details Méthode pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params) {
 
             $modeleLocation = $this->lireDAO("Location");
@@ -34,12 +41,23 @@
                         $donnees["erreur"] = "";
                         if (isset($_SESSION["courriel"])) {
                             if (isset($params["idLogement"]) && isset($params["datesLocation"]) && isset($_SESSION["location"]["prixTotal"])) {
-                                // Valider que le logement est disponible pour ces dates
                                 $donnees["idLogement"] = $params["idLogement"];
+                                $donnees["datesLocation"] = $params["datesLocation"];
+                                $usager = $modeleUsagers->obtenir_par_courriel($_SESSION["courriel"]);
+                                if ($usager->lireTypePaiement() == 2) {
+                                    $donnees["paypal"] = "checked";
+                                }
+                                else if ($usager->lireTypePaiement() == 3) {
+                                    $donnees["mastercard"] = "checked";
+                                }
+                                else if ($usager->lireTypePaiement() == 4) {
+                                    $donnees["visa"] = "checked";
+                                }
                                 // Vérifier qu'un propriétaire ne puisse pas louer son propre logement 
-                                $logement = $modeleLogement->lireLogementParId($params["idLogement"]);
-                                $proprietaire = $logement->lireCourriel();
+                                $donnees["logement"] = $modeleLogement->lireLogementParId($params["idLogement"]);
+                                $proprietaire = $donnees["logement"]->lireCourriel();
                                 if ($_SESSION["courriel"] != $proprietaire) {
+                                    // Valider que le logement est disponible pour ces dates
                                     $disponible = false;
                                     $dates = explode("  au  ", $params["datesLocation"]);
                                     $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($params["idLogement"]);
@@ -115,7 +133,7 @@
                                     // Demande expirée - mettre valide=3 : 
                                     $modeleLocation->validerLocation($locations[$i]->lireIdLocation(), 3);
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "est expirée.";
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . " est expirée.";
                                     $sujet = "Demande de location expirée";
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["erreur"]));
                                 }
@@ -183,9 +201,11 @@
                                     // Approuver la location
                                     $modeleLocation->validerLocation($params["idLocation"], 1);
                                     // Créer le lien pour l'évaluation et commentaires sur le logement
-                                    $lienEvaluation = "<a href=" . RACINE . "/index.php?Evaluation&action=evaluerLogement&idLocation=" . $location->lireIdLocation() . "&jeton=" . $location->lireJeton() . "Évaluez ce logement !</a>";
+                                    //$lienEvaluation = "<a href=" . RACINE . "index.php?Evaluation&action=evaluerLogement&idLocation=" . $location->lireIdLocation() . "&jeton=" . $location->lireJeton() . "Évaluez ce logement !</a>";
+                                    $lienEvaluation = "http://localhost:8888/alouer/projet2/index.php?Evaluation&action=evaluerLogement&idLocation=" . $location->lireIdLocation() . "&jeton=" . $location->lireJeton();
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["success"] = "<p>Votre demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est approuvée !</p><p>Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement.</p><p>Voici le lien pour l'évaluation du logement : " . $lienEvaluation . ".<br>Ce lien sera fermé et compilé le lendemain de la date de fin de location.</p><p>Merci !</p>";
+                                    //$donnees["success"] = "<p>Votre demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est approuvée !</p><p>Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement.</p><p>Voici le lien pour l'évaluation du logement : " . $lienEvaluation . ".<br>Ce lien sera fermé et compilé le lendemain de la date de fin de location.</p><p>Merci !</p>";
+                                    $donnees["success"] = "Votre demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est approuvée ! Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement. Le lien pour l'évaluation du logement sera fermé et compilé le lendemain de la date de fin de location. Veuillez copier-coller ce lien dans la barre d'adresse de votre fureteur : " . $lienEvaluation;
                                     $sujet = "Demande de location APPROUVÉE !";
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["success"]));
                                 }
@@ -193,7 +213,7 @@
                                     // Mettre la location à 3-Expiré
                                     $modeleLocation->validerLocation($params["idLocation"], 3);
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . "est expirée.";
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est expirée.";
                                     $sujet = "Demande de location expirée";
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["erreur"]));
                                 }
@@ -213,11 +233,16 @@
                         if (isset($params["idLocation"])) {
                             $location = $modeleLocation->lireLocationParId($params["idLocation"]);
                             if (isset($_SESSION["courriel"]) && isset($_SESSION["courriel"]) == $location->lireIdProprietaire()) {
-                                $modeleLocation->validerLocation($params["idLocation"], 2);
-                                // Envoyer message au locataire par la messagerie interne
-                                $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "a été déclinée.";
-                                $sujet = "Location déclinée";
-                                header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["erreur"]));
+                                //if (strtotime($location->lireDateDebut()) > strtotime(date('Y-m-d'))) {
+                                    $modeleLocation->validerLocation($params["idLocation"], 2);
+                                    // Envoyer message au locataire par la messagerie interne
+                                    $donnees["erreur"] = "Désolé, la demande de location pour le logement situé au " . $adresse . " entre le " . $locations[$i]->lireDateDebut() . " et le " . $locations[$i]->lireDateFin() . "a été déclinée.";
+                                    $sujet = "Location déclinée";
+                                    header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["erreur"]));
+                                /*}
+                                else {
+                                    $donnees["erreur"] = "Vous ne pouvez pas annuler une location en cours.";
+                                }*/
                             }
                             else {
                                 $donnees["erreur"] = "Vous n'avez pas les permissions nécessaires pour effectuer cette action.";
@@ -241,9 +266,12 @@
 		  	}
 
 	  	} // Fin d'index
-
-
-        // Fonction pour afficher le modal de demande de location d'un logement
+		/**
+		 * @brief Fonction pour afficher le modal de demande de location d'un logement
+		 * @details Prend les coordonnées et autres informations sur les logements. 
+		 * @details Utilise les modèles suivants: ModeleLocaton,ModeleLogement, ModeleDisponibilite et le ModeleOption
+		 * @return Puis ouvre la vue AfficheLocation.
+		 */
         public function afficherLocation($params) {
             $modeleLocation = $this->lireDAO("Location");
             $modeleLogement = $this->lireDAO("Logement");
@@ -321,7 +349,12 @@
             $this->afficherVues("location", $donnees, false);
         }
 
-        // Fonction pour formatter un chiffre en monnaie
+        /**
+		 * @brief Fonction pour formatter un nombre en monnaie
+		 * @details Prend un nombre  entier le met en float et lui met le signe de dollar
+		 * @param [numeric] nombre
+		 * @return un nombre.
+		 */
         public function formatMonnaie($nombre) {
             if (is_numeric($nombre)) {
                 $nombre = number_format(ceil($nombre / 0.01) * 0.01, 2, '.', ' ') . " $";
@@ -329,10 +362,11 @@
             }
             return false;
         }
-
-        // Fonction pour créer un jeton pour s'assurer qu'une location ait seulement une évaluation
-        // Source : https://stackoverflow.com/questions/1846202/php-how-to-generate-a-random-unique-alphanumeric-string/13733588#13733588
-        public function creerJeton($longueur){
+		/**
+         * Fonction pour créer un jeton pour s'assurer qu'une location ait seulement une évaluation
+         * Source : https://stackoverflow.com/questions/1846202/php-how-to-generate-a-random-unique-alphanumeric-string/13733588#13733588
+         */
+		public function creerJeton($longueur){
             $jeton = "";
             $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz123456789";
             $max = strlen($codeAlphabet);
