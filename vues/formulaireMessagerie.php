@@ -2,15 +2,14 @@
 /**
  * @file     formulaire.php
  * @author   Zoraida Ortiz
- * @version  1.0
- * @date     26 fevrier 2018
+ * @version  3.0
+ * @date     8 mars 2018
  * @brief    formulaire pour afficher un message 
  * 
  */
 ?>
-   
-    <button class="btn btn-bleu btn-sm repondre" onclick="repondreMessage();">Répondre</button>
-    <button class="btn btn-bleu btn-sm" onclick="transfererMessage()">Transférer</button><hr>
+    <button type="button" class="btn btn-bleu btn-sm repondre" onclick="repondreMessage();">Répondre</button>
+    <button type="button" class="btn btn-bleu btn-sm" onclick="transfererMessage()">Transférer</button><hr>
     <div class="form-group row heigthFormBLecture expediteurLabel">
       <label class="col-sm-2 col-form-label-sm ">De :</label>
       <div class="col-sm-10">
@@ -45,5 +44,3 @@
         <textarea class="form-control textMessage" rows="6" disabled></textarea>
       </div>
     </div>
-
-    

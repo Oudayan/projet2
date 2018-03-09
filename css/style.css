@@ -446,6 +446,10 @@ label {
 .fa-envelope{
   color: #e98d34;
 }
+
+.fa-envelope-open{
+  color: #6c757d;
+}
 #info {
     background-color: #f6f7eA;   
     padding: 15px;
@@ -474,7 +478,7 @@ nav.v-pills-tab {
     /*background: rgb(29, 145, 188);*/
     background: linear-gradient(to right, rgba(11, 42, 52, 0.99), rgb(75, 76, 76));
     border-radius: 5px;
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
   
  a.nav-link {
@@ -482,11 +486,9 @@ nav.v-pills-tab {
   }
   
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-   /* color: #fff;
-    background-color: rgb(75, 76, 76);*/
     color: #f5f5f5;
-    background-color: #e98d34;
-    border-color: #e98d34;
+    background-color: rgb(205, 120, 45) !important;
+    border-color: rgb(205, 120, 45) !important;
   }
   
 #v-pills-boitRecp, #v-pills-mEnvoyes {
@@ -506,9 +508,11 @@ nav.v-pills-tab {
 #btnEnvoyer{
   float:right;
   }
+  
 #suppMsg{
   float:right;
-  }  
+  } 
+  
 .boiteLecture{
     background: rgb(250, 251, 246);
     padding: 20px 20px 140px 20px;
@@ -521,17 +525,64 @@ nav.v-pills-tab {
     height: 15px;
   }
   
-  .display {
+  .display, .composerMessage{
     border-style: solid;
     border-width: 1px;  
     border-color: #dee2e6;
     border-radius: 4px;
   }
+    .composerMessage{
+     padding: 20px; 
+     margin: 0;
+  }
   
-
+  #menuMessagerie{
+    padding: 0px;
+  }
+  
   .textMessage {
     border-style: solid;
     border-color: rgb(246, 247, 234);
     border-radius: 4px;
   }
   
+  .display th{
+    text-align: center !important;
+  }
+
+   /* ------------
+  Modal Liste de contacts 
+-------------*/
+  #feedback { 
+    font-size: 0.9em;
+  }
+  
+  #selectable .ui-selecting { 
+    color: #f5f5f5;
+    background-color: rgb(205, 120, 45) !important;
+    border-color: rgb(205, 120, 45) !important;
+  }
+  
+  #selectable .ui-selected { 
+    background: #e98d34;
+    color: #f5f5f5; 
+  }
+  
+  #selectable {
+    list-style-type: none;
+    margin: 0; 
+    padding: 0;
+    width: 60%;
+  }
+  
+  #selectable li { 
+    margin-left: 5px; 
+    padding: 0em; 
+    font-size: 0.8em;
+  }
+  
+  .afficherContacts{
+    border-style: solid;
+    border-radius: 4px;
+    border-color: #dee2e6;
+  }
