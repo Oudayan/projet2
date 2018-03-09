@@ -778,14 +778,15 @@
 		</fieldset>
 		<hr>
 		<br>
-       <button onclick ="window.location.href='index.php'" class="btn btn-orange">Accueil</button>
-		<input type="submit" value="Envoyer"/>
+       <button onclick ="window.location.href='index.php'" class="btn btn-bleu">Accueil</button>
+		<input type="submit" class="btn btn-orange" value="Envoyer"/>
     </form>
 	</div>
 	</div>
-	<button type="button" class="btn btn-lg btn-orange" data-toggle="modal" data-target="#modalLocation" c="chercherPrix()">Louez ce logement&nbsp;!</button>
-    <a target=_blank href="index.php?Recherche&action=recherche"><button type="button" class="btn btn-lg btn-bleu">Retour à la page recherche</button></a>
-
+	<hr>
+<!--	<button type="button" class="btn btn-lg btn-orange" data-toggle="modal" data-target="#modalLocation" c="chercherPrix()">Louez ce logement&nbsp;!</button>
+    <a target=_blank href="index.php?Recherche&action=recherche"><button type="button" class="btn btn-lg btn-bleu">Retour à la page recherche</button></a> -->
+	
     <div class="modal fade" id="modalLocation" tabindex="-1" role="dialog" aria-labelledby="modalLocationLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div id="modalLocation-content" class="modal-content">
