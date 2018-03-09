@@ -4,10 +4,9 @@
  * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
  * @version 1.0
  * @date    31 janvier 2018
- * @brief   Controlleur parent 
- * @details Méthodes :  - index() (abstracte) pour les "cases" dans les controlleurs
-                        - afficheVues() pour afficher les vues (partielles)
-                        - lireDAO() pour la connection à la base de donnée & création d'objets modèles
+ * @brief   Controlleur parent
+ * 
+ * @details Ce controleur contient les fonctions nécessaires aux autres contrôleurs
  */
 
 	abstract class BaseControleur {
@@ -22,8 +21,8 @@
 
  		/**
 		* @brief  Permet d'afficher une ou plusieurs vues partielles
-		* @detail Affiche une vue is $nomVue est une chaine de charactère ou affiche plusieurs vues si $nomVue est un tableau contentant le nom des vues.
-                  Affiche toujours la/les vue(s) entre les vues partielles entete.php et piedPage.php
+		* @detail Affiche une vue si $nomVue est une chaine de charactère ou affiche plusieurs vues si $nomVue est un tableau contentant le nom des vues.
+        *         Affiche toujours la/les vue(s) entre les vues partielles entete.php et piedPage.php
 		* @param  [string/array]  $nomVue     Nom de la vue ou tableau contentant les noms des vues à afficher   
 		* @param  [array]         $donnees    Données passée à la/aux vues
 		* @param  [boolean]       $complete   Vrai = entête, vue(s) & pied de page / Faux = vue(s) seulement
