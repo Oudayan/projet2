@@ -14,11 +14,11 @@
         <h1>Messagerie interne</h1>
     </div>
   <div class="row">
-    <aside class="col-lg-3">
+  <aside class="col-lg-3" id="menuMessagerie">
     <nav class="nav flex-column nav-pills v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link" id="v-pills-compMessage-tab list-group-item-action" onclick="cacherBoitesLecture()" data-toggle="pill" href="#v-pills-compMessage" role="tab" aria-controls="v-pills-compMessage" aria-selected="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Composer un message</a>
        <div class="dropdown-divider"></div>
-      <a class="nav-link" id="v-pills-boitRecp-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-boitRecp" role="tab" aria-controls="v-pills-boitRecp" aria-selected="false"><span class="badge badge-default badge-pill" aria-hidden="false">14</span><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
+      <a class="nav-link" id="v-pills-boitRecp-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-boitRecp" role="tab" aria-controls="v-pills-boitRecp" aria-selected="false"><i class="fa fa-folder-open" aria-hidden="true"></i>Boîte de réception</a>      
       <a class="nav-link" id="v-pills-mEnvoyes-tab list-group-item-action" onclick="cacherBoitesLecture()"  data-toggle="pill" href="#v-pills-mEnvoyes" role="tab" aria-controls="v-pills-mEnvoyes" aria-selected="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>Messages envoyés</a>
     </nav><!-- nav flex-column -->
   </aside>  
@@ -28,7 +28,7 @@
         <form enctype="multipart/form-data" id="formMessagerie" method="post">
          <div class="input-group input-group-sm mb-3 col-9">
            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="liste_contacts" id="liste_contacts">
-            <button type="button" class="btn btn-orange btn-sm" data-toggle="modal" data-target="#modalContacts" data-whatever="@mdo">Ajouter destinataire</button>
+            <button type="button" class="btn btn-bleu" data-toggle="modal" data-target="#modalContacts" data-whatever="@mdo">Ajouter destinataire</button>
           </div><!--input-group -->
           
           <!-- Modal pour chercher un contcat-->
@@ -36,26 +36,25 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="modalContactsLabel">Sélection des destinataires</h5>
+                  <h5 class="modal-title" id="modalContactsLabel">Vous pouvez en sélectionner un ou plusieurs</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div><!-- modal-header -->
                 <div class="modal-body">
-                 <div class="input-group input-group-sm col-12">
+                  <div class="input-group input-group-sm col-12">
                    <div class="col-12">
                    <p id="feedback">
-                    <span id="select-contacts">Aucun</span>
+                    <span id="select-contacts"data-toggle="tooltip" data-placement="top" title="Appuyer sur click et glisser ou appuyer sur Ctrl+click "></span>
                    </p>
                    </div>
-                      <div class="input-group-prepend">
-                        <label class="input-group-text col-form-label-sm" for="destinataire">À</label>
+                      <div class="afficherContacts col-lg-12">
+                         <ol id="selectable"></ol>
                       </div>
-                      <ol id="selectable"></ol>
                     </div>
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="">Close</button>
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" id="">Fermer</button>
                   <button type="button" class="btn btn-orange btn-sm"  onclick="afficherSelection();">Selection de contacts</button>
                 </div><!-- modal-footer -->
               </div><!-- modal-content -->
@@ -78,8 +77,8 @@
             </div>
             <textarea class="form-control" aria-label="With textarea" rows="6" name="textMessage" id="textMessage"></textarea>
           </div>
-            <input type="submit" class="btn btn-bleu btn-sm" value="Envoyer">
-            <input type="reset" class="btn btn-secondary btn-sm" value="Anuler">
+            <input type="submit" class="btn btn-orange btn-sm" value="Envoyer">
+            <input type="reset" class="btn btn-secondary btn-sm" value="Annuler">
             <!--<input type="button" class="btn-bleu btn-sm" onclick="envoyerMessage()" value="Envoyer"> -->
         </form>
       </div><!-- composerMessage id="EnvoyerForm" id input envoyer-->
@@ -87,7 +86,7 @@
       <div class="boiteReception tab-pane fade show active" id="v-pills-boitRecp" role="tabpanel" aria-labelledby="v-pills-boitRecp-tab">
         <form  class="formSuppMsg1"  method="POST">
         <table class="table table-sm responsive-sm table-hover display">
-           <button type="submit" class="btn btn-secondary btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i>Effacer Messages</button>
+          <button type="submit" class="btn btn-secondary btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i>Effacer Messages</button>	
           <thead>
             <tr>
               <th><input type="checkbox" class='tous'/></th>
@@ -98,15 +97,15 @@
               <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
             </tr>
           </thead>
-          <tbody id="boiteReception" class="bodyScroll"></tbody>
+          <tbody id="boiteReception">
+          </tbody>
         </table>
-           <input type="text" name="actif" value="false" hidden/>
+          <input type="text" name="actif" value="false" hidden/>
        </form>    
       </div><!-- tab-pane boitRecp-->
-      
       <div class="messagesEnvoyes tab-pane fade" id="v-pills-mEnvoyes" role="tabpanel" aria-labelledby="v-pills-mEnvoyes-tab">
         <form class="formSuppMsg2" method="POST">
-        <table class="table table-sm responsive-sm table-hover  display">
+        <table class="table table-sm responsive-sm table-hover display">
           <button type="submit" class="btn btn-secondary btn-sm suppMsg"><i class="fa fa-trash"  aria-hidden="false"></i>Effacer Messages</button>
           <thead>
             <tr>
@@ -117,7 +116,7 @@
               <th><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></th>
             </tr>
           </thead>
-            <tbody id="msgEnvoyes"></tbody>
+          <tbody id="msgEnvoyes"></tbody>
         </table>
           <input type="text" name="actif" value="false" hidden/>
        </form>
@@ -132,17 +131,15 @@
   $(document).ready(function() {
       afficherBoiteReception();
       afficherMsgEnvoyes();
-      
       $('.tous').change(function () {
-         $("input:checkbox").prop('checked', $(this).prop("checked"));
+           $("input:checkbox").prop('checked', $(this).prop("checked"));
       });
   });
   
-  function cacherBoitesLecture() {
+   function cacherBoitesLecture() {
     $('.boiteLecture').addClass('hidden');
     listeContacts();
     $("input:checkbox").prop('checked', false);
-    
   }
   
   class Message{
@@ -171,11 +168,12 @@
         type: 'POST',
         dataType: 'json',
         success: function(json) {
+          console.log(json);
           $("#boiteReception").html("");
           $.each(json, function(i, item) {
             var enveloppe = item.lu == '0' ? "" : '-open';
             var expediteurs = item.expediteur.length > 30 ? item.expediteur.substr(0,28) + "...": item.expediteur;
-            var joint = item.fichier_joint == null ? "" : item.fichier_joint;
+            var joint = item.fichier_joint == null ? "" : "<i class='fa fa-paperclip' aria-hidden='true'</i>";            
             $("#boiteReception").append(
                 "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",true)'>" +
                   "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
@@ -213,9 +211,9 @@
           $("#msgEnvoyes").html("");
           var summaireMessage = {};
           $.each(json, function(i, item) {
-			  //console.log("Envoye",json);
+			  console.log("Envoye",json);
             var destinateurs = item.destinataire.length > 30 ? item.destinataire.substr(0,28) + "...": item.destinataire;
-            var joint = item.fichier_joint == null ? "" : item.fichier_joint;
+            var joint = item.fichier_joint == null ? "" : "<i class='fa fa-paperclip' aria-hidden='true'</i>";  
            $("#msgEnvoyes").append(
               "<tr class='clickable-row' data-href='#' onclick='lireMessage(" + item.id_message + ",false)'>" +
                 "<td><input class='inpChecked' type='checkbox' name='listeSupp[]' value='"+ item.id_message +"'/></td>" +
@@ -314,56 +312,8 @@
       }
     });
   } );
- 
 
-/*$('document').ready(function(){
-   $('#tous1').change(function () {
-      $("input:checkbox").prop('checked', $(this).prop("checked"));
-  });
-   $('#tous2').change(function () {
-      $("input:checkbox").prop('checked', $(this).prop("checked"));
-  });
-});*/
-
-
-/*
-function supprimerMessage() {
-$(".formSuppMsg").submit(function(e) {
-        var listeSupp = new Array();
-        $("input:checked").each(function() {
-           listeSupp.push($(this).val());
-             console.log($(this).val()); 
-        });
-        $.ajax({
-            type: "POST",
-            url: 'index.php?Messagerie&action=supprimirMessage',
-            dataType: 'html',
-            data: { id_message: message.id_messsage,
-                    listeSupp:listeSupp },
-           /* success: function(data){
-                $('#myResponse').html(data)
-            }
-        });
-        e.preventDefault();
-  });
-}*/
-/*
-function supprimerMessage() {
-  var dataString = $(".formSuppMsg").serialize();
-   
-  $.ajax({
-      type:'POST',
-      url:'index.php?Messagerie&action=supprimirMessage',
-      data: dataString,
-      dataType: 'json',
-      success: function(json) {
-         alert('asf');
-      }
-  })
-  //return false;
-}*/
-
-//function pour supprimir un message recu
+ //function pour supprimir un message recu
   $(function(){
     $(".formSuppMsg1").on("submit", function(e){
       var dataString = $(".formSuppMsg1").serialize();
@@ -377,7 +327,7 @@ function supprimerMessage() {
            alert('asf');
           }*/
       });
-        e.preventDefault();
+      
     });    
   });
   
@@ -394,10 +344,9 @@ function supprimerMessage() {
            alert('asf');
           }*/
      });
-      e.preventDefault();
+     
     });    
   });
-  
 
 //function pour envoyer un message
   $(function(){
@@ -439,15 +388,8 @@ function supprimerMessage() {
     
     document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
   }
-
+  
   </script>
 
-  <style>
-    #feedback { font-size: 0.9em; }
-    #selectable .ui-selecting { background: #FECA40; }
-    #selectable .ui-selected { background: #F39814; color: white; }
-    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-    #selectable li { margin-left: 5px; padding: 0em; font-size: 0.8em; }
-  </style>
         
  

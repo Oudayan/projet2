@@ -111,7 +111,7 @@
                         //il faut faire update sur la table al_destinataire column lu
                         //il ne faut pas retourne rien 
                         break;  
-                    
+                        
                     case "alerteMessagerie" :
                         if (isset($_SESSION["courriel"])) {
                             $modeleMessagerie = $this->lireDAO("MessagesDestinataires");
@@ -150,6 +150,7 @@
                             $modeleMessagerie->sauvegarderDestinataire($newDestinataire);
                             //header("Location: index.php?Proprietaire&action=afficherLogements");
                         }
+
                       break;
                     
                     case "composerMessage" :
