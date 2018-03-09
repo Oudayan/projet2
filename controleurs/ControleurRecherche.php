@@ -5,11 +5,17 @@
  * @version     3.0
  * @date        23 février 2018
  * @brief       Controleur pour la recherche de logements
- * @details     
- */ 
+ *
+ * @details     Cette section permet de faire une recherche pour un logement selon certains critères.
+ */
 
 	class ControleurRecherche extends BaseControleur {
-
+		/**
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params) {
 
             $modeleLogement = $this->lireDAO("Logement");
@@ -98,7 +104,11 @@
 
 	  	} // end of switch
 
-        
+        /**
+		 * @brief      Filtrer les logements
+		 * @param      [string]  $clePrimaire     ID de la clé primaire
+		 * @return     [object]
+		 */
         public function filtrerLogements(array $params) {
             
             $modeleLogement = $this->lireDAO("Logement");
@@ -279,7 +289,16 @@
         HAVING distance <= 10 ORDER BY distance ASC */
             
         // Source : https://stackoverflow.com/questions/10053358/measuring-the-distance-between-two-coordinates-in-php
-        private function distance($lat1, $lon1, $lat2, $lon2, $unite = "") {
+        /**
+		 * @brief   Fonction pour calculer la distance d'un point à un autre en utilisant différentes unités de mesure
+		 * @param   [string] $lat1 
+		 * @param   [string] $lon1 
+		 * @param   [string] $lat2 
+		 * @param   [string] $lon2 
+		 * @param   [string] $unite 
+		 * @return  Affiche la date de début et la date de fin sélectionnée
+		 */
+		private function distance($lat1, $lon1, $lat2, $lon2, $unite = "") {
             $theta = $lon1 - $lon2;
             $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
             $dist = acos($dist);
@@ -301,7 +320,13 @@
         }
 
         // km = (40000 / 2^zoomlevel) * 2
-
+		
+		
+		/**
+		 * @brief   Fonction pour aller à la page d'accueil s'il n'y a pas de courriel d'entré sinon aller à la page de recherche.
+		 * @param   [string] courriel 
+		 * @return  Affiche la vue de la d'accueil ou la vue de la recherche
+		 */
 		public function accueil() {
 			if (!isset($_SESSION["courriel"])) {
 				$this->afficherVues("accueil");
