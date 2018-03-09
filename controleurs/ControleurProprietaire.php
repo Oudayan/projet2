@@ -5,11 +5,17 @@
  * @version     3.0
  * @date        2 mars 2018
  * @brief       Controleur pour la gestion des logements d'un propriétaire
- * @details     
- */ 
+ *
+ * @details     Permet à un propriétaire de placer un ou des logement(s) en location et d'en faire la gestion
+ */  
 
 	class ControleurProprietaire extends BaseControleur {
-
+		/**
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues,aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params) {
 
             $modeleLogement = $this->lireDAO("Logement");
@@ -162,7 +168,13 @@
 
 	  	} // Fin d'index
 
-        // Fonction pour afficher les disponibilités d'un logement en retour de requête Ajax
+		/**
+		 * @brief   Fonction pour afficher les disponibilités d'un logement en retour de requête Ajax
+		 * @param   [string] $logement 
+		 * @param   [string] $erreur 
+		 * @param   [string] $dispo 
+		 * @return  Affiche la date de début et la date de fin sélectionnées
+		 */
         public function afficherDisponilitesLogement($logement, $erreur = "") {
             $modeleDisponibilite = $this->lireDAO("Disponibilite");
             $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($logement);

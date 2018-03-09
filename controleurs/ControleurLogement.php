@@ -1,17 +1,22 @@
 <?php
 /**
-* @file Controleur_Logement.php
-* @author Jorge Subirats
-* @version 1.0
-* @date 21 janvier 2018
-* @brief Définit la classe pour les controleurs
-*
-* @details Cette classe définit les différentes activités concernant les Logements.
-* 
-*/
+ * @file Controleur_Logement.php
+ * @author Jorge Subirats
+ * @version 1.0
+ * @date 21 janvier 2018
+ * @brief Définit la classe pour les controleurs
+ *
+ * @details Cette classe définit les différentes activités concernant les Logements.
+ * 
+ */
 
 	class ControleurLogement extends BaseControleur {
-
+		/**
+         * @brief   Méthode qui sera appelée par les controleurs
+         * @details Méthode abstraite pour traiter les "cases" des contrôleurs
+         * @param   [array] $params La chaîne de requête URL ("query string") captée par le Routeur.php
+         * @return  L'acces aux vues, aux données et aux différents messages pour ce contrôleur.
+         */
 		public function index(array $params) {
 
             $modeleLogement = $this->lireDAO("Logement");
