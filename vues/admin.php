@@ -31,7 +31,7 @@
           <tr>
             <th>Prenom</th>
             <th>Nom</th>
-            <th>Adresse Courriel</i></th>  
+            <th>Adresse Courriel</th>  
             <th>Téléphone</i></th>  
           </tr>
         </thead>
