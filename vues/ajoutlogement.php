@@ -793,7 +793,6 @@
     </div>
 </main>
 
-
 <script>
 	 function chercherPrix() {
 		$.ajax({
