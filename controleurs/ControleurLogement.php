@@ -111,17 +111,17 @@
 								$chauffage = 0;			
 							$json = array();
 							// Instanciation de la classe Logement
-							$nouveau["Logement"] = new Logement("",	$_POST["no_civique"], $_POST["apt"], $_POST["rue"], $_POST["ville"], $_POST["province"], $_POST["pays"], 
+							$nouveau["Logement"] = new Logement($_POST["id_logement"],	$_POST["no_civique"], $_POST["apt"], $_POST["rue"], $_POST["ville"], $_POST["province"], $_POST["pays"], 
 							$_POST["code_postal"], "0", "0", $_POST["id_TypeLogement"], $_POST["prix"],
 							null, $_POST["description"], $courriel, $_POST["nb_personnes"], $_POST["nb_chambres"], $_POST["nb_lits"], 
 							$_POST["nb_salle_de_bain"], $_POST["nb_demi_salle_de_bain"], $_POST["frais_nettoyage"], $stationement, 
 							$wifi, $cuisine, $tv, $fer_a_repasser, $ceintres, $seche_cheveux, $climatise, $laveuse, 
 							$secheuse, $chauffage, false, true, false, null, null );
-							var_dump($params);
+							//var_dump($params);
 						if (isset($params['id_logement']) ) {   /* Si dans le parametres on trouve le id_logement alors c'est un modification   */
-								echo("Modification");
+								/*echo("Modification");
 							}
-						else {
+						else {*/
 
 	
 							 $id = $modeleLogement->sauvegarderLogement($nouveau["Logement"]); 

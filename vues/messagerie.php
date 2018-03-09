@@ -76,6 +76,7 @@
               <span class="input-group-text">Message</span>
             </div>
             <textarea class="form-control" aria-label="With textarea" rows="6" name="textMessage" id="textMessage"></textarea>
+            <div name="afficherMessage" id="afficherMessage" class=""></div>
           </div>
             <input type="submit" class="btn btn-orange btn-sm" value="Envoyer">
             <input type="reset" class="btn btn-secondary btn-sm" value="Annuler">
@@ -389,6 +390,13 @@
     document.getElementById('v-pills-compMessage-tab list-group-item-action').click();
   }
   
+    // Source :https://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+    function strip(html) {
+       var tmp = document.createElement("div");
+       tmp.innerHTML = html;
+       return tmp.textContent || tmp.innerText || "";
+    }
+
   </script>
 
         

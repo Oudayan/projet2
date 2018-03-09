@@ -34,12 +34,23 @@
                         $donnees["erreur"] = "";
                         if (isset($_SESSION["courriel"])) {
                             if (isset($params["idLogement"]) && isset($params["datesLocation"]) && isset($_SESSION["location"]["prixTotal"])) {
-                                // Valider que le logement est disponible pour ces dates
                                 $donnees["idLogement"] = $params["idLogement"];
+                                $donnees["datesLocation"] = $params["datesLocation"];
+                                $usager = $modeleUsagers->obtenir_par_courriel($_SESSION["courriel"]);
+                                if ($usager->lireTypePaiement() == 2) {
+                                    $donnees["paypal"] = "checked";
+                                }
+                                else if ($usager->lireTypePaiement() == 3) {
+                                    $donnees["mastercard"] = "checked";
+                                }
+                                else if ($usager->lireTypePaiement() == 4) {
+                                    $donnees["visa"] = "checked";
+                                }
                                 // Vérifier qu'un propriétaire ne puisse pas louer son propre logement 
-                                $logement = $modeleLogement->lireLogementParId($params["idLogement"]);
-                                $proprietaire = $logement->lireCourriel();
+                                $donnees["logement"] = $modeleLogement->lireLogementParId($params["idLogement"]);
+                                $proprietaire = $donnees["logement"]->lireCourriel();
                                 if ($_SESSION["courriel"] != $proprietaire) {
+                                    // Valider que le logement est disponible pour ces dates
                                     $disponible = false;
                                     $dates = explode("  au  ", $params["datesLocation"]);
                                     $dispos = $modeleDisponibilite->lireDisponibilitesParLogement($params["idLogement"]);
@@ -183,9 +194,11 @@
                                     // Approuver la location
                                     $modeleLocation->validerLocation($params["idLocation"], 1);
                                     // Créer le lien pour l'évaluation et commentaires sur le logement
-                                    $lienEvaluation = "<a href=" . RACINE . "/index.php?Evaluation&action=evaluerLogement&idLocation=" . $location->lireIdLocation() . "&jeton=" . $location->lireJeton() . "Évaluez ce logement !</a>";
+                                    //$lienEvaluation = "<a href=" . RACINE . "index.php?Evaluation&action=evaluerLogement&idLocation=" . $location->lireIdLocation() . "&jeton=" . $location->lireJeton() . "Évaluez ce logement !</a>";
+                                    $lienEvaluation = "http://localhost:8888/alouer/projet2/index.php?Evaluation&action=evaluerLogement&idLocation=" . $location->lireIdLocation() . "&jeton=" . $location->lireJeton();
                                     // Envoyer message au locataire par la messagerie interne
-                                    $donnees["success"] = "<p>Votre demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est approuvée !</p><p>Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement.</p><p>Voici le lien pour l'évaluation du logement : " . $lienEvaluation . ".<br>Ce lien sera fermé et compilé le lendemain de la date de fin de location.</p><p>Merci !</p>";
+                                    //$donnees["success"] = "<p>Votre demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est approuvée !</p><p>Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement.</p><p>Voici le lien pour l'évaluation du logement : " . $lienEvaluation . ".<br>Ce lien sera fermé et compilé le lendemain de la date de fin de location.</p><p>Merci !</p>";
+                                    $donnees["success"] = "Votre demande de location pour le logement situé au " . $adresse . " entre le " . $location->lireDateDebut() . " et le " . $location->lireDateFin() . " est approuvée ! Veuillez répondre à ce courriel pour contacter le propriétaire et avoir les détails de la prise de possession du logement. Le lien pour l'évaluation du logement sera fermé et compilé le lendemain de la date de fin de location. Veuillez copier-coller ce lien dans la barre d'adresse de votre fureteur : " . $lienEvaluation;
                                     $sujet = "Demande de location APPROUVÉE !";
                                     header("Location: index.php?Messagerie&action=messageAutomatique&locataire=" . urlencode($locataire) . "&proprietaire=" . urlencode($proprietaire) . "&sujet=" . urlencode($sujet) . "&message=" . urlencode($donnees["success"]));
                                 }
