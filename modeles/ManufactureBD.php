@@ -5,6 +5,7 @@
  * @version 1.0
  * @date    9 février 2018
  * @brief   Manufacture de base de données
+ *
  * @details Définit les parmètres requis pour des connexions à différents types de serveurs
  */
 
