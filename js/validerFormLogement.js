@@ -216,7 +216,7 @@ function estFraisNettoyage() {
 function estDescription() {
 	monErr = 0;
 	var x = document.forms["form_ajoute"]["description"].value;
-	expr =/^([A-Z][a-zA-Z ]+[\s]?[\-]?[a-zA-Z ]*)$/g;
+	expr =/^([A-Z][a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.]+[\s]?[\-]?[a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.]*)$/g;
 	if (!x.match(expr)) {
 		document.getElementById("errDescription").style.visibility="visible";
 		monErr ++;

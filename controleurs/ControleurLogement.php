@@ -45,7 +45,49 @@
                             header("Location: index.php?Proprietaire&action=afficherLogements");
                         }
                         break;
+					case "LogementaValider":
+                    	$donnees = $modeleLogement->obtenir_listeaValider();
+						
+                    	$data = array();
+                    	for ($i=0 ;$i<count($donnees);$i++){
+                    		$data[$i]=array(
+							'id_logement'=>$donnees[$i]->lireIdLogement(),
+                    		'apt'=>$donnees[$i]->lireApt(),
+                    		'no_civique'=>$donnees[$i]->lireNoCivique(),
+                    		'rue'=>$donnees[$i]->lireRue(),
+                    		'ville'=>$donnees[$i]->lireVille(),
+                    		'province'=>$donnees[$i]->lireProvince(),
+                    		'pays'=>$donnees[$i]->lirePays(),
+                    		'code_postal'=>$donnees[$i]->lireCodePostal(),
+                    		'prix'=>$donnees[$i]->lirePrix(),	
+							'description'=>$donnees[$i]->lireDescription(),	
 
+                    		'id_type_logement'=>$donnees[$i]->lireIdTypeLogement(),
+                    		'courriel'=>$donnees[$i]->lireCourriel(),
+                    		'frais_nettoyage'=>$donnees[$i]->lireFraisNettoyage(),
+                    		'est_stationnement'=>$donnees[$i]->lireEstStationnement(),
+                    		'est_wifi'=>$donnees[$i]->lireEstWifi(),
+                    		'est_cuisine'=>$donnees[$i]->lireEstCuisine(),
+                    		'est_tv'=>$donnees[$i]->lireEstTv(),	
+							'est_fer_a_repasser'=>$donnees[$i]->lireEstFerARepasser(),	
+
+							'est_cintres'=>$donnees[$i]->lireEstCintres(),	
+							'est_seche_cheveux'=>$donnees[$i]->lireEstSecheCheveux(),
+							'est_climatise'=>$donnees[$i]->lireEstClimatise(),	
+							'est_laveuse'=>$donnees[$i]->lireEstLaveuse(),	
+							'est_secheuse'=>$donnees[$i]->lireEstSecheuse(),	
+							'est_chauffage'=>$donnees[$i]->lireEstChauffage(),	
+							'l_valide'=>$donnees[$i]->lireLValide(),	
+							'lireLBanni'=>$donnees[$i]->lireLBanni(),
+							'l_commentaire_banni'=>$donnees[$i]->lireLCommentaireBanni(),
+                    		);
+							$mesPhotos = $modelePhotosLogement->lireToutesPhotosParLogement($donnees[$i]->lireIdLogement());
+							for ($j=0 ;$j<count($mesPhotos);$j++){
+								$data[$i]["Photos"][$j]=$mesPhotos[$j]->lireCheminPhoto();
+							}
+                    	}
+                    	  echo json_encode($data);				
+						break;
                     case "formAjoutLogement" :
                         if (isset($_SESSION["courriel"])) {
 							if (isset($params['idLogement'])){
@@ -111,22 +153,32 @@
 								$chauffage = 0;			
 							$json = array();
 							// Instanciation de la classe Logement
+							var_dump($params['id_logement']);
+							
+						if (trim($params['id_logement']) != 0) {   /* Si dans le parametres on trouve le id_logement alors c'est un modification   */
+							var_dump("Modifica");
+							$nouveau["Logement"] = new Logement($_POST["id_logement"],	$_POST["no_civique"], $_POST["apt"], $_POST["rue"], $_POST["ville"], $_POST["province"], $_POST["pays"], 
+							$_POST["code_postal"], "0", "0", $_POST["id_TypeLogement"], $_POST["prix"],
+							null, $_POST["description"], $courriel, $_POST["nb_personnes"], $_POST["nb_chambres"], $_POST["nb_lits"], 
+							$_POST["nb_salle_de_bain"], $_POST["nb_demi_salle_de_bain"], $_POST["frais_nettoyage"], $stationement, 
+							$wifi, $cuisine, $tv, $fer_a_repasser, $ceintres, $seche_cheveux, $climatise, $laveuse, 
+							$secheuse, $chauffage, false, true, false, null, null );
+							$modeleLogement->actualiserLogement($nouveau["Logement"]); 
+							$_SESSION["succes"]= "Votre logement a été modifié, merci de attendre un confirmation dans votre courriel ! ";
+							header("Location: index.php?Proprietaire&action=afficherLogements");
+							}
+						else {
+							var_dump("Nuevo");
 							$nouveau["Logement"] = new Logement("",	$_POST["no_civique"], $_POST["apt"], $_POST["rue"], $_POST["ville"], $_POST["province"], $_POST["pays"], 
 							$_POST["code_postal"], "0", "0", $_POST["id_TypeLogement"], $_POST["prix"],
 							null, $_POST["description"], $courriel, $_POST["nb_personnes"], $_POST["nb_chambres"], $_POST["nb_lits"], 
 							$_POST["nb_salle_de_bain"], $_POST["nb_demi_salle_de_bain"], $_POST["frais_nettoyage"], $stationement, 
 							$wifi, $cuisine, $tv, $fer_a_repasser, $ceintres, $seche_cheveux, $climatise, $laveuse, 
 							$secheuse, $chauffage, false, true, false, null, null );
-							var_dump($params);
-						if (isset($params['id_logement']) ) {   /* Si dans le parametres on trouve le id_logement alors c'est un modification   */
-								echo("Modification");
-							}
-						else {
-
-	
 							 $id = $modeleLogement->sauvegarderLogement($nouveau["Logement"]); 
+							 var_dump($id);
 							/* &&&& Enregistrement des photos &&&& */ 
-							 $ancienNom = "./images/Logements/".$courriel;
+							$ancienNom = "./images/Logements/".$courriel;
 							$nouveauNom = "./images/Logements/".$id;
 							$chemin = "images/Logements/".$id;
 							rename($ancienNom, $nouveauNom);
@@ -150,7 +202,6 @@
 							}
                         $_SESSION["succes"]= "Votre logement a été enregistré, merci de attendre un confirmation dans votre courriel ! ";
                         header("Location: index.php?Proprietaire&action=afficherLogements");
-                        return;
 						}
 
                         break;

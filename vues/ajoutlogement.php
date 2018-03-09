@@ -114,7 +114,7 @@
   }
 ?>
 
-<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+<!-- <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet"> -->
 <script src="js/validerFormLogement.js"></script>
 <script src="js/managePhotos.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3prxRP0MgiciOnRm7HODXcLJziJ_TJuc"></script>
@@ -212,7 +212,7 @@
 			</div>
 			<div class="col-lg-4">
 				<label for="prix">Frais de nettoyage</label>
-				<input type="text" class="form-control" value=<?= $frais_nettoyage?> name="frais_nettoyage" onblur="estFraisNettoyage()" required>
+				<input type="text" class="form-control" value='<?= $frais_nettoyage?>' name="frais_nettoyage" onblur="estFraisNettoyage()" required>
 				<span id="errFraisNettoyage" style="color:red; visibility:hidden">* Frais de nettoyage invalide ou requis</span>				
 			</div>
 		</div>
@@ -260,9 +260,11 @@
 		<legend>Items </legend>
 			<div class="form-group row">
 				<div class="col-lg-2">
+				<div class="form-group d-flex justify-content-between">
 					<input type="checkbox" name="est_stationnement" <?= $est_stationnement?> data-toggle="toggle">
 					<p>Stationnement</p>
 				</div>	  
+				</div>
 				<div class="col-lg-2">
 					<input type="checkbox" name="est_wifi" <?= $est_wifi?> data-toggle="toggle">
 					<p>Wifi</p>
@@ -327,7 +329,7 @@
 						<div id="filediv">
 							<label class="btn btn-primary">
 								<i class="fa fa-upload"></i> Des photos ... 
-								<input id="multiplesPhotos" name="files[]" type="file" multiple="" accept="image/*" onchange="prePhotos(this) style="display:none;" />
+								<input id="multiplesPhotos" name="files[]" type="file" multiple="" accept="image/*" onchange="prePhotos(this)" style="display:none;" />
 							</label>
 						</div>
 					</div>
