@@ -78,7 +78,7 @@
 				    <?php }
 					else { ?>
 				    <div class="text-right">
-                        <span>Usager&nbsp;: <strong><?= $_SESSION["prenom"];?></strong></span>
+                        <span><i class="fa fa-user-circle-o" aria-hidden="true"></i><strong><?= $_SESSION["prenom"];?> - <?=$_SESSION["typeUser"]?> </strong></span>
                         <a href="index.php?Usagers&action=Logout" class="nav-item" aria-hidden="true"><i class="fa fa-sign-out fa-lg"></i>Déconnexion</a>
                         <nav class="d-flex justify-content-between">
                             <a href="index.php?Recherche&action=recherche"><i class="fa fa-search iconNav"></i>Recherche</a>

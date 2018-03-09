@@ -354,18 +354,7 @@ a.nav-item {
     color: #e98d34;
 }
 
-/* Zoraida */
-
-.bg-login {
-    color: #e98d34;
-}
-
-.bg-login:hover {
-    color: #f6c784;
-}
-
-.iconMessage,
-.iconNav {
+.iconMessage, .iconNav {
     color: #e98d34;
 }
 
@@ -430,11 +419,12 @@ label {
     color: #9d9d96;
     font-size: 0.9em;
 }
-
+/*-------------
+   Icons
+-----------------*/
 .iconFooter {
     color: #e98d34;
 }
-
 /* style social icon*/
 
 .fa {
@@ -446,15 +436,9 @@ label {
     border-radius: 10%;
 }
 
-/* Add a hover effect if you want */
-
 .fa:hover {
     opacity: 0.7;
 }
-
-/* Mettez une couleur spécifique pour chaque icon */
-
-/* Facebook */
 
 .fa-facebook {
     background: #3B5998;
