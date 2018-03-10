@@ -488,6 +488,7 @@
 					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 					}
             }) 
+			afficherListeUsagers();
 			}
 		else
 			alert('Nous avons un probléme');
