@@ -3,9 +3,9 @@
  * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
  * @version  2.0
  * @date     5 mars 2018
- * @brief    
+ * @brief  
+ *   
  * @details  
- * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
  
   $(document).ready(function() {
@@ -508,14 +508,14 @@
 			document.getElementById("errDescription").style.visibility="hidden";
 			$("#bannir").prop("disabled", false);
 		}	
-	return (monErr);	
-}
+        return (monErr);	
+    }
 
-var modal = document.getElementById('myModalimg');
-var modalImg = document.getElementById("img01");
-$('#mesPhotos').click(function (e) {
-			console.log(e.target.id);
-			var img = document.getElementById(e.target.id);
-			modal.style.display = "block";
-			modalImg.src = img.src;
-        });
+    var modal = document.getElementById('myModalimg');
+    var modalImg = document.getElementById("img01");
+    $('#mesPhotos').click(function (e) {
+        console.log(e.target.id);
+        var img = document.getElementById(e.target.id);
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    });

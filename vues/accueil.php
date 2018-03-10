@@ -5,6 +5,7 @@
  * @version     1.0
  * @date        10 février 2018
  * @brief       Page d'accueil du site
+ * 
  * @details     Liens pour recherche de logements par carte ou par liste
  */ 
 ?>
