@@ -1,3 +1,13 @@
+<?php
+  /** 
+   * @file        entete.php
+   * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+   * @version     1.0
+   * @date        10 février 2018
+   * @brief       Vue partielle structure html pour l'entete du site
+   *   
+   */ 
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>

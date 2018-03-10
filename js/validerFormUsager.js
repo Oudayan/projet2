@@ -1,16 +1,12 @@
-/*
-* Fichier: valideFormUsager.js
-* fonction validateForm
-* Autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
-* Date 21 février 2018
-*/
-
-/*
-* 
-* fonction validateForm
-* Paramètres: aucun
-* Description: valider le formulaire une fois que vous avez cliqué sur le bouton « submit »
-*/
+/**
+ * @file     valideFormUsager.js
+ * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @version  2.0
+ * @date     21 février 2018
+ * @brief    validation du formulaire
+ *   
+ * @details  valider le formulaire une fois que vous avez cliqué sur le bouton « submit »
+ */
 
 var typepaiement = null;
 // console.log(typepaiement);

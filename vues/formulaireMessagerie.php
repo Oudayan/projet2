@@ -1,10 +1,10 @@
 <?php
 /**
- * @file     formulaire.php
+ * @file     formulaireMessagerie.php
  * @author   Zoraida Ortiz
  * @version  3.0
  * @date     8 mars 2018
- * @brief    formulaire pour afficher un message 
+ * @brief    Vue partielle pour afficher les donnees d'un message 
  * 
  */
 ?>

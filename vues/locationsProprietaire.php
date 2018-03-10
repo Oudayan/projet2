@@ -5,6 +5,7 @@
  * @version     1.0
  * @date        2 mars 2018
  * @brief       Vue partielle pour afficher toutes les demandes de location de logements pour un propriétaire
+ * 
  * @details     Vue partielle locationsProprietaire.php insérée dans la page proprietaire.php par requête Ajax
  */ 
            

@@ -1,15 +1,12 @@
-/*
-* Fichier: validerFormLogement.js
-* fonction validateForm
-* Auteurs: Autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
-*/
-
-/*
-* 
-* fonction validateForm
-* Paramètres: aucun
-* Description: valider le formulaire une fois que vous avez cliqué sur le bouton « submit »
-*/
+/**
+ * @file     validerFormLogement.js
+ * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @version  2.0
+ * @date     5 mars 2018
+ * @brief    validation du formulaire
+ *   
+ * @details  valider le formulaire une fois que vous avez cliqué sur le bouton « submit »
+ */
 
 function validateFormLogement(){
 	cleanErreurs();

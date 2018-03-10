@@ -4,8 +4,8 @@
  * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
  * @version     1.0
  * @date        2 mars 2018
- * @brief       
- * @details     
+ * @brief       Page pour le proprietaire, gestion des logements
+ *     
  */ 
 ?>
         <main class="container-fluid">

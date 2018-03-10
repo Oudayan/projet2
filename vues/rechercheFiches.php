@@ -5,6 +5,7 @@
  * @version     1.0
  * @date        15 février 2018
  * @brief       Vue partielle pour afficher par fiches les résultats de recherche
+ * 
  * @details     Vue partielle rechercheFiches.php insérée dans la page recheche.php par requête Ajax
  */
                 if ($donnees["logements"]) {
