@@ -4,8 +4,8 @@
  * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
  * @version     1.0
  * @date        2 mars 2018
- * @brief       
- * @details     
+ * @brief       Page pour generer la facture d'une location
+ *    
  */ 
 ?>
         <main class="container">

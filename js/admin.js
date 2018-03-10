@@ -3,9 +3,9 @@
  * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
  * @version  2.0
  * @date     5 mars 2018
- * @brief    
+ * @brief  
+ *   
  * @details  
- * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
  
   $(document).ready(function() {

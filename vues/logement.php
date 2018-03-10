@@ -4,8 +4,8 @@
  * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
  * @version     1.0
  * @date        10 février 2018
- * @brief       
- * @details     
+ * @brief       Page pour logement
+ *     
  */ 
 ?>
         <main class="container">
