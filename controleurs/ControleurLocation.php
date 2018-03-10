@@ -44,13 +44,13 @@
                                 $donnees["idLogement"] = $params["idLogement"];
                                 $donnees["datesLocation"] = $params["datesLocation"];
                                 $usager = $modeleUsagers->obtenir_par_courriel($_SESSION["courriel"]);
-                                if ($usager->lireTypePaiement() == 2) {
+                                if ($usager->lireTypePaiement() == 1) {
                                     $donnees["paypal"] = "checked";
                                 }
-                                else if ($usager->lireTypePaiement() == 3) {
+                                else if ($usager->lireTypePaiement() == 2) {
                                     $donnees["mastercard"] = "checked";
                                 }
-                                else if ($usager->lireTypePaiement() == 4) {
+                                else if ($usager->lireTypePaiement() == 3) {
                                     $donnees["visa"] = "checked";
                                 }
                                 // Vérifier qu'un propriétaire ne puisse pas louer son propre logement 

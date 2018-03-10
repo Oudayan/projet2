@@ -277,10 +277,9 @@ INSERT INTO `al_type_logement` (`id_type_logement`, `type_logement`) VALUES
 -- 
 
 INSERT INTO `al_type_paiement` (`id_paiement`, `paiement`) VALUES
-(1, 'Interact'),
-(2, 'Paypal'),
-(3, 'MasterCard'), 
-(4, 'Visa');
+(1, 'Paypal'),
+(2, 'MasterCard'), 
+(3, 'Visa');
 
 -- --------------------------------------------------------
 
@@ -304,7 +303,7 @@ INSERT INTO `al_usager` (`courriel`, `nom`, `prenom`, `cellulaire`, `mot_de_pass
 ('chucknorris@gmail.com', 'Norris', 'Chuck', NULL, '12345', true, NULL, NULL, NULL, 3, 3, 1),
 ('jonathanmartel@gmail.com', 'Martel', 'Jonathan', NULL, '12345', true, NULL, NULL, NULL, 2, 2, 2),
 ('faycalabouzaid@gmail.com', 'Abouzaid', 'Fayçal', NULL, '12345', true, NULL, NULL, NULL, 1, 2, 3),
-('gabrielzoraidag@gmail.com', 'Ortiz', 'Zoraida', NULL, 'ZOrtiz123', true, NULL, NULL, NULL, 1, 1, 4),
+('gabrielzoraidag@gmail.com', 'Ortiz', 'Zoraida', NULL, 'ZOrtiz123', true, NULL, NULL, NULL, 1, 1, 1),
 ('jsubirats@yahoo.com', 'Subirats', 'Jorge', NULL, 'JSubirats123', true, NULL, NULL, NULL, 2, 1, 2),
 ('missde0404@gmail.com', 'Ratté', 'Denise', NULL, '12345', true, NULL, NULL, NULL, 3, 1, 1),
 ('oudayan@gmail.com', 'Dutta', 'Oudayan', NULL, '12345', true, NULL, NULL, NULL, 1, 1, 3);
