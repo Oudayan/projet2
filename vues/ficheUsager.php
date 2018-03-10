@@ -4,7 +4,7 @@
  * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
  * @version  1.0
  * @date     06 mars 2018
- * @brief    formulaire pour afficher un usager dans le module admin
+ * @brief    Vue partielle pour afficher un usager dans le module admin
  * 
  */
 ?>

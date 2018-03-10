@@ -1,12 +1,11 @@
 ﻿<?php
 /** 
-	* @ file	ajoututilisateur.php
+	* @ file	ajoutUsager.php
 	* @ author	Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats
 	* @ version 2.1
 	* @ date     16 février 2018
 	* @ brief 	 formulaire d'ajout de un nouvel utilisateur 
-	*
-	* @ details 
+	* 
 	*/	
         
 ?>

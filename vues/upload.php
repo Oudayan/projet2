@@ -1,4 +1,13 @@
 <?php
+/** 
+ * @file        upload.php
+ * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+ * @version     1.0
+ * @date        15 février 2018
+ * @brief       logique pour la destination des photos
+ * 
+ * @details     Vue partielle rechercheFiches.php insérée dans la page recheche.php par requête Ajax
+ */
 
 session_start();
 	$courriel = $_SESSION["courriel"];

@@ -5,7 +5,8 @@
  * @version  2.0
  * @date     5 mars 2018
  * @brief    vue messagerie
- * @details  
+ * 
+ * @details  Page pour le systeme du messagerie interne
  */
 ?>
 

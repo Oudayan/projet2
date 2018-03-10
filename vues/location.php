@@ -1,4 +1,14 @@
-            <div class="modal-header">
+<?php
+/**
+ * @file     location.php
+ * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @version  3.0
+ * @date     8 mars 2018
+ * @brief    Vue partielle formulaire pour gerer un location 
+ * 
+ */
+?>
+<div class="modal-header">
                 <h5 class="modal-title" id="modalLocationLabel">Location du logement</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>

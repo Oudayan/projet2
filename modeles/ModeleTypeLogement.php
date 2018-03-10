@@ -4,7 +4,8 @@
  * @author   Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats
  * @version  1.0
  * @date     11 février 2018
- * @brief    Modèle TypeLogement 
+ * @brief    Modèle TypeLogement
+ * 
  * @details  Fonctions "CRUD" pour la table al_type_logement 
  */
 

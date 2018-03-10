@@ -5,6 +5,7 @@
  * @version  1.0
  * @date     13 février 2018
  * @brief    Modèle des images de logements
+ *
  * @details  Fonctions "CRUD" pour la table al_photos_logement 
  */
 

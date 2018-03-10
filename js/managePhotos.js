@@ -1,3 +1,12 @@
+/**
+ * @file     managePhotos.js
+ * @author   Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @version  2.0
+ * @date     5 mars 2018
+ * @brief    Logique pour le télécharmegent des photos
+ *   
+ * @details   
+ */
 function checkPhotos() {
 	y = document.getElementById('photo0').src;
 	regex1 = RegExp('images/Logements');

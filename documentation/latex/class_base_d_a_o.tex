@@ -1,0 +1,152 @@
+\hypertarget{class_base_d_a_o}{}\section{Base\+D\+AO Class Reference}
+\label{class_base_d_a_o}\index{Base\+D\+AO@{Base\+D\+AO}}
+Inheritance diagram for Base\+D\+AO\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_base_d_a_o}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_base_d_a_o_ad24935f24683137fa706c8db44e36545}\label{class_base_d_a_o_ad24935f24683137fa706c8db44e36545}} 
+{\bfseries \+\_\+\+\_\+construct} (P\+DO \$bd\+P\+DO)
+\item 
+\mbox{\Hypertarget{class_base_d_a_o_a3046f62d7a52c8eddd7791f0630fde85}\label{class_base_d_a_o_a3046f62d7a52c8eddd7791f0630fde85}} 
+\hyperlink{class_base_d_a_o_a3046f62d7a52c8eddd7791f0630fde85}{lire\+Nom\+Table} ()
+\begin{DoxyCompactList}\small\item\em Méthode abstraite pour déclarer le nom de la table dans le modèle enfant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_base_d_a_o_a79b3c59f05fbe64f3e3f5bc9dd4037bd}{effacer} (\$cle\+Primaire)
+\begin{DoxyCompactList}\small\item\em Effacer une rangée de la table. \end{DoxyCompactList}\item 
+\hyperlink{class_base_d_a_o_aacee08a4ba93803b0bb46ecd253da4bb}{lire} (\$valeur, \$cle\+Primaire=N\+U\+LL)
+\begin{DoxyCompactList}\small\item\em Lire le contenu d\textquotesingle{}une rangée de la table. \end{DoxyCompactList}\item 
+\hyperlink{class_base_d_a_o_a32c8bf9c85d3429f33a1bf26d274344f}{lire\+Tous} ()
+\begin{DoxyCompactList}\small\item\em Lire le contenu de toutes les rangées de la table. \end{DoxyCompactList}\item 
+\hyperlink{class_base_d_a_o_a298f2ea2afb2c34c5e6152ddcbefd635}{modifier\+Champ} (\$id, \$champ, \$valeur)
+\begin{DoxyCompactList}\small\item\em Modifie la valeur d\textquotesingle{}un champ dans une table. \end{DoxyCompactList}\item 
+\hyperlink{class_base_d_a_o_ac1400d06d7df092961487445f6b0adb8}{requete} (\$sql, \$donnees=array())
+\begin{DoxyCompactList}\small\item\em Exécute une requête avec les paramètres voulus. \end{DoxyCompactList}\item 
+\hyperlink{class_base_d_a_o_a2f23af522b46d32e9327279dab722579}{lire\+Cle\+Primaire} ()
+\begin{DoxyCompactList}\small\item\em Va chercher le nom de la clé primaire d\textquotesingle{}une table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_base_d_a_o_a1271d3e48731994630b5d62825607f66}\label{class_base_d_a_o_a1271d3e48731994630b5d62825607f66}} 
+{\bfseries \$bd}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_base_d_a_o_a79b3c59f05fbe64f3e3f5bc9dd4037bd}\label{class_base_d_a_o_a79b3c59f05fbe64f3e3f5bc9dd4037bd}} 
+\index{Base\+D\+AO@{Base\+D\+AO}!effacer@{effacer}}
+\index{effacer@{effacer}!Base\+D\+AO@{Base\+D\+AO}}
+\subsubsection{\texorpdfstring{effacer()}{effacer()}}
+{\footnotesize\ttfamily Base\+D\+A\+O\+::effacer (\begin{DoxyParamCaption}\item[{}]{\$cle\+Primaire }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Effacer une rangée de la table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}string\mbox{]}} & \$cle\+Primaire ID de la clé primaire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}object\mbox{]} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_d_a_o_aacee08a4ba93803b0bb46ecd253da4bb}\label{class_base_d_a_o_aacee08a4ba93803b0bb46ecd253da4bb}} 
+\index{Base\+D\+AO@{Base\+D\+AO}!lire@{lire}}
+\index{lire@{lire}!Base\+D\+AO@{Base\+D\+AO}}
+\subsubsection{\texorpdfstring{lire()}{lire()}}
+{\footnotesize\ttfamily Base\+D\+A\+O\+::lire (\begin{DoxyParamCaption}\item[{}]{\$valeur,  }\item[{}]{\$cle\+Primaire = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lire le contenu d\textquotesingle{}une rangée de la table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}string\mbox{]}} & \$valeur Valeur de la clé primaire OU de la colonne spécifée \\
+\hline
+{\em \mbox{[}string\mbox{]}} & \$cle\+Primaire Nom de la clé primaire OU de la colonne spécifée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}object\mbox{]} Tous les champs d\textquotesingle{}une entrée de la table 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_d_a_o_a2f23af522b46d32e9327279dab722579}\label{class_base_d_a_o_a2f23af522b46d32e9327279dab722579}} 
+\index{Base\+D\+AO@{Base\+D\+AO}!lire\+Cle\+Primaire@{lire\+Cle\+Primaire}}
+\index{lire\+Cle\+Primaire@{lire\+Cle\+Primaire}!Base\+D\+AO@{Base\+D\+AO}}
+\subsubsection{\texorpdfstring{lire\+Cle\+Primaire()}{lireClePrimaire()}}
+{\footnotesize\ttfamily Base\+D\+A\+O\+::lire\+Cle\+Primaire (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [protected]}}
+
+
+
+Va chercher le nom de la clé primaire d\textquotesingle{}une table. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{[}string\mbox{]} Nom de la clé primaire 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_d_a_o_a32c8bf9c85d3429f33a1bf26d274344f}\label{class_base_d_a_o_a32c8bf9c85d3429f33a1bf26d274344f}} 
+\index{Base\+D\+AO@{Base\+D\+AO}!lire\+Tous@{lire\+Tous}}
+\index{lire\+Tous@{lire\+Tous}!Base\+D\+AO@{Base\+D\+AO}}
+\subsubsection{\texorpdfstring{lire\+Tous()}{lireTous()}}
+{\footnotesize\ttfamily Base\+D\+A\+O\+::lire\+Tous (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lire le contenu de toutes les rangées de la table. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{[}object\mbox{]} Tous les champs de toutes les entrées la table 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_d_a_o_a298f2ea2afb2c34c5e6152ddcbefd635}\label{class_base_d_a_o_a298f2ea2afb2c34c5e6152ddcbefd635}} 
+\index{Base\+D\+AO@{Base\+D\+AO}!modifier\+Champ@{modifier\+Champ}}
+\index{modifier\+Champ@{modifier\+Champ}!Base\+D\+AO@{Base\+D\+AO}}
+\subsubsection{\texorpdfstring{modifier\+Champ()}{modifierChamp()}}
+{\footnotesize\ttfamily Base\+D\+A\+O\+::modifier\+Champ (\begin{DoxyParamCaption}\item[{}]{\$id,  }\item[{}]{\$champ,  }\item[{}]{\$valeur }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Modifie la valeur d\textquotesingle{}un champ dans une table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}string\mbox{]}} & \$id Valeur de la clé primaire OU de la colonne spécifée \\
+\hline
+{\em \mbox{[}string\mbox{]}} & \$champ Nom de la colonne à modifier \\
+\hline
+{\em \mbox{[}string\mbox{]}} & \$valeur Valeur de la colonne à modifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}object\mbox{]} L\textquotesingle{}exécution de la requête 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_d_a_o_ac1400d06d7df092961487445f6b0adb8}\label{class_base_d_a_o_ac1400d06d7df092961487445f6b0adb8}} 
+\index{Base\+D\+AO@{Base\+D\+AO}!requete@{requete}}
+\index{requete@{requete}!Base\+D\+AO@{Base\+D\+AO}}
+\subsubsection{\texorpdfstring{requete()}{requete()}}
+{\footnotesize\ttfamily Base\+D\+A\+O\+::requete (\begin{DoxyParamCaption}\item[{}]{\$sql,  }\item[{}]{\$donnees = {\ttfamily array()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [protected]}}
+
+
+
+Exécute une requête avec les paramètres voulus. 
+
+Prépare les données en les protégeant des injections S\+QL et exécute la requête via l\textquotesingle{}object P\+D\+O\+Statement 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}string\mbox{]}} & \$sql La requete S\+QL \\
+\hline
+{\em \mbox{[}array\mbox{]}} & \$donnees La valeur des données à insérer dans la requête \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}object\mbox{]} \$stmt L\textquotesingle{}exécution de la requête 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Program Files (x86)/\+Easy\+P\+H\+P-\/\+Dev\+Server-\/14.\+1\+V\+C9/data/localweb/projet2/modeles/\hyperlink{_base_dao_8php}{Base\+Dao.\+php}\end{DoxyCompactItemize}
