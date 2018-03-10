@@ -5,8 +5,8 @@
  * @version  2.0
  * @date     5 mars 2018
  * @brief    vue admin
+ * 
  * @details  
- * source    https://www.jqueryscript.net/text/Rich-Text-Editor-jQuery-RichText.html
  */
 ?>
     <main class="container-fluid" style="height:900px" id="myMain">

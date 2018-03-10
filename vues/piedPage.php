@@ -1,4 +1,15 @@
-        <footer class="mt-5">
+<?php
+  /** 
+   * @file        piedPage.php
+   * @author      Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+   * @version     1.0
+   * @date        10 février 2018
+   * @brief       Vue partielle pie de page
+   * 
+   * @details     
+   */ 
+?>
+<footer class="mt-5">
             <div id="info" class="row">
                 <div class="circle mx-auto">
                     <div class="row justify-content-center text-center">

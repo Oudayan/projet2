@@ -1,7 +1,7 @@
 ﻿<?php
     /** 
 	* @ file	ajoutlogement.php
-	* @ author Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+	* @ author  Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
 	* @ version 1.1
 	* @ date    19 février 2018
 	* @ brief 	formulaire pour ajouter un logement 
@@ -10,7 +10,6 @@
 	*/ 
 ?>
 <!-- <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
-
 
 <?php
 	for ($i=0;$i<20;$i++){

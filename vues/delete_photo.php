@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * @file     delete_photo.php
+ * @author   J Subirats 
+ * @version  2.0
+ * @date     5 mars 2018
+ * @brief    destination Photos
+ * 
+ * @details
+ */
 
 $fichier = $_POST['files'][0];
 $solo = strstr($fichier,"/images/");
