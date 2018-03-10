@@ -1,0 +1,86 @@
+\hypertarget{class_base_controleur}{}\section{Base\+Controleur Class Reference}
+\label{class_base_controleur}\index{Base\+Controleur@{Base\+Controleur}}
+Inheritance diagram for Base\+Controleur\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.088435cm]{class_base_controleur}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_base_controleur_a7af2cca7fd2a055d0e825c26a75e7e45}{index} (array \$params)
+\begin{DoxyCompactList}\small\item\em Méthode qui sera appelée par les controleurs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_base_controleur_a5f865fc7aa819664eec62f5dbd0cd8f2}{afficher\+Vues} (\$nom\+Vue, \$donnees=null, \$complet=true)
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}afficher une ou plusieurs vues partielles  Affiche une vue si \$nom\+Vue est une chaine de charactère ou affiche plusieurs vues si \$nom\+Vue est un tableau contentant le nom des vues. Affiche toujours la/les vue(s) entre les vues partielles \hyperlink{entete_8php}{entete.\+php} et \hyperlink{pied_page_8php}{pied\+Page.\+php}. \end{DoxyCompactList}\item 
+\hyperlink{class_base_controleur_a69ec4d8d399883fc3335422053791cdb}{lire\+D\+AO} (\$nom\+Modele)
+\begin{DoxyCompactList}\small\item\em Méthode pour créer les modèles de chaque classe et connexion à la base de données. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_base_controleur_a5f865fc7aa819664eec62f5dbd0cd8f2}\label{class_base_controleur_a5f865fc7aa819664eec62f5dbd0cd8f2}} 
+\index{Base\+Controleur@{Base\+Controleur}!afficher\+Vues@{afficher\+Vues}}
+\index{afficher\+Vues@{afficher\+Vues}!Base\+Controleur@{Base\+Controleur}}
+\subsubsection{\texorpdfstring{afficher\+Vues()}{afficherVues()}}
+{\footnotesize\ttfamily Base\+Controleur\+::afficher\+Vues (\begin{DoxyParamCaption}\item[{}]{\$nom\+Vue,  }\item[{}]{\$donnees = {\ttfamily null},  }\item[{}]{\$complet = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Permet d\textquotesingle{}afficher une ou plusieurs vues partielles  Affiche une vue si \$nom\+Vue est une chaine de charactère ou affiche plusieurs vues si \$nom\+Vue est un tableau contentant le nom des vues. Affiche toujours la/les vue(s) entre les vues partielles \hyperlink{entete_8php}{entete.\+php} et \hyperlink{pied_page_8php}{pied\+Page.\+php}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}string/array\mbox{]}} & \$nom\+Vue Nom de la vue ou tableau contentant les noms des vues à afficher \\
+\hline
+{\em \mbox{[}array\mbox{]}} & \$donnees Données passée à la/aux vues \\
+\hline
+{\em \mbox{[}boolean\mbox{]}} & \$complete Vrai = entête, vue(s) \& pied de page / Faux = vue(s) seulement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+message d\textquotesingle{}erreur ou une vue 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_controleur_a7af2cca7fd2a055d0e825c26a75e7e45}\label{class_base_controleur_a7af2cca7fd2a055d0e825c26a75e7e45}} 
+\index{Base\+Controleur@{Base\+Controleur}!index@{index}}
+\index{index@{index}!Base\+Controleur@{Base\+Controleur}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily Base\+Controleur\+::index (\begin{DoxyParamCaption}\item[{array}]{\$params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+
+
+Méthode qui sera appelée par les controleurs. 
+
+Méthode abstraite pour traiter les \char`\"{}cases\char`\"{} des contrôleurs 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}array\mbox{]}} & \$params La chaîne de requête U\+RL (\char`\"{}query string\char`\"{}) captée par le \hyperlink{_routeur_8php}{Routeur.\+php} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La méthode \hyperlink{class_base_controleur_a5f865fc7aa819664eec62f5dbd0cd8f2}{afficher\+Vues()} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_controleur_a69ec4d8d399883fc3335422053791cdb}\label{class_base_controleur_a69ec4d8d399883fc3335422053791cdb}} 
+\index{Base\+Controleur@{Base\+Controleur}!lire\+D\+AO@{lire\+D\+AO}}
+\index{lire\+D\+AO@{lire\+D\+AO}!Base\+Controleur@{Base\+Controleur}}
+\subsubsection{\texorpdfstring{lire\+D\+A\+O()}{lireDAO()}}
+{\footnotesize\ttfamily Base\+Controleur\+::lire\+D\+AO (\begin{DoxyParamCaption}\item[{}]{\$nom\+Modele }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Méthode pour créer les modèles de chaque classe et connexion à la base de données. 
+
+Vérifie si le modèle existe et fait la connexion à la base de données via la méthode chercher\+B\+D() de la classe \hyperlink{_manufacture_b_d_8php}{Manufacture\+B\+D.\+php} Créé l\textquotesingle{}object modèle de la classe passée en paramètre, contenant toutes le opérations \char`\"{}\+C\+R\+U\+D\char`\"{} pour cette classe. 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}string\mbox{]}} & \$nom\+Modele Le nom du modèle à créer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}object\mbox{]} \$objet\+Modele L\textquotesingle{}object modèle de la classe passée en paramètre 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Program Files (x86)/\+Easy\+P\+H\+P-\/\+Dev\+Server-\/14.\+1\+V\+C9/data/localweb/projet2/controleurs/\hyperlink{_base_controleur_8php}{Base\+Controleur.\+php}\end{DoxyCompactItemize}

@@ -1,14 +1,14 @@
 <?php
 /**
-* @file Paiement.php
-* @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
-* @version 1.0
-* @date 8 féevrier 2018
-* @brief Définit la classe Paiement.
-*
-* @details Cette classe définit les attributs d'un type de paiement
-* 
-*/
+ * @file Paiement.php
+ * @autheurs Oudayan Dutta, Denise Ratté, Zoraida Ortiz, J Subirats 
+ * @version 1.0
+ * @date 8 féevrier 2018
+ * @brief Définit la classe Paiement.
+ *
+ * @details Cette classe définit les attributs d'un type de paiement
+ * 
+ */
 	class Paiement
 	{
 		//attributs
