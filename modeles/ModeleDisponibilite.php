@@ -4,7 +4,8 @@
  * @author   Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats
  * @version  1.0
  * @date     11 février 2018
- * @brief    Modèle Disponibilite 
+ * @brief    Modèle Disponibilite
+ * 
  * @details  Fonctions "CRUD" pour la table al_disponibilite 
  */
 

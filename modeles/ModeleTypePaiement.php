@@ -5,6 +5,7 @@
  * @version  1.0
  * @date     11 février 2018
  * @brief    Modèle TypePaiement 
+ *
  * @details  Fonctions "CRUD" pour la table al_type_paiement 
  */
 

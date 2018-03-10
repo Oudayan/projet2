@@ -4,7 +4,8 @@
  * @author  Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats
  * @version 1.0
  * @date    9 février 2018
- * @brief   Page défaut du site 
+ * @brief   Page défaut du site
+ * 
  * @details Inclus tous les fichiers du MVC via config.php, part une session, définit le fuseau horaire & date/heure et appelle le routeur pour rediriger au bon controlleur
  */
     
