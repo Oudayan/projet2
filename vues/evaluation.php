@@ -5,8 +5,7 @@
  * @version     1.0
  * @date        10 février 2018
  * @brief       Page pour évaluer et commenter un logement
- * 
- * @details     
+ *    
  */ 
 ?>
         <main class="container">

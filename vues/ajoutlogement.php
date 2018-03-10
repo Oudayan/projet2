@@ -6,7 +6,6 @@
 	* @ date    19 février 2018
 	* @ brief 	formulaire pour ajouter un logement 
 	*
-	* @ details 
 	*/ 
 ?>
 <!-- <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->

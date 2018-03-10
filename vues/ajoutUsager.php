@@ -5,8 +5,7 @@
 	* @ version 2.1
 	* @ date     16 février 2018
 	* @ brief 	 formulaire d'ajout de un nouvel utilisateur 
-	*
-	* @ details 
+	* 
 	*/	
         
 ?>

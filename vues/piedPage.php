@@ -5,8 +5,7 @@
    * @version     1.0
    * @date        10 février 2018
    * @brief       Vue partielle pie de page
-   * 
-   * @details     
+   *     
    */ 
 ?>
 <footer class="mt-5">

@@ -5,7 +5,7 @@
  * @version     1.0
  * @date        2 mars 2018
  * @brief       Page pour generer la facture d'une location
- * @details     
+ *    
  */ 
 ?>
         <main class="container">
