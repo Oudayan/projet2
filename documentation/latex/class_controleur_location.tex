@@ -1,0 +1,85 @@
+\hypertarget{class_controleur_location}{}\section{Controleur\+Location Class Reference}
+\label{class_controleur_location}\index{Controleur\+Location@{Controleur\+Location}}
+Inheritance diagram for Controleur\+Location\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_controleur_location}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_controleur_location_aecb1f92f10f3fc774ae8c5c4cc7a165d}{index} (array \$params)
+\begin{DoxyCompactList}\small\item\em Méthode qui sera appelée par les contrôleurs. \end{DoxyCompactList}\item 
+\hyperlink{class_controleur_location_a4b6693239049c3db80013b8110687690}{afficher\+Location} (\$params)
+\begin{DoxyCompactList}\small\item\em Fonction pour afficher le modal de demande de location d\textquotesingle{}un logement. \end{DoxyCompactList}\item 
+\hyperlink{class_controleur_location_a0db233aa6c62ab2d26496d64aa0b450c}{format\+Monnaie} (\$nombre)
+\begin{DoxyCompactList}\small\item\em Fonction pour formatter un nombre en monnaie. \end{DoxyCompactList}\item 
+\hyperlink{class_controleur_location_aa9739669efbe3d84d514eb7b27a78a18}{creer\+Jeton} (\$longueur)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_controleur_location_a4b6693239049c3db80013b8110687690}\label{class_controleur_location_a4b6693239049c3db80013b8110687690}} 
+\index{Controleur\+Location@{Controleur\+Location}!afficher\+Location@{afficher\+Location}}
+\index{afficher\+Location@{afficher\+Location}!Controleur\+Location@{Controleur\+Location}}
+\subsubsection{\texorpdfstring{afficher\+Location()}{afficherLocation()}}
+{\footnotesize\ttfamily Controleur\+Location\+::afficher\+Location (\begin{DoxyParamCaption}\item[{}]{\$params }\end{DoxyParamCaption})}
+
+
+
+Fonction pour afficher le modal de demande de location d\textquotesingle{}un logement. 
+
+Prend les coordonnées et autres informations sur les logements.
+
+Utilise les modèles suivants\+: Modele\+Locaton,\hyperlink{class_modele_logement}{Modele\+Logement}, \hyperlink{class_modele_disponibilite}{Modele\+Disponibilite} et le \hyperlink{class_modele_option}{Modele\+Option} \begin{DoxyReturn}{Returns}
+Puis ouvre la vue Affiche\+Location. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controleur_location_aa9739669efbe3d84d514eb7b27a78a18}\label{class_controleur_location_aa9739669efbe3d84d514eb7b27a78a18}} 
+\index{Controleur\+Location@{Controleur\+Location}!creer\+Jeton@{creer\+Jeton}}
+\index{creer\+Jeton@{creer\+Jeton}!Controleur\+Location@{Controleur\+Location}}
+\subsubsection{\texorpdfstring{creer\+Jeton()}{creerJeton()}}
+{\footnotesize\ttfamily Controleur\+Location\+::creer\+Jeton (\begin{DoxyParamCaption}\item[{}]{\$longueur }\end{DoxyParamCaption})}
+
+Fonction pour créer un jeton pour s\textquotesingle{}assurer qu\textquotesingle{}une location ait seulement une évaluation Source \+: \href{https://stackoverflow.com/questions/1846202/php-how-to-generate-a-random-unique-alphanumeric-string/13733588#13733588}{\tt https\+://stackoverflow.\+com/questions/1846202/php-\/how-\/to-\/generate-\/a-\/random-\/unique-\/alphanumeric-\/string/13733588\#13733588} \mbox{\Hypertarget{class_controleur_location_a0db233aa6c62ab2d26496d64aa0b450c}\label{class_controleur_location_a0db233aa6c62ab2d26496d64aa0b450c}} 
+\index{Controleur\+Location@{Controleur\+Location}!format\+Monnaie@{format\+Monnaie}}
+\index{format\+Monnaie@{format\+Monnaie}!Controleur\+Location@{Controleur\+Location}}
+\subsubsection{\texorpdfstring{format\+Monnaie()}{formatMonnaie()}}
+{\footnotesize\ttfamily Controleur\+Location\+::format\+Monnaie (\begin{DoxyParamCaption}\item[{}]{\$nombre }\end{DoxyParamCaption})}
+
+
+
+Fonction pour formatter un nombre en monnaie. 
+
+Prend un nombre entier le met en float et lui met le signe de dollar 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}numeric\mbox{]}} & nombre \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un nombre. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controleur_location_aecb1f92f10f3fc774ae8c5c4cc7a165d}\label{class_controleur_location_aecb1f92f10f3fc774ae8c5c4cc7a165d}} 
+\index{Controleur\+Location@{Controleur\+Location}!index@{index}}
+\index{index@{index}!Controleur\+Location@{Controleur\+Location}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily Controleur\+Location\+::index (\begin{DoxyParamCaption}\item[{array}]{\$params }\end{DoxyParamCaption})}
+
+
+
+Méthode qui sera appelée par les contrôleurs. 
+
+Méthode pour traiter les \char`\"{}cases\char`\"{} des contrôleurs 
+\begin{DoxyParams}{Parameters}
+{\em \mbox{[}array\mbox{]}} & \$params La chaîne de requête U\+RL (\char`\"{}query string\char`\"{}) captée par le \hyperlink{_routeur_8php}{Routeur.\+php} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+L\textquotesingle{}acces aux vues,aux données et aux différents messages pour ce contrôleur. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Program Files (x86)/\+Easy\+P\+H\+P-\/\+Dev\+Server-\/14.\+1\+V\+C9/data/localweb/projet2/controleurs/\hyperlink{_controleur_location_8php}{Controleur\+Location.\+php}\end{DoxyCompactItemize}

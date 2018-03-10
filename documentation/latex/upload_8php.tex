@@ -1,0 +1,52 @@
+\hypertarget{upload_8php}{}\section{C\+:/\+Program Files (x86)/\+Easy\+P\+H\+P-\/\+Dev\+Server-\/14.1\+V\+C9/data/localweb/projet2/vues/upload.php File Reference}
+\label{upload_8php}\index{C\+:/\+Program Files (x86)/\+Easy\+P\+H\+P-\/\+Dev\+Server-\/14.\+1\+V\+C9/data/localweb/projet2/vues/upload.\+php@{C\+:/\+Program Files (x86)/\+Easy\+P\+H\+P-\/\+Dev\+Server-\/14.\+1\+V\+C9/data/localweb/projet2/vues/upload.\+php}}
+
+
+logique pour la destination des photos  
+
+
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{upload_8php_a8ff270e937d198a5176cf0f0263474c6}\label{upload_8php_a8ff270e937d198a5176cf0f0263474c6}} 
+{\bfseries \$courriel} = \$\+\_\+\+S\+E\+S\+S\+I\+ON\mbox{[}\char`\"{}courriel\char`\"{}\mbox{]}
+\item 
+\mbox{\Hypertarget{upload_8php_a1659f0a629d408e0f849dbe4ee061e62}\label{upload_8php_a1659f0a629d408e0f849dbe4ee061e62}} 
+{\bfseries \$dir} = \textquotesingle{}../images/Logements/\textquotesingle{} .\$courriel
+\item 
+{\bfseries if} (!is\+\_\+dir( \$dir)) mkdir( \$dir
+\item 
+\mbox{\Hypertarget{upload_8php_a367abc06e55c440c638a820e7f40aa00}\label{upload_8php_a367abc06e55c440c638a820e7f40aa00}} 
+{\bfseries \$chemin} = \$dir . \textquotesingle{}/\textquotesingle{}
+\item 
+\mbox{\Hypertarget{upload_8php_a563a9b1813038cca992836f2da8a4ee6}\label{upload_8php_a563a9b1813038cca992836f2da8a4ee6}} 
+{\bfseries foreach} ( \$\+\_\+\+F\+I\+L\+ES\mbox{[}\char`\"{}files\char`\"{}\mbox{]}\mbox{[}\char`\"{}error\char`\"{}\mbox{]} as \$key=$>$ \$error)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+logique pour la destination des photos 
+
+\begin{DoxyAuthor}{Author}
+Oudayan Dutta, Zoraida Ortiz, Denise Ratté, Jorge Subirats 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15 février 2018
+\end{DoxyDate}
+Vue partielle \hyperlink{recherche_fiches_8php}{recherche\+Fiches.\+php} insérée dans la page recheche.\+php par requête Ajax 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{upload_8php_ab0937f5c55c93af3d8d8e5e2219eb0af}\label{upload_8php_ab0937f5c55c93af3d8d8e5e2219eb0af}} 
+\index{upload.\+php@{upload.\+php}!if@{if}}
+\index{if@{if}!upload.\+php@{upload.\+php}}
+\subsubsection{\texorpdfstring{if}{if}}
+{\footnotesize\ttfamily if}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+            $courriel = $nom = $prenom = $cellulaire = $mot\_de\_passe = $c\_mot\_de\_passe = \textcolor{stringliteral}{""}
+\end{DoxyCode}
